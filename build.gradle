@@ -1,9 +1,7 @@
-plugins {
-    id 'java'
-}
-
-group 'pl.laskowski.marcin'
+group 'pl.laskowski.pl.laskowski.pl.laskowski.marcin'
 version '1.0'
+
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
@@ -11,6 +9,9 @@ repositories {
     mavenCentral()
 }
 
+//mainClassName = "pl.laskowski.marcin.Main"
+
 dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
