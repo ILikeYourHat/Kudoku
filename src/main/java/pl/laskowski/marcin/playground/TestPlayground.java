@@ -81,16 +81,16 @@ public class TestPlayground {
         SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("BFC_1", () -> new BruteForceConcurrentSolver2(var, 1, 10))
-                .add("BFC_2", () -> new BruteForceConcurrentSolver2(var, 8, 100))
-                .add("BFC_3", () -> new BruteForceConcurrentSolver2(var, 3, 10))
-                .add("BFC_4", () -> new BruteForceConcurrentSolver2(var, 4, 10))
-                .add("BFC_5", () -> new BruteForceConcurrentSolver2(var, 5, 10))
-                .add("BFC_6", () -> new BruteForceConcurrentSolver2(var, 6, 10))
-                .add("BFC_7", () -> new BruteForceConcurrentSolver2(var, 7, 10))
-                .add("BFC_8", () -> new BruteForceConcurrentSolver2(var, 8, 10))
-                .add("BFC_9", () -> new BruteForceConcurrentSolver2(var, 9, 10))
-                .add("BFC_10", () -> new BruteForceConcurrentSolver2(var, 10, 10))
+                .add("BFC_1", () -> new BruteForceConcurrentSolver(var, 1, 5))
+                .add("BFC_2", () -> new BruteForceConcurrentSolver(var, 2, 5))
+                .add("BFC_3", () -> new BruteForceConcurrentSolver(var, 3, 5))
+                .add("BFC_4", () -> new BruteForceConcurrentSolver(var, 4, 5))
+                .add("BFC_5", () -> new BruteForceConcurrentSolver(var, 5, 5))
+                .add("BFC_6", () -> new BruteForceConcurrentSolver(var, 6, 5))
+                .add("BFC_7", () -> new BruteForceConcurrentSolver(var, 7, 5))
+                .add("BFC_8", () -> new BruteForceConcurrentSolver(var, 8, 5))
+                .add("BFC_9", () -> new BruteForceConcurrentSolver(var, 9, 5))
+                .add("BFC_10", () -> new BruteForceConcurrentSolver(var, 10, 5))
                 .run();
     }
 
