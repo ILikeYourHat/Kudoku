@@ -1,17 +1,11 @@
 package pl.laskowski.marcin.playground;
 
-import pl.laskowski.marcin.creating.SudokuGenerator;
-import pl.laskowski.marcin.creating.SudokuRater;
-import pl.laskowski.marcin.creating.SudokuShuffler;
-import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.solving.bruteforce.BruteForceConcurrentSolver;
 import pl.laskowski.marcin.solving.bruteforce.BruteForceConcurrentSolver2;
 import pl.laskowski.marcin.solving.bruteforce.BruteForcePermutationSolver;
 import pl.laskowski.marcin.solving.bruteforce.BruteForceSolver;
 import pl.laskowski.marcin.solving.deduction.solver.*;
 import pl.laskowski.marcin.solving.sat.SatSolver;
-import pl.laskowski.marcin.type.ClassicRectangle;
-import pl.laskowski.marcin.type.ClassicSquare;
 import pl.laskowski.marcin.type.SudokuVariant;
 
 /**
@@ -20,27 +14,27 @@ import pl.laskowski.marcin.type.SudokuVariant;
 
 public class TestPlayground {
 
-    public void play() {
-        TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuRater rater = new SudokuRater(set.getSudokuVariant());
-        SudokuGenerator generator = new SudokuGenerator(set.getSudokuVariant(), SudokuRater.Difficulty.EASY, null);
-        for (int i = 0; i < 1000; i++) {
-            Sudoku s = generator.generate();
-            System.out.println(s);
-            System.out.println(rater.rate(s));
-            float percent = rater.percentFilled(s);
-            System.out.println(String.format("%.2f%%", percent * 100));
-        }
-    }
-
-    public void create() {
-        TestSet set = TestSet.TEST;
-        SudokuShuffler shuffler = new SudokuShuffler();
-        for (int i = 0; i < 2000; i++) {
-            Sudoku s = shuffler.shuffle(set.getData().get(0), (ClassicRectangle) set.getSudokuVariant());
-            System.out.println(s);
-        }
-    }
+//    public void play() {
+//        TestSet set = TestSet.PROJECT_EULER_9x9;
+//        SudokuRater rater = new SudokuRater(set.getSudokuVariant());
+//        SudokuGenerator generator = new SudokuGenerator(set.getSudokuVariant(), SudokuRater.Difficulty.EASY, null);
+//        for (int i = 0; i < 1000; i++) {
+//            Sudoku s = generator.generate();
+//            System.out.println(s);
+//            System.out.println(rater.rate(s));
+//            float percent = rater.percentFilled(s);
+//            System.out.println(String.format("%.2f%%", percent * 100));
+//        }
+//    }
+//
+//    public void create() {
+//        TestSet set = TestSet.TEST;
+//        SudokuShuffler shuffler = new SudokuShuffler();
+//        for (int i = 0; i < 2000; i++) {
+//            Sudoku s = shuffler.shuffle(set.getData().get(0), (ClassicRectangle) set.getSudokuVariant());
+//            System.out.println(s);
+//        }
+//    }
 
     public void bruteForceComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
@@ -87,16 +81,16 @@ public class TestPlayground {
         SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-//                .add("BFC_1", () -> new BruteForceConcurrentSolver2(var, 1, 10))
+                .add("BFC_1", () -> new BruteForceConcurrentSolver2(var, 1, 10))
                 .add("BFC_2", () -> new BruteForceConcurrentSolver2(var, 8, 100))
-//                .add("BFC_3", () -> new BruteForceConcurrentSolver2(var, 3, 10))
-//                .add("BFC_4", () -> new BruteForceConcurrentSolver2(var, 4, 10))
-//                .add("BFC_5", () -> new BruteForceConcurrentSolver2(var, 5, 10))
-//                .add("BFC_6", () -> new BruteForceConcurrentSolver2(var, 6, 10))
-//                .add("BFC_7", () -> new BruteForceConcurrentSolver2(var, 7, 10))
-//                .add("BFC_8", () -> new BruteForceConcurrentSolver2(var, 8, 10))
-//                .add("BFC_9", () -> new BruteForceConcurrentSolver2(var, 9, 10))
-//                .add("BFC_10", () -> new BruteForceConcurrentSolver2(var, 10, 10))
+                .add("BFC_3", () -> new BruteForceConcurrentSolver2(var, 3, 10))
+                .add("BFC_4", () -> new BruteForceConcurrentSolver2(var, 4, 10))
+                .add("BFC_5", () -> new BruteForceConcurrentSolver2(var, 5, 10))
+                .add("BFC_6", () -> new BruteForceConcurrentSolver2(var, 6, 10))
+                .add("BFC_7", () -> new BruteForceConcurrentSolver2(var, 7, 10))
+                .add("BFC_8", () -> new BruteForceConcurrentSolver2(var, 8, 10))
+                .add("BFC_9", () -> new BruteForceConcurrentSolver2(var, 9, 10))
+                .add("BFC_10", () -> new BruteForceConcurrentSolver2(var, 10, 10))
                 .run();
     }
 

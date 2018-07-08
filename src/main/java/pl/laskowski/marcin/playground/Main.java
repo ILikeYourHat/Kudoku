@@ -1,16 +1,17 @@
 package pl.laskowski.marcin.playground;
 
-import pl.laskowski.marcin.model.Sudoku;
-import pl.laskowski.marcin.solving.SudokuSolver;
-import pl.laskowski.marcin.solving.sat.SatSolver;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class Main {
 
-    public static void main(String... args) {
-        TestSet set = TestSet.SMALL_SAMURAI;
-        SudokuSolver solver = new SatSolver(set.getSudokuVariant());
-        for (Sudoku s : set.getData()) {
-            System.out.println(solver.solve(s));
+    public static void main(String... args) throws InvocationTargetException, IllegalAccessException {
+        TestPlayground playground = new TestPlayground();
+        Class curClass = TestPlayground.class;
+        Method[] allMethods = curClass.getMethods();
+        for(Method method : allMethods) {
+            System.out.println(method.getName());
+            method.invoke(playground);
         }
     }
 

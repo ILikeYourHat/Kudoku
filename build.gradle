@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 }
 
-//mainClassName = "pl.laskowski.marcin.Main"
+mainClassName = "pl.laskowski.marcin.playground.Main"
 
 dependencies {
     compile fileTree(dir: 'lib', include: '*.jar')
