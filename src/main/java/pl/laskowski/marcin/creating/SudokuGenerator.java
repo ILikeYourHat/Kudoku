@@ -18,7 +18,7 @@ public class SudokuGenerator {
 
     private final SudokuVariant variant;
     private final Random random = new Random();
-    private final SatSolver solver;
+    protected final SatSolver solver;
     private final SudokuRater.Difficulty difficulty;
     private final SudokuRater rater;
     private final Float percentFilled;
@@ -32,14 +32,13 @@ public class SudokuGenerator {
     }
 
     public Sudoku generate() {
-        Sudoku empty = variant.template();
-        fillSudoku(empty);
-        generateHoles(empty);
-        return empty;
+        Sudoku sudoku = getFilledSudoku();
+        generateHoles(sudoku);
+        return sudoku;
     }
 
-
-    private void fillSudoku(Sudoku sudoku) {
+    protected Sudoku getFilledSudoku() {
+        Sudoku sudoku = variant.template();
         iterateOverFieldsInRandomOrder(sudoku, field -> {
             List<Integer> possibilities = possibilities(variant);
             do {
@@ -48,6 +47,7 @@ public class SudokuGenerator {
                 field.set(value);
             } while (solver.checkSolutions(sudoku).equals(SudokuSolutionCount.NONE));
         });
+        return sudoku;
     }
 
     private void iterateOverFieldsInRandomOrder(Sudoku sudoku, Consumer<Field> consumer) {

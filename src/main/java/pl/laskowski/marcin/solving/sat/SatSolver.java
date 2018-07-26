@@ -90,8 +90,8 @@ public class SatSolver implements SudokuSolver {
         }
 
         private void initSolver() throws ContradictionException {
-            addCausesForFields();
             addCausesForRegions();
+            addCausesForFields();
         }
 
 

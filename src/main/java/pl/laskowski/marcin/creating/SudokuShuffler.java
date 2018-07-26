@@ -38,6 +38,12 @@ public class SudokuShuffler {
         return sudoku;
     }
 
+    public Sudoku shuffleFull(Sudoku sudoku, ClassicRectangle variant){
+        sudoku = swapColumns(sudoku, variant);
+        sudoku = swapRows(sudoku, variant);
+        return sudoku;
+    }
+
     private Sudoku rotateAndMirror(Sudoku sudoku) {
         switch (random.nextInt(8)) {
             case 0:
