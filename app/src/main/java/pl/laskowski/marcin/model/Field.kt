@@ -10,9 +10,7 @@ data class Field(
 
     constructor(x: Int, y: Int): this(Point(x, y))
 
-    fun value(): Int {
-        return value
-    }
+    fun value() = value
 
     fun set(value: Int) {
         this.value = value
@@ -20,10 +18,9 @@ data class Field(
 
     val isEmpty: Boolean
         get() = value == EMPTY_FIELD
-    val x: Int
-        get() = position.x()
-    val y: Int
-        get() = position.y()
+
+    val x = position.x()
+    val y = position.y()
 
     fun clear() {
         value = EMPTY_FIELD
@@ -33,9 +30,7 @@ data class Field(
         return position == field.position
     }
 
-    fun position(): Point {
-        return position
-    }
+    fun position() = position
 
     companion object {
         private const val EMPTY_FIELD = 0
