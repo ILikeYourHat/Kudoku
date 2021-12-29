@@ -1,6 +1,5 @@
 package pl.laskowski.marcin.type;
 
-import org.omg.PortableServer.POA;
 import pl.laskowski.marcin.model.Point;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.model.dividers.SubSudokuDivider;
