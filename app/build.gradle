@@ -1,0 +1,21 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group 'pl.laskowski.marcin'
+version '1.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = "pl.laskowski.marcin.playground.Main"
+
+dependencies {
+    implementation fileTree(dir: 'lib', include: '*.jar')
+    testImplementation("junit:junit:4.13.2")
+}

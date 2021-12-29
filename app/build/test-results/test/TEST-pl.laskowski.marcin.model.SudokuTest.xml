@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="pl.laskowski.marcin.model.SudokuTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-12-29T11:53:49" hostname="PFIZER-FDO932-M" time="0.003">
+  <properties/>
+  <testcase name="shouldBeEqualsIfSizeIsEquals" classname="pl.laskowski.marcin.model.SudokuTest" time="0.0"/>
+  <testcase name="createGridWithNoFieldsAndCheckSize" classname="pl.laskowski.marcin.model.SudokuTest" time="0.0"/>
+  <testcase name="throwExceptionWhenTryingToCreateGridWithNegativeWidth" classname="pl.laskowski.marcin.model.SudokuTest" time="0.001"/>
+  <testcase name="createGridWithGivenSize" classname="pl.laskowski.marcin.model.SudokuTest" time="0.0"/>
+  <testcase name="changeValueAtGivenPosition" classname="pl.laskowski.marcin.model.SudokuTest" time="0.0"/>
+  <testcase name="throwExceptionWhenTryingToCreateGridWithNegativeHeight" classname="pl.laskowski.marcin.model.SudokuTest" time="0.0"/>
+  <testcase name="checkIfGridFieldsHaveNoValuesAfterCreation" classname="pl.laskowski.marcin.model.SudokuTest" time="0.0"/>
+  <testcase name="checkIfFieldsAreInitializedCorrectWhenValuesAreGiven" classname="pl.laskowski.marcin.model.SudokuTest" time="0.001"/>
+  <testcase name="throwExceptionWhenTryingToCreateGridWithIncorrectData" classname="pl.laskowski.marcin.model.SudokuTest" time="0.0"/>
+  <testcase name="iterateOverGrid" classname="pl.laskowski.marcin.model.SudokuTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
