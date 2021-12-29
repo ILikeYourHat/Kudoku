@@ -1,9 +1,9 @@
 package pl.laskowski.marcin.solving.bruteforce;
 
 
+import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.solving.SudokuSolver;
 import pl.laskowski.marcin.model.Field;
-import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.type.SudokuVariant;
 
