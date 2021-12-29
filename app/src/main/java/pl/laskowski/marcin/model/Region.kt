@@ -28,7 +28,7 @@ data class Region(
             if (alreadyContainsFieldValue(field, set)) {
                 return false
             } else {
-                set.add(field.value())
+                set.add(field.value)
             }
         }
         return true
@@ -47,6 +47,6 @@ data class Region(
     }
 
     private fun alreadyContainsFieldValue(field: Field, numbers: Set<Int>): Boolean {
-        return !field.isEmpty && numbers.contains(field.value())
+        return !field.isEmpty && numbers.contains(field.value)
     }
 }

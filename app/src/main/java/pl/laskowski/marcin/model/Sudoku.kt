@@ -32,7 +32,7 @@ class Sudoku(sizeX: Int, sizeY: Int) : Iterable<Field?> {
                 } else if (field.isEmpty) {
                     sb.append('_')
                 } else {
-                    sb.append(field.value())
+                    sb.append(field.value)
                 }
                 sb.append(',')
             }
@@ -95,7 +95,7 @@ class Sudoku(sizeX: Int, sizeY: Int) : Iterable<Field?> {
             val field = at(x, y)
             if (field != null) {
                 val mappedField = Field(x1, y1)
-                mappedField.set(field.value())
+                mappedField.set(field.value)
                 target.fields.put(mappedField, x1, y1)
             }
         }
@@ -126,7 +126,7 @@ class Sudoku(sizeX: Int, sizeY: Int) : Iterable<Field?> {
     }
 
     fun at(p: Point): Field? {
-        return fields[p.x(), p.y()]
+        return fields[p.x, p.y]
     }
 
     override fun iterator(): MutableListIterator<Field> {
@@ -174,8 +174,8 @@ class Sudoku(sizeX: Int, sizeY: Int) : Iterable<Field?> {
 
     fun append(other: Sudoku, anchor: Point) {
         other.fields.forEach { x: Int, y: Int ->
-            val destinationX = anchor.x() + x
-            val destinationY = anchor.y() + y
+            val destinationX = anchor.x + x
+            val destinationY = anchor.y + y
             val source = other.fields[x, y]
             if (source == null) {
                 fields.put(null, destinationX, destinationY)
@@ -184,7 +184,7 @@ class Sudoku(sizeX: Int, sizeY: Int) : Iterable<Field?> {
                 if (destination == null) {
                     destination = Field(destinationX, destinationY)
                 }
-                destination.set(source.value())
+                destination.set(source.value)
                 fields.put(destination, destinationX, destinationY)
             }
         }

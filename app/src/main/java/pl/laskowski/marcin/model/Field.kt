@@ -19,8 +19,8 @@ data class Field(
     val isEmpty: Boolean
         get() = value == EMPTY_FIELD
 
-    val x = position.x()
-    val y = position.y()
+    val x = position.x
+    val y = position.y
 
     fun clear() {
         value = EMPTY_FIELD
