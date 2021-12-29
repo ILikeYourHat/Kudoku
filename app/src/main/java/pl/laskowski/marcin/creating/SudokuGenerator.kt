@@ -17,7 +17,7 @@ open class SudokuGenerator(
     private val percentFilled: Float?
 ) {
     private val random = Random()
-    protected val solver: SatSolver = SatSolver(variant)
+    private val solver: SatSolver = SatSolver(variant)
     private val rater: SudokuRater = SudokuRater(variant)
 
     fun generate(): Sudoku {
