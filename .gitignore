@@ -1,9 +1,12 @@
-.idea
-
 ### Java ###
-# Compiled class file
 *.class
+*.log
 
 ### Gradle ###
 .gradle
-/build/
+**/build
+local.properties
+
+### IntelliJ ###
+*.iml
+.idea/*
