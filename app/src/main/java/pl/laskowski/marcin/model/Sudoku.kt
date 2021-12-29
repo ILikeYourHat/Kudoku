@@ -2,7 +2,6 @@ package pl.laskowski.marcin.model
 
 import pl.laskowski.marcin.model.matrix.ArrayMatrix
 import java.lang.StringBuilder
-import java.util.ArrayList
 
 /**
  * Created by Marcin Laskowski.
@@ -44,25 +43,25 @@ class Sudoku(sizeX: Int, sizeY: Int) : Iterable<Field?> {
     }
 
     fun rows(): List<List<Field?>> {
-        val rows: MutableList<List<Field?>> = ArrayList()
+        val rows: MutableList<List<Field?>> = mutableListOf()
         fields.forEachY { y: Int -> rows.add(row(y)) }
         return rows
     }
 
     fun columns(): List<List<Field?>> {
-        val columns: MutableList<List<Field?>> = ArrayList()
+        val columns: MutableList<List<Field?>> = mutableListOf()
         fields.forEachX { x: Int -> columns.add(column(x)) }
         return columns
     }
 
     fun row(y: Int): List<Field?> {
-        val row: MutableList<Field?> = ArrayList()
+        val row: MutableList<Field?> = mutableListOf()
         fields.forEachX { x: Int -> row.add(at(x, y)) }
         return row
     }
 
     fun column(x: Int): List<Field?> {
-        val column: MutableList<Field?> = ArrayList()
+        val column: MutableList<Field?> = mutableListOf()
         fields.forEachY { y: Int -> column.add(at(x, y)) }
         return column
     }
@@ -154,7 +153,7 @@ class Sudoku(sizeX: Int, sizeY: Int) : Iterable<Field?> {
         }
     val allFields: MutableList<Field>
         get() {
-            val allFields: MutableList<Field> = ArrayList()
+            val allFields: MutableList<Field> = mutableListOf()
             fields.forEach { x: Int, y: Int ->
                 val f = fields[x, y]
                 if (f != null) {
