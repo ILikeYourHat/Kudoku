@@ -27,7 +27,7 @@ class ArrayMatrix<E>(
         return data[y][x] as E?
     }
 
-    override fun put(elem: E, x: Int, y: Int) {
+    override fun put(elem: E?, x: Int, y: Int) {
         data[y][x] = elem
     }
 

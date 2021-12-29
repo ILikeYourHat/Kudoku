@@ -10,7 +10,7 @@ interface Matrix<E> {
     fun sizeX(): Int
     fun sizeY(): Int
     operator fun get(x: Int, y: Int): E?
-    fun put(elem: E, x: Int, y: Int)
+    fun put(elem: E?, x: Int, y: Int)
     val isEmpty: Boolean
     operator fun contains(o: E): Boolean
     fun remove(o: E): Boolean
