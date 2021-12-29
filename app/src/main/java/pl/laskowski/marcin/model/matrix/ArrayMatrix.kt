@@ -12,6 +12,10 @@ class ArrayMatrix<E>(
     private val sizeY: Int
 ) : Matrix<E> {
 
+    init {
+        require(sizeX >= 0 && sizeY >= 0)
+    }
+
     private val data: Array<Array<Any?>> = Array(sizeY) { arrayOfNulls(sizeX) }
 
     override fun sizeX(): Int {

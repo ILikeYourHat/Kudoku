@@ -33,7 +33,7 @@ class BlockDivider(
         for (x in 0 until sizeX) {
             for (y in 0 until sizeY) {
                 val field = sudoku.at(startX + x, startY + y)
-                fields.add(field)
+                fields.add(field!!)
             }
         }
         return Region(fields)

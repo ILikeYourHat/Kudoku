@@ -15,7 +15,7 @@ class RowDivider : SudokuDivider {
         for (y in 0 until sudoku.sizeY()) {
             val fields: MutableSet<Field> = HashSet()
             for (x in 0 until sudoku.sizeX()) {
-                fields.add(sudoku.at(x, y))
+                fields.add(sudoku.at(x, y)!!)
             }
             set.add(Region(fields))
         }

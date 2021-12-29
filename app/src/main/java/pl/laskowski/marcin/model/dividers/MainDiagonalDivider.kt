@@ -15,7 +15,7 @@ class MainDiagonalDivider : SudokuDivider {
         val limit = min(sudoku.sizeX(), sudoku.sizeY())
         val fields: MutableList<Field> = ArrayList()
         for (i in 0 until limit) {
-            fields.add(sudoku.at(i, i))
+            fields.add(sudoku.at(i, i)!!)
         }
         val region = Region(fields)
         return setOf(region)
