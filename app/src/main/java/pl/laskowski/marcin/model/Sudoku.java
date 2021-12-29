@@ -97,7 +97,7 @@ public class Sudoku implements Iterable<Field> {
         fields.forEach((x, y) -> {
             Field field = fields.get(x, y);
             if (field != null) {
-                copy.fields.put(field.copy(), x, y);
+                copy.fields.put(field.copy(field.position(), field.value()), x, y);
             } else {
                 copy.fields.put(null, x, y);
             }
