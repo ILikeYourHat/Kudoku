@@ -1,5 +1,6 @@
 package pl.laskowski.marcin.solving.bruteforce;
 
+import org.jetbrains.annotations.NotNull;
 import pl.laskowski.marcin.creating.SudokuTransformations;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.solving.ConcurrentSudokuSolver;
@@ -10,11 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
-
-/**
- * Created by Marcin Laskowski.
- */
-
 public class BruteForcePermutationSolver implements ConcurrentSudokuSolver {
 
     private final SudokuSolver coreAlgorithm;
@@ -27,13 +23,15 @@ public class BruteForcePermutationSolver implements ConcurrentSudokuSolver {
         this.executors = Executors.newFixedThreadPool(threads);
     }
 
+    @NotNull
     @Override
     public SudokuVariant getSudokuVariant() {
         return coreAlgorithm.getSudokuVariant();
     }
 
+    @NotNull
     @Override
-    public Sudoku solve(Sudoku sudoku) {
+    public Sudoku solve(@NotNull Sudoku sudoku) {
         try {
             return solveInParallel(sudoku);
         } catch (InterruptedException | ExecutionException e) {
@@ -59,7 +57,7 @@ public class BruteForcePermutationSolver implements ConcurrentSudokuSolver {
         try {
             return service.take().get();
         } finally {
-            for (Future f : futures) f.cancel(true);
+            for (Future<Sudoku> f : futures) f.cancel(true);
         }
     }
 
@@ -148,6 +146,7 @@ public class BruteForcePermutationSolver implements ConcurrentSudokuSolver {
     public void shutdown() {
         try {
             executors.shutdownNow();
+            //noinspection ResultOfMethodCallIgnored
             executors.awaitTermination(1, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             //ignore

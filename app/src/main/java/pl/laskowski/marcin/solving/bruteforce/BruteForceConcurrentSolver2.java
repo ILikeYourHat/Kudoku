@@ -1,5 +1,6 @@
 package pl.laskowski.marcin.solving.bruteforce;
 
+import org.jetbrains.annotations.NotNull;
 import pl.laskowski.marcin.model.Field;
 import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.model.Sudoku;
@@ -16,7 +17,7 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
 
     private final SudokuSolver coreAlgorithm;
     private final ThreadPoolExecutor executors;
-    private int sampleSize;
+    private final int sampleSize;
 
     public BruteForceConcurrentSolver2(SudokuVariant sudokuVariant, int threads, int sampleSize) {
         if (threads < 1) throw new IllegalArgumentException("There must be at least one thread");
@@ -25,13 +26,15 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
         this.sampleSize = sampleSize;
     }
 
+    @NotNull
     @Override
     public SudokuVariant getSudokuVariant() {
         return coreAlgorithm.getSudokuVariant();
     }
 
+    @NotNull
     @Override
-    public Sudoku solve(Sudoku sudoku) {
+    public Sudoku solve(@NotNull Sudoku sudoku) {
         try {
             BlockingQueue<Sudoku> queue = new LinkedBlockingQueue<>();
             queue.add(sudoku);
@@ -76,7 +79,7 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
         try {
             return service.take().get();
         } finally {
-            for (Future f : futures) f.cancel(true);
+            for (Future<Sudoku> f : futures) f.cancel(true);
         }
     }
 
@@ -96,6 +99,7 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
     public void shutdown() {
         try {
             this.executors.shutdownNow();
+            //noinspection ResultOfMethodCallIgnored
             this.executors.awaitTermination(1, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             //ignore

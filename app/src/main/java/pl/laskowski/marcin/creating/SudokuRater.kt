@@ -20,7 +20,7 @@ class SudokuRater(variant: SudokuVariant) {
         }
     }
 
-    fun rate(sudoku: Sudoku?): Difficulty {
+    fun rate(sudoku: Sudoku): Difficulty {
         return if (easySolver.solve(sudoku).isSolved) {
             Difficulty.EASY
         } else if (mediumSolver.solve(sudoku).isSolved) {
@@ -33,7 +33,7 @@ class SudokuRater(variant: SudokuVariant) {
     }
 
     fun percentFilled(sudoku: Sudoku): Float {
-        val fields = sudoku.allFields.filterNotNull()
+        val fields = sudoku.allFields
         val total = fields.count()
         val notEmpty = fields.count { !it.isEmpty }
         return notEmpty.toFloat() / total

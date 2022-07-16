@@ -140,6 +140,7 @@ data class Sudoku(
                 .filterNotNull()
                 .none { it.isEmpty }
     val allFields = board.fields()
+        .filterNotNull()
     val firstEmptyField: Field?
         get() = board.fields()
             .filterNotNull()
@@ -162,7 +163,9 @@ data class Sudoku(
 //        }
 //    }
 
-
+    fun values(): List<Int?> {
+        return board.fields().map { it?.value }
+    }
 
     companion object {
         @JvmStatic
