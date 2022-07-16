@@ -6,7 +6,6 @@ import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.model.SudokuHintGrid;
 import pl.laskowski.marcin.solving.ConcurrentSudokuSolver;
 import pl.laskowski.marcin.solving.SudokuSolver;
-import pl.laskowski.marcin.type.SudokuVariant;
 
 import java.util.List;
 import java.util.concurrent.*;
@@ -19,17 +18,11 @@ public class BruteForceConcurrentSolver implements ConcurrentSudokuSolver {
     private final ThreadPoolExecutor executors;
     private final int sampleSize;
 
-    public BruteForceConcurrentSolver(SudokuVariant sudokuVariant, int threads, int sampleSize) {
+    public BruteForceConcurrentSolver(int threads, int sampleSize) {
         if (threads < 1) throw new IllegalArgumentException("There must be at least one thread");
-        this.coreAlgorithm = new BruteForceSolver(sudokuVariant);
+        this.coreAlgorithm = new BruteForceSolver();
         this.executors = (ThreadPoolExecutor) Executors.newFixedThreadPool(threads);
         this.sampleSize = sampleSize;
-    }
-
-    @NotNull
-    @Override
-    public SudokuVariant getSudokuVariant() {
-        return coreAlgorithm.getSudokuVariant();
     }
 
     @NotNull
@@ -56,7 +49,7 @@ public class BruteForceConcurrentSolver implements ConcurrentSudokuSolver {
     }
 
     private List<Sudoku> divide(Sudoku sample) {
-        SudokuHintGrid hintGrid = SudokuHintGrid.createAndReduce(sample, getSudokuVariant());
+        SudokuHintGrid hintGrid = SudokuHintGrid.createAndReduce(sample);
         Field field = sample.getFirstEmptyField();
         if (field != null) {
             return hintGrid.forField(field).stream()

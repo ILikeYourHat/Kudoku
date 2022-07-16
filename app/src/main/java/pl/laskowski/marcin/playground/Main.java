@@ -36,7 +36,7 @@ public class Main {
     }
 
     private static void testClassic() {
-        SudokuRater rater = new SudokuRater(new ClassicSquare(9));
+        SudokuRater rater = new SudokuRater();
 
         System.out.println("CLASSIC");
         SudokuGenerator generator1 = new SudokuGenerator(new ClassicSquare(9), null, null);
@@ -68,7 +68,7 @@ public class Main {
     }
 
     private static void testClassicOptimized() {
-        SudokuRater rater = new SudokuRater(new ClassicSquare(9));
+        SudokuRater rater = new SudokuRater();
 
         System.out.println("CLASSIC_OPTIMIZED");
         SudokuGenerator generator1 = new ClassicSudokuGenerator(null, null);
@@ -101,21 +101,21 @@ public class Main {
 
     public static void testDiagonal() {
         System.out.println("CLASSIC_DIAGONAL");
-        SudokuRater rater = new SudokuRater(new DiagonalSquare(9));
+        SudokuRater rater = new SudokuRater();
         SudokuGenerator generator = new SudokuGenerator(new DiagonalSquare(9), null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }
 
     public static void testClassic16() {
         System.out.println("CLASSIC_16x16");
-        SudokuRater rater = new SudokuRater(new ClassicSquare(16));
+        SudokuRater rater = new SudokuRater();
         SudokuGenerator generator = new SudokuGenerator(new ClassicSquare(16), null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }
 
     public static void testClassic25() {
         System.out.println("CLASSIC_25x25");
-        SudokuRater rater = new SudokuRater(new ClassicSquare(25));
+        SudokuRater rater = new SudokuRater();
         SudokuGenerator generator = new SudokuGenerator(new ClassicSquare(25), null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }
@@ -123,7 +123,7 @@ public class Main {
     public static void testSamurai15() {
         System.out.println("SAMURAI_15");
         SudokuVariant type = TestSet.SMALL_SAMURAI.getSudokuVariant();
-        SudokuRater rater = new SudokuRater(type);
+        SudokuRater rater = new SudokuRater();
         SudokuGenerator generator = new SudokuGenerator(type, null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }
@@ -131,7 +131,7 @@ public class Main {
     public static void testSamurai30() {
         System.out.println("SAMURAI_30");
         SudokuVariant type = TestSet.COLOSSUS_SAMURAI.getSudokuVariant();
-        SudokuRater rater = new SudokuRater(type);
+        SudokuRater rater = new SudokuRater();
         SudokuGenerator generator = new SudokuGenerator(type, null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }

@@ -5,7 +5,6 @@ import pl.laskowski.marcin.creating.SudokuTransformations;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.solving.ConcurrentSudokuSolver;
 import pl.laskowski.marcin.solving.SudokuSolver;
-import pl.laskowski.marcin.type.SudokuVariant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +16,10 @@ public class BruteForcePermutationSolver implements ConcurrentSudokuSolver {
     private final SudokuTransformations shuffler = new SudokuTransformations();
     private final ExecutorService executors;
 
-    public BruteForcePermutationSolver(SudokuVariant sudokuVariant, int threads) {
+    public BruteForcePermutationSolver(int threads) {
         if (threads < 1) throw new IllegalArgumentException("There must be at least one thread");
-        this.coreAlgorithm = new BruteForceSolver(sudokuVariant);
+        this.coreAlgorithm = new BruteForceSolver();
         this.executors = Executors.newFixedThreadPool(threads);
-    }
-
-    @NotNull
-    @Override
-    public SudokuVariant getSudokuVariant() {
-        return coreAlgorithm.getSudokuVariant();
     }
 
     @NotNull

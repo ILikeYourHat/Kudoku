@@ -4,11 +4,8 @@ import pl.laskowski.marcin.model.Field
 import pl.laskowski.marcin.model.Region
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.solving.SudokuSolver
-import pl.laskowski.marcin.type.SudokuVariant
 
-class BruteForceSolver(
-    override val sudokuVariant: SudokuVariant
-) : SudokuSolver {
+class BruteForceSolver: SudokuSolver {
 
     internal enum class Direction {
         FORWARD, BACKWARD
@@ -25,7 +22,7 @@ class BruteForceSolver(
     private inner class Command(private val origin: Sudoku) {
         private val sudoku: Sudoku = origin.copy()
         private val iterator: ListIterator<Field> = sudoku.allFields.listIterator()
-        private val regions: Set<Region> = sudokuVariant.divideIntoRegions(sudoku)
+        private val regions: Set<Region> = sudoku.type.divideIntoRegions(sudoku)
 
         private var currentDirection = Direction.FORWARD
         private lateinit var currentField: Field
@@ -81,7 +78,7 @@ class BruteForceSolver(
 
         private fun setNextValuesAndCheckGrid() {
             val currentNumber = currentField.value()
-            for (i in currentNumber + 1..sudokuVariant.regionSize()) {
+            for (i in currentNumber + 1..sudoku.type.regionSize()) {
                 currentField.set(i)
                 if (isGridCorrectAfterChange()) {
                     changeDirection(Direction.FORWARD)

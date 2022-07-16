@@ -4,13 +4,12 @@ import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV1
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV2
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV3
-import pl.laskowski.marcin.type.SudokuVariant
 
-class SudokuRater(variant: SudokuVariant) {
+class SudokuRater() {
 
-    private var easySolver = DeductionSolverV1(variant)
-    private var mediumSolver = DeductionSolverV2(variant)
-    private var hardSolver = DeductionSolverV3(variant)
+    private var easySolver = DeductionSolverV1()
+    private var mediumSolver = DeductionSolverV2()
+    private var hardSolver = DeductionSolverV3()
 
     enum class Difficulty {
         EASY, MEDIUM, HARD, DIABOLIC;

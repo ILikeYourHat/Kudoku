@@ -18,7 +18,15 @@ abstract class SudokuVariant(
         return width
     }
 
+    fun sizeX(): Int {
+        return width
+    }
+
     fun height(): Int {
+        return height
+    }
+
+    fun sizeY(): Int {
         return height
     }
 

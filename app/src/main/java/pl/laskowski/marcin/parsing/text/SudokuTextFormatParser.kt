@@ -1,6 +1,8 @@
 package pl.laskowski.marcin.parsing.text
 
 import pl.laskowski.marcin.model.Sudoku
+import pl.laskowski.marcin.type.ClassicSquare
+import pl.laskowski.marcin.type.SudokuVariant
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
@@ -26,8 +28,17 @@ class SudokuTextFormatParser {
         return Command(file).parseMany()
     }
 
+    private fun getType(type: String): SudokuVariant {
+        return when(type) {
+            "classic_4x4" -> ClassicSquare(4)
+            "classic_9x9" -> ClassicSquare(9)
+            else -> throw IllegalArgumentException("Unknown sudoku type: $type")
+        }
+    }
+
     private inner class Command {
         private val scanner: Scanner
+        private lateinit var type: SudokuVariant
         private var width = 0
         private var height = 0
         private var data: Array<Int?> = arrayOfNulls(0)
@@ -66,12 +77,13 @@ class SudokuTextFormatParser {
                 }
                 y++
             }
-            return Sudoku(width, height, data)
+            return Sudoku(type, data)
         }
 
         private fun readSize() {
-            width = scanner.nextInt()
-            height = scanner.nextInt()
+            type = getType(scanner.nextLine())
+            width = type.sizeX()
+            height = type.sizeY()
             data = arrayOfNulls(width * height)
             pointer = 0
             scanner.nextLine()

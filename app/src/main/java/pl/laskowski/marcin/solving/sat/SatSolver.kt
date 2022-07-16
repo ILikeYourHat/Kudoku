@@ -11,11 +11,8 @@ import pl.laskowski.marcin.model.Field
 import pl.laskowski.marcin.model.Region
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.solving.SudokuSolver
-import pl.laskowski.marcin.type.SudokuVariant
 
-class SatSolver(
-    override val sudokuVariant: SudokuVariant
-) : SudokuSolver {
+class SatSolver: SudokuSolver {
 
     override fun solve(sudoku: Sudoku): Sudoku {
         return Command(sudoku).solve()
@@ -27,7 +24,7 @@ class SatSolver(
 
     private inner class Command(private val sudoku: Sudoku) {
         private val ie: IndexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY())
-        private val regions: Set<Region> = sudokuVariant.divideIntoRegions(sudoku)
+        private val regions: Set<Region> = sudoku.type.divideIntoRegions(sudoku)
         private val solver: ISolver = SolverFactory.newDefault()
             .apply { timeout = 60 }
 
@@ -98,7 +95,7 @@ class SatSolver(
 
         @Throws(ContradictionException::class)
         private fun addCausesForRegions() {
-            for (possibleValue in 1..sudokuVariant.regionSize()) {
+            for (possibleValue in 1..sudoku.type.regionSize()) {
                 for (region in regions) {
                     val vec = VecInt(region.size())
                     for ((position) in region) {
@@ -111,8 +108,8 @@ class SatSolver(
         }
 
         private fun createValues(field: Field): VecInt {
-            val vec = VecInt(sudokuVariant.regionSize())
-            for (value in 1..sudokuVariant.regionSize()) {
+            val vec = VecInt(sudoku.type.regionSize())
+            for (value in 1..sudoku.type.regionSize()) {
                 val index = ie.encode(field.position(), value)
                 vec.push(index)
             }

@@ -19,17 +19,11 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
     private final ThreadPoolExecutor executors;
     private final int sampleSize;
 
-    public BruteForceConcurrentSolver2(SudokuVariant sudokuVariant, int threads, int sampleSize) {
+    public BruteForceConcurrentSolver2(int threads, int sampleSize) {
         if (threads < 1) throw new IllegalArgumentException("There must be at least one thread");
-        this.coreAlgorithm = new BruteForceSolver(sudokuVariant);
+        this.coreAlgorithm = new BruteForceSolver();
         this.executors = (ThreadPoolExecutor) Executors.newFixedThreadPool(threads);
         this.sampleSize = sampleSize;
-    }
-
-    @NotNull
-    @Override
-    public SudokuVariant getSudokuVariant() {
-        return coreAlgorithm.getSudokuVariant();
     }
 
     @NotNull
@@ -58,7 +52,7 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
     private List<Sudoku> divide(Sudoku sample) {
         Field field = sample.getFirstEmptyField();
         if (field != null) {
-            return IntStream.range(1, getSudokuVariant().regionSize())
+            return IntStream.range(1, sample.getType().regionSize())
                     .mapToObj(newValue -> {
                         Sudoku copy = sample.copy();
                         copy.at(field.position()).set(newValue);
@@ -107,7 +101,7 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
     }
 
     private boolean isValid(Sudoku s) {
-        for (Region r: getSudokuVariant().divideIntoRegions(s)) {
+        for (Region r: s.getType().divideIntoRegions(s)) {
             if (!r.isValid()) return false;
         }
         return true;

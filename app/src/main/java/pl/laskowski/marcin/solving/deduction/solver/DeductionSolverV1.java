@@ -15,12 +15,8 @@ import java.util.List;
 
 public class DeductionSolverV1 extends DeductionSolver {
 
-    public DeductionSolverV1(SudokuVariant sudokuVariant) {
-        super(sudokuVariant);
-    }
-
     @Override
-    protected List<DeductionAlgorithm.Factory> provideAlgorithms() {
+    protected List<DeductionAlgorithm.Factory> provideAlgorithms(SudokuVariant type) {
         List<DeductionAlgorithm.Factory> algorithms = new ArrayList<>();
         algorithms.add(new HintEliminationAlgorithm.Factory());
         algorithms.add(new NakedSinglesAlgorithm.Factory());

@@ -35,10 +35,11 @@ class Slash(
     }
 
     override fun template(): Sudoku {
-        val sudoku = Sudoku(width(), height())
+//        val sudoku = Sudoku(width(), height())
 //        sudoku.append(child.template(), upperLeftCorner())
 //        sudoku.append(child.template(), lowerRightCorner())
-        return sudoku
+//        return sudoku
+        TODO()
     }
 
     private fun areaStartingIn(p: Point): SubSudokuDivider.Area {

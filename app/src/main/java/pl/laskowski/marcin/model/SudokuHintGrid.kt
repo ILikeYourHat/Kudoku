@@ -8,14 +8,14 @@ import pl.laskowski.marcin.solving.deduction.algorithm.HintEliminationAlgorithm
 /**
  * Created by Marcin Laskowski.
  */
-class SudokuHintGrid(sudoku: Sudoku, sudokuVariant: SudokuVariant) {
+class SudokuHintGrid(sudoku: Sudoku) {
     private val hintMap: MutableMap<Point, MutableSet<Int>>
 
     init {
         hintMap = HashMap()
-        for (f in sudoku.allFields.filterNotNull()) {
+        for (f in sudoku.allFields) {
             if (f.isEmpty) {
-                hintMap[f.position] = allValuesSet(sudokuVariant)
+                hintMap[f.position] = allValuesSet(sudoku.type)
             }
         }
     }
@@ -77,10 +77,10 @@ class SudokuHintGrid(sudoku: Sudoku, sudokuVariant: SudokuVariant) {
 
     companion object {
         @JvmStatic
-        fun createAndReduce(sudoku: Sudoku, sudokuVariant: SudokuVariant): SudokuHintGrid {
-            val grid = SudokuHintGrid(sudoku, sudokuVariant)
+        fun createAndReduce(sudoku: Sudoku): SudokuHintGrid {
+            val grid = SudokuHintGrid(sudoku)
             val algorithm = HintEliminationAlgorithm.Factory()
-                .instance(sudokuVariant.divideIntoRegions(sudoku), grid)
+                .instance(sudoku.type.divideIntoRegions(sudoku), grid)
             algorithm.solve()
             return grid
         }

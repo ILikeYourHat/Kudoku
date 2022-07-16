@@ -1,6 +1,5 @@
 package pl.laskowski.marcin.type
 
-import pl.laskowski.marcin.model.Sudoku.Companion.blank
 import pl.laskowski.marcin.model.dividers.SudokuDivider
 import pl.laskowski.marcin.model.dividers.ComplexDivider
 import pl.laskowski.marcin.model.dividers.RowDivider
@@ -33,7 +32,7 @@ class DiagonalSquare(size: Int) : SudokuVariant(size, size) {
     }
 
     override fun template(): Sudoku {
-        return blank(width(), height())
+        return Sudoku(this)
     }
 
     companion object {

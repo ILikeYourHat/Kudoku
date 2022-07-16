@@ -65,12 +65,13 @@ class Samurai(
     }
 
     override fun template(): Sudoku {
-        val sudoku = Sudoku(width(), height())
+//        val sudoku = Sudoku(width(), height())
 //        sudoku.append(child.template(), upperLeftCorner())
 //        sudoku.append(child.template(), upperRightCorner())
 //        sudoku.append(child.template(), center())
 //        sudoku.append(child.template(), lowerLeftCorner())
 //        sudoku.append(child.template(), lowerRightCorner())
-        return sudoku
+//        return sudoku
+        TODO()
     }
 }

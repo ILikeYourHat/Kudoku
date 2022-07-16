@@ -17,18 +17,11 @@ public class ParallelDeductionSolver implements SudokuSolver {
 
     private final SudokuSolver solver;
     private final ExecutorService executors;
-    private final SudokuVariant sudokuVariant;
 
     public ParallelDeductionSolver(DeductionSolver solver, int threads) {
         if (threads < 1) throw new IllegalArgumentException("There must be at least one thread");
-        this.sudokuVariant = solver.getSudokuVariant();
         this.solver = solver;
         this.executors = Executors.newFixedThreadPool(threads);
-    }
-
-    @Override
-    public SudokuVariant getSudokuVariant() {
-        return sudokuVariant;
     }
 
     @Override
@@ -61,7 +54,7 @@ public class ParallelDeductionSolver implements SudokuSolver {
     }
 
     private List<Sudoku> permutations(Sudoku sudoku) {
-        SudokuHintGrid hintGrid = new SudokuHintGrid(sudoku, sudokuVariant);
+        SudokuHintGrid hintGrid = new SudokuHintGrid(sudoku);
         Field emptyField = getFieldWithLowestPossibilities(sudoku, hintGrid);
         if (emptyField == null) return Collections.emptyList();
         Set<Integer> possibilities = hintGrid.forField(emptyField);

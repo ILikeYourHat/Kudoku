@@ -1,19 +1,28 @@
 package pl.laskowski.marcin.model
 
+import pl.laskowski.marcin.type.SudokuVariant
+
 /**
  * Created by Marcin Laskowski.
  */
 data class Sudoku(
-    private val board: Board
+    private val board: Board,
+    val type: SudokuVariant
 ) {
 
-    constructor(sizeX: Int, sizeY: Int) : this(Board(sizeX, sizeY) { x, y -> Field(x, y) })
+    constructor(type: SudokuVariant) : this(
+        type = type,
+        board = Board(type.sizeX(), type.sizeY()) { x, y -> Field(x, y) }
+    )
 
-    constructor(sizeX: Int, sizeY: Int, values: Array<Int?>) : this(Board(sizeX, sizeY) { x, y ->
-        require(sizeX * sizeY == values.size) {
-            "Incorrect data count, expected ${sizeX * sizeY}, but was ${values.size}"
+    constructor(type: SudokuVariant, values: Array<Int?>) : this(
+        type = type,
+        board = Board(type.width(), type.height()) { x, y ->
+            val dataLength = type.width() * type.height()
+        require(dataLength == values.size) {
+            "Incorrect data count, expected $dataLength, but was ${values.size}"
         }
-        val value = values[x * sizeY + y]
+        val value = values[x * type.sizeY() + y]
         if (value != null) {
             Field(x, y).also { it.set(value) }
         } else null
@@ -64,7 +73,7 @@ data class Sudoku(
     }
 
     fun copy(): Sudoku {
-        return Sudoku(board.copy())
+        return Sudoku(board.copy(), type)
     }
 
 //    fun copyWithIndexMapping(mapper: (Point) -> Point): Sudoku {
@@ -103,9 +112,10 @@ data class Sudoku(
 //    }
 
     fun subSudoku(startX: Int, startY: Int, endX: Int, endY: Int): Sudoku {
-        return Sudoku(
-            board.fragment(startX, startY, endX, endY)
-        )
+        TODO()
+//        return Sudoku(
+//            board.fragment(startX, startY, endX, endY),
+//        )
     }
 
     fun sizeX(): Int {
@@ -165,12 +175,5 @@ data class Sudoku(
 
     fun values(): List<Int?> {
         return board.fields().map { it?.value }
-    }
-
-    companion object {
-        @JvmStatic
-        fun blank(sizeX: Int, sizeY: Int): Sudoku {
-            return Sudoku(sizeX, sizeY)
-        }
     }
 }

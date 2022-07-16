@@ -16,30 +16,19 @@ import java.util.Set;
 
 public abstract class DeductionSolver implements SudokuSolver {
 
-    private final List<DeductionAlgorithm.Factory> algorithmFactories;
-    protected final SudokuVariant sudokuVariant;
-
-    protected DeductionSolver(SudokuVariant sudokuVariant) {
-        this.sudokuVariant = sudokuVariant;
-        this.algorithmFactories = provideAlgorithms();
-    }
-
-    protected abstract List<DeductionAlgorithm.Factory> provideAlgorithms();
-
-    @Override
-    public SudokuVariant getSudokuVariant() {
-        return sudokuVariant;
-    }
+    protected abstract List<DeductionAlgorithm.Factory> provideAlgorithms(SudokuVariant type);
 
     @Override
     public Sudoku solve(Sudoku sudoku) {
         sudoku = sudoku.copy();
-        SudokuHintGrid sudokuHintGrid = new SudokuHintGrid(sudoku, sudokuVariant);
-        Set<Region> regions = sudokuVariant.divideIntoRegions(sudoku);
+        SudokuHintGrid sudokuHintGrid = new SudokuHintGrid(sudoku);
+        Set<Region> regions = sudoku.getType().divideIntoRegions(sudoku);
         return solve(sudoku, regions, sudokuHintGrid);
     }
 
     private Sudoku solve(Sudoku sudoku, Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        List<DeductionAlgorithm.Factory> algorithmFactories = provideAlgorithms(sudoku.getType());
+
         boolean gridHasChanged;
         do {
             gridHasChanged = false;

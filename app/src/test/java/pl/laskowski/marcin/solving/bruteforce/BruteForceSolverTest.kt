@@ -5,14 +5,15 @@ import org.junit.Ignore
 import org.junit.Test
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.type.ClassicSquare
+import pl.laskowski.marcin.type.SudokuTypes
 
 class BruteForceSolverTest {
 
     @Test
     fun `classic BruteForce`() {
-        val solver = BruteForceSolver(ClassicSquare(4))
+        val solver = BruteForceSolver()
 
-        val sudoku = Sudoku(4, 4,
+        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
             arrayOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
@@ -37,9 +38,9 @@ class BruteForceSolverTest {
     @Test
     @Ignore
     fun `concurrent BruteForce`() {
-        val solver = BruteForceConcurrentSolver(ClassicSquare(4), 5, 5)
+        val solver = BruteForceConcurrentSolver( 5, 5)
 
-        val sudoku = Sudoku(4, 4,
+        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
             arrayOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
@@ -64,9 +65,9 @@ class BruteForceSolverTest {
     @Test
     @Ignore
     fun `concurrent BruteForce 2`() {
-        val solver = BruteForceConcurrentSolver2(ClassicSquare(4), 2, 4)
+        val solver = BruteForceConcurrentSolver2(2, 4)
 
-        val sudoku = Sudoku(4, 4,
+        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
             arrayOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
@@ -91,9 +92,9 @@ class BruteForceSolverTest {
     @Test
     @Ignore
     fun `permutation BruteForce`() {
-        val solver = BruteForcePermutationSolver(ClassicSquare(4), 2)
+        val solver = BruteForcePermutationSolver( 2)
 
-        val sudoku = Sudoku(4, 4,
+        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
             arrayOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,

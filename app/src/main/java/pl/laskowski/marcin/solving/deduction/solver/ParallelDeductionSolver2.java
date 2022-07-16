@@ -4,7 +4,6 @@ import pl.laskowski.marcin.model.Field;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.model.SudokuHintGrid;
 import pl.laskowski.marcin.solving.SudokuSolver;
-import pl.laskowski.marcin.type.SudokuVariant;
 
 import java.util.*;
 
@@ -15,16 +14,9 @@ import java.util.*;
 public class ParallelDeductionSolver2 implements SudokuSolver {
 
     private final SudokuSolver solver;
-    private final SudokuVariant sudokuVariant;
 
     public ParallelDeductionSolver2(DeductionSolver solver) {
-        this.sudokuVariant = solver.getSudokuVariant();
         this.solver = solver;
-    }
-
-    @Override
-    public SudokuVariant getSudokuVariant() {
-        return sudokuVariant;
     }
 
     @Override
@@ -49,7 +41,7 @@ public class ParallelDeductionSolver2 implements SudokuSolver {
     }
 
     private List<Sudoku> permutations(Sudoku sudoku) {
-        SudokuHintGrid hintGrid = new SudokuHintGrid(sudoku, sudokuVariant);
+        SudokuHintGrid hintGrid = new SudokuHintGrid(sudoku);
         Field emptyField = getFieldWithLowestPossibilities(sudoku, hintGrid);
         if (emptyField == null) return Collections.emptyList();
         Set<Integer> possibilities = hintGrid.forField(emptyField);

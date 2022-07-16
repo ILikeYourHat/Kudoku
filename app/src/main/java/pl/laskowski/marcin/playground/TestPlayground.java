@@ -5,7 +5,6 @@ import pl.laskowski.marcin.solving.bruteforce.BruteForcePermutationSolver;
 import pl.laskowski.marcin.solving.bruteforce.BruteForceSolver;
 import pl.laskowski.marcin.solving.deduction.solver.*;
 import pl.laskowski.marcin.solving.sat.SatSolver;
-import pl.laskowski.marcin.type.SudokuVariant;
 
 /**
  * Created by Marcin Laskowski.
@@ -37,134 +36,124 @@ public class TestPlayground {
 
     public void bruteForceComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("BF", () -> new BruteForceSolver(var))
-                .add("BFP", () -> new BruteForcePermutationSolver(var, 5))
-                .add("BFC", () -> new BruteForceConcurrentSolver(var, 6, 6))
+                .add("BF", () -> new BruteForceSolver())
+                .add("BFP", () -> new BruteForcePermutationSolver(5))
+                .add("BFC", () -> new BruteForceConcurrentSolver( 6, 6))
                 .run();
     }
 
     public void bruteForceSingleThreadComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("BF", () -> new BruteForceSolver(var))
-                .add("BFP", () -> new BruteForcePermutationSolver(var, 1))
-                .add("BFC", () -> new BruteForceConcurrentSolver(var, 1, 6))
+                .add("BF", () -> new BruteForceSolver())
+                .add("BFP", () -> new BruteForcePermutationSolver(1))
+                .add("BFC", () -> new BruteForceConcurrentSolver(1, 6))
                 .run();
     }
 
     public void bruteForcePermutationComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("BFP_1", () -> new BruteForcePermutationSolver(var, 1))
-                .add("BFP_2", () -> new BruteForcePermutationSolver(var, 2))
-                .add("BFP_3", () -> new BruteForcePermutationSolver(var, 3))
-                .add("BFP_4", () -> new BruteForcePermutationSolver(var, 4))
-                .add("BFP_5", () -> new BruteForcePermutationSolver(var, 5))
-                .add("BFP_6", () -> new BruteForcePermutationSolver(var, 6))
-                .add("BFP_7", () -> new BruteForcePermutationSolver(var, 7))
-                .add("BFP_8", () -> new BruteForcePermutationSolver(var, 8))
-                .add("BFP_9", () -> new BruteForcePermutationSolver(var, 9))
-                .add("BFP_10", () -> new BruteForcePermutationSolver(var, 10))
+                .add("BFP_1", () -> new BruteForcePermutationSolver(1))
+                .add("BFP_2", () -> new BruteForcePermutationSolver(2))
+                .add("BFP_3", () -> new BruteForcePermutationSolver(3))
+                .add("BFP_4", () -> new BruteForcePermutationSolver(4))
+                .add("BFP_5", () -> new BruteForcePermutationSolver(5))
+                .add("BFP_6", () -> new BruteForcePermutationSolver(6))
+                .add("BFP_7", () -> new BruteForcePermutationSolver(7))
+                .add("BFP_8", () -> new BruteForcePermutationSolver(8))
+                .add("BFP_9", () -> new BruteForcePermutationSolver(9))
+                .add("BFP_10", () -> new BruteForcePermutationSolver( 10))
                 .run();
     }
 
     public void bruteForceConcurrentComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("BFC_1", () -> new BruteForceConcurrentSolver(var, 1, 5))
-                .add("BFC_2", () -> new BruteForceConcurrentSolver(var, 2, 5))
-                .add("BFC_3", () -> new BruteForceConcurrentSolver(var, 3, 5))
-                .add("BFC_4", () -> new BruteForceConcurrentSolver(var, 4, 5))
-                .add("BFC_5", () -> new BruteForceConcurrentSolver(var, 5, 5))
-                .add("BFC_6", () -> new BruteForceConcurrentSolver(var, 6, 5))
-                .add("BFC_7", () -> new BruteForceConcurrentSolver(var, 7, 5))
-                .add("BFC_8", () -> new BruteForceConcurrentSolver(var, 8, 5))
-                .add("BFC_9", () -> new BruteForceConcurrentSolver(var, 9, 5))
-                .add("BFC_10", () -> new BruteForceConcurrentSolver(var, 10, 5))
+                .add("BFC_1", () -> new BruteForceConcurrentSolver(1, 5))
+                .add("BFC_2", () -> new BruteForceConcurrentSolver(2, 5))
+                .add("BFC_3", () -> new BruteForceConcurrentSolver(3, 5))
+                .add("BFC_4", () -> new BruteForceConcurrentSolver(4, 5))
+                .add("BFC_5", () -> new BruteForceConcurrentSolver(5, 5))
+                .add("BFC_6", () -> new BruteForceConcurrentSolver(6, 5))
+                .add("BFC_7", () -> new BruteForceConcurrentSolver(7, 5))
+                .add("BFC_8", () -> new BruteForceConcurrentSolver( 8, 5))
+                .add("BFC_9", () -> new BruteForceConcurrentSolver(9, 5))
+                .add("BFC_10", () -> new BruteForceConcurrentSolver(10, 5))
                 .run();
     }
 
     public void bruteForceConcurrentComparision2() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("BFC_2", () -> new BruteForceConcurrentSolver(var, 6, 2))
-                .add("BFC_4", () -> new BruteForceConcurrentSolver(var, 6, 4))
-                .add("BFC_6", () -> new BruteForceConcurrentSolver(var, 6, 6))
-                .add("BFC_8", () -> new BruteForceConcurrentSolver(var, 6, 8))
-                .add("BFC_10", () -> new BruteForceConcurrentSolver(var, 6, 10))
-                .add("BFC_12", () -> new BruteForceConcurrentSolver(var, 6, 12))
-                .add("BFC_14", () -> new BruteForceConcurrentSolver(var, 6, 14))
-                .add("BFC_16", () -> new BruteForceConcurrentSolver(var, 6, 16))
-                .add("BFC_18", () -> new BruteForceConcurrentSolver(var, 6, 18))
-                .add("BFC_20", () -> new BruteForceConcurrentSolver(var, 6, 20))
+                .add("BFC_2", () -> new BruteForceConcurrentSolver(6, 2))
+                .add("BFC_4", () -> new BruteForceConcurrentSolver( 6, 4))
+                .add("BFC_6", () -> new BruteForceConcurrentSolver( 6, 6))
+                .add("BFC_8", () -> new BruteForceConcurrentSolver( 6, 8))
+                .add("BFC_10", () -> new BruteForceConcurrentSolver( 6, 10))
+                .add("BFC_12", () -> new BruteForceConcurrentSolver( 6, 12))
+                .add("BFC_14", () -> new BruteForceConcurrentSolver( 6, 14))
+                .add("BFC_16", () -> new BruteForceConcurrentSolver( 6, 16))
+                .add("BFC_18", () -> new BruteForceConcurrentSolver( 6, 18))
+                .add("BFC_20", () -> new BruteForceConcurrentSolver( 6, 20))
                 .run();
     }
 
     public void deductionComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("DED_V1", () -> new DeductionSolverV1(var))
-                .add("DED_V2", () -> new DeductionSolverV2(var))
-                .add("DED_V3", () -> new DeductionSolverV3(var))
+                .add("DED_V1", () -> new DeductionSolverV1())
+                .add("DED_V2", () -> new DeductionSolverV2())
+                .add("DED_V3", () -> new DeductionSolverV3())
                 .run();
     }
 
     public void parallelDeductionComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("DED_V1", () -> new ParallelDeductionSolver2(new DeductionSolverV1(var)))
-                .add("DED_V2", () -> new ParallelDeductionSolver2(new DeductionSolverV2(var)))
-                .add("DED_V3", () -> new ParallelDeductionSolver2(new DeductionSolverV3(var)))
+                .add("DED_V1", () -> new ParallelDeductionSolver2(new DeductionSolverV1()))
+                .add("DED_V2", () -> new ParallelDeductionSolver2(new DeductionSolverV2()))
+                .add("DED_V3", () -> new ParallelDeductionSolver2(new DeductionSolverV3()))
                 .run();
     }
 
     public void satComparision() {
         TestSet set = TestSet.PROJECT_EULER_9x9;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("SAT", () -> new SatSolver(var))
-                .add("DED_S3", () -> new ParallelDeductionSolver2(new DeductionSolverV3(var)))
-                .add("BFP", () -> new BruteForcePermutationSolver(var, 5))
+                .add("SAT", () -> new SatSolver())
+                .add("DED_S3", () -> new ParallelDeductionSolver2(new DeductionSolverV3()))
+                .add("BFP", () -> new BruteForcePermutationSolver(5))
                 .run();
     }
 
     public void worstCase1() {
         TestSet set = TestSet.BRUTE_FORCE_EXTREME;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("SAT", () -> new SatSolver(var))
-                .add("DED_S3", () -> new ParallelDeductionSolver2(new DeductionSolverV3(var)))
-                .add("BFP", () -> new BruteForcePermutationSolver(var, 5))
-                .add("BF", () -> new BruteForceSolver(var))
+                .add("SAT", () -> new SatSolver())
+                .add("DED_S3", () -> new ParallelDeductionSolver2(new DeductionSolverV3()))
+                .add("BFP", () -> new BruteForcePermutationSolver(5))
+                .add("BF", () -> new BruteForceSolver())
                 .run();
     }
 
     public void worstCase2() {
         TestSet set = TestSet.DEDUCTION_EXTREME;
-        SudokuVariant var = set.getSudokuVariant();
 
         new TimeComparator(set)
-                .add("SAT", () -> new SatSolver(var))
-                .add("DED_S3", () -> new ParallelDeductionSolver2(new DeductionSolverV3(var)))
-                .add("BFP", () -> new BruteForcePermutationSolver(var, 5))
-                .add("BF", () -> new BruteForceSolver(var))
+                .add("SAT", () -> new SatSolver())
+                .add("DED_S3", () -> new ParallelDeductionSolver2(new DeductionSolverV3()))
+                .add("BFP", () -> new BruteForcePermutationSolver(5))
+                .add("BF", () -> new BruteForceSolver())
                 .run();
     }
 

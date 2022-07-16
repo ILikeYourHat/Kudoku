@@ -1,6 +1,5 @@
 package pl.laskowski.marcin.type
 
-import pl.laskowski.marcin.model.Sudoku.Companion.blank
 import pl.laskowski.marcin.model.Sudoku
 import kotlin.math.sqrt
 
@@ -9,7 +8,7 @@ import kotlin.math.sqrt
  */
 class ClassicSquare(size: Int) : ClassicRectangle(size, size, blockSize(size), blockSize(size)) {
     override fun template(): Sudoku {
-        return blank(width(), height())
+        return Sudoku(this)
     }
 
     companion object {

@@ -4,14 +4,15 @@ import org.junit.Assert
 import org.junit.Test
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.type.ClassicSquare
+import pl.laskowski.marcin.type.SudokuTypes
 
 class SatSolverTest {
 
     @Test
     fun `SatSolver test`() {
-        val solver = SatSolver(ClassicSquare(4))
+        val solver = SatSolver()
 
-        val sudoku = Sudoku(4, 4,
+        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
             arrayOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
