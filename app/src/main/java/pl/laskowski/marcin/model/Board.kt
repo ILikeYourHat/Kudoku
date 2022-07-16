@@ -3,25 +3,34 @@ package pl.laskowski.marcin.model
 import pl.laskowski.marcin.model.matrix.ListMatrix
 import pl.laskowski.marcin.model.matrix.Matrix
 
-class Board(
-    val sizeX: Int,
-    val sizeY: Int,
-    valueInitializer: (x: Int, y: Int) -> Field?
+data class Board(
+    private val fields: Matrix<Field?>
 ) {
-    private val fields: Matrix<Field?> = ListMatrix(
-        sizeX = sizeX,
-        sizeY = sizeY,
-        values = iterate(sizeX, sizeY, valueInitializer)
-    )
 
-    private fun <T> iterate(sizeX: Int, sizeY: Int, mapper: (x: Int, y: Int) -> T): List<T> {
-        return (0 until sizeX).flatMap { x -> (0 until sizeY).map { y -> mapper(x, y) } }
-    }
+    constructor(
+        sizeX: Int,
+        sizeY: Int,
+        valueInitializer: (x: Int, y: Int) -> Field?
+    ) : this(
+        ListMatrix(
+            sizeX = sizeX,
+            sizeY = sizeY,
+            values = (0 until sizeX)
+                .flatMap { x ->
+                    (0 until sizeY)
+                        .map { y -> valueInitializer(x, y) }
+                }
+        )
+    )
 
     fun at(x: Int, y: Int) = fields[x, y]
 
+    fun sizeX() = fields.sizeX
+
+    fun sizeY() = fields.sizeY
+
     fun copy(): Board {
-        return Board(sizeX, sizeY) { x, y -> fields[x, y]?.copy() }
+        return Board(fields.sizeX, fields.sizeY) { x, y -> fields[x, y]?.copy() }
     }
 
     fun fields() = fields.toList()

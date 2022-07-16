@@ -10,7 +10,10 @@ data class Sudoku(
     constructor(sizeX: Int, sizeY: Int) : this(Board(sizeX, sizeY) { x, y -> Field(x, y) })
 
     constructor(sizeX: Int, sizeY: Int, values: Array<Int?>) : this(Board(sizeX, sizeY) { x, y ->
-        val value = values[y * sizeX + x]
+        require(sizeX * sizeY == values.size) {
+            "Incorrect data count, expected ${sizeX * sizeY}, but was ${values.size}"
+        }
+        val value = values[x * sizeY + y]
         if (value != null) {
             Field(x, y).also { it.set(value) }
         } else null
@@ -41,22 +44,22 @@ data class Sudoku(
     }
 
     fun rows(): List<List<Field?>> {
-        return (0 until board.sizeY)
+        return (0 until board.sizeY())
             .map { y -> row(y) }
     }
 
     fun columns(): List<List<Field?>> {
-        return (0 until board.sizeX)
+        return (0 until board.sizeX())
             .map { x -> column(x) }
     }
 
     fun row(y: Int): List<Field?> {
-        return (0 until board.sizeX)
+        return (0 until board.sizeX())
             .map { x -> board.at(x, y) }
     }
 
     fun column(x: Int): List<Field?> {
-        return (0 until board.sizeY)
+        return (0 until board.sizeY())
             .map { y -> board.at(x, y) }
     }
 
@@ -106,15 +109,30 @@ data class Sudoku(
     }
 
     fun sizeX(): Int {
-        return board.sizeX
+        return board.sizeX()
     }
 
     fun sizeY(): Int {
-        return board.sizeY
+        return board.sizeY()
     }
 
     fun at(p: Point): Field? {
         return board.at(p.x, p.y)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Sudoku
+
+        if (board != other.board) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return board.hashCode()
     }
 
     val isSolved: Boolean
@@ -143,6 +161,8 @@ data class Sudoku(
 //            }
 //        }
 //    }
+
+
 
     companion object {
         @JvmStatic

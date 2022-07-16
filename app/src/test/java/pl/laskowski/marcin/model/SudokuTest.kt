@@ -3,9 +3,6 @@ package pl.laskowski.marcin.model
 import org.junit.Assert.*
 import org.junit.Test
 
-/**
- * Created by Marcin Laskowski.
- */
 class SudokuTest {
 
     @Test
@@ -48,7 +45,7 @@ class SudokuTest {
         val sudoku = createGridWithSize(2, 2)
         for (x in 0..1) {
             for (y in 0..1) {
-                assertNull(sudoku.at(x, y))
+                assertEquals(0, sudoku.at(x, y)!!.value)
             }
         }
     }

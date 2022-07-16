@@ -3,9 +3,6 @@ package pl.laskowski.marcin.model.matrix
 import org.junit.Assert.*
 import org.junit.Test
 
-/**
- * Created by Marcin Laskowski.
- */
 class ListMatrixTest {
 
     @Test
