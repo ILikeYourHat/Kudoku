@@ -108,7 +108,7 @@ public class SatSolver implements SudokuSolver {
         }
 
         private void addCausesForFields() throws ContradictionException {
-            for (Field field : sudoku) {
+            for (Field field : sudoku.getAllFields()) {
                 solver.addExactly(createValues(field), 1);
                 if (!field.isEmpty()) {
                     int index = ie.encode(field.position(), field.value());

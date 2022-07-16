@@ -83,20 +83,20 @@ class SudokuTest {
         assertEquals(2, sudoku.at(2, 1)!!.value)
     }
 
-    @Test
-    fun iterateOverGrid() {
-        val values = arrayOf<Int?>(
-            0, 1, 2, 3,
-            4, 5, 6, 7,
-            8, 9, 10, 11
-        )
-        val sudoku = Sudoku(4, 3, values)
-        var currentValue = 0
-        for ((_, value) in sudoku) {
-            assertEquals(currentValue, value)
-            currentValue++
-        }
-    }
+//    @Test
+//    fun iterateOverGrid() {
+//        val values = arrayOf<Int?>(
+//            0, 1, 2, 3,
+//            4, 5, 6, 7,
+//            8, 9, 10, 11
+//        )
+//        val sudoku = Sudoku(4, 3, values)
+//        var currentValue = 0
+//        for ((_, value) in sudoku) {
+//            assertEquals(currentValue, value)
+//            currentValue++
+//        }
+//    }
 
     @Test
     fun shouldBeEqualsIfSizeIsEquals() {

@@ -42,31 +42,33 @@ class SudokuShuffler(
     }
 
     private fun Sudoku.swapNumbers(maxValue: Int): Sudoku {
-        val possibleValues = shuffledValues(maxValue)
-        forEach(Consumer { field: Field? ->
-            if (field != null && !field.isEmpty) {
-                val currentValue = field.value()
-                val newValue = possibleValues[currentValue - 1]
-                field.set(newValue)
-            }
-        })
+//        val possibleValues = shuffledValues(maxValue)
+//        forEach(Consumer { field: Field? ->
+//            if (field != null && !field.isEmpty) {
+//                val currentValue = field.value()
+//                val newValue = possibleValues[currentValue - 1]
+//                field.set(newValue)
+//            }
+//        })
         return this
     }
 
     private fun Sudoku.swapColumns(variant: ClassicRectangle): Sudoku {
-        val shuffled: List<List<Field>> = shuffleGroups(columns().assumeNoNulls(), variant.blockWidth)
-        return copyWithIndexMapping { (x, y): Point ->
-            val f = shuffled[x][y]
-            Point(f.x, f.y)
-        }
+//        val shuffled: List<List<Field>> = shuffleGroups(columns().assumeNoNulls(), variant.blockWidth)
+//        return copyWithIndexMapping { (x, y): Point ->
+//            val f = shuffled[x][y]
+//            Point(f.x, f.y)
+//        }
+        return this
     }
 
     private fun Sudoku.swapRows(variant: ClassicRectangle): Sudoku {
-        val shuffled: List<List<Field>> = shuffleGroups(rows().assumeNoNulls(), variant.blockHeight)
-        return copyWithIndexMapping { (x, y): Point ->
-            val f = shuffled[y][x]
-            Point(f.x, f.y)
-        }
+//        val shuffled: List<List<Field>> = shuffleGroups(rows().assumeNoNulls(), variant.blockHeight)
+//        return copyWithIndexMapping { (x, y): Point ->
+//            val f = shuffled[y][x]
+//            Point(f.x, f.y)
+//        }
+        return this
     }
 
     private fun List<List<Field?>>.assumeNoNulls(): List<List<Field>> {

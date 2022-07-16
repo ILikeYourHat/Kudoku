@@ -13,7 +13,7 @@ class SudokuHintGrid(sudoku: Sudoku, sudokuVariant: SudokuVariant) {
 
     init {
         hintMap = HashMap()
-        for (f in sudoku) {
+        for (f in sudoku.allFields.filterNotNull()) {
             if (f.isEmpty) {
                 hintMap[f.position] = allValuesSet(sudokuVariant)
             }

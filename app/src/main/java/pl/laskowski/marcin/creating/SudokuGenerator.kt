@@ -41,10 +41,10 @@ open class SudokuGenerator(
         }
 
     private fun iterateOverFieldsInRandomOrder(sudoku: Sudoku, consumer: Consumer<Field>) {
-        val fields = sudoku.allFields
+        val fields = sudoku.allFields.toMutableList()
         while (fields.isNotEmpty()) {
             val index = random.nextInt(fields.size)
-            consumer.accept(fields.removeAt(index))
+            consumer.accept(fields.removeAt(index)!!)
         }
     }
 
@@ -57,10 +57,10 @@ open class SudokuGenerator(
     }
 
     private fun generateHoles(sudoku: Sudoku) {
-        val fields = sudoku.allFields
+        val fields = sudoku.allFields.toMutableList()
         while (fields.isNotEmpty() && !isPercentReached(sudoku)) {
             val index = random.nextInt(fields.size)
-            val field = fields.removeAt(index)
+            val field = fields.removeAt(index)!!
             val value = field.value
             field.clear()
             if (!hasOneSolution(sudoku) || isAboveMaxDifficulty(sudoku)) {

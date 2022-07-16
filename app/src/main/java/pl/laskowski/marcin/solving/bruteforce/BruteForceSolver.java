@@ -49,7 +49,7 @@ public class BruteForceSolver implements SudokuSolver {
         private Command(Sudoku origin) {
             this.origin = origin;
             this.sudoku = origin.copy();
-            this.iterator = sudoku.iterator();
+            this.iterator = sudoku.getAllFields().listIterator();
             this.regions = sudokuVariant.divideIntoRegions(sudoku);
         }
 

@@ -22,7 +22,7 @@ abstract class SudokuVariant(
         return height
     }
 
-    protected abstract fun divider(): SudokuDivider
+    abstract fun divider(): SudokuDivider
 
     fun divideIntoRegions(sudoku: Sudoku): Set<Region> {
         return divider().divideIntoRegions(sudoku)

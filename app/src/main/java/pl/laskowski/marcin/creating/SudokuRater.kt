@@ -33,8 +33,9 @@ class SudokuRater(variant: SudokuVariant) {
     }
 
     fun percentFilled(sudoku: Sudoku): Float {
-        val total = sudoku.allFields.count()
-        val notEmpty = sudoku.allFields.count { !it.isEmpty }
+        val fields = sudoku.allFields.filterNotNull()
+        val total = fields.count()
+        val notEmpty = fields.count { !it.isEmpty }
         return notEmpty.toFloat() / total
     }
 }

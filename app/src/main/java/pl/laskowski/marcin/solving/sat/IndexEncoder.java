@@ -19,7 +19,7 @@ public class IndexEncoder {
     }
 
     public int encode(Point p, int value) {
-        return p.x() + sizeX * p.y() + blockSize * --value + 1;
+        return p.getX() + sizeX * p.getY() + blockSize * --value + 1;
     }
 
     public Point decodePoint(int index) {

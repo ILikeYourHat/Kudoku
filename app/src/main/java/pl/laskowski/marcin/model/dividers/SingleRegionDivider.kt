@@ -9,6 +9,6 @@ import pl.laskowski.marcin.model.Sudoku
  */
 class SingleRegionDivider : SudokuDivider {
     override fun divideIntoRegions(sudoku: Sudoku): Set<Region> {
-        return setOf(Region(sudoku.allFields))
+        return setOf(Region(sudoku.allFields.filterNotNull()))
     }
 }

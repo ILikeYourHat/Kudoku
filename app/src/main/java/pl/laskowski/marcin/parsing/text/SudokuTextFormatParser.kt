@@ -10,6 +10,7 @@ import java.util.regex.Pattern
  * Created by Marcin Laskowski.
  */
 class SudokuTextFormatParser {
+
     fun parseOne(text: String): Sudoku {
         return Command(text).parseOne()
     }
