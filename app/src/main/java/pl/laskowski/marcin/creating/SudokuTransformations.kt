@@ -3,9 +3,6 @@ package pl.laskowski.marcin.creating
 import pl.laskowski.marcin.model.Point
 import pl.laskowski.marcin.model.Sudoku
 
-/**
- * Created by Marcin Laskowski.
- */
 class SudokuTransformations {
     fun rotateLeft(origin: Sudoku): Sudoku {
         TODO()

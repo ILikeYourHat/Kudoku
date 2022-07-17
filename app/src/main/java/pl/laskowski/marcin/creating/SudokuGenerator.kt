@@ -8,17 +8,14 @@ import pl.laskowski.marcin.model.Field
 import java.util.*
 import java.util.function.Consumer
 
-/**
- * Created by Marcin Laskowski.
- */
 open class SudokuGenerator(
     private val variant: SudokuVariant,
     private val difficulty: Difficulty?,
     private val percentFilled: Float?
 ) {
     private val random = Random()
-    private val solver: SatSolver = SatSolver(variant)
-    private val rater: SudokuRater = SudokuRater(variant)
+    private val solver: SatSolver = SatSolver()
+    private val rater: SudokuRater = SudokuRater()
 
     fun generate(): Sudoku {
         val sudoku = filledSudoku

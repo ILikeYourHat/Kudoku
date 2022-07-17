@@ -5,9 +5,6 @@ import pl.laskowski.marcin.type.ClassicSquare
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.playground.TestSet
 
-/**
- * Created by Marcin Laskowski.
- */
 class ClassicSudokuGenerator(difficulty: Difficulty?, percentFilled: Float?) :
 
     SudokuGenerator(ClassicSquare(9), difficulty, percentFilled) {

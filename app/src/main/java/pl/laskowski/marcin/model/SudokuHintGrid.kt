@@ -80,7 +80,7 @@ class SudokuHintGrid(sudoku: Sudoku) {
         fun createAndReduce(sudoku: Sudoku): SudokuHintGrid {
             val grid = SudokuHintGrid(sudoku)
             val algorithm = HintEliminationAlgorithm.Factory()
-                .instance(sudoku.type.divideIntoRegions(sudoku), grid)
+                .instance(sudoku.regions, grid)
             algorithm.solve()
             return grid
         }

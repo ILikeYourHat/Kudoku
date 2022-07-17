@@ -3,62 +3,28 @@ package pl.laskowski.marcin.model
 import pl.laskowski.marcin.type.SudokuVariant
 
 data class Sudoku(
-    private val board: Board,
+    val board: Board,
     val type: SudokuVariant
 ) {
 
+    val regions = type.divideIntoRegions(this)
+
     constructor(type: SudokuVariant) : this(
         type = type,
-        board = Board(type.sizeX(), type.sizeY()) { x, y -> Field(x, y) }
+        board = Board(type.sizeX, type.sizeY) { x, y -> Field(x, y) }
     )
 
     constructor(type: SudokuVariant, values: List<Int?>) : this(
         type = type,
-        board = Board(type.width(), type.height(), values)
+        board = Board(type.sizeY, type.sizeY, values)
     )
 
     override fun toString(): String {
-        val sb = StringBuilder()
-        sb.append('|')
-        for (row in rows()) {
-            for (field in row) {
-                if (field == null) {
-                    sb.append('#')
-                } else if (field.isEmpty) {
-                    sb.append('_')
-                } else {
-                    sb.append(field.value)
-                }
-                sb.append(',')
-            }
-            sb.deleteCharAt(sb.length - 1)
-            sb.append('|')
-        }
-        return sb.toString()
+        return board.toString()
     }
 
     fun at(x: Int, y: Int): Field? {
         return board.at(x, y)
-    }
-
-    fun rows(): List<List<Field?>> {
-        return (0 until board.sizeY())
-            .map { y -> row(y) }
-    }
-
-    fun columns(): List<List<Field?>> {
-        return (0 until board.sizeX())
-            .map { x -> column(x) }
-    }
-
-    fun row(y: Int): List<Field?> {
-        return (0 until board.sizeX())
-            .map { x -> board.at(x, y) }
-    }
-
-    fun column(x: Int): List<Field?> {
-        return (0 until board.sizeY())
-            .map { y -> board.at(x, y) }
     }
 
     fun copy(): Sudoku {
@@ -138,8 +104,10 @@ data class Sudoku(
         get() = board.fields()
                 .filterNotNull()
                 .none { it.isEmpty }
+
     val allFields = board.fields()
         .filterNotNull()
+
     val firstEmptyField: Field?
         get() = board.fields()
             .filterNotNull()

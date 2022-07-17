@@ -59,5 +59,24 @@ data class Board(
 //        )
 //    }
 
-
+    override fun toString(): String {
+        val sb = StringBuilder()
+        for (y in 0 until fields.sizeY) {
+            sb.append('|')
+            for (x in 0 until fields.sizeX) {
+                val field = fields[x,y]
+                if (field == null) {
+                    sb.append('#')
+                } else if (field.isEmpty) {
+                    sb.append('_')
+                } else {
+                    sb.append(field.value)
+                }
+                sb.append(',')
+            }
+            sb.deleteCharAt(sb.length - 1)
+            sb.append('|')
+        }
+        return sb.toString()
+    }
 }

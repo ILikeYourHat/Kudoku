@@ -1,6 +1,6 @@
 package pl.laskowski.marcin.solving.deduction.solver;
 
-import pl.laskowski.marcin.model.Region;
+import org.jetbrains.annotations.NotNull;
 import pl.laskowski.marcin.solving.SudokuSolver;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.model.SudokuHintGrid;
@@ -8,32 +8,27 @@ import pl.laskowski.marcin.solving.deduction.algorithm.DeductionAlgorithm;
 import pl.laskowski.marcin.type.SudokuVariant;
 
 import java.util.List;
-import java.util.Set;
-
-/**
- * Created by Marcin Laskowski.
- */
 
 public abstract class DeductionSolver implements SudokuSolver {
 
     protected abstract List<DeductionAlgorithm.Factory> provideAlgorithms(SudokuVariant type);
 
+    @NotNull
     @Override
-    public Sudoku solve(Sudoku sudoku) {
+    public Sudoku solve(@NotNull Sudoku sudoku) {
         sudoku = sudoku.copy();
         SudokuHintGrid sudokuHintGrid = new SudokuHintGrid(sudoku);
-        Set<Region> regions = sudoku.getType().divideIntoRegions(sudoku);
-        return solve(sudoku, regions, sudokuHintGrid);
+        return solve(sudoku, sudokuHintGrid);
     }
 
-    private Sudoku solve(Sudoku sudoku, Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+    private Sudoku solve(Sudoku sudoku, SudokuHintGrid sudokuHintGrid) {
         List<DeductionAlgorithm.Factory> algorithmFactories = provideAlgorithms(sudoku.getType());
 
         boolean gridHasChanged;
         do {
             gridHasChanged = false;
             for (DeductionAlgorithm.Factory factory : algorithmFactories) {
-                if (factory.instance(regions, sudokuHintGrid).solve()){
+                if (factory.instance(sudoku.getRegions(), sudokuHintGrid).solve()){
                     gridHasChanged = true;
                     break;
                 }

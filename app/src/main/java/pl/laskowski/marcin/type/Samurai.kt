@@ -15,12 +15,12 @@ class Samurai(
 ) : SudokuVariant(width, height) {
 
     init {
-        require(width() % 2 == child.width() % 2)
-        require(height() % 2 == child.height() % 2)
-        require(width() >= 2 * child.width())
-        require(height() >= 2 * child.height())
-        require(width() < 3 * child.width())
-        require(height() < 3 * child.height())
+        require(sizeX % 2 == child.sizeX % 2)
+        require(sizeY % 2 == child.sizeY % 2)
+        require(sizeX >= 2 * child.sizeX)
+        require(sizeY >= 2 * child.sizeY)
+        require(sizeX < 3 * child.sizeX)
+        require(sizeY < 3 * child.sizeY)
     }
 
     override fun regionSize(): Int {
@@ -43,25 +43,25 @@ class Samurai(
     }
 
     private fun upperRightCorner(): Point {
-        return Point(width() - child.width(), 0)
+        return Point(sizeX - child.sizeX, 0)
     }
 
     private fun center(): Point {
-        val x = (width() - child.width()) / 2
-        val y = (height() - child.height()) / 2
+        val x = (sizeX - child.sizeX) / 2
+        val y = (sizeY - child.sizeY) / 2
         return Point(x, y)
     }
 
     private fun lowerLeftCorner(): Point {
-        return Point(0, height() - child.height())
+        return Point(0, sizeY - child.sizeY)
     }
 
     private fun lowerRightCorner(): Point {
-        return Point(width() - child.width(), height() - child.height())
+        return Point(sizeX - child.sizeX, sizeY - child.sizeY)
     }
 
     private fun areaStartingIn(p: Point): SubSudokuDivider.Area {
-        return SubSudokuDivider.Area(p, Point(p.x + child.width(), p.y + child.height()))
+        return SubSudokuDivider.Area(p, Point(p.x + child.sizeX, p.y + child.sizeY))
     }
 
     override fun template(): Sudoku {

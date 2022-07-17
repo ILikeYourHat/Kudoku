@@ -7,9 +7,6 @@ import pl.laskowski.marcin.type.ClassicRectangle
 import java.util.*
 import java.util.function.Consumer
 
-/**
- * Created by Marcin Laskowski.
- */
 class SudokuShuffler(
     private val random: Random = Random()
 ) {

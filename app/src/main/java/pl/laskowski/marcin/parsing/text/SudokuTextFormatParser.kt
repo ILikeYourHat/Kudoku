@@ -41,7 +41,7 @@ class SudokuTextFormatParser {
         private lateinit var type: SudokuVariant
         private var width = 0
         private var height = 0
-        private var data: Array<Int?> = arrayOfNulls(0)
+        private lateinit var data: MutableList<Int?>
         private var pointer = 0
 
         constructor(text: String) {
@@ -82,9 +82,9 @@ class SudokuTextFormatParser {
 
         private fun readSize() {
             type = getType(scanner.nextLine())
-            width = type.sizeX()
-            height = type.sizeY()
-            data = arrayOfNulls(width * height)
+            width = type.sizeX
+            height = type.sizeY
+            data = MutableList(width * height) { null }
             pointer = 0
             scanner.nextLine()
         }

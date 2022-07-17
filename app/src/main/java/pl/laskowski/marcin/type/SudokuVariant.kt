@@ -4,31 +4,12 @@ import pl.laskowski.marcin.model.Region
 import pl.laskowski.marcin.model.dividers.SudokuDivider
 import pl.laskowski.marcin.model.Sudoku
 
-/**
- * Created by Marcin Laskowski.
- */
 abstract class SudokuVariant(
-    private val width: Int,
-    private val height: Int
+    val sizeX: Int,
+    val sizeY: Int
 ) {
 
     abstract fun regionSize(): Int
-
-    fun width(): Int {
-        return width
-    }
-
-    fun sizeX(): Int {
-        return width
-    }
-
-    fun height(): Int {
-        return height
-    }
-
-    fun sizeY(): Int {
-        return height
-    }
 
     abstract fun divider(): SudokuDivider
 

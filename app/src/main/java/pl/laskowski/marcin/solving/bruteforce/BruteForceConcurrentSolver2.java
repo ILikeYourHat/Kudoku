@@ -101,10 +101,9 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
     }
 
     private boolean isValid(Sudoku s) {
-        for (Region r: s.getType().divideIntoRegions(s)) {
+        for (Region r: s.getRegions()) {
             if (!r.isValid()) return false;
         }
         return true;
     }
-
 }

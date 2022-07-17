@@ -10,15 +10,12 @@ import pl.laskowski.marcin.model.dividers.AntidiagonalDivider
 import pl.laskowski.marcin.model.Sudoku
 import kotlin.math.sqrt
 
-/**
- * Created by Marcin Laskowski.
- */
 class DiagonalSquare(size: Int) : SudokuVariant(size, size) {
 
     private val blockSize = blockSize(size)
 
     override fun regionSize(): Int {
-        return height()
+        return sizeY
     }
 
     override fun divider(): SudokuDivider {

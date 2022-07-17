@@ -1,7 +1,6 @@
 package pl.laskowski.marcin.solving.bruteforce
 
 import pl.laskowski.marcin.model.Field
-import pl.laskowski.marcin.model.Region
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.solving.SudokuSolver
 
@@ -22,7 +21,6 @@ class BruteForceSolver: SudokuSolver {
     private inner class Command(private val origin: Sudoku) {
         private val sudoku: Sudoku = origin.copy()
         private val iterator: ListIterator<Field> = sudoku.allFields.listIterator()
-        private val regions: Set<Region> = sudoku.type.divideIntoRegions(sudoku)
 
         private var currentDirection = Direction.FORWARD
         private lateinit var currentField: Field
@@ -90,7 +88,7 @@ class BruteForceSolver: SudokuSolver {
         }
 
         private fun isGridCorrectAfterChange(): Boolean {
-            for (region in regions) {
+            for (region in sudoku.regions) {
                 if (region.containsFieldWithSamePosition(currentField)) {
                     if (!region.isValid()) return false
                 }

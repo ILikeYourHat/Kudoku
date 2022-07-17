@@ -24,7 +24,6 @@ class SatSolver: SudokuSolver {
 
     private inner class Command(private val sudoku: Sudoku) {
         private val ie: IndexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY())
-        private val regions: Set<Region> = sudoku.type.divideIntoRegions(sudoku)
         private val solver: ISolver = SolverFactory.newDefault()
             .apply { timeout = 60 }
 
@@ -96,7 +95,7 @@ class SatSolver: SudokuSolver {
         @Throws(ContradictionException::class)
         private fun addCausesForRegions() {
             for (possibleValue in 1..sudoku.type.regionSize()) {
-                for (region in regions) {
+                for (region in sudoku.regions) {
                     val vec = VecInt(region.size())
                     for ((position) in region) {
                         val index = ie.encode(position, possibleValue)
