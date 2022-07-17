@@ -2,9 +2,6 @@ package pl.laskowski.marcin.model
 
 import pl.laskowski.marcin.type.SudokuVariant
 
-/**
- * Created by Marcin Laskowski.
- */
 data class Sudoku(
     private val board: Board,
     val type: SudokuVariant
@@ -15,18 +12,10 @@ data class Sudoku(
         board = Board(type.sizeX(), type.sizeY()) { x, y -> Field(x, y) }
     )
 
-    constructor(type: SudokuVariant, values: Array<Int?>) : this(
+    constructor(type: SudokuVariant, values: List<Int?>) : this(
         type = type,
-        board = Board(type.width(), type.height()) { x, y ->
-            val dataLength = type.width() * type.height()
-        require(dataLength == values.size) {
-            "Incorrect data count, expected $dataLength, but was ${values.size}"
-        }
-        val value = values[x * type.sizeY() + y]
-        if (value != null) {
-            Field(x, y).also { it.set(value) }
-        } else null
-    })
+        board = Board(type.width(), type.height(), values)
+    )
 
     override fun toString(): String {
         val sb = StringBuilder()

@@ -95,4 +95,19 @@ class ListMatrixTest {
         assertNotEquals(twinMatrix1.hashCode(), differentMatrix1.hashCode())
         assertNotEquals(twinMatrix1.hashCode(), differentMatrix2.hashCode())
     }
+
+    @Test
+    fun checkIfCoordinatesByIndexWorks() {
+        val matrix = ListMatrix(3, 2, "")
+
+        val coordinates = (0 until matrix.size).toList()
+            .map { index -> matrix.coordinatesOf(index) }
+
+        assertEquals(
+            listOf(
+                0 to 0, 1 to 0, 2 to 0,
+                0 to 1, 1 to 1, 2 to 1
+            ), coordinates
+        )
+    }
 }

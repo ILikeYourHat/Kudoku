@@ -7,20 +7,36 @@ data class Board(
     private val fields: Matrix<Field?>
 ) {
 
-    constructor(
-        sizeX: Int,
-        sizeY: Int,
-        valueInitializer: (x: Int, y: Int) -> Field?
-    ) : this(
-        ListMatrix(
+    constructor(sizeX: Int, sizeY: Int, valueInitializer: (x: Int, y: Int) -> Field?) : this(
+        ListMatrix<Field?>(
             sizeX = sizeX,
             sizeY = sizeY,
-            values = (0 until sizeX)
-                .flatMap { x ->
-                    (0 until sizeY)
-                        .map { y -> valueInitializer(x, y) }
+            defaultValue = null
+        ).also { matrix ->
+            for (x in 0 until sizeX) {
+                for (y in 0 until sizeY) {
+                    matrix[x,y] = valueInitializer(x, y)
                 }
-        )
+            }
+        }
+    )
+
+    constructor(sizeX: Int, sizeY: Int, values: List<Int?>) : this(
+        ListMatrix<Field?>(
+            sizeX = sizeX,
+            sizeY = sizeY,
+            defaultValue = null
+        ).also { matrix ->
+            require(matrix.size == values.size) {
+                "Incorrect data count, expected ${matrix.size}, but was ${values.size}"
+            }
+            values.forEachIndexed { index, value ->
+                if (value != null) {
+                    val (x, y) = matrix.coordinatesOf(index)
+                    matrix[x,y] = Field(x, y).also { it.set(value) }
+                }
+            }
+        }
     )
 
     fun at(x: Int, y: Int) = fields[x, y]
@@ -35,11 +51,13 @@ data class Board(
 
     fun fields() = fields.toList()
 
-    fun fragment(startX: Int, startY: Int, endX: Int, endY: Int): Board {
-        return Board(
-            sizeX = endX - startX,
-            sizeY = endY - startY,
-            valueInitializer = { x, y -> at(startX + x, startY + y) }
-        )
-    }
+//    fun fragment(startX: Int, startY: Int, endX: Int, endY: Int): Board {
+//        return Board(
+//            sizeX = endX - startX,
+//            sizeY = endY - startY,
+//            valueInitializer = { x, y -> at(startX + x, startY + y) }
+//        )
+//    }
+
+
 }
