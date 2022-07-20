@@ -5,9 +5,6 @@ import pl.laskowski.marcin.model.dividers.SudokuDivider
 import pl.laskowski.marcin.model.dividers.SubSudokuDivider
 import pl.laskowski.marcin.model.Sudoku
 
-/**
- * Created by Marcin Laskowski.
- */
 class Slash(
     width: Int,
     height: Int,
@@ -32,14 +29,6 @@ class Slash(
             areaStartingIn(upperLeftCorner()),
             areaStartingIn(lowerRightCorner())
         )
-    }
-
-    override fun template(): Sudoku {
-//        val sudoku = Sudoku(width(), height())
-//        sudoku.append(child.template(), upperLeftCorner())
-//        sudoku.append(child.template(), lowerRightCorner())
-//        return sudoku
-        TODO()
     }
 
     private fun areaStartingIn(p: Point): SubSudokuDivider.Area {

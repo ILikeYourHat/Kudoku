@@ -5,7 +5,7 @@ import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV1
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV2
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV3
 
-class SudokuRater() {
+class SudokuRater {
 
     private var easySolver = DeductionSolverV1()
     private var mediumSolver = DeductionSolverV2()
@@ -20,11 +20,11 @@ class SudokuRater() {
     }
 
     fun rate(sudoku: Sudoku): Difficulty {
-        return if (easySolver.solve(sudoku).isSolved) {
+        return if (easySolver.solve(sudoku).isSolved()) {
             Difficulty.EASY
-        } else if (mediumSolver.solve(sudoku).isSolved) {
+        } else if (mediumSolver.solve(sudoku).isSolved()) {
             Difficulty.MEDIUM
-        } else if (hardSolver.solve(sudoku).isSolved) {
+        } else if (hardSolver.solve(sudoku).isSolved()) {
             Difficulty.HARD
         } else {
             Difficulty.DIABOLIC

@@ -31,14 +31,6 @@ class Backslash(
         )
     }
 
-    override fun template(): Sudoku {
-//        val sudoku = Sudoku(width(), height())
-//        sudoku.append(child.template(), upperRightCorner())
-//        sudoku.append(child.template(), lowerLeftCorner())
-//        return sudoku
-        TODO()
-    }
-
     private fun areaStartingIn(p: Point): SubSudokuDivider.Area {
         return SubSudokuDivider.Area(p, Point(p.x + child.sizeX, p.y + child.sizeY))
     }

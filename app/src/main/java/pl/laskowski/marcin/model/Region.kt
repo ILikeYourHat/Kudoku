@@ -23,12 +23,10 @@ data class Region(
     }
 
     fun isValid(): Boolean {
-        val set: MutableSet<Int> = HashSet()
+        val set = mutableSetOf<Int>()
         for (field in fields) {
-            if (alreadyContainsFieldValue(field, set)) {
+            if (!field.isEmpty && !set.add(field.value)) {
                 return false
-            } else {
-                set.add(field.value)
             }
         }
         return true
@@ -44,9 +42,5 @@ data class Region(
 
     fun emptyFields(): List<Field> {
         return fields.filter { it.isEmpty }
-    }
-
-    private fun alreadyContainsFieldValue(field: Field, numbers: Set<Int>): Boolean {
-        return !field.isEmpty && numbers.contains(field.value)
     }
 }

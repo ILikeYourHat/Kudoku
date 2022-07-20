@@ -6,7 +6,6 @@ import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.solving.ConcurrentSudokuSolver;
 import pl.laskowski.marcin.solving.SudokuSolver;
-import pl.laskowski.marcin.type.SudokuVariant;
 
 import java.util.List;
 import java.util.concurrent.*;

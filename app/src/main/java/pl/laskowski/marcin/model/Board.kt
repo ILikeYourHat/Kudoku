@@ -51,13 +51,13 @@ data class Board(
 
     fun fields() = fields.toList()
 
-//    fun fragment(startX: Int, startY: Int, endX: Int, endY: Int): Board {
-//        return Board(
-//            sizeX = endX - startX,
-//            sizeY = endY - startY,
-//            valueInitializer = { x, y -> at(startX + x, startY + y) }
-//        )
-//    }
+    fun fragment(startX: Int, startY: Int, endX: Int, endY: Int): Board {
+        return Board(
+            sizeX = endX - startX,
+            sizeY = endY - startY,
+            valueInitializer = { x, y -> at(startX + x, startY + y) }
+        )
+    }
 
     override fun toString(): String {
         val sb = StringBuilder()

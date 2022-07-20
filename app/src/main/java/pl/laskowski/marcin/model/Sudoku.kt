@@ -7,7 +7,7 @@ data class Sudoku(
     val type: SudokuVariant
 ) {
 
-    val regions = type.divideIntoRegions(this)
+    val regions = type.divider().divideIntoRegions(board)
 
     constructor(type: SudokuVariant) : this(
         type = type,
@@ -66,13 +66,6 @@ data class Sudoku(
 //        return target
 //    }
 
-    fun subSudoku(startX: Int, startY: Int, endX: Int, endY: Int): Sudoku {
-        TODO()
-//        return Sudoku(
-//            board.fragment(startX, startY, endX, endY),
-//        )
-    }
-
     fun sizeX(): Int {
         return board.sizeX()
     }
@@ -85,25 +78,15 @@ data class Sudoku(
         return board.at(p.x, p.y)
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Sudoku
-
-        if (board != other.board) return false
-
-        return true
+    fun isSolved(): Boolean {
+        return board.fields()
+            .filterNotNull()
+            .none { it.isEmpty }
     }
 
-    override fun hashCode(): Int {
-        return board.hashCode()
+    fun isSolvedCorrectly(): Boolean {
+        return isSolved() && regions.all { it.isValid() }
     }
-
-    val isSolved: Boolean
-        get() = board.fields()
-                .filterNotNull()
-                .none { it.isEmpty }
 
     val allFields = board.fields()
         .filterNotNull()

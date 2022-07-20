@@ -18,8 +18,4 @@ class FourCells : SudokuVariant(2, 2) {
             ColumnDivider()
         )
     }
-
-    override fun template(): Sudoku {
-        return Sudoku(this)
-    }
 }

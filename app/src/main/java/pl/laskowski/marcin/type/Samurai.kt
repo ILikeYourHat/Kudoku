@@ -3,11 +3,7 @@ package pl.laskowski.marcin.type
 import pl.laskowski.marcin.model.Point
 import pl.laskowski.marcin.model.dividers.SudokuDivider
 import pl.laskowski.marcin.model.dividers.SubSudokuDivider
-import pl.laskowski.marcin.model.Sudoku
 
-/**
- * Created by Marcin Laskowski.
- */
 class Samurai(
     width: Int,
     height: Int,
@@ -62,16 +58,5 @@ class Samurai(
 
     private fun areaStartingIn(p: Point): SubSudokuDivider.Area {
         return SubSudokuDivider.Area(p, Point(p.x + child.sizeX, p.y + child.sizeY))
-    }
-
-    override fun template(): Sudoku {
-//        val sudoku = Sudoku(width(), height())
-//        sudoku.append(child.template(), upperLeftCorner())
-//        sudoku.append(child.template(), upperRightCorner())
-//        sudoku.append(child.template(), center())
-//        sudoku.append(child.template(), lowerLeftCorner())
-//        sudoku.append(child.template(), lowerRightCorner())
-//        return sudoku
-        TODO()
     }
 }

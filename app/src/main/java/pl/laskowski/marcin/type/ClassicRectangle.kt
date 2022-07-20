@@ -25,8 +25,4 @@ open class ClassicRectangle(
             BlockDivider(blockWidth, blockHeight)
         )
     }
-
-    override fun template(): Sudoku {
-        return Sudoku(this)
-    }
 }

@@ -28,10 +28,6 @@ class DiagonalSquare(size: Int) : SudokuVariant(size, size) {
         )
     }
 
-    override fun template(): Sudoku {
-        return Sudoku(this)
-    }
-
     companion object {
         private fun blockSize(size: Int): Int {
             val blockSize = sqrt(size.toDouble()).toInt()

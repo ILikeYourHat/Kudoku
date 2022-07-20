@@ -1,21 +1,18 @@
 package pl.laskowski.marcin.model.dividers
 
+import pl.laskowski.marcin.model.Board
 import pl.laskowski.marcin.model.Field
 import pl.laskowski.marcin.model.Region
-import pl.laskowski.marcin.model.Sudoku
 import java.util.ArrayList
 import kotlin.math.min
 
-/**
- * Created by Marcin Laskowski.
- */
 class AntidiagonalDivider : SudokuDivider {
 
-    override fun divideIntoRegions(sudoku: Sudoku): Set<Region> {
-        val limit = min(sudoku.sizeX(), sudoku.sizeY())
+    override fun divideIntoRegions(board: Board): Set<Region> {
+        val limit = min(board.sizeX(), board.sizeY())
         val fields: MutableList<Field> = ArrayList()
         for (i in 0 until limit) {
-            fields.add(sudoku.at(limit - i - 1, i)!!)
+            fields.add(board.at(limit - i - 1, i)!!)
         }
         val region = Region(fields)
         return setOf(region)

@@ -4,7 +4,6 @@ import pl.laskowski.marcin.model.Field;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.model.SudokuHintGrid;
 import pl.laskowski.marcin.solving.SudokuSolver;
-import pl.laskowski.marcin.type.SudokuVariant;
 
 import java.util.*;
 import java.util.concurrent.*;

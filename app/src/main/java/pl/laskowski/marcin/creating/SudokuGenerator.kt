@@ -14,8 +14,8 @@ open class SudokuGenerator(
     private val percentFilled: Float?
 ) {
     private val random = Random()
-    private val solver: SatSolver = SatSolver()
-    private val rater: SudokuRater = SudokuRater()
+    private val solver = SatSolver()
+    private val rater = SudokuRater()
 
     fun generate(): Sudoku {
         val sudoku = filledSudoku
@@ -25,7 +25,7 @@ open class SudokuGenerator(
 
     protected open val filledSudoku: Sudoku
         get() {
-            val sudoku = variant.template()
+            val sudoku = Sudoku(variant)
             iterateOverFieldsInRandomOrder(sudoku) { randomField ->
                 val possibilities = possibilities(variant)
                 do {
@@ -38,11 +38,9 @@ open class SudokuGenerator(
         }
 
     private fun iterateOverFieldsInRandomOrder(sudoku: Sudoku, consumer: Consumer<Field>) {
-        val fields = sudoku.allFields.toMutableList()
-        while (fields.isNotEmpty()) {
-            val index = random.nextInt(fields.size)
-            consumer.accept(fields.removeAt(index))
-        }
+        sudoku.allFields
+            .shuffled(random)
+            .forEach { consumer.accept(it) }
     }
 
     private fun possibilities(variant: SudokuVariant): MutableList<Int> {

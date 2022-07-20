@@ -1,7 +1,7 @@
 package pl.laskowski.marcin.parsing.text
 
 import pl.laskowski.marcin.model.Sudoku
-import pl.laskowski.marcin.type.ClassicSquare
+import pl.laskowski.marcin.type.SudokuTypes
 import pl.laskowski.marcin.type.SudokuVariant
 import java.io.File
 import java.io.FileNotFoundException
@@ -30,8 +30,10 @@ class SudokuTextFormatParser {
 
     private fun getType(type: String): SudokuVariant {
         return when(type) {
-            "classic_4x4" -> ClassicSquare(4)
-            "classic_9x9" -> ClassicSquare(9)
+            "classic_1x1" -> SudokuTypes.CLASSIC_1x1
+            "classic_2x2" -> SudokuTypes.CLASSIC_2x2
+            "classic_4x4" -> SudokuTypes.CLASSIC_4x4
+            "classic_9x9" -> SudokuTypes.CLASSIC_9x9
             else -> throw IllegalArgumentException("Unknown sudoku type: $type")
         }
     }
