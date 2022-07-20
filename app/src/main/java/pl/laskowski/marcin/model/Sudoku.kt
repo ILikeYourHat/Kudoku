@@ -16,7 +16,7 @@ data class Sudoku(
 
     constructor(type: SudokuVariant, values: List<Int?>) : this(
         type = type,
-        board = Board(type.sizeY, type.sizeY, values)
+        board = Board(type.sizeX, type.sizeY, values)
     )
 
     override fun toString(): String {

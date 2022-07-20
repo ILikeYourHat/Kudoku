@@ -7,9 +7,6 @@ import pl.laskowski.marcin.model.dividers.ColumnDivider
 import pl.laskowski.marcin.model.dividers.BlockDivider
 import pl.laskowski.marcin.model.Sudoku
 
-/**
- * Created by Marcin Laskowski.
- */
 open class ClassicRectangle(
     width: Int,
     height: Int,

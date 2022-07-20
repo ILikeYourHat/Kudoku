@@ -5,9 +5,6 @@ import pl.laskowski.marcin.model.Region
 import pl.laskowski.marcin.model.Sudoku
 import java.util.HashSet
 
-/**
- * Created by Marcin Laskowski.
- */
 class RowDivider : SudokuDivider {
 
     override fun divideIntoRegions(sudoku: Sudoku): Set<Region> {

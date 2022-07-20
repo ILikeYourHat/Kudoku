@@ -57,6 +57,7 @@ class SudokuTextFormatParser {
             while (scanner.hasNext()) {
                 val sudoku = parseOne()
                 sudokuList.add(sudoku)
+                if (scanner.hasNext()) scanner.nextLine()
             }
             return sudokuList
         }
@@ -86,7 +87,6 @@ class SudokuTextFormatParser {
             height = type.sizeY
             data = MutableList(width * height) { null }
             pointer = 0
-            scanner.nextLine()
         }
 
         private fun parse(input: String): Int? {
