@@ -1,6 +1,7 @@
 package pl.laskowski.marcin.creating
 
 import pl.laskowski.marcin.model.Sudoku
+import pl.laskowski.marcin.solving.SudokuSolver
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV1
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV2
 import pl.laskowski.marcin.solving.deduction.solver.DeductionSolverV3
@@ -20,15 +21,16 @@ class SudokuRater {
     }
 
     fun rate(sudoku: Sudoku): Difficulty {
-        return if (easySolver.solve(sudoku).isSolved()) {
-            Difficulty.EASY
-        } else if (mediumSolver.solve(sudoku).isSolved()) {
-            Difficulty.MEDIUM
-        } else if (hardSolver.solve(sudoku).isSolved()) {
-            Difficulty.HARD
-        } else {
-            Difficulty.DIABOLIC
+        return when {
+            easySolver.canSolve(sudoku) -> Difficulty.EASY
+            mediumSolver.canSolve(sudoku) -> Difficulty.MEDIUM
+            hardSolver.canSolve(sudoku) -> Difficulty.HARD
+            else -> Difficulty.DIABOLIC
         }
+    }
+
+    private fun SudokuSolver.canSolve(sudoku: Sudoku): Boolean {
+        return solve(sudoku).isSolved()
     }
 
     fun percentFilled(sudoku: Sudoku): Float {

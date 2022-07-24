@@ -32,10 +32,6 @@ data class Region(
         return true
     }
 
-    fun containsFieldWithSamePosition(field: Field): Boolean {
-        return fields.any { it.haveSamePosition(field) }
-    }
-
     fun fullFields(): List<Field> {
         return fields.filterNot { it.isEmpty }
     }

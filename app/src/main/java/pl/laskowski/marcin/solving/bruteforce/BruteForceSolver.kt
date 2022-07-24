@@ -88,12 +88,9 @@ class BruteForceSolver: SudokuSolver {
         }
 
         private fun isGridCorrectAfterChange(): Boolean {
-            for (region in sudoku.regions) {
-                if (region.containsFieldWithSamePosition(currentField)) {
-                    if (!region.isValid()) return false
-                }
-            }
-            return true
+            return sudoku.regions
+                .filter { it.contains(currentField) }
+                .all { it.isValid() }
         }
     }
 }
