@@ -3,7 +3,7 @@ package pl.laskowski.marcin.solving.deduction.solver;
 import org.jetbrains.annotations.NotNull;
 import pl.laskowski.marcin.solving.SudokuSolver;
 import pl.laskowski.marcin.model.Sudoku;
-import pl.laskowski.marcin.model.SudokuHintGrid;
+import pl.laskowski.marcin.model.hint.SudokuHintGrid;
 import pl.laskowski.marcin.solving.deduction.algorithm.DeductionAlgorithm;
 import pl.laskowski.marcin.type.ISudokuVariant;
 

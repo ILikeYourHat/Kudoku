@@ -3,7 +3,7 @@ package pl.laskowski.marcin.solving.deduction.algorithm;
 import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.solving.deduction.combinations.CollectionCombinator;
 import pl.laskowski.marcin.model.Field;
-import pl.laskowski.marcin.model.SudokuHintGrid;
+import pl.laskowski.marcin.model.hint.SudokuHintGrid;
 
 import java.util.ArrayList;
 import java.util.HashSet;

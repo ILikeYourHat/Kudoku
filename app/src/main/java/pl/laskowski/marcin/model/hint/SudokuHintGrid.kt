@@ -1,13 +1,14 @@
-package pl.laskowski.marcin.model
+package pl.laskowski.marcin.model.hint
 
-import pl.laskowski.marcin.type.SudokuVariant
+import pl.laskowski.marcin.model.Field
+import pl.laskowski.marcin.model.Point
+import pl.laskowski.marcin.model.Region
+import pl.laskowski.marcin.model.Sudoku
 import java.util.HashMap
 import java.util.HashSet
 import pl.laskowski.marcin.solving.deduction.algorithm.HintEliminationAlgorithm
+import pl.laskowski.marcin.type.ISudokuVariant
 
-/**
- * Created by Marcin Laskowski.
- */
 class SudokuHintGrid(sudoku: Sudoku) {
     private val hintMap: MutableMap<Point, MutableSet<Int>>
 
@@ -20,8 +21,8 @@ class SudokuHintGrid(sudoku: Sudoku) {
         }
     }
 
-    private fun allValuesSet(sudokuVariant: SudokuVariant): MutableSet<Int> {
-        val regionSize = sudokuVariant.regionSize()
+    private fun allValuesSet(sudokuVariant: ISudokuVariant): MutableSet<Int> {
+        val regionSize = sudokuVariant.regionSize
         return (1..regionSize).toMutableSet()
     }
 

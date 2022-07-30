@@ -1,7 +1,7 @@
 package pl.laskowski.marcin.solving.deduction.algorithm;
 
 import pl.laskowski.marcin.model.Region;
-import pl.laskowski.marcin.model.SudokuHintGrid;
+import pl.laskowski.marcin.model.hint.SudokuHintGrid;
 
 import java.util.List;
 

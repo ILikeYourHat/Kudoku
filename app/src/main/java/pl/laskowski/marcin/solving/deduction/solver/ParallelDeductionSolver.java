@@ -2,7 +2,7 @@ package pl.laskowski.marcin.solving.deduction.solver;
 
 import pl.laskowski.marcin.model.Field;
 import pl.laskowski.marcin.model.Sudoku;
-import pl.laskowski.marcin.model.SudokuHintGrid;
+import pl.laskowski.marcin.model.hint.SudokuHintGrid;
 import pl.laskowski.marcin.solving.SudokuSolver;
 
 import java.util.*;
