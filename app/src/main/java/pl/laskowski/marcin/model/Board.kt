@@ -15,7 +15,7 @@ data class Board(
         ).also { matrix ->
             for (x in 0 until sizeX) {
                 for (y in 0 until sizeY) {
-                    matrix[x,y] = valueInitializer(x, y)
+                    matrix[x, y] = valueInitializer(x, y)
                 }
             }
         }
@@ -33,7 +33,7 @@ data class Board(
             values.forEachIndexed { index, value ->
                 if (value != null) {
                     val (x, y) = matrix.coordinatesOf(index)
-                    matrix[x,y] = Field(x, y).also { it.set(value) }
+                    matrix[x, y] = Field(x, y).also { it.set(value) }
                 }
             }
         }
@@ -59,12 +59,21 @@ data class Board(
         )
     }
 
+    fun region(startX: Int, startY: Int, endX: Int, endY: Int): Region {
+        val fields = (startX..endX).flatMap { indexX ->
+            (startY..endY).mapNotNull { indexY ->
+                at(indexX, indexY)
+            }
+        }
+        return Region(fields)
+    }
+
     override fun toString(): String {
         val sb = StringBuilder()
         for (y in 0 until fields.sizeY) {
             sb.append('|')
             for (x in 0 until fields.sizeX) {
-                val field = fields[x,y]
+                val field = fields[x, y]
                 if (field == null) {
                     sb.append('#')
                 } else if (field.isEmpty) {

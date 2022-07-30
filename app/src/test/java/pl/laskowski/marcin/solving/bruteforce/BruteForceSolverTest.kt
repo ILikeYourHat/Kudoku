@@ -4,7 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
 import pl.laskowski.marcin.model.Sudoku
-import pl.laskowski.marcin.type.SudokuTypes
+import pl.laskowski.marcin.model.type.SudokuTypes
 
 class BruteForceSolverTest {
 
@@ -12,7 +12,8 @@ class BruteForceSolverTest {
     fun `classic BruteForce`() {
         val solver = BruteForceSolver()
 
-        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
+        val sudoku = Sudoku(
+            SudokuTypes.CLASSIC_4x4,
             listOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
@@ -39,7 +40,8 @@ class BruteForceSolverTest {
     fun `concurrent BruteForce`() {
         val solver = BruteForceConcurrentSolver( 5, 5)
 
-        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
+        val sudoku = Sudoku(
+            SudokuTypes.CLASSIC_4x4,
             listOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
@@ -66,7 +68,8 @@ class BruteForceSolverTest {
     fun `concurrent BruteForce 2`() {
         val solver = BruteForceConcurrentSolver2(2, 4)
 
-        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
+        val sudoku = Sudoku(
+            SudokuTypes.CLASSIC_4x4,
             listOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
@@ -93,7 +96,8 @@ class BruteForceSolverTest {
     fun `permutation BruteForce`() {
         val solver = BruteForcePermutationSolver( 2)
 
-        val sudoku = Sudoku(SudokuTypes.CLASSIC_4x4,
+        val sudoku = Sudoku(
+            SudokuTypes.CLASSIC_4x4,
             listOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,

@@ -1,15 +1,15 @@
 package pl.laskowski.marcin.creating
 
-import pl.laskowski.marcin.type.SudokuVariant
 import pl.laskowski.marcin.creating.SudokuRater.Difficulty
 import pl.laskowski.marcin.solving.sat.SatSolver
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.model.Field
+import pl.laskowski.marcin.type.ISudokuVariant
 import java.util.*
 import java.util.function.Consumer
 
 open class SudokuGenerator(
-    private val variant: SudokuVariant,
+    private val variant: ISudokuVariant,
     private val difficulty: Difficulty?,
     private val percentFilled: Float?
 ) {
@@ -43,9 +43,9 @@ open class SudokuGenerator(
             .forEach { consumer.accept(it) }
     }
 
-    private fun possibilities(variant: SudokuVariant): MutableList<Int> {
+    private fun possibilities(variant: ISudokuVariant): MutableList<Int> {
         val values: MutableList<Int> = ArrayList()
-        for (i in 1..variant.regionSize()) {
+        for (i in 1..variant.regionSize) {
             values.add(i)
         }
         return values

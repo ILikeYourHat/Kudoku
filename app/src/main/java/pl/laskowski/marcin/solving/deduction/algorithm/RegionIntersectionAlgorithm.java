@@ -4,6 +4,7 @@ import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.solving.deduction.combinations.CollectionCombinator;
 import pl.laskowski.marcin.model.SudokuHintGrid;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,13 +15,13 @@ public class RegionIntersectionAlgorithm extends DeductionAlgorithm {
 
     public static class Factory implements DeductionAlgorithm.Factory {
 
-        public RegionIntersectionAlgorithm instance(Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        public RegionIntersectionAlgorithm instance(List<Region> regions, SudokuHintGrid sudokuHintGrid) {
             return new RegionIntersectionAlgorithm(regions, sudokuHintGrid);
         }
 
     }
 
-    private RegionIntersectionAlgorithm(Set<Region> regions, SudokuHintGrid possibilities) {
+    private RegionIntersectionAlgorithm(List<Region> regions, SudokuHintGrid possibilities) {
         super(regions, possibilities);
     }
 

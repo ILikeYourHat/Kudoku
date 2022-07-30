@@ -4,6 +4,7 @@ import pl.laskowski.marcin.model.Field;
 import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.model.SudokuHintGrid;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,13 +15,13 @@ public class NakedSinglesAlgorithm extends DeductionAlgorithm {
 
     public static class Factory implements DeductionAlgorithm.Factory {
 
-        public NakedSinglesAlgorithm instance(Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        public NakedSinglesAlgorithm instance(List<Region> regions, SudokuHintGrid sudokuHintGrid) {
             return new NakedSinglesAlgorithm(regions, sudokuHintGrid);
         }
 
     }
 
-    private NakedSinglesAlgorithm(Set<Region> regions, SudokuHintGrid possibilities) {
+    private NakedSinglesAlgorithm(List<Region> regions, SudokuHintGrid possibilities) {
         super(regions, possibilities);
     }
 

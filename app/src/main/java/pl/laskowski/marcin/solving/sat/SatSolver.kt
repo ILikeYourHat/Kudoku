@@ -8,7 +8,6 @@ import org.sat4j.specs.TimeoutException
 import org.sat4j.tools.SingleSolutionDetector
 import pl.laskowski.marcin.creating.SudokuSolutionCount
 import pl.laskowski.marcin.model.Field
-import pl.laskowski.marcin.model.Region
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.solving.SudokuSolver
 
@@ -94,7 +93,7 @@ class SatSolver: SudokuSolver {
 
         @Throws(ContradictionException::class)
         private fun addCausesForRegions() {
-            for (possibleValue in 1..sudoku.type.regionSize()) {
+            for (possibleValue in 1..sudoku.type.regionSize) {
                 for (region in sudoku.regions) {
                     val vec = VecInt(region.size())
                     for ((position) in region) {
@@ -107,8 +106,8 @@ class SatSolver: SudokuSolver {
         }
 
         private fun createValues(field: Field): VecInt {
-            val vec = VecInt(sudoku.type.regionSize())
-            for (value in 1..sudoku.type.regionSize()) {
+            val vec = VecInt(sudoku.type.regionSize)
+            for (value in 1..sudoku.type.regionSize) {
                 val index = ie.encode(field.position(), value)
                 vec.push(index)
             }

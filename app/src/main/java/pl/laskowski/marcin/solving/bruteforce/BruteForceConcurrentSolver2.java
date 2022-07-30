@@ -51,7 +51,7 @@ public class BruteForceConcurrentSolver2 implements ConcurrentSudokuSolver {
     private List<Sudoku> divide(Sudoku sample) {
         Field field = sample.getFirstEmptyField();
         if (field != null) {
-            return IntStream.range(1, sample.getType().regionSize())
+            return IntStream.range(1, sample.getType().getRegionSize())
                     .mapToObj(newValue -> {
                         Sudoku copy = sample.copy();
                         copy.at(field.position()).set(newValue);

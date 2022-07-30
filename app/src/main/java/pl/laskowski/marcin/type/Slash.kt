@@ -3,12 +3,11 @@ package pl.laskowski.marcin.type
 import pl.laskowski.marcin.model.Point
 import pl.laskowski.marcin.model.dividers.SudokuDivider
 import pl.laskowski.marcin.model.dividers.SubSudokuDivider
-import pl.laskowski.marcin.model.Sudoku
 
 class Slash(
     width: Int,
     height: Int,
-    private val child: SudokuVariant
+    private val child: ISudokuVariant
 ) : SudokuVariant(width, height) {
 
     private val widthOffset = width - child.sizeX
@@ -19,16 +18,15 @@ class Slash(
         require(heightOffset > 0 && heightOffset < child.sizeY)
     }
 
-    override fun regionSize(): Int {
-        return child.regionSize()
-    }
+    override val regionSize = child.regionSize
 
     override fun divider(): SudokuDivider {
-        return SubSudokuDivider(
-            child.divider(),
-            areaStartingIn(upperLeftCorner()),
-            areaStartingIn(lowerRightCorner())
-        )
+//        return SubSudokuDivider(
+//            child.divider(),
+//            areaStartingIn(upperLeftCorner()),
+//            areaStartingIn(lowerRightCorner())
+//        )
+        TODO()
     }
 
     private fun areaStartingIn(p: Point): SubSudokuDivider.Area {

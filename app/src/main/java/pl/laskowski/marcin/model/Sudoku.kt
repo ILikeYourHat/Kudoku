@@ -1,20 +1,20 @@
 package pl.laskowski.marcin.model
 
-import pl.laskowski.marcin.type.SudokuVariant
+import pl.laskowski.marcin.type.ISudokuVariant
 
 data class Sudoku(
-    val board: Board,
-    val type: SudokuVariant
+    val type: ISudokuVariant,
+    val board: Board
 ) {
 
-    val regions = type.divider().divideIntoRegions(board)
+    val regions = type.divideIntoRegions(board)
 
-    constructor(type: SudokuVariant) : this(
+    constructor(type: ISudokuVariant) : this(
         type = type,
         board = Board(type.sizeX, type.sizeY) { x, y -> Field(x, y) }
     )
 
-    constructor(type: SudokuVariant, values: List<Int?>) : this(
+    constructor(type: ISudokuVariant, values: List<Int?>) : this(
         type = type,
         board = Board(type.sizeX, type.sizeY, values)
     )
@@ -28,7 +28,7 @@ data class Sudoku(
     }
 
     fun copy(): Sudoku {
-        return Sudoku(board.copy(), type)
+        return Sudoku(type, board.copy())
     }
 
 //    fun copyWithIndexMapping(mapper: (Point) -> Point): Sudoku {

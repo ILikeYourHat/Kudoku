@@ -14,13 +14,13 @@ public class HiddenSinglesAlgorithm extends DeductionAlgorithm {
 
     public static class Factory implements DeductionAlgorithm.Factory {
 
-        public HiddenSinglesAlgorithm instance(Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        public HiddenSinglesAlgorithm instance(List<Region> regions, SudokuHintGrid sudokuHintGrid) {
             return new HiddenSinglesAlgorithm(regions, sudokuHintGrid);
         }
 
     }
 
-    private HiddenSinglesAlgorithm(Set<Region> regions, SudokuHintGrid possibilities) {
+    private HiddenSinglesAlgorithm(List<Region> regions, SudokuHintGrid possibilities) {
         super(regions, possibilities);
     }
 

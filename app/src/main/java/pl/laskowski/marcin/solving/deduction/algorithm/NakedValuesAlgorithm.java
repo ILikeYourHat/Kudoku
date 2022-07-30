@@ -24,7 +24,7 @@ public class NakedValuesAlgorithm extends DeductionAlgorithm {
             this.size = size;
         }
 
-        public NakedValuesAlgorithm instance(Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        public NakedValuesAlgorithm instance(List<Region> regions, SudokuHintGrid sudokuHintGrid) {
             return new NakedValuesAlgorithm(regions, sudokuHintGrid, size);
         }
 
@@ -32,7 +32,7 @@ public class NakedValuesAlgorithm extends DeductionAlgorithm {
 
     private final int size;
 
-    private NakedValuesAlgorithm(Set<Region> regions, SudokuHintGrid possibilities, int size) {
+    private NakedValuesAlgorithm(List<Region> regions, SudokuHintGrid possibilities, int size) {
         super(regions, possibilities);
         this.size = size;
     }

@@ -4,6 +4,7 @@ import pl.laskowski.marcin.model.Field;
 import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.model.SudokuHintGrid;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,13 +15,13 @@ public class HintEliminationAlgorithm extends DeductionAlgorithm {
 
     public static class Factory implements DeductionAlgorithm.Factory {
 
-        public HintEliminationAlgorithm instance(Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        public HintEliminationAlgorithm instance(List<Region> regions, SudokuHintGrid sudokuHintGrid) {
             return new HintEliminationAlgorithm(regions, sudokuHintGrid);
         }
 
     }
 
-    private HintEliminationAlgorithm(Set<Region> regions, SudokuHintGrid possibilities) {
+    private HintEliminationAlgorithm(List<Region> regions, SudokuHintGrid possibilities) {
         super(regions, possibilities);
     }
 

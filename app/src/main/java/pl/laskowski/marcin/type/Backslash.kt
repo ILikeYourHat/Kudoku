@@ -19,9 +19,7 @@ class Backslash(
         require(heightOffset > 0 && heightOffset < child.sizeY)
     }
 
-    override fun regionSize(): Int {
-        return child.regionSize()
-    }
+    override val regionSize = child.regionSize
 
     override fun divider(): SudokuDivider {
         return SubSudokuDivider(

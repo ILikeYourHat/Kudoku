@@ -3,15 +3,11 @@ package pl.laskowski.marcin.type
 import pl.laskowski.marcin.model.Point
 import pl.laskowski.marcin.model.dividers.SudokuDivider
 import pl.laskowski.marcin.model.dividers.SubSudokuDivider
-import pl.laskowski.marcin.model.Sudoku
 
-/**
- * Created by Marcin Laskowski.
- */
 class Butterfly(
     width: Int,
     height: Int,
-    private val child: SudokuVariant
+    private val child: ISudokuVariant
 ) : SudokuVariant(width, height) {
 
     private val widthOffset = width - child.sizeX
@@ -22,18 +18,17 @@ class Butterfly(
         require(heightOffset > 0 && heightOffset < child.sizeY)
     }
 
-    override fun regionSize(): Int {
-        return child.regionSize()
-    }
+    override val regionSize = child.regionSize
 
     override fun divider(): SudokuDivider {
-        return SubSudokuDivider(
-            child.divider(),
-            areaStartingIn(upperLeftCorner()),
-            areaStartingIn(upperRightCorner()),
-            areaStartingIn(lowerLeftCorner()),
-            areaStartingIn(lowerRightCorner())
-        )
+//        return SubSudokuDivider(
+//            child.divider(),
+//            areaStartingIn(upperLeftCorner()),
+//            areaStartingIn(upperRightCorner()),
+//            areaStartingIn(lowerLeftCorner()),
+//            areaStartingIn(lowerRightCorner())
+//        )
+        TODO()
     }
 
     private fun upperLeftCorner(): Point {

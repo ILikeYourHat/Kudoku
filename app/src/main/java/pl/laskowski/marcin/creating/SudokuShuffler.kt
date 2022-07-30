@@ -1,25 +1,23 @@
 package pl.laskowski.marcin.creating
 
 import pl.laskowski.marcin.model.Field
-import pl.laskowski.marcin.model.Point
 import pl.laskowski.marcin.model.Sudoku
-import pl.laskowski.marcin.type.ClassicRectangle
+import pl.laskowski.marcin.type.ISudokuVariant
 import java.util.*
-import java.util.function.Consumer
 
 class SudokuShuffler(
     private val random: Random = Random()
 ) {
     private val transformations = SudokuTransformations()
 
-    fun shuffle(sudoku: Sudoku, variant: ClassicRectangle): Sudoku {
+    fun shuffle(sudoku: Sudoku, variant: ISudokuVariant): Sudoku {
         return sudoku.rotateAndMirror()
-            .swapNumbers(variant.regionSize())
+            .swapNumbers(variant.regionSize)
             .swapColumns(variant)
             .swapRows(variant)
     }
 
-    fun shuffleFull(sudoku: Sudoku, variant: ClassicRectangle): Sudoku {
+    fun shuffleFull(sudoku: Sudoku, variant: ISudokuVariant): Sudoku {
         return sudoku.swapColumns(variant)
             .swapRows(variant)
     }
@@ -50,7 +48,7 @@ class SudokuShuffler(
         return this
     }
 
-    private fun Sudoku.swapColumns(variant: ClassicRectangle): Sudoku {
+    private fun Sudoku.swapColumns(variant: ISudokuVariant): Sudoku {
 //        val shuffled: List<List<Field>> = shuffleGroups(columns().assumeNoNulls(), variant.blockWidth)
 //        return copyWithIndexMapping { (x, y): Point ->
 //            val f = shuffled[x][y]
@@ -59,7 +57,7 @@ class SudokuShuffler(
         return this
     }
 
-    private fun Sudoku.swapRows(variant: ClassicRectangle): Sudoku {
+    private fun Sudoku.swapRows(variant: ISudokuVariant): Sudoku {
 //        val shuffled: List<List<Field>> = shuffleGroups(rows().assumeNoNulls(), variant.blockHeight)
 //        return copyWithIndexMapping { (x, y): Point ->
 //            val f = shuffled[y][x]

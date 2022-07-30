@@ -6,7 +6,7 @@ import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.parsing.text.SudokuTextFormatParser
-import pl.laskowski.marcin.type.SudokuTypes
+import pl.laskowski.marcin.model.type.SudokuTypes
 
 
 class SudokuTextFormatParserTest {

@@ -7,7 +7,7 @@ import pl.laskowski.marcin.model.dividers.SubSudokuDivider
 class Samurai(
     width: Int,
     height: Int,
-    private val child: SudokuVariant
+    private val child: ISudokuVariant
 ) : SudokuVariant(width, height) {
 
     init {
@@ -19,19 +19,18 @@ class Samurai(
         require(sizeY < 3 * child.sizeY)
     }
 
-    override fun regionSize(): Int {
-        return child.regionSize()
-    }
+    override val regionSize = child.regionSize
 
     override fun divider(): SudokuDivider {
-        return SubSudokuDivider(
-            child.divider(),
-            areaStartingIn(upperLeftCorner()),
-            areaStartingIn(upperRightCorner()),
-            areaStartingIn(center()),
-            areaStartingIn(lowerLeftCorner()),
-            areaStartingIn(lowerRightCorner())
-        )
+//        return SubSudokuDivider(
+//            child.divider(),
+//            areaStartingIn(upperLeftCorner()),
+//            areaStartingIn(upperRightCorner()),
+//            areaStartingIn(center()),
+//            areaStartingIn(lowerLeftCorner()),
+//            areaStartingIn(lowerRightCorner())
+//        )
+        TODO()
     }
 
     private fun upperLeftCorner(): Point {

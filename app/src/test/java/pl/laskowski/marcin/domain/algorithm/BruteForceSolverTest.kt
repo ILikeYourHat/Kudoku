@@ -4,8 +4,8 @@ import org.junit.Assert.*
 import org.junit.Test
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.solving.bruteforce.BruteForceSolver
-import pl.laskowski.marcin.type.SudokuTypes
-import pl.laskowski.marcin.type.SudokuTypes.CLASSIC_1x1
+import pl.laskowski.marcin.model.type.SudokuTypes
+import pl.laskowski.marcin.model.type.SudokuTypes.CLASSIC_1x1
 
 class BruteForceSolverTest {
 

@@ -5,13 +5,13 @@ import pl.laskowski.marcin.solving.SudokuSolver;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.model.SudokuHintGrid;
 import pl.laskowski.marcin.solving.deduction.algorithm.DeductionAlgorithm;
-import pl.laskowski.marcin.type.SudokuVariant;
+import pl.laskowski.marcin.type.ISudokuVariant;
 
 import java.util.List;
 
 public abstract class DeductionSolver implements SudokuSolver {
 
-    protected abstract List<DeductionAlgorithm.Factory> provideAlgorithms(SudokuVariant type);
+    protected abstract List<DeductionAlgorithm.Factory> provideAlgorithms(ISudokuVariant type);
 
     @NotNull
     @Override
