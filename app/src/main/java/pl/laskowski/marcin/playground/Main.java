@@ -41,31 +41,31 @@ public class Main {
         SudokuRater rater = new SudokuRater();
 
         System.out.println("CLASSIC");
-        SudokuGenerator generator1 = new SudokuGenerator(new ClassicSquare9x9(), null, null);
+        SudokuGenerator generator1 = new SudokuGenerator(ClassicSquare9x9.INSTANCE, null, null);
         new SudokuGenerationTimer(rater, generator1).measure(100);
 
         System.out.println("CLASSIC_EASY");
-        SudokuGenerator generator2 = new SudokuGenerator(new ClassicSquare9x9(), SudokuRater.Difficulty.EASY, null);
+        SudokuGenerator generator2 = new SudokuGenerator(ClassicSquare9x9.INSTANCE, SudokuRater.Difficulty.EASY, null);
         new SudokuGenerationTimer(rater, generator2).measure(100);
 
         System.out.println("CLASSIC_MEDIUM");
-        SudokuGenerator generator3 = new SudokuGenerator(new ClassicSquare9x9(), SudokuRater.Difficulty.MEDIUM, null);
+        SudokuGenerator generator3 = new SudokuGenerator(ClassicSquare9x9.INSTANCE, SudokuRater.Difficulty.MEDIUM, null);
         new SudokuGenerationTimer(rater, generator3).measure(100);
 
         System.out.println("CLASSIC_HARD");
-        SudokuGenerator generator4 = new SudokuGenerator(new ClassicSquare9x9(), SudokuRater.Difficulty.HARD, null);
+        SudokuGenerator generator4 = new SudokuGenerator(ClassicSquare9x9.INSTANCE, SudokuRater.Difficulty.HARD, null);
         new SudokuGenerationTimer(rater, generator4).measure(100);
 
         System.out.println("CLASSIC_35");
-        SudokuGenerator generator5 = new SudokuGenerator(new ClassicSquare9x9(), null, 0.35f);
+        SudokuGenerator generator5 = new SudokuGenerator(ClassicSquare9x9.INSTANCE, null, 0.35f);
         new SudokuGenerationTimer(rater, generator5).measure(100);
 
         System.out.println("CLASSIC_50");
-        SudokuGenerator generator6 = new SudokuGenerator(new ClassicSquare9x9(), null, 0.5f);
+        SudokuGenerator generator6 = new SudokuGenerator(ClassicSquare9x9.INSTANCE, null, 0.5f);
         new SudokuGenerationTimer(rater, generator6).measure(100);
 
         System.out.println("CLASSIC_75");
-        SudokuGenerator generator7 = new SudokuGenerator(new ClassicSquare9x9(), null, 0.75f);
+        SudokuGenerator generator7 = new SudokuGenerator(ClassicSquare9x9.INSTANCE, null, 0.75f);
         new SudokuGenerationTimer(rater, generator7).measure(100);
     }
 
@@ -104,21 +104,21 @@ public class Main {
     public static void testDiagonal() {
         System.out.println("CLASSIC_DIAGONAL");
         SudokuRater rater = new SudokuRater();
-        SudokuGenerator generator = new SudokuGenerator(new DiagonalSquare9x9(), null, null);
+        SudokuGenerator generator = new SudokuGenerator(DiagonalSquare9x9.INSTANCE, null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }
 
     public static void testClassic16() {
         System.out.println("CLASSIC_16x16");
         SudokuRater rater = new SudokuRater();
-        SudokuGenerator generator = new SudokuGenerator(new ClassicSquare16x16(), null, null);
+        SudokuGenerator generator = new SudokuGenerator(ClassicSquare16x16.INSTANCE, null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }
 
     public static void testClassic25() {
         System.out.println("CLASSIC_25x25");
         SudokuRater rater = new SudokuRater();
-        SudokuGenerator generator = new SudokuGenerator(new ClassicSquare25x25(), null, null);
+        SudokuGenerator generator = new SudokuGenerator(ClassicSquare25x25.INSTANCE, null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
     }
 

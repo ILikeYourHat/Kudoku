@@ -7,7 +7,7 @@ data class Sudoku(
     val board: Board
 ) {
 
-    val regions = type.divideIntoRegions(board)
+    val regions = type.divider().divide(board)
 
     constructor(type: ISudokuVariant) : this(
         type = type,
@@ -30,41 +30,6 @@ data class Sudoku(
     fun copy(): Sudoku {
         return Sudoku(type, board.copy())
     }
-
-//    fun copyWithIndexMapping(mapper: (Point) -> Point): Sudoku {
-//        val board = Board(
-//            sizeX(),
-//            sizeY(),
-//
-//        )
-//        val copy = Sudoku(sizeX(), sizeY())
-//        return mapValues(copy, mapper)
-//    }
-//
-//    fun copyRotatedWithIndexMapping(mapper: (Point) -> Point): Sudoku {
-//        val copy = Sudoku(sizeY(), sizeX())
-//        return mapValues(copy, mapper)
-//    }
-
-//    private fun mapValues(target: Sudoku, mapper: (Point) -> Point): Sudoku {
-//        target.board.fields()
-//
-//        return Sudoku(
-//            Board(
-//
-//            )
-//        )
-//        fields.forEach { x: Int, y: Int ->
-//            val (x1, y1) = mapper(Point(x, y))
-//            val field = board.at(x, y)
-//            if (field != null) {
-//                val mappedField = Field(x1, y1)
-//                mappedField.set(field.value)
-//                target.fields.put(mappedField, x1, y1)
-//            }
-//        }
-//        return target
-//    }
 
     fun sizeX(): Int {
         return board.sizeX()
@@ -95,23 +60,6 @@ data class Sudoku(
         get() = board.fields()
             .filterNotNull()
             .firstOrNull { it.isEmpty }
-
-//    fun append(other: Sudoku, anchor: Point) {
-//        other.fields.forEachIndexed { x, y, field ->
-//            val destinationX = anchor.x + x
-//            val destinationY = anchor.y + y
-//            if (field == null) {
-//                fields.put(null, destinationX, destinationY)
-//            } else {
-//                var destination = fields[destinationX, destinationY]
-//                if (destination == null) {
-//                    destination = Field(destinationX, destinationY)
-//                }
-//                destination.set(field.value)
-//                fields.put(destination, destinationX, destinationY)
-//            }
-//        }
-//    }
 
     fun values(): List<Int?> {
         return board.fields().map { it?.value }

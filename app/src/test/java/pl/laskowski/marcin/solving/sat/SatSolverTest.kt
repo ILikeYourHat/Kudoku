@@ -3,7 +3,7 @@ package pl.laskowski.marcin.solving.sat
 import org.junit.Assert
 import org.junit.Test
 import pl.laskowski.marcin.model.Sudoku
-import pl.laskowski.marcin.model.type.SudokuTypes
+import pl.laskowski.marcin.model.type.ClassicSquare4x4
 
 class SatSolverTest {
 
@@ -12,7 +12,7 @@ class SatSolverTest {
         val solver = SatSolver()
 
         val sudoku = Sudoku(
-            SudokuTypes.CLASSIC_4x4,
+            ClassicSquare4x4,
             listOf(
                 0, 2, 3, 0,
                 1, 0, 0, 4,
