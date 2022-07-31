@@ -1,8 +1,8 @@
-package pl.laskowski.marcin.type
+package pl.laskowski.marcin.model.type
 
 import pl.laskowski.marcin.model.dividers.RegionDivider
 
-interface ISudokuVariant {
+interface SudokuType {
     val sizeX: Int
     val sizeY: Int
     val regionSize: Int

@@ -1,7 +1,7 @@
 package pl.laskowski.marcin.solving.deduction.solver;
 
 import pl.laskowski.marcin.solving.deduction.algorithm.*;
-import pl.laskowski.marcin.type.ISudokuVariant;
+import pl.laskowski.marcin.model.type.SudokuType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public class DeductionSolverV2 extends DeductionSolver {
 
     @Override
-    protected List<DeductionAlgorithm.Factory> provideAlgorithms(ISudokuVariant type) {
+    protected List<DeductionAlgorithm.Factory> provideAlgorithms(SudokuType type) {
         List<DeductionAlgorithm.Factory> algorithms = new ArrayList<>();
         algorithms.add(new HintEliminationAlgorithm.Factory());
         algorithms.add(new NakedSinglesAlgorithm.Factory());

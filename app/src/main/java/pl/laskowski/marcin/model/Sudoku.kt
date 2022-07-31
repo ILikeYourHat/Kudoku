@@ -1,20 +1,20 @@
 package pl.laskowski.marcin.model
 
-import pl.laskowski.marcin.type.ISudokuVariant
+import pl.laskowski.marcin.model.type.SudokuType
 
 data class Sudoku(
-    val type: ISudokuVariant,
+    val type: SudokuType,
     val board: Board
 ) {
 
     val regions = type.divider().divide(board)
 
-    constructor(type: ISudokuVariant) : this(
+    constructor(type: SudokuType) : this(
         type = type,
         board = Board(type.sizeX, type.sizeY) { x, y -> Field(x, y) }
     )
 
-    constructor(type: ISudokuVariant, values: List<Int?>) : this(
+    constructor(type: SudokuType, values: List<Int?>) : this(
         type = type,
         board = Board(type.sizeX, type.sizeY, values)
     )

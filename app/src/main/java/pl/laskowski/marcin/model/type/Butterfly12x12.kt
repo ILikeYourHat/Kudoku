@@ -1,9 +1,8 @@
 package pl.laskowski.marcin.model.type
 
 import pl.laskowski.marcin.model.dividers.RegionDivider
-import pl.laskowski.marcin.type.ISudokuVariant
 
-object Butterfly12x12 : ISudokuVariant {
+object Butterfly12x12 : SudokuType {
 
     override val sizeX = 12
     override val sizeY = 12

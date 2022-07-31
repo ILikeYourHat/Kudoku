@@ -1,9 +1,8 @@
 package pl.laskowski.marcin.model.type
 
 import pl.laskowski.marcin.model.dividers.RegionDivider
-import pl.laskowski.marcin.type.ISudokuVariant
 
-object ClassicSquare25x25 : ISudokuVariant {
+object ClassicSquare25x25 : SudokuType {
 
     override val sizeX = 25
     override val sizeY = 25

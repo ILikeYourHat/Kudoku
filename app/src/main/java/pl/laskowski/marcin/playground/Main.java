@@ -8,7 +8,7 @@ import pl.laskowski.marcin.model.type.ClassicSquare25x25;
 import pl.laskowski.marcin.model.type.ClassicSquare9x9;
 import pl.laskowski.marcin.model.type.DiagonalSquare9x9;
 import pl.laskowski.marcin.playground.gen.SudokuGenerationTimer;
-import pl.laskowski.marcin.type.ISudokuVariant;
+import pl.laskowski.marcin.model.type.SudokuType;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -124,7 +124,7 @@ public class Main {
 
     public static void testSamurai15() {
         System.out.println("SAMURAI_15");
-        ISudokuVariant type = TestSet.SMALL_SAMURAI.getSudokuVariant();
+        SudokuType type = TestSet.SMALL_SAMURAI.getSudokuVariant();
         SudokuRater rater = new SudokuRater();
         SudokuGenerator generator = new SudokuGenerator(type, null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);
@@ -132,7 +132,7 @@ public class Main {
 
     public static void testSamurai30() {
         System.out.println("SAMURAI_30");
-        ISudokuVariant type = TestSet.COLOSSUS_SAMURAI.getSudokuVariant();
+        SudokuType type = TestSet.COLOSSUS_SAMURAI.getSudokuVariant();
         SudokuRater rater = new SudokuRater();
         SudokuGenerator generator = new SudokuGenerator(type, null, null);
         new SudokuGenerationTimer(rater, generator).measure(10);

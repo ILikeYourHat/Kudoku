@@ -7,7 +7,7 @@ import pl.laskowski.marcin.model.Sudoku
 import java.util.HashMap
 import java.util.HashSet
 import pl.laskowski.marcin.solving.deduction.algorithm.HintEliminationAlgorithm
-import pl.laskowski.marcin.type.ISudokuVariant
+import pl.laskowski.marcin.model.type.SudokuType
 
 class SudokuHintGrid(sudoku: Sudoku) {
     private val hintMap: MutableMap<Point, MutableSet<Int>>
@@ -21,7 +21,7 @@ class SudokuHintGrid(sudoku: Sudoku) {
         }
     }
 
-    private fun allValuesSet(sudokuVariant: ISudokuVariant): MutableSet<Int> {
+    private fun allValuesSet(sudokuVariant: SudokuType): MutableSet<Int> {
         val regionSize = sudokuVariant.regionSize
         return (1..regionSize).toMutableSet()
     }

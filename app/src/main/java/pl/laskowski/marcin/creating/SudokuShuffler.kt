@@ -2,7 +2,7 @@ package pl.laskowski.marcin.creating
 
 import pl.laskowski.marcin.model.Field
 import pl.laskowski.marcin.model.Sudoku
-import pl.laskowski.marcin.type.ISudokuVariant
+import pl.laskowski.marcin.model.type.SudokuType
 import java.util.*
 
 class SudokuShuffler(
@@ -10,14 +10,14 @@ class SudokuShuffler(
 ) {
     private val transformations = SudokuTransformations()
 
-    fun shuffle(sudoku: Sudoku, variant: ISudokuVariant): Sudoku {
+    fun shuffle(sudoku: Sudoku, variant: SudokuType): Sudoku {
         return sudoku.rotateAndMirror()
             .swapNumbers(variant.regionSize)
             .swapColumns(variant)
             .swapRows(variant)
     }
 
-    fun shuffleFull(sudoku: Sudoku, variant: ISudokuVariant): Sudoku {
+    fun shuffleFull(sudoku: Sudoku, variant: SudokuType): Sudoku {
         return sudoku.swapColumns(variant)
             .swapRows(variant)
     }
@@ -48,7 +48,7 @@ class SudokuShuffler(
         return this
     }
 
-    private fun Sudoku.swapColumns(variant: ISudokuVariant): Sudoku {
+    private fun Sudoku.swapColumns(variant: SudokuType): Sudoku {
 //        val shuffled: List<List<Field>> = shuffleGroups(columns().assumeNoNulls(), variant.blockWidth)
 //        return copyWithIndexMapping { (x, y): Point ->
 //            val f = shuffled[x][y]
@@ -57,7 +57,7 @@ class SudokuShuffler(
         return this
     }
 
-    private fun Sudoku.swapRows(variant: ISudokuVariant): Sudoku {
+    private fun Sudoku.swapRows(variant: SudokuType): Sudoku {
 //        val shuffled: List<List<Field>> = shuffleGroups(rows().assumeNoNulls(), variant.blockHeight)
 //        return copyWithIndexMapping { (x, y): Point ->
 //            val f = shuffled[y][x]

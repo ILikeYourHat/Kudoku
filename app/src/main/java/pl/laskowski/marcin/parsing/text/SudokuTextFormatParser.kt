@@ -2,7 +2,7 @@ package pl.laskowski.marcin.parsing.text
 
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.model.type.*
-import pl.laskowski.marcin.type.ISudokuVariant
+import pl.laskowski.marcin.model.type.SudokuType
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
@@ -28,7 +28,7 @@ class SudokuTextFormatParser {
         return Command(file).parseMany()
     }
 
-    private fun getType(type: String): ISudokuVariant {
+    private fun getType(type: String): SudokuType {
         return when (type) {
             "classic_1x1" -> ClassicSquare1x1
             "classic_2x2" -> ClassicSquare2x2
@@ -43,7 +43,7 @@ class SudokuTextFormatParser {
 
     private inner class Command {
         private val scanner: Scanner
-        private lateinit var type: ISudokuVariant
+        private lateinit var type: SudokuType
         private var width = 0
         private var height = 0
         private lateinit var data: MutableList<Int?>
