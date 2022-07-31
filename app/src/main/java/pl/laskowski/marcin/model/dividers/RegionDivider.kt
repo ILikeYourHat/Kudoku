@@ -49,7 +49,7 @@ class RegionDivider {
 
     fun applySubSudoku(x: Int, y: Int, type: SudokuType) = apply {
         dividers.add { board ->
-            val subBoard = board.fragment(x, y, x + type.sizeX - 1, y + type.sizeY - 1)
+            val subBoard = board.fragment(x, y, x + type.sizeX, y + type.sizeY)
             type.divider().divide(subBoard)
         }
     }

@@ -17,8 +17,8 @@ fun Board.divideByColumns(): List<Region> {
 }
 
 fun Board.divideByBlocks(blockSizeX: Int, blockSizeY: Int): List<Region> {
-    require(sizeX() % blockSizeX == 0)
-    require(sizeY() % blockSizeY == 0)
+    require(sizeX() % blockSizeX == 0) { "blockSizeX is $blockSizeX, sizeX is ${sizeX()}" }
+    require(sizeY() % blockSizeY == 0) { "blockSizeY is $blockSizeY, sizeY is ${sizeY()}" }
 
     val regions = mutableListOf<Region>()
     for (x in 0 until sizeX() step blockSizeX) {

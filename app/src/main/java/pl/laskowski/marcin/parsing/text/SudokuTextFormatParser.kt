@@ -37,6 +37,7 @@ class SudokuTextFormatParser {
             "classic_16x16" -> ClassicSquare16x16
             "classic_25x25" -> ClassicSquare25x25
             "diagonal_9x9" -> DiagonalSquare9x9
+            "double_slash_15x15" -> DoubleSlash15x15
             else -> throw IllegalArgumentException("Unknown sudoku type: $type")
         }
     }

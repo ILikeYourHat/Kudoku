@@ -1,5 +1,6 @@
 package pl.laskowski.marcin.model
 
+import pl.laskowski.marcin.model.type.BoardCreator
 import pl.laskowski.marcin.model.type.SudokuType
 
 data class Sudoku(
@@ -11,12 +12,18 @@ data class Sudoku(
 
     constructor(type: SudokuType) : this(
         type = type,
-        board = Board(type.sizeX, type.sizeY) { x, y -> Field(x, y) }
+        board = BoardCreator.createBoard(type)
     )
 
     constructor(type: SudokuType, values: List<Int?>) : this(
         type = type,
-        board = Board(type.sizeX, type.sizeY, values)
+        board = BoardCreator.createBoard(type)
+            .also {
+                it.fields().zip(values)
+                    .forEach { (field, value) ->
+                        field?.set(value!!)
+                    }
+            }
     )
 
     override fun toString(): String {

@@ -3,12 +3,11 @@ package pl.laskowski.marcin.playground;
 import pl.laskowski.marcin.creating.ClassicSudokuGenerator;
 import pl.laskowski.marcin.creating.SudokuGenerator;
 import pl.laskowski.marcin.creating.SudokuRater;
-import pl.laskowski.marcin.model.type.ClassicSquare16x16;
-import pl.laskowski.marcin.model.type.ClassicSquare25x25;
-import pl.laskowski.marcin.model.type.ClassicSquare9x9;
-import pl.laskowski.marcin.model.type.DiagonalSquare9x9;
+import pl.laskowski.marcin.model.Sudoku;
+import pl.laskowski.marcin.model.type.*;
 import pl.laskowski.marcin.playground.gen.SudokuGenerationTimer;
-import pl.laskowski.marcin.model.type.SudokuType;
+import pl.laskowski.marcin.solving.SudokuSolver;
+import pl.laskowski.marcin.solving.sat.SatSolver;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -24,7 +23,12 @@ public class Main {
 //                method.invoke(playground);
 //            }
 //        }
-        test();
+        Sudoku sudoku = new SudokuGenerator(DoubleSlash15x15.INSTANCE, null, null).generate();
+        System.out.println(sudoku);
+
+        SudokuSolver solver = new SatSolver();
+        Sudoku result = solver.solve(sudoku);
+        System.out.println(result);
     }
 
     private static void test() {
