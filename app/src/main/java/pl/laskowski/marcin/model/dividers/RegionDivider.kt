@@ -1,9 +1,9 @@
 package pl.laskowski.marcin.model.dividers
 
 import pl.laskowski.marcin.model.Board
+import pl.laskowski.marcin.model.Field
 import pl.laskowski.marcin.model.Region
 import pl.laskowski.marcin.model.type.SudokuType
-import pl.laskowski.marcin.type.*
 
 class RegionDivider {
 
@@ -11,13 +11,17 @@ class RegionDivider {
 
     fun divideByRows() = apply {
         dividers.add { board ->
-            board.divideByRows()
+            (0 until board.sizeY()).map { indexY ->
+                board.region(0, indexY, board.sizeX() - 1, indexY)
+            }
         }
     }
 
     fun divideByColumns() = apply {
         dividers.add { board ->
-            board.divideByColumns()
+            (0 until board.sizeX()).map { indexX ->
+                board.region(indexX, 0, indexX, board.sizeY() - 1)
+            }
         }
     }
 
@@ -25,25 +29,44 @@ class RegionDivider {
 
     fun divideByBlocks(blockSizeX: Int, blockSizeY: Int) = apply {
         dividers.add { board ->
-            board.divideByBlocks(blockSizeX, blockSizeY)
+            require(board.sizeX() % blockSizeX == 0) { "blockSizeX is $blockSizeX, sizeX is ${board.sizeX()}" }
+            require(board.sizeY() % blockSizeY == 0) { "blockSizeY is $blockSizeY, sizeY is ${board.sizeY()}" }
+
+            val regions = mutableListOf<Region>()
+            for (x in 0 until board.sizeX() step blockSizeX) {
+                for (y in 0 until board.sizeY() step blockSizeY) {
+                    regions += board.region(x, y, x + blockSizeX - 1, y + blockSizeY - 1)
+                }
+            }
+            regions
         }
     }
 
     fun allFields() = apply {
         dividers.add { board ->
-            board.allFields()
+            listOf(Region(board.fields().filterNotNull()))
         }
     }
 
     fun primaryDiagonal() = apply {
         dividers.add { board ->
-            board.primaryDiagonal()
+            require(board.sizeX() == board.sizeY())
+            val fields = mutableListOf<Field>()
+            for (x in 0 until board.sizeX()) {
+                fields += board.at(x, x)!!
+            }
+            listOf(Region(fields))
         }
     }
 
     fun antiDiagonal() = apply {
         dividers.add { board ->
-            board.antiDiagonal()
+            require(board.sizeX() == board.sizeY())
+            val fields = mutableListOf<Field>()
+            for (x in 0 until board.sizeX()) {
+                fields += board.at(x, board.sizeY() - x - 1)!!
+            }
+            listOf(Region(fields))
         }
     }
 

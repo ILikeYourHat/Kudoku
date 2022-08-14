@@ -4,7 +4,6 @@ package pl.laskowski.marcin.playground;
 import pl.laskowski.marcin.model.Sudoku;
 import pl.laskowski.marcin.model.type.*;
 import pl.laskowski.marcin.parsing.text.SudokuTextFormatParser;
-import pl.laskowski.marcin.type.*;
 
 import java.io.*;
 import java.util.Iterator;

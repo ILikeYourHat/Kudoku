@@ -23,7 +23,7 @@ public class Main {
 //                method.invoke(playground);
 //            }
 //        }
-        Sudoku sudoku = new SudokuGenerator(DoubleSlash15x15.INSTANCE, null, null).generate();
+        Sudoku sudoku = new SudokuGenerator(ClassicSquare25x25.INSTANCE, null, null).generate();
         System.out.println(sudoku);
 
         SudokuSolver solver = new SatSolver();
