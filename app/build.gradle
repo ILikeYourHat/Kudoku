@@ -16,6 +16,6 @@ targetCompatibility = 1.8
 mainClassName = "pl.laskowski.marcin.playground.Main"
 
 dependencies {
-    implementation fileTree(dir: 'lib', include: '*.jar')
+    implementation "org.ow2.sat4j:org.ow2.sat4j.core:2.3.6"
     testImplementation("junit:junit:4.13.2")
 }
