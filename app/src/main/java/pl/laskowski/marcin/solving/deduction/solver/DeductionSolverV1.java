@@ -19,5 +19,4 @@ public class DeductionSolverV1 extends DeductionSolver {
         algorithms.add(new HiddenSinglesAlgorithm.Factory());
         return algorithms;
     }
-
 }

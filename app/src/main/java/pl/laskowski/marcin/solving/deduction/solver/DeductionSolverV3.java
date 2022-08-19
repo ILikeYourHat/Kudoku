@@ -21,5 +21,4 @@ public class DeductionSolverV3 extends DeductionSolver {
         algorithms.add(new RegionIntersectionAlgorithm.Factory());
         return algorithms;
     }
-
 }

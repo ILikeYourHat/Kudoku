@@ -20,5 +20,4 @@ public class DeductionSolverV2 extends DeductionSolver {
         }
         return algorithms;
     }
-
 }

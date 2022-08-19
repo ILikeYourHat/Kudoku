@@ -7,10 +7,6 @@ import pl.laskowski.marcin.solving.SudokuSolver;
 
 import java.util.*;
 
-/**
- * Created by Marcin Laskowski.
- */
-
 public class ParallelDeductionSolver2 implements SudokuSolver {
 
     private final SudokuSolver solver;
@@ -61,5 +57,4 @@ public class ParallelDeductionSolver2 implements SudokuSolver {
                 .min(Comparator.comparingInt(f -> possibilities.forField(f).size()))
                 .orElse(null);
     }
-
 }

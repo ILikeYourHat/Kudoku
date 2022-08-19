@@ -8,11 +8,8 @@ import java.util.*
 class SudokuShuffler(
     private val random: Random = Random()
 ) {
-    private val transformations = SudokuTransformations()
-
     fun shuffle(sudoku: Sudoku, variant: SudokuType): Sudoku {
-        return sudoku.rotateAndMirror()
-            .swapNumbers(variant.regionSize)
+        return sudoku.swapNumbers(variant.regionSize)
             .swapColumns(variant)
             .swapRows(variant)
     }
@@ -20,20 +17,6 @@ class SudokuShuffler(
     fun shuffleFull(sudoku: Sudoku, variant: SudokuType): Sudoku {
         return sudoku.swapColumns(variant)
             .swapRows(variant)
-    }
-
-    private fun Sudoku.rotateAndMirror(): Sudoku {
-        return when (random.nextInt(8)) {
-            0 -> copy()
-            1 -> transformations.rotateLeft(this)
-            2 -> transformations.rotate180(this)
-            3 -> transformations.rotateRight(this)
-            4 -> transformations.mirrorByXAxis(this)
-            5 -> transformations.mirrorByYAxis(this)
-            6 -> transformations.mirrorByFirstDiagonal(this)
-            7 -> transformations.mirrorBySecondDiagonal(this)
-            else -> throw IllegalStateException()
-        }
     }
 
     private fun Sudoku.swapNumbers(maxValue: Int): Sudoku {

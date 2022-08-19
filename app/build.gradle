@@ -1,6 +1,6 @@
 plugins {
+    id 'java-library'
     id 'org.jetbrains.kotlin.jvm' version '1.7.10'
-    id 'application'
 }
 
 repositories {
@@ -12,8 +12,6 @@ version '1.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-mainClassName = "pl.laskowski.marcin.playground.Main"
 
 dependencies {
     implementation "org.ow2.sat4j:org.ow2.sat4j.core:2.3.6"
