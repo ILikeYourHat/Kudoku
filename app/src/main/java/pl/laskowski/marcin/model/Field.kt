@@ -1,8 +1,5 @@
 package pl.laskowski.marcin.model
 
-/**
- * Created by Marcin Laskowski.
- */
 data class Field(
     val position: Point,
     var value: Int = EMPTY_FIELD

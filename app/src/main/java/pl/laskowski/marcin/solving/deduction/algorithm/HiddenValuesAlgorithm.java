@@ -3,7 +3,7 @@ package pl.laskowski.marcin.solving.deduction.algorithm;
 import pl.laskowski.marcin.model.Region;
 import pl.laskowski.marcin.solving.deduction.combinations.CollectionCombinator;
 import pl.laskowski.marcin.model.Field;
-import pl.laskowski.marcin.model.SudokuHintGrid;
+import pl.laskowski.marcin.model.hint.SudokuHintGrid;
 
 import java.util.*;
 
@@ -21,7 +21,7 @@ public class HiddenValuesAlgorithm extends DeductionAlgorithm {
             this.size = size;
         }
 
-        public HiddenValuesAlgorithm instance(Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        public HiddenValuesAlgorithm instance(List<Region> regions, SudokuHintGrid sudokuHintGrid) {
             return new HiddenValuesAlgorithm(regions, sudokuHintGrid, size);
         }
 
@@ -30,7 +30,7 @@ public class HiddenValuesAlgorithm extends DeductionAlgorithm {
     private final CollectionCombinator combinator;
     private final int size;
 
-    private HiddenValuesAlgorithm(Set<Region> regions, SudokuHintGrid possibilities, int size) {
+    private HiddenValuesAlgorithm(List<Region> regions, SudokuHintGrid possibilities, int size) {
         super(regions, possibilities);
         this.combinator = new CollectionCombinator(size);
         this.size = size;

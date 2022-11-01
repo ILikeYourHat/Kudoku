@@ -2,9 +2,9 @@ package pl.laskowski.marcin.solving.deduction.algorithm;
 
 import pl.laskowski.marcin.model.Field;
 import pl.laskowski.marcin.model.Region;
-import pl.laskowski.marcin.model.SudokuHintGrid;
+import pl.laskowski.marcin.model.hint.SudokuHintGrid;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by Marcin Laskowski.
@@ -14,13 +14,13 @@ public class HintEliminationAlgorithm extends DeductionAlgorithm {
 
     public static class Factory implements DeductionAlgorithm.Factory {
 
-        public HintEliminationAlgorithm instance(Set<Region> regions, SudokuHintGrid sudokuHintGrid) {
+        public HintEliminationAlgorithm instance(List<Region> regions, SudokuHintGrid sudokuHintGrid) {
             return new HintEliminationAlgorithm(regions, sudokuHintGrid);
         }
 
     }
 
-    private HintEliminationAlgorithm(Set<Region> regions, SudokuHintGrid possibilities) {
+    private HintEliminationAlgorithm(List<Region> regions, SudokuHintGrid possibilities) {
         super(regions, possibilities);
     }
 

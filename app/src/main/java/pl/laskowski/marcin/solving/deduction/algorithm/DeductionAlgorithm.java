@@ -1,26 +1,21 @@
 package pl.laskowski.marcin.solving.deduction.algorithm;
 
 import pl.laskowski.marcin.model.Region;
-import pl.laskowski.marcin.model.SudokuHintGrid;
+import pl.laskowski.marcin.model.hint.SudokuHintGrid;
 
-import java.util.Set;
-
-/**
- * Created by Marcin Laskowski.
- */
-
+import java.util.List;
 
 public abstract class DeductionAlgorithm {
 
     public interface Factory {
-        DeductionAlgorithm instance(Set<Region> regions, SudokuHintGrid possibilities);
+        DeductionAlgorithm instance(List<Region> regions, SudokuHintGrid possibilities);
     }
 
-    final Set<Region> regions;
+    final List<Region> regions;
     final SudokuHintGrid possibilities;
     private boolean haveChanged = false;
 
-    DeductionAlgorithm(Set<Region> regions, SudokuHintGrid possibilities) {
+    DeductionAlgorithm(List<Region> regions, SudokuHintGrid possibilities) {
         this.regions = regions;
         this.possibilities = possibilities;
     }

@@ -1,15 +1,15 @@
 package pl.laskowski.marcin.parsing.text
 
 import pl.laskowski.marcin.model.Sudoku
+import pl.laskowski.marcin.model.type.*
+import pl.laskowski.marcin.model.type.SudokuType
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
 import java.util.regex.Pattern
 
-/**
- * Created by Marcin Laskowski.
- */
 class SudokuTextFormatParser {
+
     fun parseOne(text: String): Sudoku {
         return Command(text).parseOne()
     }
@@ -28,11 +28,26 @@ class SudokuTextFormatParser {
         return Command(file).parseMany()
     }
 
+    private fun getType(type: String): SudokuType {
+        return when (type) {
+            "classic_1x1" -> ClassicSquare1x1
+            "classic_2x2" -> ClassicSquare2x2
+            "classic_4x4" -> ClassicSquare4x4
+            "classic_9x9" -> ClassicSquare9x9
+            "classic_16x16" -> ClassicSquare16x16
+            "classic_25x25" -> ClassicSquare25x25
+            "diagonal_9x9" -> DiagonalSquare9x9
+            "double_slash_15x15" -> DoubleSlash15x15
+            else -> throw IllegalArgumentException("Unknown sudoku type: $type")
+        }
+    }
+
     private inner class Command {
         private val scanner: Scanner
+        private lateinit var type: SudokuType
         private var width = 0
         private var height = 0
-        private var data: Array<Int?> = arrayOfNulls(0)
+        private lateinit var data: MutableList<Int?>
         private var pointer = 0
 
         constructor(text: String) {
@@ -48,6 +63,7 @@ class SudokuTextFormatParser {
             while (scanner.hasNext()) {
                 val sudoku = parseOne()
                 sudokuList.add(sudoku)
+                if (scanner.hasNext()) scanner.nextLine()
             }
             return sudokuList
         }
@@ -68,15 +84,15 @@ class SudokuTextFormatParser {
                 }
                 y++
             }
-            return Sudoku(width, height, data)
+            return Sudoku(type, data)
         }
 
         private fun readSize() {
-            width = scanner.nextInt()
-            height = scanner.nextInt()
-            data = arrayOfNulls(width * height)
+            type = getType(scanner.nextLine())
+            width = type.sizeX
+            height = type.sizeY
+            data = MutableList(width * height) { null }
             pointer = 0
-            scanner.nextLine()
         }
 
         private fun parse(input: String): Int? {

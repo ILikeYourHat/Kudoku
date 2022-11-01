@@ -3,10 +3,8 @@ package pl.laskowski.marcin.model
 import org.junit.Assert.*
 import org.junit.Test
 
-/**
- * Created by Marcin Laskowski.
- */
 class FieldTest {
+
     @Test
     fun createEmptyField() {
         val field = Field(0, 0)

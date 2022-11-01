@@ -1,24 +1,21 @@
 package pl.laskowski.marcin.creating
 
-import pl.laskowski.marcin.type.SudokuVariant
 import pl.laskowski.marcin.creating.SudokuRater.Difficulty
 import pl.laskowski.marcin.solving.sat.SatSolver
 import pl.laskowski.marcin.model.Sudoku
 import pl.laskowski.marcin.model.Field
+import pl.laskowski.marcin.model.type.SudokuType
 import java.util.*
 import java.util.function.Consumer
 
-/**
- * Created by Marcin Laskowski.
- */
 open class SudokuGenerator(
-    private val variant: SudokuVariant,
+    private val variant: SudokuType,
     private val difficulty: Difficulty?,
     private val percentFilled: Float?
 ) {
     private val random = Random()
-    private val solver: SatSolver = SatSolver(variant)
-    private val rater: SudokuRater = SudokuRater(variant)
+    private val solver = SatSolver()
+    private val rater = SudokuRater()
 
     fun generate(): Sudoku {
         val sudoku = filledSudoku
@@ -28,7 +25,7 @@ open class SudokuGenerator(
 
     protected open val filledSudoku: Sudoku
         get() {
-            val sudoku = variant.template()
+            val sudoku = Sudoku(variant)
             iterateOverFieldsInRandomOrder(sudoku) { randomField ->
                 val possibilities = possibilities(variant)
                 do {
@@ -41,23 +38,21 @@ open class SudokuGenerator(
         }
 
     private fun iterateOverFieldsInRandomOrder(sudoku: Sudoku, consumer: Consumer<Field>) {
-        val fields = sudoku.allFields
-        while (fields.isNotEmpty()) {
-            val index = random.nextInt(fields.size)
-            consumer.accept(fields.removeAt(index))
-        }
+        sudoku.allFields
+            .shuffled(random)
+            .forEach { consumer.accept(it) }
     }
 
-    private fun possibilities(variant: SudokuVariant): MutableList<Int> {
+    private fun possibilities(variant: SudokuType): MutableList<Int> {
         val values: MutableList<Int> = ArrayList()
-        for (i in 1..variant.regionSize()) {
+        for (i in 1..variant.regionSize) {
             values.add(i)
         }
         return values
     }
 
     private fun generateHoles(sudoku: Sudoku) {
-        val fields = sudoku.allFields
+        val fields = sudoku.allFields.toMutableList()
         while (fields.isNotEmpty() && !isPercentReached(sudoku)) {
             val index = random.nextInt(fields.size)
             val field = fields.removeAt(index)
