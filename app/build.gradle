@@ -13,7 +13,12 @@ version '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation "org.ow2.sat4j:org.ow2.sat4j.core:2.3.6"
-    testImplementation("junit:junit:4.13.2")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
 }

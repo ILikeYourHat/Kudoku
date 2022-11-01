@@ -1,9 +1,9 @@
 package com.github.ilikeyourhat.sudokusolver.solving.sat
 
-import org.junit.Assert
-import org.junit.Test
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare4x4
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class SatSolverTest {
 
@@ -23,7 +23,7 @@ class SatSolverTest {
 
         val result = solver.solve(sudoku)
 
-        Assert.assertEquals(
+        assertEquals(
             listOf(
                 4, 2, 3, 1,
                 1, 3, 2, 4,

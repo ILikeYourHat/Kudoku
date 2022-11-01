@@ -1,10 +1,10 @@
 package com.github.ilikeyourhat.sudokusolver.solving.deduction
 
-import org.junit.Assert
-import org.junit.Test
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare4x4
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.solver.DeductionSolverV3
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class DeductionSolverTest {
 
@@ -24,7 +24,7 @@ class DeductionSolverTest {
 
         val result = solver.solve(sudoku)
 
-        Assert.assertEquals(
+        assertEquals(
             listOf(
                 4, 2, 3, 1,
                 1, 3, 2, 4,

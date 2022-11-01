@@ -1,18 +1,17 @@
 package com.github.ilikeyourhat.sudokusolver.parsing
 
-import org.junit.Assert.assertEquals
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare9x9
 import com.github.ilikeyourhat.sudokusolver.parsing.text.SudokuTextFormatParser
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
+import java.io.File
 
 class SudokuTextFormatParserTest {
 
-    @Rule
-    @JvmField
-    val folder = TemporaryFolder()
+    @field:TempDir
+    lateinit var tempDir: File
 
     @Test
     fun `parse one sudoku from text`() {
@@ -52,7 +51,7 @@ class SudokuTextFormatParserTest {
 
     @Test
     fun `parse one sudoku from file`() {
-        val file = folder.newFile("test.txt")
+        val file = File(tempDir, "test.txt")
         file.writeText(
             """
             classic_9x9
@@ -157,7 +156,7 @@ class SudokuTextFormatParserTest {
 
     @Test
     fun `parse many sudoku from file`() {
-        val file = folder.newFile("test.txt")
+        val file = File(tempDir, "test.txt")
         file.writeText(
             """
             classic_9x9

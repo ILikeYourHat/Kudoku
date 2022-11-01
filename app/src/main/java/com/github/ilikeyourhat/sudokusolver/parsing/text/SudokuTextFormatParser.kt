@@ -61,14 +61,21 @@ class SudokuTextFormatParser {
         fun parseMany(): List<Sudoku> {
             val sudokuList: MutableList<Sudoku> = ArrayList()
             while (scanner.hasNext()) {
-                val sudoku = parseOne()
+                val sudoku = parse()
                 sudokuList.add(sudoku)
                 if (scanner.hasNext()) scanner.nextLine()
             }
+            scanner.close()
             return sudokuList
         }
 
         fun parseOne(): Sudoku {
+            val sudoku = parse()
+            scanner.close()
+            return sudoku
+        }
+
+        private fun parse(): Sudoku {
             readSize()
             var y = 0
             while (y < height) {

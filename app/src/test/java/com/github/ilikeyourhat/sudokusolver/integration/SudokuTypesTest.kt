@@ -1,9 +1,9 @@
 package com.github.ilikeyourhat.sudokusolver.integration
 
 import com.github.ilikeyourhat.sudokusolver.Kudoku
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 abstract class SudokuTypesTest {
 

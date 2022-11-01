@@ -1,10 +1,10 @@
 package com.github.ilikeyourhat.sudokusolver.solving.bruteforce
 
-import org.junit.Assert.assertEquals
-import org.junit.Ignore
-import org.junit.Test
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare4x4
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 class BruteForceSolverTest {
 
@@ -36,7 +36,7 @@ class BruteForceSolverTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     fun `concurrent BruteForce`() {
         val solver = BruteForceConcurrentSolver(5, 5)
 
@@ -64,7 +64,7 @@ class BruteForceSolverTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     fun `concurrent BruteForce 2`() {
         val solver = BruteForceConcurrentSolver2(2, 4)
 

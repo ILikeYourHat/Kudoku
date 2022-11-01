@@ -1,9 +1,9 @@
 package com.github.ilikeyourhat.sudokusolver.domain.algorithm
 
-import org.junit.Assert.*
-import org.junit.Test
 import com.github.ilikeyourhat.sudokusolver.model.Point
 import com.github.ilikeyourhat.sudokusolver.solving.sat.IndexEncoder
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class IndexEncoderTest {
     @Test

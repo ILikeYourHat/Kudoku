@@ -1,7 +1,8 @@
 package com.github.ilikeyourhat.sudokusolver.model
 
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class BoardTest {
 
@@ -19,24 +20,31 @@ class BoardTest {
         assertEquals(8, sudoku.sizeY())
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun throwExceptionWhenTryingToCreateGridWithNegativeWidth() {
-        createGridWithSize(-1, 2)
+        assertThrows<IllegalArgumentException> {
+            createGridWithSize(-1, 2)
+        }
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun throwExceptionWhenTryingToCreateGridWithNegativeHeight() {
-        createGridWithSize(2, -1)
+        assertThrows<IllegalArgumentException> {
+            createGridWithSize(2, -1)
+        }
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun throwExceptionWhenTryingToCreateGridWithIncorrectData() {
-        Board(4, 4, listOf(
-                2, 2,
-                3, 4,
-                7
+        assertThrows<IllegalArgumentException> {
+            Board(
+                4, 4, listOf(
+                    2, 2,
+                    3, 4,
+                    7
+                )
             )
-        )
+        }
     }
 
     @Test
