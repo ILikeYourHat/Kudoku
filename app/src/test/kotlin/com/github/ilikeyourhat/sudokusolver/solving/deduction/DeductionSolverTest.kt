@@ -1,7 +1,7 @@
 package com.github.ilikeyourhat.sudokusolver.solving.deduction
 
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
-import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare4x4
+import com.github.ilikeyourhat.sudokusolver.type.ClassicSquare4x4
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.solver.DeductionSolverV3
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

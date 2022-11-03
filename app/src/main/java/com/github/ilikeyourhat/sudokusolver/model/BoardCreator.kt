@@ -1,7 +1,4 @@
-package com.github.ilikeyourhat.sudokusolver.model.type
-
-import com.github.ilikeyourhat.sudokusolver.model.Board
-import com.github.ilikeyourhat.sudokusolver.model.SudokuType
+package com.github.ilikeyourhat.sudokusolver.model
 
 object BoardCreator {
 

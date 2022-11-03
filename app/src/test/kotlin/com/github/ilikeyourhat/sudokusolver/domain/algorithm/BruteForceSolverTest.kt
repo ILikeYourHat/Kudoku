@@ -1,8 +1,8 @@
 package com.github.ilikeyourhat.sudokusolver.domain.algorithm
 
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
-import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare1x1
-import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare2x2
+import com.github.ilikeyourhat.sudokusolver.type.ClassicSquare1x1
+import com.github.ilikeyourhat.sudokusolver.type.ClassicSquare2x2
 import com.github.ilikeyourhat.sudokusolver.solving.bruteforce.BruteForceSolver
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

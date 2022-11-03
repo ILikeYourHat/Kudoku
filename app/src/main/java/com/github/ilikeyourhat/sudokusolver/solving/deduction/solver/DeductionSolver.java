@@ -33,7 +33,7 @@ public abstract class DeductionSolver implements SudokuSolver {
                     break;
                 }
             }
-        } while (gridHasChanged && !sudoku.isSolved());
+        } while (gridHasChanged && !sudoku.isCompleted());
         return sudoku;
     }
 

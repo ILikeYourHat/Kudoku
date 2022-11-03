@@ -1,4 +1,4 @@
-package com.github.ilikeyourhat.sudokusolver.integration.types
+package com.github.ilikeyourhat.sudokusolver.integration.type
 
 class DoubleSlash15x15Test: SudokuTypesTest() {
 

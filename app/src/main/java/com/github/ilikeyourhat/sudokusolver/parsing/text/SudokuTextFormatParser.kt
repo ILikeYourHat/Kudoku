@@ -3,6 +3,7 @@ package com.github.ilikeyourhat.sudokusolver.parsing.text
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.type.*
 import com.github.ilikeyourhat.sudokusolver.model.SudokuType
+import com.github.ilikeyourhat.sudokusolver.type.*
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*

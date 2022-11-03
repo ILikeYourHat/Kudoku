@@ -1,7 +1,5 @@
 package com.github.ilikeyourhat.sudokusolver.model
 
-import com.github.ilikeyourhat.sudokusolver.model.type.BoardCreator
-
 data class Sudoku(
     val type: SudokuType,
     val board: Board
@@ -49,14 +47,18 @@ data class Sudoku(
         return board.at(p.x, p.y)
     }
 
-    fun isSolved(): Boolean {
+    fun isCompleted(): Boolean {
         return board.fields()
             .filterNotNull()
             .none { it.isEmpty }
     }
 
-    fun isSolvedCorrectly(): Boolean {
-        return isSolved() && regions.all { it.isValid() }
+    fun isValid(): Boolean {
+        return regions.all { it.isValid() }
+    }
+
+    fun isSolved(): Boolean {
+        return isCompleted() && isValid()
     }
 
     val allFields = board.fields()

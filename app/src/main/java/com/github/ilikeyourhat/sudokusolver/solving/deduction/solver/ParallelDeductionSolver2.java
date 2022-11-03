@@ -27,7 +27,7 @@ public class ParallelDeductionSolver2 implements SudokuSolver {
         while (!queue.isEmpty()) {
             Sudoku chosen = queue.poll();
             Sudoku result = solver.solve(chosen);
-            if (result.isSolved()) {
+            if (result.isCompleted()) {
                 return result;
             } else {
                 queue.addAll(permutations(result));

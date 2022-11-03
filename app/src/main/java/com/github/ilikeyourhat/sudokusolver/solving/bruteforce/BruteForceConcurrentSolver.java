@@ -6,11 +6,6 @@ import com.github.ilikeyourhat.sudokusolver.model.hint.SudokuHintGrid;
 import com.github.ilikeyourhat.sudokusolver.solving.ConcurrentSudokuSolver;
 import com.github.ilikeyourhat.sudokusolver.solving.SudokuSolver;
 import org.jetbrains.annotations.NotNull;
-import com.github.ilikeyourhat.sudokusolver.model.Field;
-import com.github.ilikeyourhat.sudokusolver.model.Sudoku;
-import com.github.ilikeyourhat.sudokusolver.model.hint.SudokuHintGrid;
-import com.github.ilikeyourhat.sudokusolver.solving.ConcurrentSudokuSolver;
-import com.github.ilikeyourhat.sudokusolver.solving.SudokuSolver;
 
 import java.util.List;
 import java.util.concurrent.*;
@@ -86,7 +81,7 @@ public class BruteForceConcurrentSolver implements ConcurrentSudokuSolver {
         return () -> {
             while (!Thread.interrupted()) {
                 Sudoku result = coreAlgorithm.solve(queue.take());
-                if (result.isSolved()) return result;
+                if (result.isCompleted()) return result;
             }
             return null;
         };

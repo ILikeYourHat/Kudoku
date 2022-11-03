@@ -5,18 +5,18 @@ import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.Field
 import com.github.ilikeyourhat.sudokusolver.model.SudokuType
 import com.github.ilikeyourhat.sudokusolver.rating.Difficulty
-import com.github.ilikeyourhat.sudokusolver.rating.SudokuRater
+import com.github.ilikeyourhat.sudokusolver.rating.DeductionBasedRater
+import com.github.ilikeyourhat.sudokusolver.solving.SolutionCount
 import java.util.*
 import java.util.function.Consumer
 
 open class SudokuGenerator(
     private val variant: SudokuType,
-    private val difficulty: Difficulty?,
-    private val percentFilled: Float?
+    private val difficulty: Difficulty?
 ) {
     private val random = Random()
     private val solver = SatSolver()
-    private val rater = SudokuRater()
+    private val rater = DeductionBasedRater()
 
     fun generate(): Sudoku {
         val sudoku = filledSudoku
@@ -33,7 +33,7 @@ open class SudokuGenerator(
                     val index = random.nextInt(possibilities.size)
                     val value: Int = possibilities.removeAt(index)
                     randomField.set(value)
-                } while (solver.checkSolutions(sudoku) == SudokuSolutionCount.NONE)
+                } while (solver.checkSolutions(sudoku) == SolutionCount.NONE)
             }
             return sudoku
         }
@@ -54,7 +54,7 @@ open class SudokuGenerator(
 
     private fun generateHoles(sudoku: Sudoku) {
         val fields = sudoku.allFields.toMutableList()
-        while (fields.isNotEmpty() && !isPercentReached(sudoku)) {
+        while (fields.isNotEmpty()) {
             val index = random.nextInt(fields.size)
             val field = fields.removeAt(index)
             val value = field.value
@@ -66,11 +66,7 @@ open class SudokuGenerator(
     }
 
     private fun hasOneSolution(sudoku: Sudoku): Boolean {
-        return solver.checkSolutions(sudoku) == SudokuSolutionCount.ONE
-    }
-
-    private fun isPercentReached(sudoku: Sudoku): Boolean {
-        return percentFilled != null && percentFilled > rater.percentFilled(sudoku)
+        return solver.checkSolutions(sudoku) == SolutionCount.ONE
     }
 
     private fun isAboveMaxDifficulty(sudoku: Sudoku): Boolean {

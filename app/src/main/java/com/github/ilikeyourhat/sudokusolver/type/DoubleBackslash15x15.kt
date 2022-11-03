@@ -1,9 +1,9 @@
-package com.github.ilikeyourhat.sudokusolver.model.type
+package com.github.ilikeyourhat.sudokusolver.type
 
 import com.github.ilikeyourhat.sudokusolver.model.SudokuType
 import com.github.ilikeyourhat.sudokusolver.model.dividers.RegionDivider
 
-object TripleBackslash15x15 : SudokuType {
+object DoubleBackslash15x15 : SudokuType {
 
     override val sizeX = 15
     override val sizeY = 15
@@ -14,17 +14,17 @@ object TripleBackslash15x15 : SudokuType {
         _,_,_ _,_,_ _,_,_ #,#,# #,#,#
         _,_,_ _,_,_ _,_,_ #,#,# #,#,#
         
-        _,_,_ _,_,_ _,_,_ _,_,_ #,#,#
-        _,_,_ _,_,_ _,_,_ _,_,_ #,#,#
-        _,_,_ _,_,_ _,_,_ _,_,_ #,#,#
+        _,_,_ _,_,_ _,_,_ #,#,# #,#,#
+        _,_,_ _,_,_ _,_,_ #,#,# #,#,#
+        _,_,_ _,_,_ _,_,_ #,#,# #,#,#
         
         _,_,_ _,_,_ _,_,_ _,_,_ _,_,_
         _,_,_ _,_,_ _,_,_ _,_,_ _,_,_
         _,_,_ _,_,_ _,_,_ _,_,_ _,_,_
         
-        #,#,# _,_,_ _,_,_ _,_,_ _,_,_
-        #,#,# _,_,_ _,_,_ _,_,_ _,_,_
-        #,#,# _,_,_ _,_,_ _,_,_ _,_,_
+        #,#,# #,#,# _,_,_ _,_,_ _,_,_
+        #,#,# #,#,# _,_,_ _,_,_ _,_,_
+        #,#,# #,#,# _,_,_ _,_,_ _,_,_
         
         #,#,# #,#,# _,_,_ _,_,_ _,_,_
         #,#,# #,#,# _,_,_ _,_,_ _,_,_
@@ -34,7 +34,6 @@ object TripleBackslash15x15 : SudokuType {
     override fun divider(): RegionDivider {
         return RegionDivider()
             .applySubSudoku(0, 0, ClassicSquare9x9)
-            .applySubSudoku(3, 3, ClassicSquare9x9)
             .applySubSudoku(6, 6, ClassicSquare9x9)
     }
 }

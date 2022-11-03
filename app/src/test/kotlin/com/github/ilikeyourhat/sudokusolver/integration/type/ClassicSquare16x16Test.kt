@@ -1,4 +1,4 @@
-package com.github.ilikeyourhat.sudokusolver.integration.types
+package com.github.ilikeyourhat.sudokusolver.integration.type
 
 class ClassicSquare16x16Test: SudokuTypesTest() {
 

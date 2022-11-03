@@ -6,18 +6,19 @@ import org.sat4j.specs.ContradictionException
 import org.sat4j.specs.ISolver
 import org.sat4j.specs.TimeoutException
 import org.sat4j.tools.SingleSolutionDetector
-import com.github.ilikeyourhat.sudokusolver.creating.SudokuSolutionCount
+import com.github.ilikeyourhat.sudokusolver.solving.SolutionCount
 import com.github.ilikeyourhat.sudokusolver.model.Field
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
+import com.github.ilikeyourhat.sudokusolver.solving.SudokuSolutionChecker
 import com.github.ilikeyourhat.sudokusolver.solving.SudokuSolver
 
-class SatSolver: SudokuSolver {
+class SatSolver: SudokuSolver, SudokuSolutionChecker {
 
     override fun solve(sudoku: Sudoku): Sudoku {
         return Command(sudoku).solve()
     }
 
-    fun checkSolutions(sudoku: Sudoku): SudokuSolutionCount {
+    override fun checkSolutions(sudoku: Sudoku): SolutionCount {
         return Command(sudoku).checkSolutions()
     }
 
@@ -30,7 +31,11 @@ class SatSolver: SudokuSolver {
             return try {
                 initSolver()
                 val model = solver.findModel()
-                applyResult(model)
+                if (model != null) {
+                    applyResult(model)
+                } else {
+                    sudoku.copy()
+                }
             } catch (e: ContradictionException) {
                 sudoku.copy()
             } catch (e: TimeoutException) {
@@ -40,23 +45,23 @@ class SatSolver: SudokuSolver {
             }
         }
 
-        fun checkSolutions(): SudokuSolutionCount {
+        fun checkSolutions(): SolutionCount {
             return try {
                 initSolver()
                 val solutionDetector = SingleSolutionDetector(solver)
                 if (solutionDetector.isSatisfiable) {
                     if (solutionDetector.hasASingleSolution()) {
-                        SudokuSolutionCount.ONE
+                        SolutionCount.ONE
                     } else {
-                        SudokuSolutionCount.MANY
+                        SolutionCount.MANY
                     }
                 } else {
-                    SudokuSolutionCount.NONE
+                    SolutionCount.NONE
                 }
             } catch (e: ContradictionException) {
-                SudokuSolutionCount.NONE
+                SolutionCount.NONE
             } catch (e: TimeoutException) {
-                SudokuSolutionCount.NONE
+                SolutionCount.NONE
             } finally {
                 solver.reset()
             }

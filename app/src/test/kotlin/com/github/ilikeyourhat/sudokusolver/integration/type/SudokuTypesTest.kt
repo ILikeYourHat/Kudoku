@@ -1,4 +1,4 @@
-package com.github.ilikeyourhat.sudokusolver.integration.types
+package com.github.ilikeyourhat.sudokusolver.integration.type
 
 import com.github.ilikeyourhat.sudokusolver.Kudoku
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -13,12 +13,12 @@ abstract class SudokuTypesTest {
     @Test
     fun `should solve it correctly`() {
         val solver = Kudoku.defaultSolver()
-        val sudokuToSolve = Kudoku.sudokuFromString(puzzle)
-        val expectedResult = Kudoku.sudokuFromString(solution)
+        val sudokuToSolve = Kudoku.createFromString(puzzle)
+        val expectedResult = Kudoku.createFromString(solution)
 
         val result = solver.solve(sudokuToSolve)
 
         assertEquals(expectedResult, result)
-        assertTrue(result.isSolvedCorrectly())
+        assertTrue(result.isSolved())
     }
 }

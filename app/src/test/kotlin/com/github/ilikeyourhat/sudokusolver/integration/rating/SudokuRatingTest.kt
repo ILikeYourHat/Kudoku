@@ -9,7 +9,7 @@ class SudokuRatingTest {
 
     @Test
     fun `should rate sudoku as EASY`() {
-        val sudoku = Kudoku.sudokuFromString("""
+        val sudoku = Kudoku.createFromString("""
             classic_9x9
             _,5,7, 8,6,_, _,_,4
             8,_,4, _,9,5, 2,_,_
@@ -31,7 +31,7 @@ class SudokuRatingTest {
 
     @Test
     fun `should rate sudoku as MEDIUM`() {
-        val sudoku = Kudoku.sudokuFromString("""
+        val sudoku = Kudoku.createFromString("""
             classic_9x9
             3,_,_, 2,_,_, _,_,_
             _,_,_, 1,_,7, _,_,_
@@ -53,7 +53,7 @@ class SudokuRatingTest {
 
     @Test
     fun `should rate sudoku as HARD`() {
-        val sudoku = Kudoku.sudokuFromString("""
+        val sudoku = Kudoku.createFromString("""
             classic_9x9
             _,_,_, _,_,7, 5,_,_
             _,_,4, _,_,9, _,1,_
@@ -75,7 +75,7 @@ class SudokuRatingTest {
 
     @Test
     fun `should rate sudoku as VERY_HARD`() {
-        val sudoku = Kudoku.sudokuFromString("""
+        val sudoku = Kudoku.createFromString("""
             classic_9x9
             8,_,_, _,_,_, _,_,_
             _,_,3, 6,_,_, _,_,_
@@ -93,5 +93,49 @@ class SudokuRatingTest {
         val rating = Kudoku.rate(sudoku)
 
         assertEquals(Difficulty.VERY_HARD, rating)
+    }
+
+    @Test
+    fun `should rate sudoku as INVALID when no solutions`() {
+        val sudoku = Kudoku.createFromString("""
+            classic_9x9
+            1,1,1, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+        """.trimIndent())
+
+        val rating = Kudoku.rate(sudoku)
+
+        assertEquals(Difficulty.INVALID, rating)
+    }
+
+    @Test
+    fun `should rate sudoku as INVALID when multiple solutions`() {
+        val sudoku = Kudoku.createFromString("""
+            classic_9x9
+            1,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+            _,_,_, _,_,_, _,_,_
+        """.trimIndent())
+
+        val rating = Kudoku.rate(sudoku)
+
+        assertEquals(Difficulty.INVALID, rating)
     }
 }
