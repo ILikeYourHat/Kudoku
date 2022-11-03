@@ -7,7 +7,7 @@ repositories {
     mavenCentral()
 }
 
-group 'com.github.ilikeyourhat.sudokusolver'
+group 'com.github.ilikeyourhat.kudoku'
 version '1.0'
 
 sourceCompatibility = 1.8
