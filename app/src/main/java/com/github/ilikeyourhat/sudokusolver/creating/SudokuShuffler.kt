@@ -2,7 +2,7 @@ package com.github.ilikeyourhat.sudokusolver.creating
 
 import com.github.ilikeyourhat.sudokusolver.model.Field
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType
 import java.util.*
 
 class SudokuShuffler(

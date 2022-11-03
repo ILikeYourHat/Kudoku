@@ -1,4 +1,4 @@
-package com.github.ilikeyourhat.sudokusolver.creating
+package com.github.ilikeyourhat.sudokusolver.rating
 
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.solving.SudokuSolver
@@ -12,20 +12,12 @@ class SudokuRater {
     private var mediumSolver = DeductionSolverV2()
     private var hardSolver = DeductionSolverV3()
 
-    enum class Difficulty {
-        EASY, MEDIUM, HARD, DIABOLIC;
-
-        fun harderThan(difficulty: Difficulty): Boolean {
-            return ordinal > difficulty.ordinal
-        }
-    }
-
     fun rate(sudoku: Sudoku): Difficulty {
         return when {
             easySolver.canSolve(sudoku) -> Difficulty.EASY
             mediumSolver.canSolve(sudoku) -> Difficulty.MEDIUM
             hardSolver.canSolve(sudoku) -> Difficulty.HARD
-            else -> Difficulty.DIABOLIC
+            else -> Difficulty.VERY_HARD
         }
     }
 

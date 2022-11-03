@@ -1,8 +1,8 @@
 package com.github.ilikeyourhat.sudokusolver.creating
 
-import com.github.ilikeyourhat.sudokusolver.creating.SudokuRater.Difficulty
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.type.ClassicSquare9x9
+import com.github.ilikeyourhat.sudokusolver.rating.Difficulty
 
 class ClassicSudokuGenerator(difficulty: Difficulty?, percentFilled: Float?) :
     SudokuGenerator(ClassicSquare9x9, difficulty, percentFilled) {

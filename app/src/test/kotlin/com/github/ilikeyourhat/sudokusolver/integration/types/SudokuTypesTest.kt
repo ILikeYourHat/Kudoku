@@ -1,4 +1,4 @@
-package com.github.ilikeyourhat.sudokusolver.integration
+package com.github.ilikeyourhat.sudokusolver.integration.types
 
 import com.github.ilikeyourhat.sudokusolver.Kudoku
 import org.junit.jupiter.api.Assertions.assertEquals

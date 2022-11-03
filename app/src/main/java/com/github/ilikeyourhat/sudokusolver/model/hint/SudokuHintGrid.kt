@@ -7,7 +7,7 @@ import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import java.util.HashMap
 import java.util.HashSet
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.algorithm.HintEliminationAlgorithm
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType
 
 class SudokuHintGrid(sudoku: Sudoku) {
     private val hintMap: MutableMap<Point, MutableSet<Int>>

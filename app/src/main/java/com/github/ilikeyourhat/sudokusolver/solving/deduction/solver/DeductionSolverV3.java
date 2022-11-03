@@ -1,7 +1,7 @@
 package com.github.ilikeyourhat.sudokusolver.solving.deduction.solver;
 
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.algorithm.*;
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType;
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType;
 
 import java.util.ArrayList;
 import java.util.List;

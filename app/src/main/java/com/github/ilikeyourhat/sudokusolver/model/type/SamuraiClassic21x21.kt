@@ -1,5 +1,6 @@
 package com.github.ilikeyourhat.sudokusolver.model.type
 
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType
 import com.github.ilikeyourhat.sudokusolver.model.dividers.RegionDivider
 
 object SamuraiClassic21x21 : SudokuType {

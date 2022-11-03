@@ -4,7 +4,7 @@ import com.github.ilikeyourhat.sudokusolver.solving.deduction.algorithm.Deductio
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.algorithm.HiddenSinglesAlgorithm;
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.algorithm.HintEliminationAlgorithm;
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.algorithm.NakedSinglesAlgorithm;
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType;
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.github.ilikeyourhat.sudokusolver.model.type
+package com.github.ilikeyourhat.sudokusolver.model
 
 import com.github.ilikeyourhat.sudokusolver.model.dividers.RegionDivider
 

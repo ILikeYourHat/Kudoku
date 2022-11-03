@@ -5,7 +5,7 @@ import com.github.ilikeyourhat.sudokusolver.model.hint.SudokuHintGrid;
 import com.github.ilikeyourhat.sudokusolver.solving.SudokuSolver;
 import com.github.ilikeyourhat.sudokusolver.solving.deduction.algorithm.DeductionAlgorithm;
 import org.jetbrains.annotations.NotNull;
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType;
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType;
 
 import java.util.List;
 

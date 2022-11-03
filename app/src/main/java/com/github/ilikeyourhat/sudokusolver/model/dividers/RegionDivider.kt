@@ -3,7 +3,7 @@ package com.github.ilikeyourhat.sudokusolver.model.dividers
 import com.github.ilikeyourhat.sudokusolver.model.Board
 import com.github.ilikeyourhat.sudokusolver.model.Field
 import com.github.ilikeyourhat.sudokusolver.model.Region
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType
 
 class RegionDivider {
 

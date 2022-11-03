@@ -1,7 +1,6 @@
 package com.github.ilikeyourhat.sudokusolver.model
 
 import com.github.ilikeyourhat.sudokusolver.model.type.BoardCreator
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType
 
 data class Sudoku(
     val type: SudokuType,

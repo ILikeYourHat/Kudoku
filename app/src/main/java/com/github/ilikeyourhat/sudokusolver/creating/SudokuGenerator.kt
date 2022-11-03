@@ -1,10 +1,11 @@
 package com.github.ilikeyourhat.sudokusolver.creating
 
-import com.github.ilikeyourhat.sudokusolver.creating.SudokuRater.Difficulty
 import com.github.ilikeyourhat.sudokusolver.solving.sat.SatSolver
 import com.github.ilikeyourhat.sudokusolver.model.Sudoku
 import com.github.ilikeyourhat.sudokusolver.model.Field
-import com.github.ilikeyourhat.sudokusolver.model.type.SudokuType
+import com.github.ilikeyourhat.sudokusolver.model.SudokuType
+import com.github.ilikeyourhat.sudokusolver.rating.Difficulty
+import com.github.ilikeyourhat.sudokusolver.rating.SudokuRater
 import java.util.*
 import java.util.function.Consumer
 
@@ -73,6 +74,6 @@ open class SudokuGenerator(
     }
 
     private fun isAboveMaxDifficulty(sudoku: Sudoku): Boolean {
-        return difficulty != null && rater.rate(sudoku).harderThan(difficulty)
+        return difficulty != null && rater.rate(sudoku).isHarderThan(difficulty)
     }
 }
