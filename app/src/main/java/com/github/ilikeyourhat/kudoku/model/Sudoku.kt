@@ -24,7 +24,7 @@ data class Sudoku(
     )
 
     override fun toString(): String {
-        return board.toString()
+        return "$type $board"
     }
 
     fun at(x: Int, y: Int): Field? {
@@ -43,10 +43,6 @@ data class Sudoku(
         return board.sizeY()
     }
 
-    fun at(p: Point): Field? {
-        return board.at(p.x, p.y)
-    }
-
     fun isCompleted(): Boolean {
         return board.fields()
             .filterNotNull()
@@ -63,11 +59,6 @@ data class Sudoku(
 
     val allFields = board.fields()
         .filterNotNull()
-
-    val firstEmptyField: Field?
-        get() = board.fields()
-            .filterNotNull()
-            .firstOrNull { it.isEmpty }
 
     fun values(): List<Int?> {
         return board.fields().map { it?.value }

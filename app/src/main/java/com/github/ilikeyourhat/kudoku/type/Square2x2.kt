@@ -3,7 +3,7 @@ package com.github.ilikeyourhat.kudoku.type
 import com.github.ilikeyourhat.kudoku.model.SudokuType
 import com.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
 
-object ClassicSquare2x2 : SudokuType {
+object Square2x2 : SudokuType {
 
     override val sizeX = 2
     override val sizeY = 2

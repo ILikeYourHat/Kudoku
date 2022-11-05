@@ -1,12 +1,15 @@
 package com.github.ilikeyourhat.kudoku
 
+import com.github.ilikeyourhat.kudoku.generating.SudokuGenerator
 import com.github.ilikeyourhat.kudoku.rating.Difficulty
 import com.github.ilikeyourhat.kudoku.rating.DeductionBasedRater
 import com.github.ilikeyourhat.kudoku.model.Sudoku
+import com.github.ilikeyourhat.kudoku.model.SudokuType
 import com.github.ilikeyourhat.kudoku.parsing.text.SudokuTextFormatParser
 import com.github.ilikeyourhat.kudoku.solving.SolutionCount
 import com.github.ilikeyourhat.kudoku.solving.SudokuSolver
 import com.github.ilikeyourhat.kudoku.solving.sat.SatSolver
+import kotlin.random.Random
 
 object Kudoku {
 
@@ -16,6 +19,18 @@ object Kudoku {
 
     fun satSolver(): SudokuSolver {
         return SatSolver()
+    }
+
+    fun create(
+        type: SudokuType,
+        difficulty: Difficulty? = null,
+        random: Random = Random.Default
+    ): Sudoku {
+        return SudokuGenerator(
+            solutionChecker = SatSolver(),
+            rater = DeductionBasedRater(),
+            random = random
+        ).generate(type, difficulty)
     }
 
     fun createFromString(string: String): Sudoku {

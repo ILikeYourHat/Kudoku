@@ -1,16 +1,14 @@
 package com.github.ilikeyourhat.kudoku.integration.type
 
-class ClassicSquare2x2Test: SudokuTypesTest() {
+class Square1X1Test: SudokuTypesTest() {
 
     override val puzzle = """
-            classic_2x2
-            2,1
-            _,_
+            classic_1x1
+            _
         """.trimIndent()
 
     override val solution = """
-            classic_2x2
-            2,1
-            1,2
+            classic_1x1
+            1
         """.trimIndent()
 }

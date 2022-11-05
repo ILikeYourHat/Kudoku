@@ -30,8 +30,8 @@ class SudokuTextFormatParser {
 
     private fun getType(type: String): SudokuType {
         return when (type) {
-            "classic_1x1" -> ClassicSquare1x1
-            "classic_2x2" -> ClassicSquare2x2
+            "classic_1x1" -> Square1x1
+            "classic_2x2" -> Square2x2
             "classic_4x4" -> ClassicSquare4x4
             "classic_9x9" -> ClassicSquare9x9
             "classic_16x16" -> ClassicSquare16x16

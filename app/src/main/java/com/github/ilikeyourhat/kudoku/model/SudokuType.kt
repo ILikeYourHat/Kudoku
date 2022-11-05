@@ -8,4 +8,5 @@ interface SudokuType {
     val regionSize: Int
     fun divider(): RegionDivider
     fun template(): String
+    fun possibleValues(): List<Int> = IntRange(1, regionSize).toList()
 }
