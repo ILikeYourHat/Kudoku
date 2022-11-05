@@ -1,11 +1,5 @@
 package com.github.ilikeyourhat.kudoku.solving.sat
 
-import org.sat4j.core.VecInt
-import org.sat4j.minisat.SolverFactory
-import org.sat4j.specs.ContradictionException
-import org.sat4j.specs.ISolver
-import org.sat4j.specs.TimeoutException
-import org.sat4j.tools.SingleSolutionDetector
 import com.github.ilikeyourhat.kudoku.solving.SolutionCount
 import com.github.ilikeyourhat.kudoku.model.Field
 import com.github.ilikeyourhat.kudoku.model.Sudoku
@@ -22,101 +16,70 @@ class SatSolver: SudokuSolver, SudokuSolutionChecker {
         return Command(sudoku).checkSolutions()
     }
 
-    private inner class Command(private val sudoku: Sudoku) {
-        private val ie: IndexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY())
-        private val solver: ISolver = SolverFactory.newDefault()
-            .apply { timeout = 60 }
+    private class Command(private val sudoku: Sudoku) {
+
+        private val indexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY())
+        private val engine = SatEngine()
 
         fun solve(): Sudoku {
-            return try {
-                initSolver()
-                val model = solver.findModel()
-                if (model != null) {
-                    applyResult(model)
-                } else {
-                    sudoku.copy()
-                }
-            } catch (e: ContradictionException) {
-                sudoku.copy()
-            } catch (e: TimeoutException) {
-                sudoku.copy()
-            } finally {
-                solver.reset()
+            initEngine(sudoku)
+            val model = engine.findModel()
+            val result = sudoku.copy()
+            if (model != null) {
+                result.applyModel(model)
             }
+            return result
         }
 
         fun checkSolutions(): SolutionCount {
-            return try {
-                initSolver()
-                val solutionDetector = SingleSolutionDetector(solver)
-                if (solutionDetector.isSatisfiable) {
-                    if (solutionDetector.hasASingleSolution()) {
-                        SolutionCount.ONE
-                    } else {
-                        SolutionCount.MANY
-                    }
-                } else {
-                    SolutionCount.NONE
+            initEngine(sudoku)
+            return engine.detectSolutions()
+        }
+
+        private fun initEngine(sudoku: Sudoku) {
+            addCausesForRegions(sudoku)
+            addCausesForFields(sudoku)
+        }
+
+        private fun Sudoku.applyModel(model: List<Int>) {
+            model.filter { index -> index > 0 }
+                .forEach { index ->
+                    val (x, y) = indexEncoder.decodePoint(index)
+                    val value = indexEncoder.decodeValue(index)
+                    at(x, y)!!.set(value)
                 }
-            } catch (e: ContradictionException) {
-                SolutionCount.NONE
-            } catch (e: TimeoutException) {
-                SolutionCount.NONE
-            } finally {
-                solver.reset()
-            }
         }
 
-        @Throws(ContradictionException::class)
-        private fun initSolver() {
-            addCausesForRegions()
-            addCausesForFields()
-        }
-
-        private fun applyResult(result: IntArray): Sudoku {
-            val solution = sudoku.copy()
-            for (index in result) {
-                if (index > 0) {
-                    val p = ie.decodePoint(index)
-                    val v = ie.decodeValue(index)
-                    solution.at(p)!!.set(v)
-                }
-            }
-            return solution
-        }
-
-        @Throws(ContradictionException::class)
-        private fun addCausesForFields() {
+        private fun addCausesForFields(sudoku: Sudoku) {
             for (field in sudoku.allFields) {
-                solver.addExactly(createValues(field), 1)
+                engine.addExactly(createValues(field))
                 if (!field.isEmpty) {
-                    val index = ie.encode(field.position(), field.value())
-                    solver.addClause(VecInt(intArrayOf(index)))
+                    val index = indexEncoder.encode(field.position(), field.value())
+                    engine.addClause(listOf(index))
                 }
             }
         }
 
-        @Throws(ContradictionException::class)
-        private fun addCausesForRegions() {
+        private fun addCausesForRegions(sudoku: Sudoku) {
             for (possibleValue in 1..sudoku.type.regionSize) {
                 for (region in sudoku.regions) {
-                    val vec = VecInt(region.size())
+                    val list = mutableListOf<Int>()
                     for ((position) in region) {
-                        val index = ie.encode(position, possibleValue)
-                        vec.push(index)
+                        val index = indexEncoder.encode(position, possibleValue)
+                        list.add(index)
                     }
-                    solver.addExactly(vec, 1)
+                    engine.addExactly(list)
                 }
             }
         }
 
-        private fun createValues(field: Field): VecInt {
-            val vec = VecInt(sudoku.type.regionSize)
+        private fun createValues(field: Field): List<Int> {
+            val list = mutableListOf<Int>()
             for (value in 1..sudoku.type.regionSize) {
-                val index = ie.encode(field.position(), value)
-                vec.push(index)
+                val index = indexEncoder.encode(field.position(), value)
+                list.add(index)
             }
-            return vec
+            return list
         }
     }
 }
