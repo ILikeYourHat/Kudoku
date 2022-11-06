@@ -11,7 +11,7 @@ class SudokuShuffler(
 
     fun shuffleClassic(sudoku: Sudoku): Sudoku {
         require(CLASSIC_TYPES.contains(sudoku.type)) {
-            "${sudoku.type::class} not supported"
+            "${sudoku.type.name} not supported"
         }
 
         return sudoku.copy().apply {

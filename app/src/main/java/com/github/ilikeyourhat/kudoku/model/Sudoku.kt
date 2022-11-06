@@ -24,7 +24,7 @@ data class Sudoku(
     )
 
     override fun toString(): String {
-        return "$type $board"
+        return "${type.name} $board"
     }
 
     fun at(x: Int, y: Int): Field? {

@@ -15,7 +15,7 @@ class ClassicFilledSudokuGenerator(
 
     fun generate(type: SudokuType): Sudoku {
         val template = templates.find { it.type == type }
-            ?: throw IllegalArgumentException("${type::class} not supported")
+            ?: throw IllegalArgumentException("${type.name} not supported")
         return shuffler.shuffleClassic(template)
     }
 
