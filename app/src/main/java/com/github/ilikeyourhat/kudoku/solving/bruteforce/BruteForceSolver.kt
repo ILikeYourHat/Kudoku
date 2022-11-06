@@ -76,7 +76,7 @@ class BruteForceSolver: SudokuSolver {
 
         private fun setNextValuesAndCheckGrid() {
             val currentNumber = currentField.value()
-            for (i in currentNumber + 1..sudoku.type.regionSize) {
+            for (i in currentNumber + 1..sudoku.type.possibleValues) {
                 currentField.set(i)
                 if (isGridCorrectAfterChange()) {
                     changeDirection(Direction.FORWARD)

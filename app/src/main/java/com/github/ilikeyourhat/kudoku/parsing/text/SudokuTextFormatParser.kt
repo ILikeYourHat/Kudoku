@@ -8,7 +8,9 @@ import java.io.FileNotFoundException
 import java.util.*
 import java.util.regex.Pattern
 
-class SudokuTextFormatParser {
+class SudokuTextFormatParser(
+    private val supportedTypes :List<SudokuType> = BUILD_IN_TYPES
+) {
 
     fun parseOne(text: String): Sudoku {
         return Command(text).parseOne()
@@ -29,23 +31,8 @@ class SudokuTextFormatParser {
     }
 
     private fun getType(type: String): SudokuType {
-        return when (type) {
-            "butterfly_12x12" -> Butterfly12x12
-            "classic_1x1" -> Square1x1
-            "classic_2x2" -> Square2x2
-            "classic_4x4" -> Classic4x4
-            "classic_9x9" -> Classic9x9
-            "classic_16x16" -> Classic16x16
-            "classic_25x25" -> Classic25x25
-            "classic_horizontal_6x6" -> ClassicHorizontal6x6
-            "classic_vertical_6x6" -> ClassicVertical6x6
-            "double_backslash_15x15" -> DoubleBackslash15x15
-            "double_diagonal_9x9" -> DoubleDiagonal9x9
-            "double_slash_15x15" -> DoubleSlash15x15
-            "samurai_butterfly_30x30" -> SamuraiButterfly30x30
-            "samurai_classic_40x40" -> SamuraiClassic40x40
-            else -> throw IllegalArgumentException("Unknown sudoku type: $type")
-        }
+        return supportedTypes.find { it.name == type }
+            ?: throw IllegalArgumentException("Unknown sudoku type: $type")
     }
 
     private inner class Command {

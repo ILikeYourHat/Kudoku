@@ -5,9 +5,10 @@ import com.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
 
 object Classic25x25 : SudokuType {
 
+    override val name = "classic_25x25"
     override val sizeX = 25
     override val sizeY = 25
-    override val regionSize = 25
+    override val possibleValues = 25
 
     override fun template() = """
         _,_,_,_,_ _,_,_,_,_ _,_,_,_,_ _,_,_,_,_ _,_,_,_,_

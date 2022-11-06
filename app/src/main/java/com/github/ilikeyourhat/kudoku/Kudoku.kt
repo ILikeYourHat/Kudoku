@@ -9,9 +9,13 @@ import com.github.ilikeyourhat.kudoku.parsing.text.SudokuTextFormatParser
 import com.github.ilikeyourhat.kudoku.solving.SolutionCount
 import com.github.ilikeyourhat.kudoku.solving.SudokuSolver
 import com.github.ilikeyourhat.kudoku.solving.sat.SatSolver
+import com.github.ilikeyourhat.kudoku.type.BUILD_IN_TYPES
 import kotlin.random.Random
 
 object Kudoku {
+
+    private val supportedTypes = mutableListOf<SudokuType>()
+        .apply { addAll(BUILD_IN_TYPES) }
 
     fun defaultSolver(): SudokuSolver {
         return SatSolver()
@@ -34,7 +38,7 @@ object Kudoku {
     }
 
     fun createFromString(string: String): Sudoku {
-        return SudokuTextFormatParser().parseOne(string)
+        return SudokuTextFormatParser(supportedTypes).parseOne(string)
     }
 
     fun rate(sudoku: Sudoku): Difficulty {
@@ -43,5 +47,9 @@ object Kudoku {
 
     fun checkSolutions(sudoku: Sudoku): SolutionCount {
         return SatSolver().checkSolutions(sudoku)
+    }
+    
+    fun registerType(sudokuType: SudokuType) {
+        supportedTypes.add(sudokuType)
     }
 }

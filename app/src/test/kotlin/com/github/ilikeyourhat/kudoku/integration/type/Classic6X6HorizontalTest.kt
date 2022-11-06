@@ -1,9 +1,9 @@
 package com.github.ilikeyourhat.kudoku.integration.type
 
-class ClassicHorizontal6x6Test: SudokuTypesTest() {
+class Classic6X6HorizontalTest: SudokuTypesTest() {
 
     override val puzzle = """
-            classic_horizontal_6x6
+            classic_6x6_horizontal
             _,5,_, 2,_,_
             _,2,_, _,4,_
             
@@ -15,7 +15,7 @@ class ClassicHorizontal6x6Test: SudokuTypesTest() {
         """.trimIndent()
 
     override val solution = """
-            classic_4x4
+            classic_6x6_horizontal
             6,5,4, 2,1,3
             1,2,3, 5,4,6
             

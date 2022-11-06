@@ -22,7 +22,7 @@ class SudokuHintGrid(sudoku: Sudoku) {
     }
 
     private fun allValuesSet(sudokuVariant: SudokuType): MutableSet<Int> {
-        val regionSize = sudokuVariant.regionSize
+        val regionSize = sudokuVariant.possibleValues
         return (1..regionSize).toMutableSet()
     }
 

@@ -5,9 +5,10 @@ import com.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
 
 object TripleBackslash15x15 : SudokuType {
 
+    override val name = "triple_backslash_15x15"
     override val sizeX = 15
     override val sizeY = 15
-    override val regionSize = 9
+    override val possibleValues = 9
 
     override fun template() = """
         _,_,_ _,_,_ _,_,_ #,#,# #,#,#

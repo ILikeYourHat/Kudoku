@@ -1,6 +1,6 @@
 package com.github.ilikeyourhat.kudoku.integration.type
 
-class Classic9X9Test: SudokuTypesTest() {
+class Classic9x9Test: SudokuTypesTest() {
 
     override val puzzle = """
             classic_9x9

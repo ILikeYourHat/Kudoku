@@ -61,7 +61,7 @@ class SatSolver: SudokuSolver, SudokuSolutionChecker {
         }
 
         private fun addCausesForRegions(sudoku: Sudoku) {
-            for (possibleValue in 1..sudoku.type.regionSize) {
+            for (possibleValue in 1..sudoku.type.possibleValues) {
                 for (region in sudoku.regions) {
                     val list = mutableListOf<Int>()
                     for ((position) in region) {
@@ -75,7 +75,7 @@ class SatSolver: SudokuSolver, SudokuSolutionChecker {
 
         private fun createValues(field: Field): List<Int> {
             val list = mutableListOf<Int>()
-            for (value in 1..sudoku.type.regionSize) {
+            for (value in 1..sudoku.type.possibleValues) {
                 val index = indexEncoder.encode(field.position(), value)
                 list.add(index)
             }
