@@ -30,14 +30,18 @@ class SudokuTextFormatParser {
 
     private fun getType(type: String): SudokuType {
         return when (type) {
+            "butterfly_12x12" -> Butterfly12x12
             "classic_1x1" -> Square1x1
             "classic_2x2" -> Square2x2
-            "classic_4x4" -> ClassicSquare4x4
-            "classic_9x9" -> ClassicSquare9x9
-            "classic_16x16" -> ClassicSquare16x16
-            "classic_25x25" -> ClassicSquare25x25
-            "diagonal_9x9" -> DiagonalSquare9x9
+            "classic_4x4" -> Classic4x4
+            "classic_9x9" -> Classic9x9
+            "classic_16x16" -> Classic16x16
+            "classic_25x25" -> Classic25x25
+            "double_backslash_15x15" -> DoubleBackslash15x15
+            "double_diagonal_9x9" -> DoubleDiagonal9x9
             "double_slash_15x15" -> DoubleSlash15x15
+            "samurai_butterfly_30x30" -> SamuraiButterfly30x30
+            "samurai_classic_40x40" -> SamuraiClassic40x40
             else -> throw IllegalArgumentException("Unknown sudoku type: $type")
         }
     }

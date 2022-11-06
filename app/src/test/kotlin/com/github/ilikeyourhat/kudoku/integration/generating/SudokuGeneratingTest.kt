@@ -3,7 +3,7 @@ package com.github.ilikeyourhat.kudoku.integration.generating
 import com.github.ilikeyourhat.kudoku.Kudoku
 import com.github.ilikeyourhat.kudoku.rating.Difficulty
 import com.github.ilikeyourhat.kudoku.type.Butterfly12x12
-import com.github.ilikeyourhat.kudoku.type.ClassicSquare9x9
+import com.github.ilikeyourhat.kudoku.type.Classic9x9
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotEquals
@@ -17,9 +17,9 @@ class SudokuGeneratingTest {
 
     @Test
     fun `should generate Classic9x9 sudoku`() {
-        val sudoku = Kudoku.create(ClassicSquare9x9, random = random)
+        val sudoku = Kudoku.create(Classic9x9, random = random)
 
-        assertEquals(ClassicSquare9x9, sudoku.type)
+        assertEquals(Classic9x9, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
         assertNotEquals(Difficulty.INVALID, Kudoku.rate(sudoku))
@@ -27,9 +27,9 @@ class SudokuGeneratingTest {
 
     @Test
     fun `should generate Classic9x9 sudoku with given difficulty`() {
-        val sudoku = Kudoku.create(ClassicSquare9x9, difficulty = Difficulty.HARD, random = random)
+        val sudoku = Kudoku.create(Classic9x9, difficulty = Difficulty.HARD, random = random)
 
-        assertEquals(ClassicSquare9x9, sudoku.type)
+        assertEquals(Classic9x9, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
         assertEquals(Difficulty.HARD, Kudoku.rate(sudoku))

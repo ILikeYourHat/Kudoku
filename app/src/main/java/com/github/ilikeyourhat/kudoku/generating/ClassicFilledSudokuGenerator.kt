@@ -2,10 +2,10 @@ package com.github.ilikeyourhat.kudoku.generating
 
 import com.github.ilikeyourhat.kudoku.model.Sudoku
 import com.github.ilikeyourhat.kudoku.model.SudokuType
-import com.github.ilikeyourhat.kudoku.type.ClassicSquare16x16
-import com.github.ilikeyourhat.kudoku.type.ClassicSquare25x25
-import com.github.ilikeyourhat.kudoku.type.ClassicSquare4x4
-import com.github.ilikeyourhat.kudoku.type.ClassicSquare9x9
+import com.github.ilikeyourhat.kudoku.type.Classic16x16
+import com.github.ilikeyourhat.kudoku.type.Classic25x25
+import com.github.ilikeyourhat.kudoku.type.Classic4x4
+import com.github.ilikeyourhat.kudoku.type.Classic9x9
 import kotlin.random.Random
 
 class ClassicFilledSudokuGenerator(
@@ -22,7 +22,7 @@ class ClassicFilledSudokuGenerator(
     companion object {
         val templates = listOf(
             Sudoku(
-                ClassicSquare4x4, listOf(
+                Classic4x4, listOf(
                     1, 2, 3, 4,
                     3, 4, 1, 2,
                     2, 3, 4, 1,
@@ -30,7 +30,7 @@ class ClassicFilledSudokuGenerator(
                 )
             ),
             Sudoku(
-                ClassicSquare9x9, listOf(
+                Classic9x9, listOf(
                     1, 2, 3, 4, 5, 6, 7, 8, 9,
                     4, 5, 6, 7, 8, 9, 1, 2, 3,
                     7, 8, 9, 1, 2, 3, 4, 5, 6,
@@ -43,7 +43,7 @@ class ClassicFilledSudokuGenerator(
                 )
             ),
             Sudoku(
-                ClassicSquare16x16, listOf(
+                Classic16x16, listOf(
                     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                     5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4,
                     9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8,
@@ -63,7 +63,7 @@ class ClassicFilledSudokuGenerator(
                 )
             ),
             Sudoku(
-                ClassicSquare25x25, listOf(
+                Classic25x25, listOf(
                     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
                     6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 1, 2, 3, 4, 5,
                     11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,

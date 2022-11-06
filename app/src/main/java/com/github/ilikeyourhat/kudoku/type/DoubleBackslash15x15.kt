@@ -33,7 +33,7 @@ object DoubleBackslash15x15 : SudokuType {
 
     override fun divider(): RegionDivider {
         return RegionDivider()
-            .applySubSudoku(0, 0, ClassicSquare9x9)
-            .applySubSudoku(6, 6, ClassicSquare9x9)
+            .applySubSudoku(0, 0, Classic9x9)
+            .applySubSudoku(6, 6, Classic9x9)
     }
 }

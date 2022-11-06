@@ -1,7 +1,7 @@
 package com.github.ilikeyourhat.kudoku.parsing
 
 import com.github.ilikeyourhat.kudoku.model.Sudoku
-import com.github.ilikeyourhat.kudoku.type.ClassicSquare9x9
+import com.github.ilikeyourhat.kudoku.type.Classic9x9
 import com.github.ilikeyourhat.kudoku.parsing.text.SudokuTextFormatParser
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -34,7 +34,7 @@ class SudokuTextFormatParserTest {
 
         assertEquals(
             Sudoku(
-                ClassicSquare9x9, listOf(
+                Classic9x9, listOf(
                     0, 0, 3, 0, 2, 0, 6, 0, 0,
                     9, 0, 0, 3, 0, 5, 0, 0, 1,
                     0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -73,7 +73,7 @@ class SudokuTextFormatParserTest {
 
         assertEquals(
             Sudoku(
-                ClassicSquare9x9, listOf(
+                Classic9x9, listOf(
                     0, 0, 3, 0, 2, 0, 6, 0, 0,
                     9, 0, 0, 3, 0, 5, 0, 0, 1,
                     0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -123,7 +123,7 @@ class SudokuTextFormatParserTest {
         assertEquals(
             listOf(
                 Sudoku(
-                    ClassicSquare9x9, listOf(
+                    Classic9x9, listOf(
                         0, 0, 3, 0, 2, 0, 6, 0, 0,
                         9, 0, 0, 3, 0, 5, 0, 0, 1,
                         0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -136,7 +136,7 @@ class SudokuTextFormatParserTest {
                     )
                 ),
                 Sudoku(
-                    ClassicSquare9x9, listOf(
+                    Classic9x9, listOf(
                         2, 0, 0, 0, 8, 0, 3, 0, 0,
                         0, 6, 0, 0, 7, 0, 0, 8, 4,
                         0, 3, 0, 5, 0, 0, 2, 0, 9,
@@ -192,7 +192,7 @@ class SudokuTextFormatParserTest {
         assertEquals(
             listOf(
                 Sudoku(
-                    ClassicSquare9x9, listOf(
+                    Classic9x9, listOf(
                         0, 0, 3, 0, 2, 0, 6, 0, 0,
                         9, 0, 0, 3, 0, 5, 0, 0, 1,
                         0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -205,7 +205,7 @@ class SudokuTextFormatParserTest {
                     )
                 ),
                 Sudoku(
-                    ClassicSquare9x9, listOf(
+                    Classic9x9, listOf(
                         2, 0, 0, 0, 8, 0, 3, 0, 0,
                         0, 6, 0, 0, 7, 0, 0, 8, 4,
                         0, 3, 0, 5, 0, 0, 2, 0, 9,

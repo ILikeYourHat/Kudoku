@@ -11,10 +11,10 @@ object Butterfly12x12 : SudokuType {
 
     override fun divider(): RegionDivider {
         return RegionDivider()
-            .applySubSudoku(0, 0, ClassicSquare9x9)
-            .applySubSudoku(3, 0, ClassicSquare9x9)
-            .applySubSudoku(0, 3, ClassicSquare9x9)
-            .applySubSudoku(3, 3, ClassicSquare9x9)
+            .applySubSudoku(0, 0, Classic9x9)
+            .applySubSudoku(3, 0, Classic9x9)
+            .applySubSudoku(0, 3, Classic9x9)
+            .applySubSudoku(3, 3, Classic9x9)
     }
 
     override fun template() = """
