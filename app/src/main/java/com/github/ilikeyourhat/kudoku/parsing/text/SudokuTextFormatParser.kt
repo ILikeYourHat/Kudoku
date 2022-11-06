@@ -37,6 +37,8 @@ class SudokuTextFormatParser {
             "classic_9x9" -> Classic9x9
             "classic_16x16" -> Classic16x16
             "classic_25x25" -> Classic25x25
+            "classic_horizontal_6x6" -> ClassicHorizontal6x6
+            "classic_vertical_6x6" -> ClassicVertical6x6
             "double_backslash_15x15" -> DoubleBackslash15x15
             "double_diagonal_9x9" -> DoubleDiagonal9x9
             "double_slash_15x15" -> DoubleSlash15x15
