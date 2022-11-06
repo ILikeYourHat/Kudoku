@@ -26,7 +26,7 @@ class FilledSudokuGenerator(
     }
 
     private fun setRandomValidValue(sudoku: Sudoku, field: Field) {
-        sudoku.type.possibleValues()
+        sudoku.type.allPossibleValues()
             .shuffled(random)
             .asSequence()
             .onEach { field.set(it) }

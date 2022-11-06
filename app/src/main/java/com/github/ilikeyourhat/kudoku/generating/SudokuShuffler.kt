@@ -21,7 +21,7 @@ class SudokuShuffler(
     }
 
     private fun Sudoku.swapNumbers() {
-        val previousValues = type.possibleValues()
+        val previousValues = type.allPossibleValues()
         val newValues = previousValues.shuffled(random)
 
         allFields

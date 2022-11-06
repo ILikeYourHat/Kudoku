@@ -48,7 +48,7 @@ object Kudoku {
     fun checkSolutions(sudoku: Sudoku): SolutionCount {
         return SatSolver().checkSolutions(sudoku)
     }
-    
+
     fun registerType(sudokuType: SudokuType) {
         supportedTypes.add(sudokuType)
     }

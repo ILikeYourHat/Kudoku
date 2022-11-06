@@ -7,7 +7,7 @@ interface SudokuType {
     val sizeX: Int
     val sizeY: Int
     val possibleValues: Int
-    fun divider(): RegionDivider
     fun template(): String
-    fun possibleValues(): List<Int> = IntRange(1, possibleValues).toList()
+    fun divider(): RegionDivider
+    fun allPossibleValues(): List<Int> = IntRange(1, possibleValues).toList()
 }
