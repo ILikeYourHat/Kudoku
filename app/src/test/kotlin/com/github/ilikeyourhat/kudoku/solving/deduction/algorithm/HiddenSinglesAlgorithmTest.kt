@@ -47,10 +47,10 @@ class HiddenSinglesAlgorithmTest {
         val expected = Sudoku(
             Classic4x4,
             listOf(
-                1, 0, 4, 2,
-                2, 4, 1, 3,
-                0, 2, 0, 1,
-                0, 1, 2, 0
+                0, 0, 4, 2,
+                2, 4, 0, 3,
+                0, 0, 0, 0,
+                0, 1, 0, 0
             )
         )
 

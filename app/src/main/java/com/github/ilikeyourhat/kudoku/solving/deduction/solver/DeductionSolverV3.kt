@@ -6,7 +6,7 @@ import com.github.ilikeyourhat.kudoku.solving.deduction.algorithm.HiddenSinglesA
 import com.github.ilikeyourhat.kudoku.solving.deduction.algorithm.HiddenValuesAlgorithm
 import com.github.ilikeyourhat.kudoku.solving.deduction.algorithm.HintEliminationAlgorithm
 import com.github.ilikeyourhat.kudoku.solving.deduction.algorithm.NakedSinglesAlgorithm
-import com.github.ilikeyourhat.kudoku.solving.deduction.algorithm.NakedValuesAlgorithmV2
+import com.github.ilikeyourhat.kudoku.solving.deduction.algorithm.NakedValuesAlgorithm
 import com.github.ilikeyourhat.kudoku.solving.deduction.algorithm.RegionIntersectionAlgorithm
 
 class DeductionSolverV3 : DeductionSolver() {
@@ -18,7 +18,7 @@ class DeductionSolverV3 : DeductionSolver() {
             HiddenSinglesAlgorithm.Factory()
         )
         for (i in 2..type.possibleValues / 2) {
-            algorithms.add(NakedValuesAlgorithmV2.Factory(i))
+            algorithms.add(NakedValuesAlgorithm.Factory(i))
             algorithms.add(HiddenValuesAlgorithm.Factory(i))
         }
         algorithms.add(RegionIntersectionAlgorithm.Factory())

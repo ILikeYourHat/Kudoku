@@ -15,6 +15,12 @@ class HintEliminationAlgorithm(
         }
     }
 
+    override fun solve(): Boolean {
+        return regions
+            .map { solve(it) }
+            .any { it }
+    }
+
     override fun solve(region: Region): Boolean {
         var changed = false
         for (field in region.fullFields()) {
