@@ -17,12 +17,7 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Gradle check app
+      - name: Gradle build app
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: check
-
-      - name: Gradle assemble app
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: assemble
+          arguments: build
