@@ -1,0 +1,28 @@
+name: "Check project health"
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Gradle check app
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: check
+
+      - name: Gradle assemble app
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: assemble
