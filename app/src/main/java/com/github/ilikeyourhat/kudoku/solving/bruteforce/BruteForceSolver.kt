@@ -1,6 +1,8 @@
 package com.github.ilikeyourhat.kudoku.solving.bruteforce
 
 import com.github.ilikeyourhat.kudoku.model.Field
+import com.github.ilikeyourhat.kudoku.model.Point
+import com.github.ilikeyourhat.kudoku.model.Region
 import com.github.ilikeyourhat.kudoku.model.Sudoku
 import com.github.ilikeyourhat.kudoku.solving.SudokuSolver
 
@@ -11,15 +13,12 @@ class BruteForceSolver: SudokuSolver {
     }
 
     override fun solve(sudoku: Sudoku): Sudoku {
-        return if (Thread.interrupted()) {
-            sudoku.copy()
-        } else {
-            Command(sudoku).findSolution()
-        }
+        return Command(sudoku).findSolution()
     }
 
-    private inner class Command(private val origin: Sudoku) {
+    private class Command(private val origin: Sudoku) {
         private val sudoku: Sudoku = origin.copy()
+        private val regionLookup: Map<Point, List<Region>> = createRegionLookup(sudoku)
         private val iterator: ListIterator<Field> = sudoku.allFields.listIterator()
 
         private var currentDirection = Direction.FORWARD
@@ -27,7 +26,6 @@ class BruteForceSolver: SudokuSolver {
 
         fun findSolution(): Sudoku {
             while (canMove()) {
-                if (Thread.interrupted()) return sudoku
                 move()
                 if (isOriginFieldEmpty()) {
                     setNextValuesAndCheckGrid()
@@ -88,9 +86,13 @@ class BruteForceSolver: SudokuSolver {
         }
 
         private fun isGridCorrectAfterChange(): Boolean {
-            return sudoku.regions
-                .filter { it.contains(currentField) }
+            return regionLookup[currentField.position]!!
                 .all { it.isValid() }
+        }
+
+        private fun createRegionLookup(sudoku: Sudoku): Map<Point, List<Region>> {
+            return sudoku.allFields
+                .associate { field -> field.position to sudoku.regions.filter { it.contains(field) } }
         }
     }
 }

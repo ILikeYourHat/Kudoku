@@ -23,10 +23,6 @@ data class Field(
         value = EMPTY_FIELD
     }
 
-    fun haveSamePosition(field: Field): Boolean {
-        return position == field.position
-    }
-
     fun position() = position
 
     companion object {

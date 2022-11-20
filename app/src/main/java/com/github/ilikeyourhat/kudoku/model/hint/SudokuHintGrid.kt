@@ -5,17 +5,9 @@ import com.github.ilikeyourhat.kudoku.model.Point
 import com.github.ilikeyourhat.kudoku.model.Region
 import com.github.ilikeyourhat.kudoku.model.Sudoku
 
-class SudokuHintGrid(sudoku: Sudoku) {
-
+data class SudokuHintGrid(
     private val hintMap: Map<Point, MutableSet<Int>>
-
-    init {
-        val possibleValues = sudoku.type.allPossibleValues()
-
-        hintMap = sudoku.allFields
-            .filter { it.isEmpty }
-            .associate { it.position to possibleValues.toMutableSet() }
-    }
+) {
 
     fun forField(field: Field): Set<Int> {
         return getFor(field).toSet()
@@ -57,11 +49,23 @@ class SudokuHintGrid(sudoku: Sudoku) {
         }
     }
 
-    fun removeAll(field: Field, hintsToRemove: Set<Int>) {
-        getFor(field).removeAll(hintsToRemove)
+    fun removeAll(field: Field, hintsToRemove: Set<Int>): Boolean {
+        return getFor(field).removeAll(hintsToRemove)
     }
 
     private fun getFor(field: Field): MutableSet<Int> {
-        return hintMap[field.position()] ?: mutableSetOf()
+        return hintMap[field.position()]!!
+    }
+
+    companion object {
+
+        fun create(sudoku: Sudoku): SudokuHintGrid {
+            val possibleValues = sudoku.type.allPossibleValues()
+
+            val hintMap = sudoku.allFields
+                .associate { it.position to possibleValues.toMutableSet() }
+
+            return SudokuHintGrid(hintMap)
+        }
     }
 }

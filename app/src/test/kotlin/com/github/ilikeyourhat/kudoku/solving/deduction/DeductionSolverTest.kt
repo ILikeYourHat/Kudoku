@@ -1,6 +1,7 @@
 package com.github.ilikeyourhat.kudoku.solving.deduction
 
 import com.github.ilikeyourhat.kudoku.model.Sudoku
+import com.github.ilikeyourhat.kudoku.solving.deduction.solver.DeductionSolverV1
 import com.github.ilikeyourhat.kudoku.solving.deduction.solver.DeductionSolverV3
 import com.github.ilikeyourhat.kudoku.type.Classic4x4
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -10,7 +11,7 @@ class DeductionSolverTest {
 
     @Test
     fun `classic BruteForce`() {
-        val solver = DeductionSolverV3()
+        val solver = DeductionSolverV1()
 
         val sudoku = Sudoku(
             Classic4x4,
