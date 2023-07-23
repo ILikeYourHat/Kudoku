@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.8.10"
-junit5 = "5.9.2"
+junit5 = "5.10.0"
 sat4j = "2.3.6"
 
 [libraries]
