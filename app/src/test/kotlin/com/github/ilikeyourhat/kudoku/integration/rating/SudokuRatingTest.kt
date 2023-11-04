@@ -114,7 +114,7 @@ class SudokuRatingTest {
 
         val rating = Kudoku.rate(sudoku)
 
-        assertEquals(Difficulty.INVALID, rating)
+        assertEquals(Difficulty.UNSOLVABLE, rating)
     }
 
     @Test
@@ -136,6 +136,6 @@ class SudokuRatingTest {
 
         val rating = Kudoku.rate(sudoku)
 
-        assertEquals(Difficulty.INVALID, rating)
+        assertEquals(Difficulty.UNSOLVABLE, rating)
     }
 }

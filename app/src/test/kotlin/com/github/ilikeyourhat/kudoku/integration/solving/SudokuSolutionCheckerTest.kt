@@ -26,7 +26,7 @@ class SudokuSolutionCheckerTest {
 
         val solutions = Kudoku.checkSolutions(sudoku)
 
-        assertEquals(SolutionCount.NONE, solutions)
+        assertEquals(SolutionCount.ZERO, solutions)
     }
 
     @Test

@@ -34,6 +34,6 @@ class FilledSudokuGenerator(
     }
 
     private fun Sudoku.hasSolution(): Boolean {
-        return solutionChecker.checkSolutions(this) != SolutionCount.NONE
+        return solutionChecker.checkSolutions(this) != SolutionCount.ZERO
     }
 }

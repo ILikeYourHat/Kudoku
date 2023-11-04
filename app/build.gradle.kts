@@ -27,4 +27,6 @@ dependencies {
 
     testRuntimeOnly(libs.junit5.engine)
     testImplementation(libs.junit5.api)
+    testImplementation(libs.kotest)
+    testImplementation(libs.mockk)
 }

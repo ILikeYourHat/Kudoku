@@ -29,7 +29,7 @@ class SudokuGeneratingTest {
         assertEquals(Classic9x9, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertNotEquals(Difficulty.INVALID, Kudoku.rate(sudoku))
+        assertNotEquals(Difficulty.UNSOLVABLE, Kudoku.rate(sudoku))
     }
 
     @Test
@@ -49,7 +49,7 @@ class SudokuGeneratingTest {
         assertEquals(Butterfly12x12, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertNotEquals(Difficulty.INVALID, Kudoku.rate(sudoku))
+        assertNotEquals(Difficulty.UNSOLVABLE, Kudoku.rate(sudoku))
     }
 
     @Test

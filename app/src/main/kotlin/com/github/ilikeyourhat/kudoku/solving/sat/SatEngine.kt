@@ -42,9 +42,9 @@ class SatEngine {
                 init()
                 SingleSolutionDetector(this).getSolutionCount()
             } catch (e: ContradictionException) {
-                SolutionCount.NONE
+                SolutionCount.ZERO
             } catch (e: TimeoutException) {
-                SolutionCount.NONE
+                SolutionCount.ZERO
             }
         }
     }
@@ -56,7 +56,7 @@ class SatEngine {
 
     private fun SingleSolutionDetector.getSolutionCount(): SolutionCount {
         return when {
-            !isSatisfiable -> SolutionCount.NONE
+            !isSatisfiable -> SolutionCount.ZERO
             hasASingleSolution() -> SolutionCount.ONE
             else -> SolutionCount.MANY
         }

@@ -2,18 +2,19 @@ package com.github.ilikeyourhat.kudoku.rating
 
 import com.github.ilikeyourhat.kudoku.model.Sudoku
 import com.github.ilikeyourhat.kudoku.solving.SolutionCount
+import com.github.ilikeyourhat.kudoku.solving.SudokuSolutionChecker
 import com.github.ilikeyourhat.kudoku.solving.SudokuSolver
 import com.github.ilikeyourhat.kudoku.solving.deduction.solver.DeductionSolverV1
 import com.github.ilikeyourhat.kudoku.solving.deduction.solver.DeductionSolverV2
 import com.github.ilikeyourhat.kudoku.solving.deduction.solver.DeductionSolverV3
 import com.github.ilikeyourhat.kudoku.solving.sat.SatSolver
 
-class DeductionBasedRater : SudokuRater {
-
-    private val easySolver = DeductionSolverV1()
-    private val mediumSolver = DeductionSolverV2()
-    private val hardSolver = DeductionSolverV3()
-    private val solutionsChecker = SatSolver()
+class DeductionBasedRater(
+    private val easySolver: SudokuSolver = DeductionSolverV1(),
+    private val mediumSolver: SudokuSolver = DeductionSolverV2(),
+    private val hardSolver: SudokuSolver = DeductionSolverV3(),
+    private val solutionChecker: SudokuSolutionChecker = SatSolver()
+) : SudokuRater {
 
     override fun rate(sudoku: Sudoku): Difficulty {
         return when {
@@ -21,10 +22,10 @@ class DeductionBasedRater : SudokuRater {
             mediumSolver.canSolve(sudoku) -> Difficulty.MEDIUM
             hardSolver.canSolve(sudoku) -> Difficulty.HARD
             else -> {
-                when(solutionsChecker.checkSolutions(sudoku)) {
-                    SolutionCount.NONE -> Difficulty.INVALID
+                when(solutionChecker.checkSolutions(sudoku)) {
+                    SolutionCount.ZERO -> Difficulty.UNSOLVABLE
                     SolutionCount.ONE -> Difficulty.VERY_HARD
-                    SolutionCount.MANY -> Difficulty.INVALID
+                    SolutionCount.MANY -> Difficulty.UNSOLVABLE
                 }
             }
         }

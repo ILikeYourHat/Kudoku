@@ -11,7 +11,7 @@ class SudokuHolePuncher(
 ) {
 
     fun punchHoles(sudoku: Sudoku, difficulty: Difficulty? = null): Sudoku {
-        require(difficulty != Difficulty.INVALID)
+        require(difficulty != Difficulty.UNSOLVABLE)
 
         val minDifficulty = difficulty ?: Difficulty.EASY
         while (true) {
@@ -33,7 +33,7 @@ class SudokuHolePuncher(
             .forEach { field ->
                 val value = field.value
                 field.clear()
-                if (rater.rate(sudoku).isHarderThan(minDifficulty)) {
+                if (rater.rate(sudoku) > minDifficulty) {
                     field.set(value)
                 }
             }
