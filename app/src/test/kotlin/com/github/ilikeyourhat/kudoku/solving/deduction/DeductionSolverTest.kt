@@ -35,5 +35,4 @@ class DeductionSolverTest {
             result.values()
         )
     }
-
 }

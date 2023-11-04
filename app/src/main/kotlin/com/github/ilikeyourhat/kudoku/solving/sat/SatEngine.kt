@@ -21,6 +21,7 @@ class SatEngine {
         clauseList.add(literals)
     }
 
+    @Suppress("SwallowedException")
     fun findModel(): List<Int>? {
         return useSolver {
             try {
@@ -34,6 +35,7 @@ class SatEngine {
         }
     }
 
+    @Suppress("SwallowedException")
     fun detectSolutions(): SolutionCount {
         return useSolver {
             try {
@@ -61,11 +63,16 @@ class SatEngine {
     }
 
     private fun <T> useSolver(block: ISolver.() -> T): T {
-        val solver = SolverFactory.newDefault().apply { timeout = 60 }
+        val solver = SolverFactory.newDefault()
+            .apply { timeout = SOLVING_TIMEOUT_IN_SECONDS }
         try {
             return block.invoke(solver)
         } finally {
             solver.reset()
         }
+    }
+
+    companion object {
+        private const val SOLVING_TIMEOUT_IN_SECONDS = 60
     }
 }

@@ -1,0 +1,9 @@
+style:
+  MagicNumber:
+    excludes: [
+      '**/type/**',
+      '**/test/**'
+    ]
+complexity:
+  LongMethod:
+    threshold: 80

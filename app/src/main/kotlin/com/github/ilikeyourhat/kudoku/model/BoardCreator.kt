@@ -13,7 +13,7 @@ object BoardCreator {
             when (symbol) {
                 "_" -> 0
                 "#" -> null
-                else -> throw IllegalArgumentException()
+                else -> throw IllegalArgumentException("Unknown symbol: $symbol")
             }
         }
 

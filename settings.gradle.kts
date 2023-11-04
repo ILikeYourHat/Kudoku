@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -11,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "kudoku"
+rootProject.name = "Kudoku"
 
 include(":app")

@@ -1,15 +1,15 @@
 package com.github.ilikeyourhat.kudoku.parsing.text
 
 import com.github.ilikeyourhat.kudoku.model.Sudoku
-import com.github.ilikeyourhat.kudoku.type.*
 import com.github.ilikeyourhat.kudoku.model.SudokuType
+import com.github.ilikeyourhat.kudoku.type.BUILD_IN_TYPES
 import java.io.File
 import java.io.FileNotFoundException
-import java.util.*
+import java.util.Scanner
 import java.util.regex.Pattern
 
 class SudokuTextFormatParser(
-    private val supportedTypes :List<SudokuType> = BUILD_IN_TYPES
+    private val supportedTypes: List<SudokuType> = BUILD_IN_TYPES
 ) {
 
     fun parseOne(text: String): Sudoku {
@@ -112,7 +112,7 @@ class SudokuTextFormatParser(
         }
 
         private fun asNumber(input: String): Int {
-            return input.toInt(10)
+            return input.toInt()
         }
     }
 

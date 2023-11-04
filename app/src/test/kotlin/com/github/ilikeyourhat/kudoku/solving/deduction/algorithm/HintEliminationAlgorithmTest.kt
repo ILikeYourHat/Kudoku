@@ -55,5 +55,4 @@ class HintEliminationAlgorithmTest {
             points.associate { (p, s) -> p to s.toMutableSet() }
         )
     }
-
 }

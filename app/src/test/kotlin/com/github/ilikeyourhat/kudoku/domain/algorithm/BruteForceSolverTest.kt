@@ -48,24 +48,4 @@ class BruteForceSolverTest {
         val foundSolution = algorithm.solve(input)
         assertEquals(input, foundSolution)
     }
-
-
-
-//    @Test
-//    fun shouldReturnToPreviousFields() {
-//        val input = Sudoku(
-//            3, 2, arrayOf(
-//                0, 0, 0,
-//                0, 0, 3
-//            )
-//        )
-//        val expectedSolution = Sudoku(
-//            3, 2, arrayOf(
-//                1, 3, 2,
-//                2, 1, 3
-//            )
-//        )
-//        val foundSolution = algorithm.solve(input)
-//        assertEquals(expectedSolution, foundSolution)
-//    }
 }
