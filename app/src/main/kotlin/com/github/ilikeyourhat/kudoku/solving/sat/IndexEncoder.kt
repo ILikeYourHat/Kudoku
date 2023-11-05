@@ -4,8 +4,20 @@ import com.github.ilikeyourhat.kudoku.model.Point
 
 class IndexEncoder(
     private val sizeX: Int,
-    private val sizeY: Int
+    private val sizeY: Int,
+    private val maxValue: Int
 ) {
+
+    init {
+        require(sizeX > 0) { "sizeX must be greater than 0, got $sizeX" }
+        require(sizeY > 0) { "sizeY must be greater than 0, got $sizeY" }
+        require(maxValue > 0) { "maxValue must be greater than 0, got $maxValue" }
+        require(
+            // two-step check not to overflow the Long
+            1L * sizeX * sizeY <= Int.MAX_VALUE && 1L * sizeX * sizeY * maxValue <= Int.MAX_VALUE
+        ) { "Possible Int overflow for given values: sizeX=$sizeX, sizeY=$sizeY, maxValue=$maxValue" }
+    }
+
     private val blockSize = sizeX * sizeY
 
     fun encode(p: Point, value: Int): Int {

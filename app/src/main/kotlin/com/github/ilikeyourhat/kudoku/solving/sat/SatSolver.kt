@@ -18,7 +18,7 @@ class SatSolver: SudokuSolver, SudokuSolutionChecker {
 
     private class Command(private val sudoku: Sudoku) {
 
-        private val indexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY())
+        private val indexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY(), sudoku.type.possibleValues)
         private val engine = SatEngine()
 
         fun solve(): Sudoku {
