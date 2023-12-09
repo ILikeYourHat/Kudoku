@@ -12,5 +12,6 @@ mockk = { module = "io.mockk:mockk", version = "1.13.8" }
 sat4j = { module = "org.ow2.sat4j:org.ow2.sat4j.core", version.ref = "sat4j" }
 
 [plugins]
+axion = { id = "pl.allegro.tech.build.axion-release", version = "1.16.1" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.4" }
