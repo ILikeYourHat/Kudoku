@@ -13,4 +13,4 @@ sat4j = { module = "org.ow2.sat4j:org.ow2.sat4j.core", version.ref = "sat4j" }
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.4" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.5" }
