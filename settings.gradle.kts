@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Kudoku"
 
-include(":app")
+include(":kudoku")
