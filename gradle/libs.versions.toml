@@ -7,7 +7,7 @@ sat4j = "2.3.6"
 junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit5-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
 junit5-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
-kotest = { module = "io.kotest:kotest-assertions-core", version = "5.8.0" }
+kotest = { module = "io.kotest:kotest-assertions-core", version = "5.8.1" }
 mockk = { module = "io.mockk:mockk", version = "1.13.9" }
 sat4j = { module = "org.ow2.sat4j:org.ow2.sat4j.core", version.ref = "sat4j" }
 
