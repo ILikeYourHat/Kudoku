@@ -26,7 +26,7 @@ detekt {
 dependencies {
     implementation(libs.sat4j)
 
-    testRuntimeOnly(libs.junit5.engine)
+    testRuntimeOnly(libs.junit5.platform)
     testImplementation(libs.junit5.api)
     testImplementation(libs.junit5.params)
     testImplementation(libs.kotest)
