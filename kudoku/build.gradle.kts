@@ -1,15 +1,12 @@
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.kover)
     alias(libs.plugins.axion)
 }
 
 group = "io.github.ilikeyourhat.kudoku"
 version = scmVersion.version
-
-tasks.test {
-    useJUnitPlatform()
-}
 
 java {
     toolchain {
@@ -21,6 +18,10 @@ java {
 detekt {
     buildUponDefaultConfig = true
     config.setFrom("$rootDir/config/detekt.yml")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 dependencies {
