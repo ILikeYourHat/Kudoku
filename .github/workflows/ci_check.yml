@@ -12,12 +12,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 11
+          java-version: 17
 
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-      - name: Gradle build app
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: build
+      - name: Build app
+        run: ./gradlew build

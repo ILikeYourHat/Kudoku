@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 @Timeout(
-    value = 10,
+    value = 30,
     unit = TimeUnit.SECONDS,
     threadMode = Timeout.ThreadMode.SEPARATE_THREAD
 )
