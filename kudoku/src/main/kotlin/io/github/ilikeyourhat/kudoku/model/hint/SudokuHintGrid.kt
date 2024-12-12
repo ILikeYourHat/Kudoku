@@ -54,7 +54,7 @@ data class SudokuHintGrid(
     }
 
     private fun getFor(field: Field): MutableSet<Int> {
-        return hintMap[field.position()]!!
+        return hintMap.getValue(field.position())
     }
 
     companion object {

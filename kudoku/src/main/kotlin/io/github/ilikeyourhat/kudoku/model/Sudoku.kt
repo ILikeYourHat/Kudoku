@@ -18,7 +18,7 @@ data class Sudoku(
             .also {
                 it.fields().zip(values)
                     .forEach { (field, value) ->
-                        field?.set(value!!)
+                        field?.set(requireNotNull(value))
                     }
             }
     )
@@ -28,7 +28,11 @@ data class Sudoku(
     }
 
     fun at(x: Int, y: Int): Field? {
-        return board.at(x, y)
+        return board.getOrNull(x, y)
+    }
+
+    fun atField(x: Int, y: Int): Field {
+        return board.getOrNull(x, y) ?: throw NoSuchElementException("Missing field at position $x,$y")
     }
 
     fun copy(): Sudoku {

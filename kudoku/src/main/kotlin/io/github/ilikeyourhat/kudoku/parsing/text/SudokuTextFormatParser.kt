@@ -35,6 +35,7 @@ class SudokuTextFormatParser(
             ?: throw IllegalArgumentException("Unknown sudoku type: $type")
     }
 
+    @Suppress("DoubleMutabilityForCollection")
     private inner class Command {
         private val scanner: Scanner
         private lateinit var type: SudokuType

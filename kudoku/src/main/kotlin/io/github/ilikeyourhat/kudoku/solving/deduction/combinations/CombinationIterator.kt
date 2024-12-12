@@ -1,12 +1,13 @@
+@file:Suppress("UnsafeCallOnNullableType") // This should be rewritten anyway
+
 package io.github.ilikeyourhat.kudoku.solving.deduction.combinations
 
 internal class CombinationIterator(sampleSize: Int, collectionSize: Int) : MutableIterator<IntArray> {
     private val collectionSize: Int
-    private val current: IntArray
+    private val current: IntArray = IntArray(sampleSize)
     private var next: IntArray?
 
     init {
-        current = IntArray(sampleSize)
         next = IntArray(sampleSize)
         this.collectionSize = collectionSize
         for (i in next!!.indices) {
@@ -49,12 +50,12 @@ internal class CombinationIterator(sampleSize: Int, collectionSize: Int) : Mutab
 
     private fun findFirstTooBigIndex(): Int {
         for (i in next!!.indices) {
-            if (next!![i] > biggestIndexFor(next, i)) return i
+            if (next!![i] > biggestIndexFor(next!!, i)) return i
         }
         return -1
     }
 
-    private fun biggestIndexFor(array: IntArray?, position: Int): Int {
-        return collectionSize - array!!.size + position
+    private fun biggestIndexFor(array: IntArray, position: Int): Int {
+        return collectionSize - array.size + position
     }
 }

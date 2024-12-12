@@ -48,7 +48,7 @@ class BoardTest {
         val sudoku = createGridWithSize(2, 2)
         for (x in 0..1) {
             for (y in 0..1) {
-                assertEquals(0, sudoku.at(x, y)!!.value)
+                assertEquals(0, sudoku.getOrNull(x, y)!!.value)
             }
         }
     }
@@ -57,14 +57,14 @@ class BoardTest {
     fun checkIfFieldsAreInitializedCorrectWhenValuesAreGiven() {
         val values = listOf<Int?>(1, 2, 3, 4)
         val board = Board(2, 2, values)
-        assertFalse(board.at(0, 0)!!.isEmpty)
-        assertEquals(1, board.at(0, 0)!!.value)
-        assertFalse(board.at(1, 0)!!.isEmpty)
-        assertEquals(2, board.at(1, 0)!!.value)
-        assertFalse(board.at(0, 1)!!.isEmpty)
-        assertEquals(3, board.at(0, 1)!!.value)
-        assertFalse(board.at(1, 1)!!.isEmpty)
-        assertEquals(4, board.at(1, 1)!!.value)
+        assertFalse(board.getOrNull(0, 0)!!.isEmpty)
+        assertEquals(1, board.getOrNull(0, 0)!!.value)
+        assertFalse(board.getOrNull(1, 0)!!.isEmpty)
+        assertEquals(2, board.getOrNull(1, 0)!!.value)
+        assertFalse(board.getOrNull(0, 1)!!.isEmpty)
+        assertEquals(3, board.getOrNull(0, 1)!!.value)
+        assertFalse(board.getOrNull(1, 1)!!.isEmpty)
+        assertEquals(4, board.getOrNull(1, 1)!!.value)
     }
 
     @Test
@@ -75,9 +75,9 @@ class BoardTest {
             0, 0, 0
         )
         val board = Board(3, 3, values)
-        assertEquals(1, board.at(2, 1)!!.value)
-        board.at(2, 1)!!.set(2)
-        assertEquals(2, board.at(2, 1)!!.value)
+        assertEquals(1, board.getOrNull(2, 1)!!.value)
+        board.getOrNull(2, 1)!!.set(2)
+        assertEquals(2, board.getOrNull(2, 1)!!.value)
     }
 
     @Test

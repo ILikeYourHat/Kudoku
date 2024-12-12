@@ -2,6 +2,7 @@ package io.github.ilikeyourhat.kudoku.model
 
 import io.github.ilikeyourhat.kudoku.model.matrix.ListMatrix
 import io.github.ilikeyourhat.kudoku.model.matrix.Matrix
+import java.util.NoSuchElementException
 
 data class Board(
     private val fields: Matrix<Field?>
@@ -39,7 +40,11 @@ data class Board(
         }
     )
 
-    fun at(x: Int, y: Int) = fields[x, y]
+    fun getOrNull(x: Int, y: Int) = fields[x, y]
+
+    fun get(x: Int, y: Int): Field {
+        return fields[x, y] ?: throw NoSuchElementException("Missing field at position $x,$y")
+    }
 
     fun sizeX() = fields.sizeX
 
@@ -55,14 +60,14 @@ data class Board(
         return Board(
             sizeX = endX - startX,
             sizeY = endY - startY,
-            valueInitializer = { x, y -> at(startX + x, startY + y) }
+            valueInitializer = { x, y -> getOrNull(startX + x, startY + y) }
         )
     }
 
     fun region(startX: Int, startY: Int, endX: Int, endY: Int): Region {
         val fields = (startX..endX).flatMap { indexX ->
             (startY..endY).mapNotNull { indexY ->
-                at(indexX, indexY)
+                getOrNull(indexX, indexY)
             }
         }
         return Region(fields)

@@ -46,7 +46,7 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
                 .forEach { index ->
                     val (x, y) = indexEncoder.decodePoint(index)
                     val value = indexEncoder.decodeValue(index)
-                    at(x, y)!!.set(value)
+                    atField(x, y).set(value)
                 }
         }
 

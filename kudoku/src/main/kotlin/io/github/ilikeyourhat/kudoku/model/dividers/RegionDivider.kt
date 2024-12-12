@@ -53,7 +53,7 @@ class RegionDivider {
             require(board.sizeX() == board.sizeY())
             val fields = mutableListOf<Field>()
             for (x in 0 until board.sizeX()) {
-                fields += board.at(x, x)!!
+                fields += board.get(x, x)
             }
             listOf(Region(fields))
         }
@@ -64,7 +64,7 @@ class RegionDivider {
             require(board.sizeX() == board.sizeY())
             val fields = mutableListOf<Field>()
             for (x in 0 until board.sizeX()) {
-                fields += board.at(x, board.sizeY() - x - 1)!!
+                fields += board.get(x, board.sizeY() - x - 1)
             }
             listOf(Region(fields))
         }

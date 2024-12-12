@@ -26,6 +26,11 @@ detekt {
     config.setFrom("$rootDir/config/detekt.yml")
 }
 
+tasks.getByName("check") {
+    dependsOn += "detektMain"
+    dependsOn += "detektTest"
+}
+
 tasks.test {
     useJUnitPlatform()
 }

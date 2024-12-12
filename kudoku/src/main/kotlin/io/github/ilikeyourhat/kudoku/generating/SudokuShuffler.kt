@@ -39,7 +39,7 @@ class SudokuShuffler(
         origin.allFields.forEach { field ->
             val targetX = shuffledX[field.x]
             val targetY = shuffledY[field.y]
-            at(targetX, targetY)!!.set(field.value)
+            atField(targetX, targetY).set(field.value)
         }
     }
 

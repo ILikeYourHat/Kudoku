@@ -1,3 +1,5 @@
+@file:Suppress("UnsafeCallOnNullableType")
+
 package io.github.ilikeyourhat.kudoku.solving.bruteforce
 
 import io.github.ilikeyourhat.kudoku.model.Field
@@ -69,7 +71,7 @@ class BruteForceSolver : SudokuSolver {
         private fun isOriginFieldEmpty(): Boolean {
             val x = currentField.x
             val y = currentField.y
-            return origin.at(x, y)!!.isEmpty
+            return origin.atField(x, y).isEmpty
         }
 
         private fun setNextValuesAndCheckGrid() {
@@ -86,7 +88,7 @@ class BruteForceSolver : SudokuSolver {
         }
 
         private fun isGridCorrectAfterChange(): Boolean {
-            return regionLookup[currentField.position]!!
+            return regionLookup.getValue(currentField.position)
                 .all { it.isValid() }
         }
 
