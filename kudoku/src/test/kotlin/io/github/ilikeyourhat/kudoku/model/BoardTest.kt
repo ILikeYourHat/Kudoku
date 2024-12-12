@@ -39,13 +39,7 @@ class BoardTest {
     @Test
     fun throwExceptionWhenTryingToCreateGridWithIncorrectData() {
         assertThrows<IllegalArgumentException> {
-            Board(
-                4, 4, listOf(
-                    2, 2,
-                    3, 4,
-                    7
-                )
-            )
+            Board(4, 4, listOf(2, 2, 3, 4, 7))
         }
     }
 
@@ -61,10 +55,7 @@ class BoardTest {
 
     @Test
     fun checkIfFieldsAreInitializedCorrectWhenValuesAreGiven() {
-        val values = listOf<Int?>(
-            1, 2,
-            3, 4
-        )
+        val values = listOf<Int?>(1, 2, 3, 4)
         val board = Board(2, 2, values)
         assertFalse(board.at(0, 0)!!.isEmpty)
         assertEquals(1, board.at(0, 0)!!.value)

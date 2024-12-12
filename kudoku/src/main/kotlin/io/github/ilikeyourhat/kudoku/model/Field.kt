@@ -5,7 +5,7 @@ data class Field(
     var value: Int = EMPTY_FIELD
 ) {
 
-    constructor(x: Int, y: Int): this(Point(x, y))
+    constructor(x: Int, y: Int) : this(Point(x, y))
 
     fun value() = value
 

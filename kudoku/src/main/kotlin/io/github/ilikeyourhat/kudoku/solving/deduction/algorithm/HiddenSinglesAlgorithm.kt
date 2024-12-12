@@ -15,7 +15,7 @@ class HiddenSinglesAlgorithm(
         }
     }
 
-    override fun solve(region: Region) : Boolean {
+    override fun solve(region: Region): Boolean {
         for (value in 1..region.size()) {
             val occurrences = mutableSetOf<Field>()
             for (field in region) {

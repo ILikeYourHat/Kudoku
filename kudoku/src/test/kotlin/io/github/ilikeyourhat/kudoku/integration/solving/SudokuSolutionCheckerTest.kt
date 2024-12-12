@@ -9,7 +9,8 @@ class SudokuSolutionCheckerTest {
 
     @Test
     fun `should have no solutions`() {
-        val sudoku = Kudoku.createFromString("""
+        val sudoku = Kudoku.createFromString(
+            """
             classic_9x9
             1,1,1, _,_,_, _,_,_
             _,_,_, _,_,_, _,_,_
@@ -22,7 +23,8 @@ class SudokuSolutionCheckerTest {
             _,_,_, _,_,_, _,_,_
             _,_,_, _,_,_, _,_,_
             _,_,_, _,_,_, _,_,_
-        """.trimIndent())
+            """.trimIndent()
+        )
 
         val solutions = Kudoku.checkSolutions(sudoku)
 
@@ -31,7 +33,8 @@ class SudokuSolutionCheckerTest {
 
     @Test
     fun `should have one solution`() {
-        val sudoku = Kudoku.createFromString("""
+        val sudoku = Kudoku.createFromString(
+            """
             classic_9x9
             _,5,7, 8,6,_, _,_,4
             8,_,4, _,9,5, 2,_,_
@@ -44,7 +47,8 @@ class SudokuSolutionCheckerTest {
             1,4,_, 9,_,3, 7,_,_
             5,_,_, 6,_,_, 4,9,3
             9,3,_, _,7,4, _,_,8
-        """.trimIndent())
+            """.trimIndent()
+        )
 
         val solutions = Kudoku.checkSolutions(sudoku)
 
@@ -53,7 +57,8 @@ class SudokuSolutionCheckerTest {
 
     @Test
     fun `should have multiple solutions`() {
-        val sudoku = Kudoku.createFromString("""
+        val sudoku = Kudoku.createFromString(
+            """
             classic_9x9
             1,_,_, _,_,_, _,_,_
             _,_,_, _,_,_, _,_,_
@@ -66,7 +71,8 @@ class SudokuSolutionCheckerTest {
             _,_,_, _,_,_, _,_,_
             _,_,_, _,_,_, _,_,_
             _,_,_, _,_,_, _,_,_
-        """.trimIndent())
+            """.trimIndent()
+        )
 
         val solutions = Kudoku.checkSolutions(sudoku)
 

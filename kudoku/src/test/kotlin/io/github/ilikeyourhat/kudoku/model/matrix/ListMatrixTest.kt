@@ -109,10 +109,8 @@ class ListMatrixTest {
             .map { index -> matrix.coordinatesOf(index) }
 
         assertEquals(
-            listOf(
-                0 to 0, 1 to 0, 2 to 0,
-                0 to 1, 1 to 1, 2 to 1
-            ), coordinates
+            listOf(0 to 0, 1 to 0, 2 to 0, 0 to 1, 1 to 1, 2 to 1),
+            coordinates
         )
     }
 }

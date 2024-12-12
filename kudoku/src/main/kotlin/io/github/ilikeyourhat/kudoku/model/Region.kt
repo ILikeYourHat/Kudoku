@@ -2,9 +2,9 @@ package io.github.ilikeyourhat.kudoku.model
 
 data class Region(
     val fields: Set<Field>
-): Iterable<Field> {
+) : Iterable<Field> {
 
-    constructor(fields: List<Field>): this(fields.toSet())
+    constructor(fields: List<Field>) : this(fields.toSet())
 
     override fun iterator() = fields.iterator()
 

@@ -22,7 +22,7 @@ class DeductionBasedRater(
             mediumSolver.canSolve(sudoku) -> Difficulty.MEDIUM
             hardSolver.canSolve(sudoku) -> Difficulty.HARD
             else -> {
-                when(solutionChecker.checkSolutions(sudoku)) {
+                when (solutionChecker.checkSolutions(sudoku)) {
                     SolutionCount.ZERO -> Difficulty.UNSOLVABLE
                     SolutionCount.ONE -> Difficulty.VERY_HARD
                     SolutionCount.MANY -> Difficulty.UNSOLVABLE

@@ -3,7 +3,7 @@ package io.github.ilikeyourhat.kudoku.solving.deduction.algorithm
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.hint.SudokuHintGrid
 
-class NakedSinglesAlgorithm (
+class NakedSinglesAlgorithm(
     regions: List<Region>,
     possibilities: SudokuHintGrid
 ) : DeductionAlgorithm(regions, possibilities) {

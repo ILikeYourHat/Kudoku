@@ -31,7 +31,7 @@ tasks.test {
 }
 
 dependencies {
-    //detektPlugins(libs.detekt.formatting)
+    detektPlugins(libs.detekt.formatting)
 
     implementation(libs.sat4j)
 

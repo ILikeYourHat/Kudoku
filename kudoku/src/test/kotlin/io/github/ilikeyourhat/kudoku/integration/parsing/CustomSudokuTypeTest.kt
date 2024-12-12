@@ -22,11 +22,12 @@ class CustomSudokuTypeTest {
             
             _,_, _,_,
             _,_, _,3,
-        """.trimIndent()
+            """.trimIndent()
         )
 
         val expected = Sudoku(
-            MyCustomType, listOf(
+            MyCustomType,
+            listOf(
                 3, 2, 0, 1,
                 1, 0, 0, 0,
                 0, 0, 0, 0,

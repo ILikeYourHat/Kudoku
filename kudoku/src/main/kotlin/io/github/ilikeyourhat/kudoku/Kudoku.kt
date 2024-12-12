@@ -1,11 +1,11 @@
 package io.github.ilikeyourhat.kudoku
 
 import io.github.ilikeyourhat.kudoku.generating.SudokuGenerator
-import io.github.ilikeyourhat.kudoku.rating.Difficulty
-import io.github.ilikeyourhat.kudoku.rating.DeductionBasedRater
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.parsing.text.SudokuTextFormatParser
+import io.github.ilikeyourhat.kudoku.rating.DeductionBasedRater
+import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.solving.SolutionCount
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
 import io.github.ilikeyourhat.kudoku.solving.sat.SatSolver

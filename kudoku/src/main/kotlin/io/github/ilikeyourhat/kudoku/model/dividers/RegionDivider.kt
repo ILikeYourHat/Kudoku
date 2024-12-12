@@ -83,6 +83,6 @@ class RegionDivider {
     }
 }
 
-fun interface DivideCommand{
+fun interface DivideCommand {
     fun divide(board: Board): List<Region>
 }

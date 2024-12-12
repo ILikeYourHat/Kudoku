@@ -17,5 +17,4 @@ class DifficultyTest {
             Difficulty.UNSOLVABLE
         )
     }
-
 }

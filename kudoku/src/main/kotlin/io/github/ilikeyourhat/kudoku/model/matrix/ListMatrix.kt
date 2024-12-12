@@ -6,8 +6,11 @@ class ListMatrix<E>(
     values: List<E>
 ) : MutableMatrix<E> {
 
-    constructor(sizeX: Int, sizeY: Int, defaultValue: E)
-            : this(sizeX, sizeY, (0 until (sizeX * sizeY)).map { defaultValue })
+    constructor(sizeX: Int, sizeY: Int, defaultValue: E) : this(
+        sizeX = sizeX,
+        sizeY = sizeY,
+        values = (0 until (sizeX * sizeY)).map { defaultValue }
+    )
 
     private val data = values.toMutableList()
 
@@ -46,10 +49,10 @@ class ListMatrix<E>(
     override fun iterator() = data.iterator()
 
     override fun equals(other: Any?): Boolean {
-        return other is ListMatrix<*>
-                && sizeX == other.sizeX
-                && sizeY == other.sizeY
-                && data == other.data
+        return other is ListMatrix<*> &&
+            sizeX == other.sizeX &&
+            sizeY == other.sizeY &&
+            data == other.data
     }
 
     override fun hashCode(): Int {

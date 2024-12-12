@@ -1,12 +1,12 @@
 package io.github.ilikeyourhat.kudoku.solving.sat
 
-import io.github.ilikeyourhat.kudoku.solving.SolutionCount
 import io.github.ilikeyourhat.kudoku.model.Field
 import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.solving.SolutionCount
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolutionChecker
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
 
-class SatSolver: SudokuSolver, SudokuSolutionChecker {
+class SatSolver : SudokuSolver, SudokuSolutionChecker {
 
     override fun solve(sudoku: Sudoku): Sudoku {
         return Command(sudoku).solve()

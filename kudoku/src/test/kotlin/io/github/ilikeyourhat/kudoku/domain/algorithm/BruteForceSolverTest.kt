@@ -1,9 +1,9 @@
 package io.github.ilikeyourhat.kudoku.domain.algorithm
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.solving.bruteforce.BruteForceSolver
 import io.github.ilikeyourhat.kudoku.type.Square1x1
 import io.github.ilikeyourhat.kudoku.type.Square2x2
-import io.github.ilikeyourhat.kudoku.solving.bruteforce.BruteForceSolver
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

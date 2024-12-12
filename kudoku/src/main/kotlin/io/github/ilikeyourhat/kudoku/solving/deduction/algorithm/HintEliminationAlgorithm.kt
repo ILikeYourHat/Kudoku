@@ -25,8 +25,8 @@ class HintEliminationAlgorithm(
         var changed = false
         for (field in region.fullFields()) {
             changed = changed or
-                    ensureFullFieldHaveNoHints(field) or
-                    removeHintFromRegion(region, field.value())
+                ensureFullFieldHaveNoHints(field) or
+                removeHintFromRegion(region, field.value())
         }
         return changed
     }

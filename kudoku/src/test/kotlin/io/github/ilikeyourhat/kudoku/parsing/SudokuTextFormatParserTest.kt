@@ -1,8 +1,8 @@
 package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
-import io.github.ilikeyourhat.kudoku.type.Classic9x9
 import io.github.ilikeyourhat.kudoku.parsing.text.SudokuTextFormatParser
+import io.github.ilikeyourhat.kudoku.type.Classic9x9
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
@@ -34,7 +34,8 @@ class SudokuTextFormatParserTest {
 
         assertEquals(
             Sudoku(
-                Classic9x9, listOf(
+                Classic9x9,
+                listOf(
                     0, 0, 3, 0, 2, 0, 6, 0, 0,
                     9, 0, 0, 3, 0, 5, 0, 0, 1,
                     0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -45,7 +46,8 @@ class SudokuTextFormatParserTest {
                     8, 0, 0, 2, 0, 3, 0, 0, 9,
                     0, 0, 5, 0, 1, 0, 3, 0, 0
                 )
-            ), sudoku
+            ),
+            sudoku
         )
     }
 
@@ -66,14 +68,15 @@ class SudokuTextFormatParserTest {
             _,_,2, 6,_,9, 5,_,_
             8,_,_, 2,_,3, _,_,9
             _,_,5, _,1,_, 3,_,_
-        """.trimIndent()
+            """.trimIndent()
         )
 
         val sudoku = SudokuTextFormatParser().parseOne(file)
 
         assertEquals(
             Sudoku(
-                Classic9x9, listOf(
+                Classic9x9,
+                listOf(
                     0, 0, 3, 0, 2, 0, 6, 0, 0,
                     9, 0, 0, 3, 0, 5, 0, 0, 1,
                     0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -84,7 +87,8 @@ class SudokuTextFormatParserTest {
                     8, 0, 0, 2, 0, 3, 0, 0, 9,
                     0, 0, 5, 0, 1, 0, 3, 0, 0
                 )
-            ), sudoku
+            ),
+            sudoku
         )
     }
 
@@ -123,7 +127,8 @@ class SudokuTextFormatParserTest {
         assertEquals(
             listOf(
                 Sudoku(
-                    Classic9x9, listOf(
+                    Classic9x9,
+                    listOf(
                         0, 0, 3, 0, 2, 0, 6, 0, 0,
                         9, 0, 0, 3, 0, 5, 0, 0, 1,
                         0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -136,7 +141,8 @@ class SudokuTextFormatParserTest {
                     )
                 ),
                 Sudoku(
-                    Classic9x9, listOf(
+                    Classic9x9,
+                    listOf(
                         2, 0, 0, 0, 8, 0, 3, 0, 0,
                         0, 6, 0, 0, 7, 0, 0, 8, 4,
                         0, 3, 0, 5, 0, 0, 2, 0, 9,
@@ -150,7 +156,8 @@ class SudokuTextFormatParserTest {
                         0, 0, 4, 0, 1, 0, 0, 0, 3
                     ),
                 )
-            ), sudoku
+            ),
+            sudoku
         )
     }
 
@@ -184,7 +191,7 @@ class SudokuTextFormatParserTest {
             3,_,1, _,_,7, _,4,_
             7,2,_, _,4,_, _,6,_
             _,_,4, _,1,_, _,_,3
-        """.trimIndent()
+            """.trimIndent()
         )
 
         val sudoku = SudokuTextFormatParser().parseMany(file)
@@ -192,7 +199,8 @@ class SudokuTextFormatParserTest {
         assertEquals(
             listOf(
                 Sudoku(
-                    Classic9x9, listOf(
+                    Classic9x9,
+                    listOf(
                         0, 0, 3, 0, 2, 0, 6, 0, 0,
                         9, 0, 0, 3, 0, 5, 0, 0, 1,
                         0, 0, 1, 8, 0, 6, 4, 0, 0,
@@ -205,7 +213,8 @@ class SudokuTextFormatParserTest {
                     )
                 ),
                 Sudoku(
-                    Classic9x9, listOf(
+                    Classic9x9,
+                    listOf(
                         2, 0, 0, 0, 8, 0, 3, 0, 0,
                         0, 6, 0, 0, 7, 0, 0, 8, 4,
                         0, 3, 0, 5, 0, 0, 2, 0, 9,
@@ -219,7 +228,8 @@ class SudokuTextFormatParserTest {
                         0, 0, 4, 0, 1, 0, 0, 0, 3
                     ),
                 )
-            ), sudoku
+            ),
+            sudoku
         )
     }
 }

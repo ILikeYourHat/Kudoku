@@ -6,7 +6,7 @@ import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
 
-class BruteForceSolver: SudokuSolver {
+class BruteForceSolver : SudokuSolver {
 
     internal enum class Direction {
         FORWARD, BACKWARD
