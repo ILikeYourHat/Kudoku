@@ -2,6 +2,9 @@
 *.class
 *.log
 
+### Kotlin ###
+.kotlin/*
+
 ### Gradle ###
 .gradle
 **/build

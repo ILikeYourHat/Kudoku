@@ -8,10 +8,16 @@ plugins {
 group = "io.github.ilikeyourhat.kudoku"
 version = scmVersion.version
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+kotlin {
+    jvmToolchain {
+        languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
+    }
+    compilerOptions {
+        allWarningsAsErrors = true
+        extraWarnings = true
+        // https://youtrack.jetbrains.com/issue/KT-73556
+        freeCompilerArgs.add("-Xsuppress-warning=UNUSED_ANONYMOUS_PARAMETER")
     }
 }
 
@@ -25,10 +31,11 @@ tasks.test {
 }
 
 dependencies {
+    //detektPlugins(libs.detekt.formatting)
+
     implementation(libs.sat4j)
 
     testRuntimeOnly(libs.junit5.platform)
-
     testImplementation(libs.junit5.api)
     testImplementation(libs.junit5.params)
     testImplementation(libs.kotest)

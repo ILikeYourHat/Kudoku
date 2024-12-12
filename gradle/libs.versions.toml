@@ -1,18 +1,24 @@
 [versions]
-kotlin = "2.1.0"
+axion = "1.18.16"
+detekt = "1.23.7"
 junit5 = "5.11.3"
+kotest = "5.9.1"
+kotlin = "2.1.0"
+kover = "0.9.0-RC"
+mockk = "1.13.13"
 sat4j = "2.3.6"
 
 [libraries]
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit5-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
 junit5-platform = { module = "org.junit.platform:junit-platform-launcher" }
-kotest = { module = "io.kotest:kotest-assertions-core", version = "5.9.1" }
-mockk = { module = "io.mockk:mockk", version = "1.13.13" }
+kotest = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 sat4j = { module = "org.ow2.sat4j:org.ow2.sat4j.core", version.ref = "sat4j" }
 
 [plugins]
-axion = { id = "pl.allegro.tech.build.axion-release", version = "1.18.16" }
+axion = { id = "pl.allegro.tech.build.axion-release", version.ref = "axion" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.0-RC" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.7" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
