@@ -2,11 +2,8 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kover)
-    alias(libs.plugins.axion)
+    alias(libs.plugins.kudoku.publishing)
 }
-
-group = "io.github.ilikeyourhat.kudoku"
-version = scmVersion.version
 
 kotlin {
     jvmToolchain {
