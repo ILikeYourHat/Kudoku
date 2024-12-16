@@ -4,7 +4,8 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kover)
-    id("com.vanniktech.maven.publish") version "0.30.0"
+    alias(libs.plugins.axion)
+    alias(libs.plugins.maven.publish)
 }
 
 kotlin {
@@ -49,27 +50,31 @@ dependencies {
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
-    coordinates("io.github.ilikeyourhat.kudoku", "kudoku", "0.0.1")
+    coordinates(
+        groupId = "io.github.ilikeyourhat.kudoku",
+        artifactId = "kudoku",
+        version = scmVersion.version
+    )
     pom {
         name = "Kudoku"
-        description.set("A sudoku engine written in Kotlin")
-        url.set("https://github.com/ILikeYourHat/Kudoku")
+        description = "A sudoku engine written in Kotlin"
+        url = "https://github.com/ILikeYourHat/Kudoku"
         licenses {
             license {
-                name.set("The Apache License, Version 2.0")
-                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
             }
         }
         developers {
             developer {
-                id.set("ILikeYourHat")
-                name.set("Marcin Laskowski")
+                id = "ILikeYourHat"
+                name = "Marcin Laskowski"
             }
         }
         scm {
-            connection.set("git@github.com:ILikeYourHat/Kudoku.git")
-            developerConnection.set("git@github.com:ILikeYourHat/Kudoku.git")
-            url.set("https://github.com/ILikeYourHat/Kudoku")
+            connection = "git@github.com:ILikeYourHat/Kudoku.git"
+            developerConnection = "git@github.com:ILikeYourHat/Kudoku.git"
+            url = "https://github.com/ILikeYourHat/Kudoku"
         }
     }
 }

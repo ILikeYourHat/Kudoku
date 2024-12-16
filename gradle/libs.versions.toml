@@ -5,11 +5,11 @@ junit5 = "5.11.4"
 kotest = "5.9.1"
 kotlin = "2.1.0"
 kover = "0.9.0"
+maven-publish = "0.30.0"
 mockk = "1.13.13"
 sat4j = "2.3.6"
 
 [libraries]
-axion-gradlePlugin = { module = "pl.allegro.tech.build:axion-release-plugin", version.ref = "axion" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit5-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
@@ -19,9 +19,8 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 sat4j = { module = "org.ow2.sat4j:org.ow2.sat4j.core", version.ref = "sat4j" }
 
 [plugins]
+axion = { id = "pl.allegro.tech.build.axion-release", version.ref = "axion" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-
-# Internal convention plugins
-kudoku-publishing = { id = "kudoku.publishing", version = "undefined" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
