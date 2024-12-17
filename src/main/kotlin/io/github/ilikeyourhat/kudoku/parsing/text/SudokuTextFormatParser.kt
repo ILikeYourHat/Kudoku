@@ -30,19 +30,8 @@ class SudokuTextFormatParser(
         return Command(file).parseMany()
     }
 
-    private fun getType(type: String): SudokuType {
-        return supportedTypes.find { it.name == type }
-            ?: throw IllegalArgumentException("Unknown sudoku type: $type")
-    }
-
-    @Suppress("DoubleMutabilityForCollection")
     private inner class Command {
         private val scanner: Scanner
-        private lateinit var type: SudokuType
-        private var width = 0
-        private var height = 0
-        private lateinit var data: MutableList<Int?>
-        private var pointer = 0
 
         constructor(text: String) {
             scanner = Scanner(text)
@@ -53,12 +42,11 @@ class SudokuTextFormatParser(
         }
 
         fun parseMany(): List<Sudoku> {
-            val sudokuList: MutableList<Sudoku> = ArrayList()
-            while (scanner.hasNext()) {
+            val sudokuList = mutableListOf<Sudoku>()
+            do {
                 val sudoku = parse()
                 sudokuList.add(sudoku)
-                if (scanner.hasNext()) scanner.nextLine()
-            }
+            } while (scanner.hasNext())
             scanner.close()
             return sudokuList
         }
@@ -70,30 +58,40 @@ class SudokuTextFormatParser(
         }
 
         private fun parse(): Sudoku {
-            readSize()
+            val data = mutableListOf<Int>()
+            val type = readType()
+            val width = type.sizeX
+            val height = type.sizeY
+            val expectedValuesCount = Sudoku(type).allFields.size
             var y = 0
             while (y < height) {
-                val line = scanner.nextLine()
-                if (line.isEmpty()) continue
+                var line = scanner.nextLine()
+                while (line.isEmpty()) {
+                    line = scanner.nextLine()
+                }
                 val lineScanner = Scanner(line).useDelimiter(",")
                 var x = 0
                 while (x < width) {
                     val value = parse(lineScanner.next().trim())
-                    data[pointer] = value
+                    if (value != null) {
+                        data.add(value)
+                    }
                     x++
-                    pointer++
                 }
                 y++
+                if (data.size >= expectedValuesCount) break
             }
             return Sudoku(type, data)
         }
 
-        private fun readSize() {
-            type = getType(scanner.nextLine())
-            width = type.sizeX
-            height = type.sizeY
-            data = MutableList(width * height) { null }
-            pointer = 0
+        private fun readType(): SudokuType {
+            var type = ""
+            while (type.isEmpty()) {
+                type = scanner.nextLine()
+            }
+
+            return supportedTypes.find { it.name == type }
+                ?: throw IllegalArgumentException("Unknown sudoku type: $type")
         }
 
         private fun parse(input: String): Int? {

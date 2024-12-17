@@ -7,3 +7,6 @@ style:
 complexity:
   LongMethod:
     threshold: 80
+  TooManyFunctions:
+    thresholdInFiles: 21
+    thresholdInClasses: 21
