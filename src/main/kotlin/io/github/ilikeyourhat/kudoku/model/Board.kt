@@ -54,7 +54,7 @@ data class Board(
         return Board(fields.sizeX, fields.sizeY) { x, y -> fields[x, y]?.copy() }
     }
 
-    fun fields() = fields.toList()
+    fun fields() = fields.toList().filterNotNull()
 
     fun fragment(startX: Int, startY: Int, endX: Int, endY: Int): Board {
         return Board(

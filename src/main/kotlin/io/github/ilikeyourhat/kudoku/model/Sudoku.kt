@@ -12,14 +12,20 @@ data class Sudoku(
         board = BoardCreator.createBoard(type)
     )
 
-    constructor(type: SudokuType, values: List<Int?>) : this(
+    constructor(type: SudokuType, values: List<Int>) : this(
         type = type,
         board = BoardCreator.createBoard(type)
             .also {
-                it.fields().zip(values)
-                    .forEach { (field, value) ->
-                        field?.set(requireNotNull(value))
+                val fields = it.fields()
+                require(fields.size == values.size) {
+                    "Incorrect values count, expected ${fields.size}, but was ${values.size}"
+                }
+                values.forEachIndexed { index, value ->
+                    require(value == 0 || type.allPossibleValues().contains(value)) {
+                        "Value $value is not supported by type ${type.name}"
                     }
+                    fields[index].set(value)
+                }
             }
     )
 
@@ -27,7 +33,7 @@ data class Sudoku(
         return "${type.name} $board"
     }
 
-    fun at(x: Int, y: Int): Field? {
+    fun atFieldOrNull(x: Int, y: Int): Field? {
         return board.getOrNull(x, y)
     }
 
@@ -49,7 +55,6 @@ data class Sudoku(
 
     fun isCompleted(): Boolean {
         return board.fields()
-            .filterNotNull()
             .none { it.isEmpty }
     }
 
@@ -61,10 +66,13 @@ data class Sudoku(
         return isCompleted() && isValid()
     }
 
-    val allFields = board.fields()
-        .filterNotNull()
+    fun isEmpty(): Boolean {
+        return board.fields().all { it.isEmpty }
+    }
 
-    fun values(): List<Int?> {
-        return board.fields().map { it?.value }
+    val allFields = board.fields()
+
+    fun values(): List<Int> {
+        return board.fields().map { it.value }
     }
 }

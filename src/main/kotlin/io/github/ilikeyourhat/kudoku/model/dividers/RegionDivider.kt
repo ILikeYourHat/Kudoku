@@ -44,7 +44,7 @@ class RegionDivider {
 
     fun allFields() = apply {
         dividers.add { board ->
-            listOf(Region(board.fields().filterNotNull()))
+            listOf(Region(board.fields()))
         }
     }
 

@@ -1,6 +1,6 @@
 # Kudoku
 
-A sudoku engine written in Kotlin.
+A powerful sudoku engine written in Kotlin.
 
 ## Usage
 
@@ -12,7 +12,26 @@ dependencies {
 }
 ```
 
-Create a sudoku board using a string notation:
+Create a sudoku board providing the type and values:
+
+```kotlin
+val sudoku = Sudoku(
+    Classic9x9,
+    listOf(
+        0, 5, 7, 7, 6, 0, 0, 0, 4,
+        8, 0, 4, 0, 9, 5, 2, 0, 0,
+        0, 0, 3, 0, 0, 7, 5, 8, 1,
+        0, 0, 0, 7, 4, 2, 0, 1, 9,
+        7, 6, 1, 0, 0, 0, 8, 4, 0,
+        0, 2, 9, 1, 8, 0, 0, 7, 0,
+        1, 4, 0, 9, 0, 3, 7, 0, 0,
+        5, 0, 0, 6, 0, 0, 4, 9, 3,
+        9, 3, 0, 0, 7, 4, 0, 0, 8
+    )
+)
+```
+
+...or using a string notation for improved readability:
 
 ```kotlin
 val sudoku = Kudoku.createFromString(
