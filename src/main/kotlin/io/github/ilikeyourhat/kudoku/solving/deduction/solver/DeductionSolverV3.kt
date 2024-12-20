@@ -17,7 +17,7 @@ class DeductionSolverV3 : DeductionSolver() {
             NakedSinglesAlgorithm.Factory(),
             HiddenSinglesAlgorithm.Factory()
         )
-        for (i in 2..type.possibleValues / 2) {
+        for (i in 2..type.maxValue / 2) {
             algorithms.add(NakedValuesAlgorithm.Factory(i))
             algorithms.add(HiddenValuesAlgorithm.Factory(i))
         }

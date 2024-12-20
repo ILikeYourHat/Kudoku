@@ -2,41 +2,16 @@ package io.github.ilikeyourhat.kudoku.solving.sat
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.solving.SolutionCount
+import io.github.ilikeyourhat.kudoku.solving.SolverContractTestTemplate
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import org.junit.jupiter.api.Test
 
-class SatSolverTest {
-
-    private val solver = SatSolver()
-
-    @Test
-    fun `should solve simple sudoku`() {
-        val sudoku = Sudoku(
-            Classic4x4,
-            listOf(
-                0, 2, 3, 0,
-                1, 0, 0, 4,
-                3, 0, 0, 2,
-                0, 4, 1, 0
-            )
-        )
-
-        val result = solver.solve(sudoku)
-
-        result shouldBe Sudoku(
-            Classic4x4,
-            listOf(
-                4, 2, 3, 1,
-                1, 3, 2, 4,
-                3, 1, 4, 2,
-                2, 4, 1, 3
-            )
-        )
-        result shouldNotBeSameInstanceAs sudoku
-    }
+class SatSolverTest : SolverContractTestTemplate<SatSolver>(
+    solver = SatSolver()
+) {
 
     @Test
     fun `should not solve sudoku when there is no solution`() {
@@ -51,8 +26,8 @@ class SatSolverTest {
         )
 
         val result = solver.solve(sudoku)
-        result shouldBe sudoku
-        result shouldNotBeSameInstanceAs sudoku
+
+        result.shouldBeEqual(sudoku)
     }
 
     @Test
@@ -69,7 +44,6 @@ class SatSolverTest {
 
         val result = solver.solve(sudoku)
         result.isSolved().shouldBeTrue()
-        result shouldNotBeSameInstanceAs sudoku
     }
 
     @Test

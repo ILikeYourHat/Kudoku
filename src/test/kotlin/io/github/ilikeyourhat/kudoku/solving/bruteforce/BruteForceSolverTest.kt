@@ -1,36 +1,28 @@
 package io.github.ilikeyourhat.kudoku.solving.bruteforce
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.solving.SolverContractTestTemplate
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
-import org.junit.jupiter.api.Assertions.assertEquals
+import io.kotest.matchers.booleans.shouldBeTrue
 import org.junit.jupiter.api.Test
 
-class BruteForceSolverTest {
+class BruteForceSolverTest : SolverContractTestTemplate<BruteForceSolver>(
+    solver = BruteForceSolver()
+) {
 
     @Test
-    fun `classic BruteForce`() {
-        val solver = BruteForceSolver()
-
-        val sudoku = Sudoku(
+    fun `should solve empty grid`() {
+        val input = Sudoku(
             Classic4x4,
             listOf(
-                0, 2, 3, 0,
-                1, 0, 0, 4,
-                3, 0, 0, 2,
-                0, 4, 1, 0
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0
             )
         )
+        val result = solver.solve(input)
 
-        val result = solver.solve(sudoku)
-
-        assertEquals(
-            listOf(
-                4, 2, 3, 1,
-                1, 3, 2, 4,
-                3, 1, 4, 2,
-                2, 4, 1, 3
-            ),
-            result.values()
-        )
+        result.isSolved().shouldBeTrue()
     }
 }

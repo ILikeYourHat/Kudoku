@@ -42,7 +42,7 @@ class CustomSudokuTypeTest {
         override val name = "my_custom_type"
         override val sizeX = 4
         override val sizeY = 4
-        override val possibleValues = 4
+        override val maxValue = 4
 
         override fun template(): String {
             return Classic4x4.template()

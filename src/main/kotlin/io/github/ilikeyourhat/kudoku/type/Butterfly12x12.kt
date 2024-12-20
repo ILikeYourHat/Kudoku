@@ -8,7 +8,7 @@ object Butterfly12x12 : SudokuType {
     override val name = "butterfly_12x12"
     override val sizeX = 12
     override val sizeY = 12
-    override val possibleValues = 9
+    override val maxValue = 9
 
     override fun divider(): RegionDivider {
         return RegionDivider()
