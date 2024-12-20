@@ -8,7 +8,7 @@ object Classic4x4 : SudokuType {
     override val name = "classic_4x4"
     override val sizeX = 4
     override val sizeY = 4
-    override val possibleValues = 4
+    override val maxValue = 4
 
     override fun template() = """
         _,_ _,_

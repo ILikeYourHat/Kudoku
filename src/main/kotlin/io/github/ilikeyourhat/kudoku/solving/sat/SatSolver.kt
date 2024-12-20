@@ -18,7 +18,7 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
 
     private class Command(private val sudoku: Sudoku) {
 
-        private val indexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY(), sudoku.type.possibleValues)
+        private val indexEncoder = IndexEncoder(sudoku.sizeX(), sudoku.sizeY(), sudoku.type.maxValue)
         private val engine = SatEngine()
 
         fun solve(): Sudoku {
@@ -61,7 +61,7 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
         }
 
         private fun addCausesForRegions(sudoku: Sudoku) {
-            for (possibleValue in 1..sudoku.type.possibleValues) {
+            for (possibleValue in 1..sudoku.type.maxValue) {
                 for (region in sudoku.regions) {
                     val list = mutableListOf<Int>()
                     for ((position) in region) {
@@ -75,7 +75,7 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
 
         private fun createValues(field: Field): List<Int> {
             val list = mutableListOf<Int>()
-            for (value in 1..sudoku.type.possibleValues) {
+            for (value in 1..sudoku.type.maxValue) {
                 val index = indexEncoder.encode(field.position(), value)
                 list.add(index)
             }

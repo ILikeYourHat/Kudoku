@@ -1,100 +1,66 @@
-@file:Suppress("UnsafeCallOnNullableType")
-
 package io.github.ilikeyourhat.kudoku.solving.bruteforce
 
 import io.github.ilikeyourhat.kudoku.model.Field
-import io.github.ilikeyourhat.kudoku.model.Point
-import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
+import kotlin.random.Random
 
-class BruteForceSolver : SudokuSolver {
-
-    internal enum class Direction {
-        FORWARD, BACKWARD
-    }
+class BruteForceSolver(
+    private val random: Random? = null
+) : SudokuSolver {
 
     override fun solve(sudoku: Sudoku): Sudoku {
-        return Command(sudoku).findSolution()
+        val result = sudoku.copy()
+        val lookup = RegionLookup(result)
+        val fields = result.allFields
+            .filter { it.isEmpty }
+            .applyRandomOrder()
+
+        runAlgorithm(result.type, fields, lookup)
+        return result
     }
 
-    private class Command(private val origin: Sudoku) {
-        private val sudoku: Sudoku = origin.copy()
-        private val regionLookup: Map<Point, List<Region>> = createRegionLookup(sudoku)
-        private val iterator: ListIterator<Field> = sudoku.allFields.listIterator()
-
-        private var currentDirection = Direction.FORWARD
-        private lateinit var currentField: Field
-
-        fun findSolution(): Sudoku {
-            while (canMove()) {
-                move()
-                if (isOriginFieldEmpty()) {
-                    setNextValuesAndCheckGrid()
+    private fun runAlgorithm(
+        type: SudokuType,
+        fields: List<Field>,
+        lookup: RegionLookup
+    ) {
+        var position = 0
+        loop@ while (fields.indices.contains(position)) {
+            val field = fields[position]
+            for (value in field.value..<type.maxValue) {
+                field.set(value + 1)
+                if (lookup.isGridCorrectAfterChange(field)) {
+                    position++
+                    continue@loop
                 }
             }
-            return sudoku
+            field.clear()
+            position--
         }
+    }
 
-        private fun canMove(): Boolean {
-            return canMoveForward() || canMoveBackward()
+    private fun List<Field>.applyRandomOrder(): List<Field> {
+        return if (random != null) {
+            this.shuffled(random)
+        } else {
+            this
         }
+    }
 
-        private fun canMoveForward(): Boolean {
-            return currentDirection == Direction.FORWARD && iterator.hasNext()
-        }
+    private class RegionLookup(sudoku: Sudoku) {
 
-        private fun canMoveBackward(): Boolean {
-            return currentDirection == Direction.BACKWARD && iterator.hasPrevious()
-        }
-
-        private fun move() {
-            currentField = if (currentDirection == Direction.FORWARD) {
-                iterator.next()
-            } else {
-                iterator.previous()
-            }
-        }
-
-        private fun changeDirection(newDirection: Direction) {
-            if (currentDirection != newDirection) {
-                currentDirection = newDirection
-                /*
-                 * Alternating calls to ListIterator.next() and ListIterator.previous() will return the same element
-                 * repeatedly. So to compensate this and return the real next/previous element in the next move, we must
-                 * move one step further after every direction change.
-                 */
-                move()
-            }
-        }
-
-        private fun isOriginFieldEmpty(): Boolean {
-            val x = currentField.x
-            val y = currentField.y
-            return origin.atField(x, y).isEmpty
-        }
-
-        private fun setNextValuesAndCheckGrid() {
-            val currentNumber = currentField.value()
-            for (i in currentNumber + 1..sudoku.type.possibleValues) {
-                currentField.set(i)
-                if (isGridCorrectAfterChange()) {
-                    changeDirection(Direction.FORWARD)
-                    return
+        private val regionsMap = sudoku.allFields
+            .associate { field ->
+                field.position to sudoku.regions.filter { region ->
+                    region.contains(field)
                 }
             }
-            currentField.clear()
-            changeDirection(Direction.BACKWARD)
-        }
 
-        private fun isGridCorrectAfterChange(): Boolean {
-            return regionLookup.getValue(currentField.position)
+        fun isGridCorrectAfterChange(field: Field): Boolean {
+            return regionsMap.getValue(field.position)
                 .all { it.isValid() }
-        }
-
-        private fun createRegionLookup(sudoku: Sudoku): Map<Point, List<Region>> {
-            return sudoku.allFields
-                .associate { field -> field.position to sudoku.regions.filter { it.contains(field) } }
         }
     }
 }

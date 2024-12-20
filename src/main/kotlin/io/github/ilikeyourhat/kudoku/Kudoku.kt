@@ -8,6 +8,7 @@ import io.github.ilikeyourhat.kudoku.rating.DeductionBasedRater
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.solving.SolutionCount
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
+import io.github.ilikeyourhat.kudoku.solving.bruteforce.BruteForceSolver
 import io.github.ilikeyourhat.kudoku.solving.sat.SatSolver
 import io.github.ilikeyourhat.kudoku.type.BUILD_IN_TYPES
 import kotlin.random.Random
@@ -23,6 +24,10 @@ object Kudoku {
 
     fun satSolver(): SudokuSolver {
         return SatSolver()
+    }
+
+    fun bruteForceSolver(): SudokuSolver {
+        return BruteForceSolver()
     }
 
     fun create(
