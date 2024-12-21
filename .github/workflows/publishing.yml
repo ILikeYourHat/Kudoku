@@ -1,4 +1,4 @@
-name: "Release project"
+name: "Publishing"
 on:
   push:
     tags:
@@ -20,7 +20,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Check project
+      - name: Build project
         run: ./gradlew build
 
       - name: Publish project
