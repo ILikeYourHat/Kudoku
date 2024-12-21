@@ -1,7 +1,5 @@
 # Kudoku
 
----
-
 [![Build](https://github.com/ilikeyourhat/kudoku/actions/workflows/build.yml/badge.svg)](https://github.com/ILikeYourHat/Kudoku/actions/workflows/build.yml)
 [![Maven Central Version](https://img.shields.io/maven-central/v/io.github.ilikeyourhat.kudoku/kudoku)](https://central.sonatype.com/artifact/io.github.ilikeyourhat.kudoku/kudoku)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
@@ -65,6 +63,13 @@ Create a solver instance and solve the board:
 val solver = Kudoku.defaultSolver()
 val solution = solver.solve(sudoku)
 println(solution.toString())
+```
+
+Choose from multiple solver implementations:
+
+```kotlin
+val solver1 = Kudoku.satSolver()
+val solver2 = Kudoku.bruteForceSolver()
 ```
 
 Create a random Sudoku with a given difficulty:
