@@ -1,5 +1,12 @@
 # Kudoku
 
+---
+
+[![Build](https://github.com/ilikeyourhat/kudoku/actions/workflows/build.yml/badge.svg)](https://github.com/ILikeYourHat/Kudoku/actions/workflows/build.yml)
+[![Maven Central Version](https://img.shields.io/maven-central/v/io.github.ilikeyourhat.kudoku/kudoku)](https://central.sonatype.com/artifact/io.github.ilikeyourhat.kudoku/kudoku)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ilikeyourhat/kudoku/blob/master/LICENSE.md)
+
 A powerful sudoku engine written in Kotlin.
 
 ## Usage
