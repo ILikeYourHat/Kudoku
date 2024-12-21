@@ -1,12 +1,12 @@
-package io.github.ilikeyourhat.kudoku.integration.type
+package io.github.ilikeyourhat.kudoku.type
 
-class Classic9x9Test : SudokuTypesTest() {
+class Classic9x9Test : SudokuTypeTestTemplate() {
 
     override val puzzle = """
         classic_9x9
-        _,_,3 ,_,2,_, 6,_,_
-        9,_,_ ,3,_,5, _,_,1
-        _,_,1 ,8,_,6, 4,_,_
+        _,_,3, _,2,_, 6,_,_
+        9,_,_, 3,_,5, _,_,1
+        _,_,1, 8,_,6, 4,_,_
         
         _,_,8, 1,_,2, 9,_,_
         7,_,_, _,_,_, _,_,8

@@ -1,6 +1,6 @@
-package io.github.ilikeyourhat.kudoku.integration.type
+package io.github.ilikeyourhat.kudoku.type
 
-class Butterfly12x12Test : SudokuTypesTest() {
+class Butterfly12x12Test : SudokuTypeTestTemplate() {
 
     override val puzzle = """
         butterfly_12x12

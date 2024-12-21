@@ -1,6 +1,6 @@
-package io.github.ilikeyourhat.kudoku.integration.type
+package io.github.ilikeyourhat.kudoku.type
 
-class Square2x2Test : SudokuTypesTest() {
+class Square2x2Test : SudokuTypeTestTemplate() {
 
     override val puzzle = """
         square_2x2
