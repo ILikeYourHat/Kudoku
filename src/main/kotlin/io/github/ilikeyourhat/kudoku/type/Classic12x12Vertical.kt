@@ -10,23 +10,6 @@ object Classic12x12Vertical : SudokuType {
     override val sizeY = 12
     override val maxValue = 12
 
-    override fun template() = """
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-        _,_,_ _,_,_ _,_,_ _,_,_
-    """.trimIndent()
-
     override fun divider(): RegionDivider {
         return RegionDivider()
             .divideByRows()

@@ -5,29 +5,28 @@ data class Sudoku(
     val board: Board
 ) {
 
-    val regions = type.divider().divide(board)
+    val regions: List<Region> = type.divider().divide(board)
 
     constructor(type: SudokuType) : this(
         type = type,
-        board = BoardCreator.createBoard(type)
+        board = Board(type.sizeX, type.sizeY),
     )
 
     constructor(type: SudokuType, values: List<Int>) : this(
         type = type,
-        board = BoardCreator.createBoard(type)
-            .also {
-                val fields = it.fields()
-                require(fields.size == values.size) {
-                    "Incorrect values count, expected ${fields.size}, but was ${values.size}"
-                }
-                values.forEachIndexed { index, value ->
-                    require(value == 0 || type.allPossibleValues().contains(value)) {
-                        "Value $value is not supported by type ${type.name}"
-                    }
-                    fields[index].set(value)
-                }
+        board = Board(type.sizeX, type.sizeY)
+    ) {
+        val fields = board.fields()
+        require(fields.size == values.size) {
+            "Incorrect values count, expected ${fields.size}, but was ${values.size}"
+        }
+        values.forEachIndexed { index, value ->
+            require((0..type.maxValue).contains(value)) {
+                "Value $value is not supported by type ${type.name}"
             }
-    )
+            fields[index].set(value)
+        }
+    }
 
     override fun toString(): String {
         return "${type.name} $board"
