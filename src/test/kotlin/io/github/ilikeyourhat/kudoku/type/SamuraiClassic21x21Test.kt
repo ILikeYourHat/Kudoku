@@ -1,6 +1,6 @@
-package io.github.ilikeyourhat.kudoku.integration.type
+package io.github.ilikeyourhat.kudoku.type
 
-class SamuraiClassic21x21Test : SudokuTypesTest() {
+class SamuraiClassic21x21Test : SudokuTypeTestTemplate() {
 
     override val puzzle = """
         samurai_classic_21x21

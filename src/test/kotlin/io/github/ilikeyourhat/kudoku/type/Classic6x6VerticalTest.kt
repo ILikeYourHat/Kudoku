@@ -1,6 +1,6 @@
-package io.github.ilikeyourhat.kudoku.integration.type
+package io.github.ilikeyourhat.kudoku.type
 
-class Classic6X6VerticalTest : SudokuTypesTest() {
+class Classic6x6VerticalTest : SudokuTypeTestTemplate() {
 
     override val puzzle = """
         classic_6x6_vertical

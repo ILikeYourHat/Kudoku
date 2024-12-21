@@ -3,9 +3,11 @@ package io.github.ilikeyourhat.kudoku.type
 val BUILD_IN_TYPES = listOf(
     Butterfly12x12,
     Classic4x4,
-    Classic6x6Horizontal,
+    Classic6x6,
     Classic6x6Vertical,
     Classic9x9,
+    Classic12x12,
+    Classic12x12Vertical,
     Classic16x16,
     Classic25x25,
     DoubleBackslash15x15,

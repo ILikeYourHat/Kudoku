@@ -1,6 +1,6 @@
-package io.github.ilikeyourhat.kudoku.integration.type
+package io.github.ilikeyourhat.kudoku.type
 
-class DoubleSlash15x15Test : SudokuTypesTest() {
+class DoubleSlash15x15Test : SudokuTypeTestTemplate() {
 
     override val puzzle = """
         double_slash_15x15

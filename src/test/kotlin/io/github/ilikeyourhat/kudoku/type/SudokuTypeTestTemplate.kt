@@ -1,11 +1,11 @@
-package io.github.ilikeyourhat.kudoku.integration.type
+package io.github.ilikeyourhat.kudoku.type
 
 import io.github.ilikeyourhat.kudoku.Kudoku
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
 
-abstract class SudokuTypesTest {
+abstract class SudokuTypeTestTemplate {
 
     abstract val puzzle: String
     abstract val solution: String
@@ -18,7 +18,7 @@ abstract class SudokuTypesTest {
 
         val result = solver.solve(sudokuToSolve)
 
-        assertEquals(expectedResult, result)
-        assertTrue(result.isSolved())
+        result.shouldBeEqual(expectedResult)
+        result.isSolved().shouldBeTrue()
     }
 }
