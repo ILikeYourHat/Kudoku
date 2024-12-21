@@ -14,8 +14,4 @@ object Square1x1 : SudokuType {
         return RegionDivider()
             .allFields()
     }
-
-    override fun template() = """
-        _
-    """.trimIndent()
 }

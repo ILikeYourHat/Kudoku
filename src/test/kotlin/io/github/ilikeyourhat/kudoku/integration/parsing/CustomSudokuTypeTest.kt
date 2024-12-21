@@ -44,10 +44,6 @@ class CustomSudokuTypeTest {
         override val sizeY = 4
         override val maxValue = 4
 
-        override fun template(): String {
-            return Classic4x4.template()
-        }
-
         override fun divider(): RegionDivider {
             return Classic4x4.divider()
         }

@@ -44,7 +44,7 @@ class RegionDivider {
 
     fun allFields() = apply {
         dividers.add { board ->
-            listOf(Region(board.fields()))
+            listOf(board.region(0, 0, board.sizeX() - 1, board.sizeY() - 1))
         }
     }
 
@@ -78,7 +78,8 @@ class RegionDivider {
     }
 
     fun divide(board: Board): List<Region> {
-        return dividers.flatMap { it.divide(board) }
+        return dividers
+            .flatMap { it.divide(board) }
             .distinct()
     }
 }

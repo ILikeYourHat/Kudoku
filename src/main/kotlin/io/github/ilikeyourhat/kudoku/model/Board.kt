@@ -1,12 +1,20 @@
 package io.github.ilikeyourhat.kudoku.model
 
 import io.github.ilikeyourhat.kudoku.model.matrix.ListMatrix
-import io.github.ilikeyourhat.kudoku.model.matrix.Matrix
+import io.github.ilikeyourhat.kudoku.model.matrix.MutableMatrix
 import java.util.NoSuchElementException
 
 data class Board(
-    private val fields: Matrix<Field?>
+    private val fields: MutableMatrix<Field?>
 ) {
+
+    constructor(sizeX: Int, sizeY: Int) : this(
+        ListMatrix<Field?>(
+            sizeX = sizeX,
+            sizeY = sizeY,
+            defaultValue = null
+        )
+    )
 
     constructor(sizeX: Int, sizeY: Int, valueInitializer: (x: Int, y: Int) -> Field?) : this(
         ListMatrix<Field?>(
@@ -60,17 +68,21 @@ data class Board(
         return Board(
             sizeX = endX - startX,
             sizeY = endY - startY,
-            valueInitializer = { x, y -> getOrNull(startX + x, startY + y) }
+            valueInitializer = { x, y -> initField(startX + x, startY + y) }
         )
     }
 
     fun region(startX: Int, startY: Int, endX: Int, endY: Int): Region {
         val fields = (startX..endX).flatMap { indexX ->
-            (startY..endY).mapNotNull { indexY ->
-                getOrNull(indexX, indexY)
+            (startY..endY).map { indexY ->
+                initField(indexX, indexY)
             }
         }
         return Region(fields)
+    }
+
+    private fun initField(x: Int, y: Int): Field {
+        return fields[x, y] ?: Field(x, y).also { fields[x, y] = it }
     }
 
     override fun toString(): String {

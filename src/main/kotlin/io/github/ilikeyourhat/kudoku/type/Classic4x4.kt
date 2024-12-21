@@ -10,14 +10,6 @@ object Classic4x4 : SudokuType {
     override val sizeY = 4
     override val maxValue = 4
 
-    override fun template() = """
-        _,_ _,_
-        _,_ _,_
-
-        _,_ _,_
-        _,_ _,_
-    """.trimIndent()
-
     override fun divider(): RegionDivider {
         return RegionDivider()
             .divideByRows()

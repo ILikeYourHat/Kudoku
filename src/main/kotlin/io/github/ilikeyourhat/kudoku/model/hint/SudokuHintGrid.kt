@@ -60,7 +60,7 @@ data class SudokuHintGrid(
     companion object {
 
         fun create(sudoku: Sudoku): SudokuHintGrid {
-            val possibleValues = sudoku.type.allPossibleValues()
+            val possibleValues = 1..sudoku.type.maxValue
 
             val hintMap = sudoku.allFields
                 .associate { it.position to possibleValues.toMutableSet() }

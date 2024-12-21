@@ -10,8 +10,6 @@ object DoubleDiagonal9x9 : SudokuType {
     override val sizeY = 9
     override val maxValue = 9
 
-    override fun template() = Classic9x9.template()
-
     override fun divider(): RegionDivider {
         return Classic9x9.divider()
             .primaryDiagonal()

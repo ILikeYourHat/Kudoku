@@ -10,11 +10,6 @@ object Square2x2 : SudokuType {
     override val sizeY = 2
     override val maxValue = 2
 
-    override fun template() = """
-        _,_
-        _,_
-    """.trimIndent()
-
     override fun divider(): RegionDivider {
         return RegionDivider()
             .divideByRows()

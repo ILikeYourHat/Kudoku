@@ -10,16 +10,6 @@ object Classic6x6Vertical : SudokuType {
     override val sizeY = 6
     override val maxValue = 6
 
-    override fun template() = """
-        _,_ _,_ _,_
-        _,_ _,_ _,_
-        _,_ _,_ _,_
-        
-        _,_ _,_ _,_
-        _,_ _,_ _,_
-        _,_ _,_ _,_
-    """.trimIndent()
-
     override fun divider(): RegionDivider {
         return RegionDivider()
             .divideByRows()
