@@ -10,6 +10,7 @@ val BUILD_IN_TYPES = listOf(
     Classic12x12Vertical,
     Classic16x16,
     Classic25x25,
+    Classic36x36,
     DoubleBackslash15x15,
     DoubleDiagonal9x9,
     DoubleSlash15x15,
@@ -27,4 +28,5 @@ val CLASSIC_TYPES = listOf(
     Classic9x9,
     Classic16x16,
     Classic25x25,
+    Classic36x36
 )
