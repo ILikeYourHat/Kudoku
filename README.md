@@ -62,7 +62,7 @@ Create a solver instance and solve the board:
 ```kotlin
 val solver = Kudoku.defaultSolver()
 val solution = solver.solve(sudoku)
-println(solution.toString())
+println(solution)
 ```
 
 Choose from multiple solver implementations:
@@ -72,11 +72,19 @@ val solver1 = Kudoku.satSolver()
 val solver2 = Kudoku.bruteForceSolver()
 ```
 
+Support for popular text formats:
+
+```kotlin
+val string = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
+val sudoku = Kudoku.createFromSingleLineString(string)
+val encoded = sudoku.toSingleLineString(emptyFieldIndicator = EmptyFieldIndicator.DOT)
+```
+
 Create a random Sudoku with a given difficulty:
 
 ```kotlin
 val sudoku = Kudoku.create(SudokuType.Classic9x9, Difficulty.VERY_HARD)
-println(sudoku.toString())
+println(sudoku)
 ```
 
 Check how hard is a given sudoku:
