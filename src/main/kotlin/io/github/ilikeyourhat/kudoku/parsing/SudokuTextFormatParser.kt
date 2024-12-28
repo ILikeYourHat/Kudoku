@@ -1,4 +1,4 @@
-package io.github.ilikeyourhat.kudoku.parsing.text
+package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType

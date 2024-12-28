@@ -1,7 +1,6 @@
 package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
-import io.github.ilikeyourhat.kudoku.parsing.text.SudokuTextFormatParser
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

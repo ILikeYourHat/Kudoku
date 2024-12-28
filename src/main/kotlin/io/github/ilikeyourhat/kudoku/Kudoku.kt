@@ -3,7 +3,8 @@ package io.github.ilikeyourhat.kudoku
 import io.github.ilikeyourhat.kudoku.generating.SudokuGenerator
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
-import io.github.ilikeyourhat.kudoku.parsing.text.SudokuTextFormatParser
+import io.github.ilikeyourhat.kudoku.parsing.SingleLineSudokuParser
+import io.github.ilikeyourhat.kudoku.parsing.SudokuTextFormatParser
 import io.github.ilikeyourhat.kudoku.rating.DeductionBasedRater
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.solving.SolutionCount
@@ -44,6 +45,10 @@ object Kudoku {
 
     fun createFromString(string: String): Sudoku {
         return SudokuTextFormatParser(supportedTypes).parseOne(string)
+    }
+
+    fun createFromSingleLineString(string: String): Sudoku {
+        return SingleLineSudokuParser().fromText(string)
     }
 
     fun rate(sudoku: Sudoku): Difficulty {
