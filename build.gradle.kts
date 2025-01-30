@@ -35,6 +35,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
+kover {
+    reports {
+        total {
+            xml.onCheck = true
+            html.onCheck = true
+        }
+    }
+}
+
 dependencies {
     detektPlugins(libs.detekt.formatting)
 
