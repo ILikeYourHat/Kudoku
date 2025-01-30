@@ -20,7 +20,7 @@ import kotlin.random.Random
 )
 class SudokuGeneratingTest {
 
-    private val random = Random(62361L)
+    private val random = Random(58857L)
 
     @Test
     fun `should generate Classic9x9 sudoku`() {

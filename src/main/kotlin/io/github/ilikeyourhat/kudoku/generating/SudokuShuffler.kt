@@ -51,8 +51,8 @@ class SudokuShuffler(
         return IntRange(0, groupSize * groupSize - 1)
             .toList()
             .groupBy { it / groupSize }.values
-            .shuffled()
-            .map { it.shuffled() }
+            .shuffled(random)
+            .map { it.shuffled(random) }
             .flatten()
     }
 }
