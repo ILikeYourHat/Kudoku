@@ -1,6 +1,6 @@
 [versions]
 axion = "1.18.16"
-detekt = "1.23.7"
+detekt = "1.23.8"
 junit5 = "5.11.4"
 kotest = "5.9.1"
 kotlin = "2.1.10"
