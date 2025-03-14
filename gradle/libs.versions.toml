@@ -1,7 +1,7 @@
 [versions]
 axion = "1.18.18"
 detekt = "1.23.8"
-junit5 = "5.12.0"
+junit5 = "5.12.1"
 kotest = "5.9.1"
 kotlin = "2.1.10"
 kover = "0.9.1"
