@@ -16,8 +16,6 @@ kotlin {
     compilerOptions {
         allWarningsAsErrors = true
         extraWarnings = true
-        // https://youtrack.jetbrains.com/issue/KT-73556
-        freeCompilerArgs.add("-Xsuppress-warning=UNUSED_ANONYMOUS_PARAMETER")
     }
 }
 
