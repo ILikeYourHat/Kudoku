@@ -64,6 +64,8 @@ data class Board(
 
     fun fields() = fields.toList().filterNotNull()
 
+    fun isEmpty() = fields.all { it == null }
+
     fun fragment(startX: Int, startY: Int, endX: Int, endY: Int): Board {
         return Board(
             sizeX = endX - startX,

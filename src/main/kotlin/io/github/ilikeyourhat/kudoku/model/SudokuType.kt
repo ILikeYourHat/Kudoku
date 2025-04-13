@@ -8,4 +8,13 @@ interface SudokuType {
     val sizeY: Int
     val maxValue: Int
     fun divider(): RegionDivider
+
+    fun createEmpty(): Sudoku {
+        val board = Board(sizeX, sizeY)
+        return Sudoku(
+            type = this,
+            board = board,
+            regions = divider().divide(board)
+        )
+    }
 }
