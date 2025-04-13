@@ -19,7 +19,7 @@ open class SudokuGenerator(
     private val classicFilledSudokuGenerator = ClassicFilledSudokuGenerator(random)
     private val holePuncher = SudokuHolePuncher(rater, random)
 
-    fun generate(type: SudokuType, difficulty: Difficulty?): Sudoku {
+    fun generate(type: SudokuType, difficulty: Difficulty? = null): Sudoku {
         require(difficulty != Difficulty.UNSOLVABLE)
         val sudoku = generateFilledSudoku(type)
         return holePuncher.punchHoles(sudoku, difficulty)
