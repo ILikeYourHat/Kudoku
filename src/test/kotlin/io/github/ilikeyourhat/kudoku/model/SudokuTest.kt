@@ -13,7 +13,7 @@ class SudokuTest {
 
     @Test
     fun `should create empty sudoku with a given type`() {
-        val sudoku = Sudoku(Classic9x9)
+        val sudoku = Classic9x9.createEmpty()
 
         sudoku.run {
             isEmpty().shouldBeTrue()

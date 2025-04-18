@@ -21,6 +21,7 @@ val BUILD_IN_TYPES = listOf(
     Square2x2,
     TripleBackslash15x15,
     TripleSlash15x15,
+    Jigsaw9x9
 )
 
 val CLASSIC_TYPES = listOf(

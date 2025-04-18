@@ -2,6 +2,7 @@ package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
+import io.github.ilikeyourhat.kudoku.type.Jigsaw9x9
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
@@ -226,6 +227,67 @@ class SudokuTextFormatParserTest {
                         7, 2, 0, 0, 4, 0, 0, 6, 0,
                         0, 0, 4, 0, 1, 0, 0, 0, 3
                     ),
+                )
+            ),
+            sudoku
+        )
+    }
+
+    @Test
+    fun `parse jigsaw sudoku from text`() {
+        val text = """
+            jigsaw_9x9
+            _,_,_, _,5,_, _,_,7
+            _,_,_, _,_,_, _,4,_
+            3,_,4, _,_,5, 2,_,_
+
+            7,2,_, _,_,1, _,5,_
+            _,_,_, _,_,_, _,_,_
+            _,6,_, 4,_,_, _,9,2
+
+            _,_,9, 8,_,_, 7,_,5
+            _,3,_, _,_,_, _,_,_
+            8,_,_, _,6,_, _,_,_
+            
+            1,1,1, 1,1,2, 2,2,2
+            1,1,3, 3,1,1, 2,2,2
+            3,3,3, 4,4,5, 5,2,2
+            
+            3,3,4, 4,4,5, 6,6,6
+            3,3,4, 5,5,5, 6,7,7
+            4,4,4, 5,6,6, 6,7,7
+            
+            8,8,5, 5,6,6, 7,7,7
+            8,8,8, 9,9,7, 7,9,9
+            8,8,8, 8,9,9, 9,9,9
+        """.trimIndent()
+
+        val sudoku = SudokuTextFormatParser().parseOne(text)
+
+        assertEquals(
+            Sudoku(
+                Jigsaw9x9,
+                listOf(
+                    0, 0, 0, 0, 5, 0, 0, 0, 7,
+                    0, 0, 0, 0, 0, 0, 0, 4, 0,
+                    3, 0, 4, 0, 0, 5, 2, 0, 0,
+                    7, 2, 0, 0, 0, 1, 0, 5, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 6, 0, 4, 0, 0, 0, 9, 2,
+                    0, 0, 9, 8, 0, 0, 7, 0, 5,
+                    0, 3, 0, 0, 0, 0, 0, 0, 0,
+                    8, 0, 0, 0, 6, 0, 0, 0, 0,
+                ),
+                listOf(
+                    1, 1, 1, 1, 1, 2, 2, 2, 2,
+                    1, 1, 3, 3, 1, 1, 2, 2, 2,
+                    3, 3, 3, 4, 4, 5, 5, 2, 2,
+                    3, 3, 4, 4, 4, 5, 6, 6, 6,
+                    3, 3, 4, 5, 5, 5, 6, 7, 7,
+                    4, 4, 4, 5, 6, 6, 6, 7, 7,
+                    8, 8, 5, 5, 6, 6, 7, 7, 7,
+                    8, 8, 8, 9, 9, 7, 7, 9, 9,
+                    8, 8, 8, 8, 9, 9, 9, 9, 9,
                 )
             ),
             sudoku

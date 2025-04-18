@@ -17,10 +17,10 @@ class RandomRegionGeneratorTest {
     @Test
     fun `regions should have the same size`() {
         val type = Classic9x9
-        val fields = Sudoku(type).allFields
+        val board = type.createEmpty().board
 
         repeat(100) {
-            val regions = generator.generateRandomRegions(type, fields)
+            val regions = generator.generateRandomRegions(type, board)
 
             regions.shouldHaveSize(9)
                 .shouldForAll { region -> region.shouldHaveSize(9) }
@@ -30,25 +30,25 @@ class RandomRegionGeneratorTest {
     @Test
     fun `regions should be distinct and cover all the board`() {
         val type = Classic9x9
-        val fields = Sudoku(type).allFields
+        val board = type.createEmpty().board
 
         repeat(100) {
-            val regions = generator.generateRandomRegions(type, fields)
+            val regions = generator.generateRandomRegions(type, board)
 
             regions.flatten()
-                .shouldHaveSize(fields.size)
+                .shouldHaveSize(board.fields().size)
                 .distinct()
-                .shouldHaveSize(fields.size)
+                .shouldHaveSize(board.fields().size)
         }
     }
 
     @Test
     fun `should work for any type`() {
         val type = Classic4x4
-        val fields = Sudoku(type).allFields
+        val board = type.createEmpty().board
 
         repeat(100) {
-            val regions = generator.generateRandomRegions(type, fields)
+            val regions = generator.generateRandomRegions(type, board)
 
             regions.shouldHaveSize(4)
                 .shouldForAll { region -> region.shouldHaveSize(4) }
@@ -58,9 +58,9 @@ class RandomRegionGeneratorTest {
     @Test
     fun `should work for any type 2`() {
         val type = SamuraiClassic21x21
-        val fields = Sudoku(type).allFields
+        val board = type.createEmpty().board
 
-        val regions = generator.generateRandomRegions(type, fields)
+        val regions = generator.generateRandomRegions(type, board)
 
         regions.shouldHaveSize(41)
             .shouldForAll { it.shouldHaveSize(9) }
@@ -69,12 +69,12 @@ class RandomRegionGeneratorTest {
     @Test
     fun `generation should be deterministic`() {
         val type = Classic9x9
-        val fields = Sudoku(type).allFields
+        val board = type.createEmpty().board
 
         val firstTry = RandomRegionGenerator(random = Random(1234L))
-            .generateRandomRegions(type, fields)
+            .generateRandomRegions(type, board)
         val secondTry = RandomRegionGenerator(random = Random(1234L))
-            .generateRandomRegions(type, fields)
+            .generateRandomRegions(type, board)
 
         firstTry.shouldBeEqual(secondTry)
     }

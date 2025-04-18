@@ -1,5 +1,6 @@
 package io.github.ilikeyourhat.kudoku.generating
 
+import io.github.ilikeyourhat.kudoku.model.Board
 import io.github.ilikeyourhat.kudoku.model.Field
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.SudokuType
@@ -11,8 +12,9 @@ class RandomRegionGenerator(
 
     fun generateRandomRegions(
         type: SudokuType,
-        fields: List<Field>
+        board: Board
     ): List<Region> {
+        val fields = board.fields()
         val regionCount = fields.size / type.maxValue
         var regions = initialDivision(fields, regionCount)
         regions = adjustment(regions, type.maxValue)

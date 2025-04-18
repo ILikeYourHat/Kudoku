@@ -14,9 +14,8 @@ class FilledSudokuGenerator(
 ) {
 
     fun generate(type: SudokuType): Sudoku {
-        return Sudoku(type).apply {
-            setRandomValidValues(this)
-        }
+        return type.createEmpty(random)
+            .apply { setRandomValidValues(this) }
     }
 
     private fun setRandomValidValues(sudoku: Sudoku) {

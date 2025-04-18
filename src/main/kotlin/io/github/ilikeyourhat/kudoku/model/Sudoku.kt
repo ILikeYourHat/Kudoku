@@ -20,7 +20,13 @@ data class Sudoku(
 
     fun copy(): Sudoku {
         val newBoard = board.copy()
-        val newRegions = type.divider().divide(newBoard)
+        val newRegions = regions
+            .map { oldRegion ->
+                val newFields = oldRegion.map { oldField ->
+                    newBoard.get(oldField.x, oldField.y)
+                }
+                Region(newFields)
+            }
         return Sudoku(type, newBoard, newRegions)
     }
 
@@ -75,6 +81,12 @@ data class Sudoku(
 
         operator fun invoke(type: SudokuType, values: List<Int>): Sudoku {
             return type.createEmpty()
+                .apply { fill(values) }
+        }
+
+        operator fun invoke(type: SudokuType, values: List<Int>, regionIds: List<Int>): Sudoku {
+            require(type is JigsawSudokuType)
+            return type.createEmpty(regionIds)
                 .apply { fill(values) }
         }
     }
