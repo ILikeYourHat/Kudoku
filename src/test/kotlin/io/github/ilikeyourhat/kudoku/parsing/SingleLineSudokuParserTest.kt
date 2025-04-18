@@ -149,7 +149,7 @@ class SingleLineSudokuParserTest {
 
     @Test
     fun `should throw exception when encoding unsupported type`() {
-        val sudoku = Sudoku(SamuraiClassic21x21)
+        val sudoku = SamuraiClassic21x21.createEmpty()
 
         shouldThrow<IllegalArgumentException> {
             parser.toText(sudoku, EmptyFieldIndicator.ZERO)

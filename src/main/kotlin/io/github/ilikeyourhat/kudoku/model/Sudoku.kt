@@ -2,31 +2,9 @@ package io.github.ilikeyourhat.kudoku.model
 
 data class Sudoku(
     val type: SudokuType,
-    val board: Board
+    val board: Board,
+    val regions: List<Region>
 ) {
-
-    val regions: List<Region> = type.divider().divide(board)
-
-    constructor(type: SudokuType) : this(
-        type = type,
-        board = Board(type.sizeX, type.sizeY),
-    )
-
-    constructor(type: SudokuType, values: List<Int>) : this(
-        type = type,
-        board = Board(type.sizeX, type.sizeY)
-    ) {
-        val fields = board.fields()
-        require(fields.size == values.size) {
-            "Incorrect values count, expected ${fields.size}, but was ${values.size}"
-        }
-        values.forEachIndexed { index, value ->
-            require((0..type.maxValue).contains(value)) {
-                "Value $value is not supported by type ${type.name}"
-            }
-            fields[index].set(value)
-        }
-    }
 
     override fun toString(): String {
         return "${type.name} $board"
@@ -41,7 +19,15 @@ data class Sudoku(
     }
 
     fun copy(): Sudoku {
-        return Sudoku(type, board.copy())
+        val newBoard = board.copy()
+        val newRegions = regions
+            .map { oldRegion ->
+                val newFields = oldRegion.map { oldField ->
+                    newBoard.get(oldField.x, oldField.y)
+                }
+                Region(newFields)
+            }
+        return Sudoku(type, newBoard, newRegions)
     }
 
     fun sizeX(): Int {
@@ -73,5 +59,35 @@ data class Sudoku(
 
     fun values(): List<Int> {
         return board.fields().map { it.value }
+    }
+
+    fun fill(values: List<Int>) {
+        val fields = board.fields()
+        require(fields.size == values.size) {
+            "Incorrect values count, expected ${fields.size}, but was ${values.size}"
+        }
+        values.forEachIndexed { index, value ->
+            require((0..type.maxValue).contains(value)) {
+                "Value $value is not supported by type ${type.name}"
+            }
+            fields[index].set(value)
+        }
+    }
+
+    companion object {
+        operator fun invoke(type: SudokuType): Sudoku {
+            return type.createEmpty()
+        }
+
+        operator fun invoke(type: SudokuType, values: List<Int>): Sudoku {
+            return type.createEmpty()
+                .apply { fill(values) }
+        }
+
+        operator fun invoke(type: SudokuType, values: List<Int>, regionIds: List<Int>): Sudoku {
+            require(type is JigsawSudokuType)
+            return type.createEmpty(regionIds)
+                .apply { fill(values) }
+        }
     }
 }

@@ -1,10 +1,8 @@
 package io.github.ilikeyourhat.kudoku.model
 
 data class Region(
-    val fields: Set<Field>
+    val fields: List<Field>
 ) : Iterable<Field> {
-
-    constructor(fields: List<Field>) : this(fields.toSet())
 
     override fun iterator() = fields.iterator()
 
@@ -14,12 +12,12 @@ data class Region(
 
     fun intersect(other: Region): Region {
         val result = fields.filter { other.fields.contains(it) }
-        return Region(result.toSet())
+        return Region(result)
     }
 
     fun subtract(other: Region): Region {
         val result = fields.filterNot { other.fields.contains(it) }
-        return Region(result.toSet())
+        return Region(result)
     }
 
     fun isValid(): Boolean {

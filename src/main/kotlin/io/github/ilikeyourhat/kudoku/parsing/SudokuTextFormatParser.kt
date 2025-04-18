@@ -1,11 +1,12 @@
 package io.github.ilikeyourhat.kudoku.parsing
 
+import io.github.ilikeyourhat.kudoku.model.JigsawSudokuType
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.type.BUILD_IN_TYPES
 import java.io.File
 import java.io.FileNotFoundException
-import java.util.Scanner
+import java.util.*
 import java.util.regex.Pattern
 
 class SudokuTextFormatParser(
@@ -61,8 +62,12 @@ class SudokuTextFormatParser(
             val data = mutableListOf<Int>()
             val type = readType()
             val width = type.sizeX
-            val height = type.sizeY
-            val expectedValuesCount = Sudoku(type).allFields.size
+            val height = if (type is JigsawSudokuType) {
+                type.sizeY * 2
+            } else {
+                type.sizeY
+            }
+            val expectedValuesCount = getExpectedValuesCount(type)
             var y = 0
             while (y < height) {
                 var line = scanner.nextLine()
@@ -81,7 +86,27 @@ class SudokuTextFormatParser(
                 y++
                 if (data.size >= expectedValuesCount) break
             }
-            return Sudoku(type, data)
+            return if (type is JigsawSudokuType) {
+                val (values, regionIds) = data.splitInHalf()
+                Sudoku(type, values, regionIds)
+            } else {
+                Sudoku(type, data)
+            }
+        }
+
+        private fun getExpectedValuesCount(type: SudokuType): Int {
+            return if (type is JigsawSudokuType) {
+                type.createEmpty().allFields.size * 2
+            } else {
+                type.createEmpty().allFields.size
+            }
+        }
+
+        fun <T> List<T>.splitInHalf(): Pair<List<T>, List<T>> {
+            val midIndex = size / 2
+            val firstHalf = subList(0, midIndex)
+            val secondHalf = subList(midIndex, size)
+            return firstHalf to secondHalf
         }
 
         private fun readType(): SudokuType {

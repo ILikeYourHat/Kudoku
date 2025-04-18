@@ -1,6 +1,7 @@
 package io.github.ilikeyourhat.kudoku.model
 
 import io.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
+import kotlin.random.Random
 
 interface SudokuType {
     val name: String
@@ -8,4 +9,13 @@ interface SudokuType {
     val sizeY: Int
     val maxValue: Int
     fun divider(): RegionDivider
+
+    fun createEmpty(random: Random = Random): Sudoku {
+        val board = Board(sizeX, sizeY)
+        return Sudoku(
+            type = this,
+            board = board,
+            regions = divider().divide(this, board)
+        )
+    }
 }
