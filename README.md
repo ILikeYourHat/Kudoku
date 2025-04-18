@@ -78,7 +78,7 @@ Support for popular text formats:
 ```kotlin
 val string = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
 val sudoku = Kudoku.createFromSingleLineString(string)
-val encoded = sudoku.toSingleLineString(emptyFieldIndicator = EmptyFieldIndicator.DOT)
+val encoded = sudoku.toSingleLineString(emptyCellIndicator = EmptyCellIndicator.DOT)
 ```
 
 Create a random Sudoku with a given difficulty:
