@@ -1,6 +1,5 @@
 package io.github.ilikeyourhat.kudoku.generating
 
-import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
 import io.github.ilikeyourhat.kudoku.type.SamuraiClassic21x21
