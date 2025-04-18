@@ -22,12 +22,12 @@ class SingleLineSudokuParser {
 
     fun toText(
         sudoku: Sudoku,
-        emptyFieldIndicator: EmptyFieldIndicator
+        emptyCellIndicator: EmptyCellIndicator
     ): String {
         require(sudoku.isSupported()) { "Unsupported sudoku type: ${sudoku.type.name}" }
 
-        return sudoku.allFields
-            .map { encodeValue(it.value, emptyFieldIndicator) }
+        return sudoku.allCells
+            .map { encodeValue(it.value, emptyCellIndicator) }
             .joinToString("")
     }
 
@@ -45,9 +45,9 @@ class SingleLineSudokuParser {
         return typeMap.containsValue(type)
     }
 
-    private fun encodeValue(value: Int, emptyFieldIndicator: EmptyFieldIndicator): Char {
+    private fun encodeValue(value: Int, emptyCellIndicator: EmptyCellIndicator): Char {
         return when (value) {
-            0 -> emptyFieldIndicator.value
+            0 -> emptyCellIndicator.value
             in 1..9 -> value.digitToChar()
             in 10..25 -> 'A'.plus(value - 10)
             else -> throw IllegalArgumentException("Value $value is not supported")
@@ -59,7 +59,7 @@ class SingleLineSudokuParser {
             in '1'..'9' -> value.digitToInt()
             in 'A'..LAST_SUPPORTED_LETTER_UPPERCASE -> value.code - 'A'.code + 10
             in 'a'..LAST_SUPPORTED_LETTER_LOWERCASE -> value.code - 'a'.code + 10
-            in EMPTY_FIELD_INDICATORS -> 0
+            in EMPTY_CELL_INDICATORS -> 0
             else -> throw IllegalArgumentException("Value $value is not supported")
         }
     }
@@ -67,6 +67,6 @@ class SingleLineSudokuParser {
     private companion object {
         const val LAST_SUPPORTED_LETTER_UPPERCASE = 'P'
         const val LAST_SUPPORTED_LETTER_LOWERCASE = 'p'
-        val EMPTY_FIELD_INDICATORS = EmptyFieldIndicator.entries.map { it.value }
+        val EMPTY_CELL_INDICATORS = EmptyCellIndicator.entries.map { it.value }
     }
 }

@@ -24,18 +24,18 @@ class HiddenValuesAlgorithm(
         val allHintValues = possibilities.forRegion(region)
         combinator.iterate(allHintValues) { result ->
             val values = result.toSet()
-            val fields = countFieldsThatContainsValues(region, values)
-            if (fields == size) {
+            val cells = countCellsThatContainsValues(region, values)
+            if (cells == size) {
                 changed = changed or removeAllOtherValues(region, values)
             }
         }
         return changed
     }
 
-    private fun countFieldsThatContainsValues(region: Region, values: Set<Int>): Int {
+    private fun countCellsThatContainsValues(region: Region, values: Set<Int>): Int {
         var sum = 0
-        for (field in region) {
-            val hints = possibilities.forField(field)
+        for (cell in region) {
+            val hints = possibilities.forCell(cell)
             if (!Collections.disjoint(hints, values)) {
                 sum++
             }
@@ -45,14 +45,14 @@ class HiddenValuesAlgorithm(
 
     private fun removeAllOtherValues(region: Region, values: Set<Int>): Boolean {
         var changed = false
-        for (field in region) {
-            val hints = possibilities.forField(field).toMutableSet()
+        for (cell in region) {
+            val hints = possibilities.forCell(cell).toMutableSet()
             val initialSize = hints.size
             if (!Collections.disjoint(hints, values)) {
                 hints.removeIf { !values.contains(it) }
             }
             if (initialSize != hints.size) {
-                possibilities.replace(field, hints)
+                possibilities.replace(cell, hints)
                 changed = true
             }
         }

@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.solving.sat
 
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.solving.SolutionCount
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolutionChecker
@@ -38,7 +38,7 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
 
         private fun initEngine(sudoku: Sudoku) {
             addCausesForRegions(sudoku)
-            addCausesForFields(sudoku)
+            addCausesForCells(sudoku)
         }
 
         private fun Sudoku.applyModel(model: List<Int>) {
@@ -46,15 +46,15 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
                 .forEach { index ->
                     val (x, y) = indexEncoder.decodePoint(index)
                     val value = indexEncoder.decodeValue(index)
-                    atField(x, y).set(value)
+                    atCell(x, y).set(value)
                 }
         }
 
-        private fun addCausesForFields(sudoku: Sudoku) {
-            for (field in sudoku.allFields) {
-                engine.addExactly(createValues(field))
-                if (!field.isEmpty) {
-                    val index = indexEncoder.encode(field.position(), field.value())
+        private fun addCausesForCells(sudoku: Sudoku) {
+            for (cell in sudoku.allCells) {
+                engine.addExactly(createValues(cell))
+                if (!cell.isEmpty) {
+                    val index = indexEncoder.encode(cell.position(), cell.value())
                     engine.addClause(listOf(index))
                 }
             }
@@ -73,10 +73,10 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
             }
         }
 
-        private fun createValues(field: Field): List<Int> {
+        private fun createValues(cell: Cell): List<Int> {
             val list = mutableListOf<Int>()
             for (value in 1..sudoku.type.maxValue) {
-                val index = indexEncoder.encode(field.position(), value)
+                val index = indexEncoder.encode(cell.position(), value)
                 list.add(index)
             }
             return list

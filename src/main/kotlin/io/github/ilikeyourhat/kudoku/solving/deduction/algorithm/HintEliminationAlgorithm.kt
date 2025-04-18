@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.solving.deduction.algorithm
 
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.hint.SudokuHintGrid
 
@@ -23,17 +23,17 @@ class HintEliminationAlgorithm(
 
     override fun solve(region: Region): Boolean {
         var changed = false
-        for (field in region.fullFields()) {
+        for (cell in region.fullCells()) {
             changed = changed or
-                ensureFullFieldHaveNoHints(field) or
-                removeHintFromRegion(region, field.value())
+                ensureFullCellHaveNoHints(cell) or
+                removeHintFromRegion(region, cell.value())
         }
         return changed
     }
 
-    private fun ensureFullFieldHaveNoHints(field: Field): Boolean {
-        if (!possibilities.isEmpty(field)) {
-            possibilities.clear(field)
+    private fun ensureFullCellHaveNoHints(cell: Cell): Boolean {
+        if (!possibilities.isEmpty(cell)) {
+            possibilities.clear(cell)
             return true
         }
         return false
@@ -41,8 +41,8 @@ class HintEliminationAlgorithm(
 
     private fun removeHintFromRegion(region: Region, value: Int): Boolean {
         var changed = false
-        for (field in region) {
-            changed = changed or possibilities.remove(field, value)
+        for (cell in region) {
+            changed = changed or possibilities.remove(cell, value)
         }
         return changed
     }

@@ -24,11 +24,11 @@ class SudokuShuffler(
         val previousValues = 1..type.maxValue
         val newValues = previousValues.shuffled(random)
 
-        allFields
+        allCells
             .filter { !it.isEmpty }
-            .forEach { field ->
-                val previousValueIndex = previousValues.indexOf(field.value)
-                field.value = newValues[previousValueIndex]
+            .forEach { cell ->
+                val previousValueIndex = previousValues.indexOf(cell.value)
+                cell.value = newValues[previousValueIndex]
             }
     }
 
@@ -36,10 +36,10 @@ class SudokuShuffler(
         val sizeSqrt = origin.sizeSqrt()
         val shuffledX = randomIndexMapping(sizeSqrt)
         val shuffledY = randomIndexMapping(sizeSqrt)
-        origin.allFields.forEach { field ->
-            val targetX = shuffledX[field.x]
-            val targetY = shuffledY[field.y]
-            atField(targetX, targetY).set(field.value)
+        origin.allCells.forEach { cell ->
+            val targetX = shuffledX[cell.x]
+            val targetY = shuffledY[cell.y]
+            atCell(targetX, targetY).set(cell.value)
         }
     }
 

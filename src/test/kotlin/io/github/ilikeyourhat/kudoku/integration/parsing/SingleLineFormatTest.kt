@@ -2,7 +2,7 @@ package io.github.ilikeyourhat.kudoku.integration.parsing
 
 import io.github.ilikeyourhat.kudoku.Kudoku
 import io.github.ilikeyourhat.kudoku.model.Sudoku
-import io.github.ilikeyourhat.kudoku.parsing.EmptyFieldIndicator
+import io.github.ilikeyourhat.kudoku.parsing.EmptyCellIndicator
 import io.github.ilikeyourhat.kudoku.parsing.toSingleLineString
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.kotest.matchers.equals.shouldBeEqual
@@ -24,7 +24,7 @@ class SingleLineFormatTest {
 
         sudoku.toSingleLineString()
             .shouldBeEqual("0010300004001040")
-        sudoku.toSingleLineString(emptyFieldIndicator = EmptyFieldIndicator.DOT)
+        sudoku.toSingleLineString(emptyCellIndicator = EmptyCellIndicator.DOT)
             .shouldBeEqual("..1.3....4..1.4.")
     }
 

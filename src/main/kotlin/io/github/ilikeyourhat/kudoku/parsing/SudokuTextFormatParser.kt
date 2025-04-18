@@ -96,9 +96,9 @@ class SudokuTextFormatParser(
 
         private fun getExpectedValuesCount(type: SudokuType): Int {
             return if (type is JigsawSudokuType) {
-                type.createEmpty().allFields.size * 2
+                type.createEmpty().allCells.size * 2
             } else {
-                type.createEmpty().allFields.size
+                type.createEmpty().allCells.size
             }
         }
 
@@ -122,7 +122,7 @@ class SudokuTextFormatParser(
         private fun parse(input: String): Int? {
             return when {
                 isEmptyValue(input) -> 0
-                isNoField(input) -> null
+                isNoCell(input) -> null
                 else -> asNumber(input)
             }
         }
@@ -131,8 +131,8 @@ class SudokuTextFormatParser(
             return EMPTY_VALUE.matcher(input).matches()
         }
 
-        private fun isNoField(input: String): Boolean {
-            return NO_FIELD.matcher(input).matches()
+        private fun isNoCell(input: String): Boolean {
+            return NO_CELL.matcher(input).matches()
         }
 
         private fun asNumber(input: String): Int {
@@ -142,6 +142,6 @@ class SudokuTextFormatParser(
 
     companion object {
         private val EMPTY_VALUE = Pattern.compile("^_*$")
-        private val NO_FIELD = Pattern.compile("^#*$")
+        private val NO_CELL = Pattern.compile("^#*$")
     }
 }

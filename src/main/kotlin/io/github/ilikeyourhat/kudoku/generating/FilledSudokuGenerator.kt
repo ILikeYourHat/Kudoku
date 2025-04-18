@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.generating
 
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.solving.SolutionCount
@@ -19,16 +19,16 @@ class FilledSudokuGenerator(
     }
 
     private fun setRandomValidValues(sudoku: Sudoku) {
-        sudoku.allFields
+        sudoku.allCells
             .shuffled(random)
-            .forEach { field -> setRandomValidValue(sudoku, field) }
+            .forEach { cell -> setRandomValidValue(sudoku, cell) }
     }
 
-    private fun setRandomValidValue(sudoku: Sudoku, field: Field) {
+    private fun setRandomValidValue(sudoku: Sudoku, cell: Cell) {
         (1..sudoku.type.maxValue)
             .shuffled(random)
             .asSequence()
-            .onEach { field.set(it) }
+            .onEach { cell.set(it) }
             .first { sudoku.hasSolution() }
     }
 

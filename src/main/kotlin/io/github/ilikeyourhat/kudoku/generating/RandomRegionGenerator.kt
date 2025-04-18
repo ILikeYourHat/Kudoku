@@ -1,7 +1,7 @@
 package io.github.ilikeyourhat.kudoku.generating
 
 import io.github.ilikeyourhat.kudoku.model.Board
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import kotlin.random.Random
@@ -14,21 +14,21 @@ class RandomRegionGenerator(
         type: SudokuType,
         board: Board
     ): List<Region> {
-        val fields = board.fields()
-        val regionCount = fields.size / type.maxValue
-        var regions = initialDivision(fields, regionCount)
+        val cells = board.cells()
+        val regionCount = cells.size / type.maxValue
+        var regions = initialDivision(cells, regionCount)
         regions = adjustment(regions, type.maxValue)
         return regions.map { Region(it) }
     }
 
-    private fun initialDivision(fields: List<Field>, regionSize: Int): List<MutableList<Field>> {
-        val cells = fields.toMutableList()
-        val seeds = cells.shuffled(random).take(regionSize)
-        cells.removeAll(seeds)
+    private fun initialDivision(cells: List<Cell>, regionSize: Int): List<MutableList<Cell>> {
+        val cellsList = cells.toMutableList()
+        val seeds = cellsList.shuffled(random).take(regionSize)
+        cellsList.removeAll(seeds)
         val regions = seeds.map { mutableListOf(it) }
 
-        while (cells.isNotEmpty()) {
-            val cell = cells.random(random)
+        while (cellsList.isNotEmpty()) {
+            val cell = cellsList.random(random)
             regions.shuffled(random)
             var found = false
 
@@ -36,7 +36,7 @@ class RandomRegionGenerator(
                 if (found) break
                 val adjacent = region.any { it.isAdjacent(cell) }
                 if (adjacent) {
-                    cells.remove(cell)
+                    cellsList.remove(cell)
                     region.add(cell)
                     found = true
                 }
@@ -45,7 +45,7 @@ class RandomRegionGenerator(
         return regions
     }
 
-    private fun adjustment(regions: List<MutableList<Field>>, desiredRegionSize: Int): List<MutableList<Field>> {
+    private fun adjustment(regions: List<MutableList<Cell>>, desiredRegionSize: Int): List<MutableList<Cell>> {
         while (regions.any { it.size != desiredRegionSize }) {
             val region = regions.random(random)
             if (region.size < desiredRegionSize) {
@@ -59,15 +59,15 @@ class RandomRegionGenerator(
     }
 
     private fun takeCellFromOtherRegion(
-        region: MutableList<Field>,
-        regions: List<MutableList<Field>>
+        region: MutableList<Cell>,
+        regions: List<MutableList<Cell>>
     ) {
         val candidates = regions.flatten()
             .filterNot { it in region }
             .filter { cell -> region.any { it.isAdjacent(cell) } }
 
         val candidate = candidates.shuffled(random)
-            .firstOrNull { isRegionStillValidWithoutField(regions, it) }
+            .firstOrNull { isRegionStillValidWithoutCell(regions, it) }
 
         if (candidate != null) {
             regions.forEach { it.remove(candidate) }
@@ -76,32 +76,32 @@ class RandomRegionGenerator(
     }
 
     private fun giveCellToOtherRegion(
-        region: MutableList<Field>,
-        regions: List<MutableList<Field>>
+        region: MutableList<Cell>,
+        regions: List<MutableList<Cell>>
     ) {
         val candidate = region.shuffled(random)
-            .filter { isRegionStillValidWithoutField(regions, it) }
+            .filter { isRegionStillValidWithoutCell(regions, it) }
             .firstOrNull { cell ->
                 regions.minusElement(region)
-                    .any { it.any { field -> field.isAdjacent(cell) } }
+                    .any { it.any { otherCell -> cell.isAdjacent(otherCell) } }
             }
 
         if (candidate != null) {
             region.remove(candidate)
             regions.minusElement(region)
-                .first { it.any { field -> field.isAdjacent(candidate) } }
+                .first { it.any { cell -> cell.isAdjacent(candidate) } }
                 .add(candidate)
         }
     }
 
-    private fun isRegionStillValidWithoutField(
-        regions: List<MutableList<Field>>,
-        cell: Field
+    private fun isRegionStillValidWithoutCell(
+        regions: List<MutableList<Cell>>,
+        cell: Cell
     ): Boolean {
         val affectedRegion = regions.first { it.contains(cell) }.minus(cell)
         if (affectedRegion.isEmpty()) return false
-        val group = mutableSetOf<Field>()
-        val stack = ArrayDeque<Field>()
+        val group = mutableSetOf<Cell>()
+        val stack = ArrayDeque<Cell>()
         stack.add(affectedRegion.first())
 
         while (stack.isNotEmpty()) {

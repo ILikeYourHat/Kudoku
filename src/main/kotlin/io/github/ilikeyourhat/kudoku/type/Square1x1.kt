@@ -12,6 +12,6 @@ object Square1x1 : SudokuType {
 
     override fun divider(): RegionDivider {
         return RegionDivider()
-            .allFields()
+            .allCells()
     }
 }

@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.parsing
 
-enum class EmptyFieldIndicator(val value: Char) {
+enum class EmptyCellIndicator(val value: Char) {
     ZERO('0'),
     DOT('.'),
     X('X'),

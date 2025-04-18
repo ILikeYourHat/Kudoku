@@ -29,7 +29,7 @@ class SingleLineSudokuParserTest {
             "  1 3    4  1 4 "
         ]
     )
-    fun `should handle multiple empty field indicators`(encodedSudoku: String) {
+    fun `should handle multiple empty cell indicators`(encodedSudoku: String) {
         val sudoku = Sudoku(
             Classic4x4,
             listOf(
@@ -103,8 +103,8 @@ class SingleLineSudokuParserTest {
         delimiter = '|',
         ignoreLeadingAndTrailingWhitespace = false
     )
-    fun `should handle multiple empty field indicators`(
-        emptyFieldIndicator: EmptyFieldIndicator,
+    fun `should handle multiple empty cell indicators`(
+        emptyCellIndicator: EmptyCellIndicator,
         expectedString: String
     ) {
         val sudoku = Sudoku(
@@ -117,7 +117,7 @@ class SingleLineSudokuParserTest {
             )
         )
 
-        parser.toText(sudoku, emptyFieldIndicator)
+        parser.toText(sudoku, emptyCellIndicator)
             .shouldBeEqual(expectedString)
     }
 
@@ -141,7 +141,7 @@ class SingleLineSudokuParserTest {
         val possibleValues = "123456789ABCDEFGHIJKLMNOP"
             .slice(0 until type.maxValue)
 
-        val encodedSudoku = parser.toText(sudoku, EmptyFieldIndicator.ZERO)
+        val encodedSudoku = parser.toText(sudoku, EmptyCellIndicator.ZERO)
 
         encodedSudoku
             .shouldBeEqual(possibleValues.repeat(possibleValues.length))
@@ -152,7 +152,7 @@ class SingleLineSudokuParserTest {
         val sudoku = SamuraiClassic21x21.createEmpty()
 
         shouldThrow<IllegalArgumentException> {
-            parser.toText(sudoku, EmptyFieldIndicator.ZERO)
+            parser.toText(sudoku, EmptyCellIndicator.ZERO)
         }.shouldHaveMessage("Unsupported sudoku type: samurai_classic_21x21")
     }
 }

@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.solving.bruteforce
 
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
@@ -13,35 +13,35 @@ class BruteForceSolver(
     override fun solve(sudoku: Sudoku): Sudoku {
         val result = sudoku.copy()
         val lookup = RegionLookup(result)
-        val fields = result.allFields
+        val cells = result.allCells
             .filter { it.isEmpty }
             .applyRandomOrder()
 
-        runAlgorithm(result.type, fields, lookup)
+        runAlgorithm(result.type, cells, lookup)
         return result
     }
 
     private fun runAlgorithm(
         type: SudokuType,
-        fields: List<Field>,
+        cells: List<Cell>,
         lookup: RegionLookup
     ) {
         var position = 0
-        loop@ while (fields.indices.contains(position)) {
-            val field = fields[position]
-            for (value in field.value..<type.maxValue) {
-                field.set(value + 1)
-                if (lookup.isGridCorrectAfterChange(field)) {
+        loop@ while (cells.indices.contains(position)) {
+            val cell = cells[position]
+            for (value in cell.value..<type.maxValue) {
+                cell.set(value + 1)
+                if (lookup.isGridCorrectAfterChange(cell)) {
                     position++
                     continue@loop
                 }
             }
-            field.clear()
+            cell.clear()
             position--
         }
     }
 
-    private fun List<Field>.applyRandomOrder(): List<Field> {
+    private fun List<Cell>.applyRandomOrder(): List<Cell> {
         return if (random != null) {
             this.shuffled(random)
         } else {
@@ -51,15 +51,15 @@ class BruteForceSolver(
 
     private class RegionLookup(sudoku: Sudoku) {
 
-        private val regionsMap = sudoku.allFields
-            .associate { field ->
-                field.position to sudoku.regions.filter { region ->
-                    region.contains(field)
+        private val regionsMap = sudoku.allCells
+            .associate { cell ->
+                cell.position to sudoku.regions.filter { region ->
+                    region.contains(cell)
                 }
             }
 
-        fun isGridCorrectAfterChange(field: Field): Boolean {
-            return regionsMap.getValue(field.position)
+        fun isGridCorrectAfterChange(cell: Cell): Boolean {
+            return regionsMap.getValue(cell.position)
                 .all { it.isValid() }
         }
     }

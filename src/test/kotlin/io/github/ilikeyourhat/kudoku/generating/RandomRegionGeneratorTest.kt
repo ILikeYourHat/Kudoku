@@ -35,9 +35,9 @@ class RandomRegionGeneratorTest {
             val regions = generator.generateRandomRegions(type, board)
 
             regions.flatten()
-                .shouldHaveSize(board.fields().size)
+                .shouldHaveSize(board.cells().size)
                 .distinct()
-                .shouldHaveSize(board.fields().size)
+                .shouldHaveSize(board.cells().size)
         }
     }
 
