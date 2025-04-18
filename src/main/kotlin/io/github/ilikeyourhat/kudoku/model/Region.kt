@@ -4,8 +4,6 @@ data class Region(
     val fields: List<Field>
 ) : Iterable<Field> {
 
-    constructor(fields: Set<Field>) : this(fields.toList())
-
     override fun iterator() = fields.iterator()
 
     fun size() = fields.size
