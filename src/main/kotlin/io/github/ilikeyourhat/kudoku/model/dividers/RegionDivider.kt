@@ -2,7 +2,7 @@ package io.github.ilikeyourhat.kudoku.model.dividers
 
 import io.github.ilikeyourhat.kudoku.generating.RandomRegionGenerator
 import io.github.ilikeyourhat.kudoku.model.Board
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import kotlin.random.Random
@@ -53,15 +53,15 @@ class RegionDivider {
 
     fun divideByRegionId(regionIds: List<Int>) = apply {
         dividers.add { _, board ->
-            val fields = board.fields()
-            require(fields.size == regionIds.size)
-            regionIds.zip(fields)
+            val cells = board.cells()
+            require(cells.size == regionIds.size)
+            regionIds.zip(cells)
                 .groupBy({ it.first }, { it.second })
                 .map { Region(it.value) }
         }
     }
 
-    fun allFields() = apply {
+    fun allCells() = apply {
         dividers.add { _, board ->
             listOf(board.region(0, 0, board.sizeX() - 1, board.sizeY() - 1))
         }
@@ -70,22 +70,22 @@ class RegionDivider {
     fun primaryDiagonal() = apply {
         dividers.add { _, board ->
             require(board.sizeX() == board.sizeY())
-            val fields = mutableListOf<Field>()
+            val cells = mutableListOf<Cell>()
             for (x in 0 until board.sizeX()) {
-                fields += board.get(x, x)
+                cells += board.get(x, x)
             }
-            listOf(Region(fields))
+            listOf(Region(cells))
         }
     }
 
     fun antiDiagonal() = apply {
         dividers.add { _, board ->
             require(board.sizeX() == board.sizeY())
-            val fields = mutableListOf<Field>()
+            val cells = mutableListOf<Cell>()
             for (x in 0 until board.sizeX()) {
-                fields += board.get(x, board.sizeY() - x - 1)
+                cells += board.get(x, board.sizeY() - x - 1)
             }
-            listOf(Region(fields))
+            listOf(Region(cells))
         }
     }
 

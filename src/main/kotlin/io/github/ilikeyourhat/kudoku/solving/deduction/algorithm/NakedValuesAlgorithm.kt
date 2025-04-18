@@ -19,8 +19,8 @@ class NakedValuesAlgorithm(
     override fun solve(region: Region): Boolean {
         val list = mutableListOf<Set<Int>>()
         var changed = false
-        for (field in region) {
-            val hints = possibilities.forField(field)
+        for (cell in region) {
+            val hints = possibilities.forCell(cell)
             if (hints.isNotEmpty()) {
                 list.add(hints)
             }
@@ -40,10 +40,10 @@ class NakedValuesAlgorithm(
 
     private fun clearFromRegion(region: Region, hintsToRemove: Set<Int>): Boolean {
         var changed = false
-        for (field in region) {
-            val hints = possibilities.forField(field)
+        for (cell in region) {
+            val hints = possibilities.forCell(cell)
             if (hints.isNotEmpty() && shouldBeCleared(hints, hintsToRemove)) {
-                possibilities.removeAll(field, hintsToRemove)
+                possibilities.removeAll(cell, hintsToRemove)
                 changed = true
             }
         }

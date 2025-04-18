@@ -15,10 +15,10 @@ class NakedSinglesAlgorithm(
     }
 
     override fun solve(region: Region): Boolean {
-        for (field in region.emptyFields()) {
-            val values = possibilities.forField(field)
+        for (cell in region.emptyCells()) {
+            val values = possibilities.forCell(cell)
             if (values.size == 1) {
-                field.set(values.single())
+                cell.set(values.single())
                 return true
             }
         }

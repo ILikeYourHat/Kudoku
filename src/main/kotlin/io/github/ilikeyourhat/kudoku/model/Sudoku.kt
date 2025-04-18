@@ -10,22 +10,22 @@ data class Sudoku(
         return "${type.name} $board"
     }
 
-    fun atFieldOrNull(x: Int, y: Int): Field? {
+    fun atCellOrNull(x: Int, y: Int): Cell? {
         return board.getOrNull(x, y)
     }
 
-    fun atField(x: Int, y: Int): Field {
-        return board.getOrNull(x, y) ?: throw NoSuchElementException("Missing field at position $x,$y")
+    fun atCell(x: Int, y: Int): Cell {
+        return board.getOrNull(x, y) ?: throw NoSuchElementException("Missing cell at position $x,$y")
     }
 
     fun copy(): Sudoku {
         val newBoard = board.copy()
         val newRegions = regions
             .map { oldRegion ->
-                val newFields = oldRegion.map { oldField ->
-                    newBoard.get(oldField.x, oldField.y)
+                val newCells = oldRegion.map { oldCell ->
+                    newBoard.get(oldCell.x, oldCell.y)
                 }
-                Region(newFields)
+                Region(newCells)
             }
         return Sudoku(type, newBoard, newRegions)
     }
@@ -39,7 +39,7 @@ data class Sudoku(
     }
 
     fun isCompleted(): Boolean {
-        return board.fields()
+        return board.cells()
             .none { it.isEmpty }
     }
 
@@ -52,25 +52,25 @@ data class Sudoku(
     }
 
     fun isEmpty(): Boolean {
-        return board.fields().all { it.isEmpty }
+        return board.cells().all { it.isEmpty }
     }
 
-    val allFields = board.fields()
+    val allCells = board.cells()
 
     fun values(): List<Int> {
-        return board.fields().map { it.value }
+        return board.cells().map { it.value }
     }
 
     fun fill(values: List<Int>) {
-        val fields = board.fields()
-        require(fields.size == values.size) {
-            "Incorrect values count, expected ${fields.size}, but was ${values.size}"
+        val cells = board.cells()
+        require(cells.size == values.size) {
+            "Incorrect values count, expected ${cells.size}, but was ${values.size}"
         }
         values.forEachIndexed { index, value ->
             require((0..type.maxValue).contains(value)) {
                 "Value $value is not supported by type ${type.name}"
             }
-            fields[index].set(value)
+            cells[index].set(value)
         }
     }
 

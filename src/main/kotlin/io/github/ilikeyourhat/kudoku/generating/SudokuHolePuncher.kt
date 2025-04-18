@@ -28,13 +28,13 @@ class SudokuHolePuncher(
     }
 
     private fun tryToPunchHoles(sudoku: Sudoku, minDifficulty: Difficulty) {
-        sudoku.allFields
+        sudoku.allCells
             .shuffled(random)
-            .forEach { field ->
-                val value = field.value
-                field.clear()
+            .forEach { cell ->
+                val value = cell.value
+                cell.clear()
                 if (rater.rate(sudoku) > minDifficulty) {
-                    field.set(value)
+                    cell.set(value)
                 }
             }
     }

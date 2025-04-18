@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.model.hint
 
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Point
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.Sudoku
@@ -9,52 +9,52 @@ data class SudokuHintGrid(
     private val hintMap: Map<Point, MutableSet<Int>>
 ) {
 
-    fun forField(field: Field): Set<Int> {
-        return getFor(field).toSet()
+    fun forCell(cell: Cell): Set<Int> {
+        return getFor(cell).toSet()
     }
 
     fun forRegion(region: Region): Set<Int> {
-        return region.fields
-            .fold(emptySet()) { set, field -> set + getFor(field) }
+        return region.cells
+            .fold(emptySet()) { set, cell -> set + getFor(cell) }
     }
 
-    fun isEmpty(field: Field): Boolean {
-        return getFor(field).isEmpty()
+    fun isEmpty(cell: Cell): Boolean {
+        return getFor(cell).isEmpty()
     }
 
-    fun clear(field: Field) {
-        getFor(field).clear()
+    fun clear(cell: Cell) {
+        getFor(cell).clear()
     }
 
-    fun remove(field: Field, value: Int): Boolean {
-        return getFor(field).remove(value)
+    fun remove(cell: Cell, value: Int): Boolean {
+        return getFor(cell).remove(value)
     }
 
     fun remove(region: Region, value: Int): Boolean {
         var removed = false
-        for (field in region) {
-            removed = removed or getFor(field).remove(value)
+        for (cell in region) {
+            removed = removed or getFor(cell).remove(value)
         }
         return removed
     }
 
-    fun contains(field: Field, value: Int): Boolean {
-        return getFor(field).contains(value)
+    fun contains(cell: Cell, value: Int): Boolean {
+        return getFor(cell).contains(value)
     }
 
-    fun replace(field: Field, hints: Set<Int>) {
-        getFor(field).apply {
+    fun replace(cell: Cell, hints: Set<Int>) {
+        getFor(cell).apply {
             clear()
             addAll(hints)
         }
     }
 
-    fun removeAll(field: Field, hintsToRemove: Set<Int>): Boolean {
-        return getFor(field).removeAll(hintsToRemove)
+    fun removeAll(cell: Cell, hintsToRemove: Set<Int>): Boolean {
+        return getFor(cell).removeAll(hintsToRemove)
     }
 
-    private fun getFor(field: Field): MutableSet<Int> {
-        return hintMap.getValue(field.position())
+    private fun getFor(cell: Cell): MutableSet<Int> {
+        return hintMap.getValue(cell.position())
     }
 
     companion object {
@@ -62,7 +62,7 @@ data class SudokuHintGrid(
         fun create(sudoku: Sudoku): SudokuHintGrid {
             val possibleValues = 1..sudoku.type.maxValue
 
-            val hintMap = sudoku.allFields
+            val hintMap = sudoku.allCells
                 .associate { it.position to possibleValues.toMutableSet() }
 
             return SudokuHintGrid(hintMap)

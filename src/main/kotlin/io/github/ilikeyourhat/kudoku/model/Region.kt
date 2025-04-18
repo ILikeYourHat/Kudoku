@@ -1,40 +1,40 @@
 package io.github.ilikeyourhat.kudoku.model
 
 data class Region(
-    val fields: List<Field>
-) : Iterable<Field> {
+    val cells: List<Cell>
+) : Iterable<Cell> {
 
-    override fun iterator() = fields.iterator()
+    override fun iterator() = cells.iterator()
 
-    fun size() = fields.size
+    fun size() = cells.size
 
-    fun isEmpty() = fields.isEmpty()
+    fun isEmpty() = cells.isEmpty()
 
     fun intersect(other: Region): Region {
-        val result = fields.filter { other.fields.contains(it) }
+        val result = cells.filter { other.cells.contains(it) }
         return Region(result)
     }
 
     fun subtract(other: Region): Region {
-        val result = fields.filterNot { other.fields.contains(it) }
+        val result = cells.filterNot { other.cells.contains(it) }
         return Region(result)
     }
 
     fun isValid(): Boolean {
         val set = mutableSetOf<Int>()
-        for (field in fields) {
-            if (!field.isEmpty && !set.add(field.value)) {
+        for (cell in cells) {
+            if (!cell.isEmpty && !set.add(cell.value)) {
                 return false
             }
         }
         return true
     }
 
-    fun fullFields(): List<Field> {
-        return fields.filterNot { it.isEmpty }
+    fun fullCells(): List<Cell> {
+        return cells.filterNot { it.isEmpty }
     }
 
-    fun emptyFields(): List<Field> {
-        return fields.filter { it.isEmpty }
+    fun emptyCells(): List<Cell> {
+        return cells.filter { it.isEmpty }
     }
 }

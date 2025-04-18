@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.solving.deduction.algorithm
 
-import io.github.ilikeyourhat.kudoku.model.Field
+import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.hint.SudokuHintGrid
 
@@ -17,10 +17,10 @@ class HiddenSinglesAlgorithm(
 
     override fun solve(region: Region): Boolean {
         for (value in 1..region.size()) {
-            val occurrences = mutableSetOf<Field>()
-            for (field in region) {
-                if (possibilities.contains(field, value)) {
-                    occurrences.add(field)
+            val occurrences = mutableSetOf<Cell>()
+            for (cell in region) {
+                if (possibilities.contains(cell, value)) {
+                    occurrences.add(cell)
                 }
             }
             if (occurrences.size == 1) {

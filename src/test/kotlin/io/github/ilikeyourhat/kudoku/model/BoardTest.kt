@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertThrows
 class BoardTest {
 
     @Test
-    fun createGridWithNoFieldsAndCheckSize() {
+    fun createGridWithNoCellsAndCheckSize() {
         val sudoku = createGridWithSize(0, 0)
         assertEquals(0, sudoku.sizeX())
         assertEquals(0, sudoku.sizeY())
@@ -44,7 +44,7 @@ class BoardTest {
     }
 
     @Test
-    fun checkIfGridFieldsHaveNoValuesAfterCreation() {
+    fun checkIfGridCellsHaveNoValuesAfterCreation() {
         val sudoku = createGridWithSize(2, 2)
         for (x in 0..1) {
             for (y in 0..1) {
@@ -54,7 +54,7 @@ class BoardTest {
     }
 
     @Test
-    fun checkIfFieldsAreInitializedCorrectWhenValuesAreGiven() {
+    fun checkIfCellsAreInitializedCorrectWhenValuesAreGiven() {
         val values = listOf<Int?>(1, 2, 3, 4)
         val board = Board(2, 2, values)
         assertFalse(board.getOrNull(0, 0)!!.isEmpty)
@@ -90,6 +90,6 @@ class BoardTest {
     }
 
     private fun createGridWithSize(sizeX: Int, sizeY: Int): Board {
-        return Board(sizeX, sizeY) { x, y -> Field(x, y) }
+        return Board(sizeX, sizeY) { x, y -> Cell(x, y) }
     }
 }
