@@ -4,6 +4,7 @@ import io.github.ilikeyourhat.kudoku.Kudoku
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.type.Butterfly12x12
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
+import io.github.ilikeyourhat.kudoku.type.Jigsaw4x4
 import io.github.ilikeyourhat.kudoku.type.Jigsaw9x9
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -81,5 +82,13 @@ class SudokuGeneratingTest {
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
         assertEquals(Difficulty.HARD, Kudoku.rate(sudoku))
+    }
+
+    @Test
+    fun `should generate valid Jigsaw4x4 sudoku giving that empty one can be already invalid`() {
+        repeat(100) {
+            val sudoku = Kudoku.create(Jigsaw4x4, random = random)
+            assertNotEquals(Difficulty.UNSOLVABLE, Kudoku.rate(sudoku))
+        }
     }
 }

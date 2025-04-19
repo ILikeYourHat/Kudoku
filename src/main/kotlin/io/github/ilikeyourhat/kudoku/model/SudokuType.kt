@@ -15,7 +15,8 @@ interface SudokuType {
         return Sudoku(
             type = this,
             board = board,
-            regions = divider().divide(this, board)
+            constantRegions = divider().divide(this, board),
+            randomizedRegions = emptyList()
         )
     }
 }
