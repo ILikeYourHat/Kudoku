@@ -1,5 +1,6 @@
 package io.github.ilikeyourhat.kudoku.model
 
+import io.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
 import kotlin.random.Random
 
 interface JigsawSudokuType : SudokuType {
@@ -9,7 +10,9 @@ interface JigsawSudokuType : SudokuType {
         return Sudoku(
             type = this,
             board = board,
-            regions = divider()
+            constantRegions = divider()
+                .divide(this, board),
+            randomizedRegions = RegionDivider()
                 .divideRandomly(random)
                 .divide(this, board)
         )
@@ -20,7 +23,9 @@ interface JigsawSudokuType : SudokuType {
         return Sudoku(
             type = this,
             board = board,
-            regions = divider()
+            constantRegions = divider()
+                .divide(this, board),
+            randomizedRegions = RegionDivider()
                 .divideByRegionId(regionIds)
                 .divide(this, board)
         )

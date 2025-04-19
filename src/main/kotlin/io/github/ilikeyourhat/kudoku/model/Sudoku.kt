@@ -3,11 +3,37 @@ package io.github.ilikeyourhat.kudoku.model
 data class Sudoku(
     val type: SudokuType,
     val board: Board,
-    val regions: List<Region>
+    private val constantRegions: List<Region>,
+    private val randomizedRegions: List<Region>
 ) {
 
+    val regions = constantRegions + randomizedRegions
+
     override fun toString(): String {
-        return "${type.name} $board"
+        return if (randomizedRegions.isEmpty()) {
+            "${type.name} $board"
+        } else {
+            "${type.name} $board ${randomizedRegionsString()}"
+        }
+    }
+
+    private fun randomizedRegionsString(): String {
+        val sb = StringBuilder()
+        for (y in 0 until board.sizeY()) {
+            sb.append('|')
+            for (x in 0 until board.sizeX()) {
+                val cell = board.getOrNull(x, y)
+                if (cell == null) {
+                    sb.append('#')
+                } else {
+                    sb.append(randomizedRegions.indexOfFirst { it.contains(cell) } + 1)
+                }
+                sb.append(',')
+            }
+            sb.deleteCharAt(sb.length - 1)
+        }
+        sb.append('|')
+        return sb.toString()
     }
 
     fun atCellOrNull(x: Int, y: Int): Cell? {
@@ -20,14 +46,18 @@ data class Sudoku(
 
     fun copy(): Sudoku {
         val newBoard = board.copy()
-        val newRegions = regions
-            .map { oldRegion ->
-                val newCells = oldRegion.map { oldCell ->
-                    newBoard.get(oldCell.x, oldCell.y)
-                }
-                Region(newCells)
+        val newConstantRegions = constantRegions.copyRegionsFrom(newBoard)
+        val newRandomizedRegions = randomizedRegions.copyRegionsFrom(newBoard)
+        return Sudoku(type, newBoard, newConstantRegions, newRandomizedRegions)
+    }
+
+    private fun List<Region>.copyRegionsFrom(newBoard: Board): List<Region> {
+        return map { oldRegion ->
+            val newCells = oldRegion.map { oldCell ->
+                newBoard.get(oldCell.x, oldCell.y)
             }
-        return Sudoku(type, newBoard, newRegions)
+            Region(newCells)
+        }
     }
 
     fun sizeX(): Int {
