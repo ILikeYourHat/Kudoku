@@ -1,4 +1,4 @@
-package io.github.ilikeyourhat.kudoku.generating
+package io.github.ilikeyourhat.kudoku.model.dividers
 
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
@@ -9,17 +9,15 @@ import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
 import kotlin.random.Random
 
-class RandomRegionGeneratorTest {
-
-    private val generator = RandomRegionGenerator()
+class RandomRegionsDividerTest {
 
     @Test
     fun `regions should have the same size`() {
-        val type = Classic9x9
-        val board = type.createEmpty().board
+        val divider = RandomRegionsDivider(Classic9x9)
+        val board = Classic9x9.createEmpty().board
 
         repeat(100) {
-            val regions = generator.generateRandomRegions(type, board)
+            val regions = divider.divide(board)
 
             regions.shouldHaveSize(9)
                 .shouldForAll { region -> region.shouldHaveSize(9) }
@@ -28,11 +26,11 @@ class RandomRegionGeneratorTest {
 
     @Test
     fun `regions should be distinct and cover all the board`() {
-        val type = Classic9x9
-        val board = type.createEmpty().board
+        val divider = RandomRegionsDivider(Classic9x9)
+        val board = Classic9x9.createEmpty().board
 
         repeat(100) {
-            val regions = generator.generateRandomRegions(type, board)
+            val regions = divider.divide(board)
 
             regions.flatten()
                 .shouldHaveSize(board.cells().size)
@@ -43,11 +41,11 @@ class RandomRegionGeneratorTest {
 
     @Test
     fun `should work for any type`() {
-        val type = Classic4x4
-        val board = type.createEmpty().board
+        val divider = RandomRegionsDivider(Classic4x4)
+        val board = Classic4x4.createEmpty().board
 
         repeat(100) {
-            val regions = generator.generateRandomRegions(type, board)
+            val regions = divider.divide(board)
 
             regions.shouldHaveSize(4)
                 .shouldForAll { region -> region.shouldHaveSize(4) }
@@ -56,10 +54,10 @@ class RandomRegionGeneratorTest {
 
     @Test
     fun `should work for any type 2`() {
-        val type = SamuraiClassic21x21
-        val board = type.createEmpty().board
+        val divider = RandomRegionsDivider(SamuraiClassic21x21)
+        val board = SamuraiClassic21x21.createEmpty().board
 
-        val regions = generator.generateRandomRegions(type, board)
+        val regions = divider.divide(board)
 
         regions.shouldHaveSize(41)
             .shouldForAll { it.shouldHaveSize(9) }
@@ -70,10 +68,10 @@ class RandomRegionGeneratorTest {
         val type = Classic9x9
         val board = type.createEmpty().board
 
-        val firstTry = RandomRegionGenerator(random = Random(1234L))
-            .generateRandomRegions(type, board)
-        val secondTry = RandomRegionGenerator(random = Random(1234L))
-            .generateRandomRegions(type, board)
+        val firstTry = RandomRegionsDivider(type, random = Random(1234L))
+            .divide(board)
+        val secondTry = RandomRegionsDivider(type, random = Random(1234L))
+            .divide(board)
 
         firstTry.shouldBeEqual(secondTry)
     }

@@ -1,20 +1,18 @@
 package io.github.ilikeyourhat.kudoku.model
 
-import io.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
+import io.github.ilikeyourhat.kudoku.model.dividers.RandomRegionsDivider
+import io.github.ilikeyourhat.kudoku.model.dividers.RegionIdDivider
 import kotlin.random.Random
 
-interface JigsawSudokuType : SudokuType {
+abstract class JigsawSudokuType : SudokuType() {
 
     override fun createEmpty(random: Random): Sudoku {
         val board = Board(sizeX, sizeY)
         return Sudoku(
             type = this,
             board = board,
-            constantRegions = divider()
-                .divide(this, board),
-            randomizedRegions = RegionDivider()
-                .divideRandomly(random)
-                .divide(this, board)
+            constantRegions = divide(board),
+            randomizedRegions = RandomRegionsDivider(this, random).divide(board)
         )
     }
 
@@ -23,11 +21,8 @@ interface JigsawSudokuType : SudokuType {
         return Sudoku(
             type = this,
             board = board,
-            constantRegions = divider()
-                .divide(this, board),
-            randomizedRegions = RegionDivider()
-                .divideByRegionId(regionIds)
-                .divide(this, board)
+            constantRegions = divide(board),
+            randomizedRegions = RegionIdDivider(regionIds).divide(board)
         )
     }
 }
