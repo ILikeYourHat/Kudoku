@@ -175,10 +175,18 @@ class ListMatrixTest {
             .shouldHaveMessage("x must be in range [0, 2], but was 3")
         shouldThrow<IndexOutOfBoundsException> { matrix[0, 3] }
             .shouldHaveMessage("y must be in range [0, 1], but was 3")
+        shouldThrow<IndexOutOfBoundsException> { matrix[-1, 0] }
+            .shouldHaveMessage("x must be in range [0, 2], but was -1")
+        shouldThrow<IndexOutOfBoundsException> { matrix[0, -1] }
+            .shouldHaveMessage("y must be in range [0, 1], but was -1")
 
         shouldThrow<IndexOutOfBoundsException> { matrix[3, 0] = "test" }
             .shouldHaveMessage("x must be in range [0, 2], but was 3")
         shouldThrow<IndexOutOfBoundsException> { matrix[0, 3] = "test" }
             .shouldHaveMessage("y must be in range [0, 1], but was 3")
+        shouldThrow<IndexOutOfBoundsException> { matrix[-1, 0] = "test" }
+            .shouldHaveMessage("x must be in range [0, 2], but was -1")
+        shouldThrow<IndexOutOfBoundsException> { matrix[0, -1] = "test" }
+            .shouldHaveMessage("y must be in range [0, 1], but was -1")
     }
 }
