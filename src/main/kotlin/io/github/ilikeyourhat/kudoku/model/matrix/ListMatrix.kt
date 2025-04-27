@@ -15,22 +15,24 @@ class ListMatrix<E>(
     private val data = values.toMutableList()
 
     init {
-        require(sizeX >= 0)
-        require(sizeY >= 0)
-        require(data.size == sizeX * sizeY)
+        require(sizeX >= 0) { "sizeX must be non-negative" }
+        require(sizeY >= 0) { "sizeY must be non-negative" }
+        require(data.size == sizeX * sizeY) {
+            "Data size must be equal to ${sizeX * sizeY}, but was ${data.size}"
+        }
     }
 
     override val size: Int = sizeX * sizeY
 
     override operator fun get(x: Int, y: Int): E {
-        check(x in 0 until sizeX)
-        check(y in 0 until sizeY)
+        validateBounds(x in 0 until sizeX) { "x must be in range [0, ${sizeX - 1}], but was $x" }
+        validateBounds(y in 0 until sizeY) { "y must be in range [0, ${sizeY - 1}], but was $y" }
         return data[y * sizeX + x]
     }
 
     override operator fun set(x: Int, y: Int, elem: E) {
-        check(x in 0 until sizeX)
-        check(y in 0 until sizeY)
+        validateBounds(x in 0 until sizeX) { "x must be in range [0, ${sizeX - 1}], but was $x" }
+        validateBounds(y in 0 until sizeY) { "y must be in range [0, ${sizeY - 1}], but was $y" }
         data[y * sizeX + x] = elem
     }
 
@@ -66,5 +68,9 @@ class ListMatrix<E>(
         val x = index % sizeX
         val y = index / sizeX
         return x to y
+    }
+
+    private inline fun validateBounds(value: Boolean, lazyMessage: () -> String) {
+        if (!value) throw IndexOutOfBoundsException(lazyMessage())
     }
 }
