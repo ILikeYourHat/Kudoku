@@ -50,7 +50,7 @@ class ListMatrixTest {
     }
 
     @Test
-    fun `insert object into matrix and check is it there`() {
+    fun `insert object into matrix and check it's there`() {
         val matrix = ListMatrix<Any?>(3, 3, null)
         val any = Any()
 
