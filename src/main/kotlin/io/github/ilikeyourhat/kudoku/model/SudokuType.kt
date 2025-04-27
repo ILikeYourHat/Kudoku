@@ -1,21 +1,27 @@
 package io.github.ilikeyourhat.kudoku.model
 
-import io.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
+import io.github.ilikeyourhat.kudoku.model.dividers.BoardDivider
 import kotlin.random.Random
 
-interface SudokuType {
-    val name: String
-    val sizeX: Int
-    val sizeY: Int
-    val maxValue: Int
-    fun divider(): RegionDivider
+abstract class SudokuType {
+    abstract val name: String
+    abstract val sizeX: Int
+    abstract val sizeY: Int
+    abstract val maxValue: Int
+    abstract val dividers: List<BoardDivider>
 
-    fun createEmpty(random: Random = Random): Sudoku {
+    fun divide(board: Board): List<Region> {
+        return dividers
+            .flatMap { it.divide(board) }
+            .distinct()
+    }
+
+    open fun createEmpty(random: Random = Random): Sudoku {
         val board = Board(sizeX, sizeY)
         return Sudoku(
             type = this,
             board = board,
-            constantRegions = divider().divide(this, board),
+            constantRegions = divide(board),
             randomizedRegions = emptyList()
         )
     }

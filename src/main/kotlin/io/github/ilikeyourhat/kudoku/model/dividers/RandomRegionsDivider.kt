@@ -1,4 +1,4 @@
-package io.github.ilikeyourhat.kudoku.generating
+package io.github.ilikeyourhat.kudoku.model.dividers
 
 import io.github.ilikeyourhat.kudoku.model.Board
 import io.github.ilikeyourhat.kudoku.model.Cell
@@ -6,14 +6,12 @@ import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import kotlin.random.Random
 
-class RandomRegionGenerator(
+class RandomRegionsDivider(
+    private val type: SudokuType,
     private val random: Random = Random.Default
-) {
+) : BoardDivider {
 
-    fun generateRandomRegions(
-        type: SudokuType,
-        board: Board
-    ): List<Region> {
+    override fun divide(board: Board): List<Region> {
         val cells = board.cells()
         val regionCount = cells.size / type.maxValue
         var regions = initialDivision(cells, regionCount)

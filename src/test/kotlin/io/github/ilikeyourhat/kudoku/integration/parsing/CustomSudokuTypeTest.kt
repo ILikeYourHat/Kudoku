@@ -3,8 +3,8 @@ package io.github.ilikeyourhat.kudoku.integration.parsing
 import io.github.ilikeyourhat.kudoku.Kudoku
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
-import io.github.ilikeyourhat.kudoku.model.dividers.RegionDivider
-import io.github.ilikeyourhat.kudoku.type.Classic4x4
+import io.github.ilikeyourhat.kudoku.model.dividers.ColumnsDivider
+import io.github.ilikeyourhat.kudoku.model.dividers.RowsDivider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -38,14 +38,14 @@ class CustomSudokuTypeTest {
         assertEquals(expected, actual)
     }
 
-    private object MyCustomType : SudokuType {
+    private object MyCustomType : SudokuType() {
         override val name = "my_custom_type"
         override val sizeX = 4
         override val sizeY = 4
         override val maxValue = 4
-
-        override fun divider(): RegionDivider {
-            return Classic4x4.divider()
-        }
+        override val dividers = listOf(
+            RowsDivider(),
+            ColumnsDivider()
+        )
     }
 }
