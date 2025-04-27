@@ -50,7 +50,7 @@ class ListMatrixTest {
     }
 
     @Test
-    fun `insert object into matrix and check its there`() {
+    fun `insert object into matrix and check is it there`() {
         val matrix = ListMatrix<Any?>(3, 3, null)
         val any = Any()
 
@@ -136,6 +136,7 @@ class ListMatrixTest {
     }
 
     @Test
+    @Suppress("ArgumentListWrapping") // for better coordinates readability
     fun `check if coordinates by index works`() {
         val matrix = ListMatrix(3, 2, "")
 
