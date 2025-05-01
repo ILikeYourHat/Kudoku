@@ -1,7 +1,5 @@
 package io.github.ilikeyourhat.kudoku.solving.sat
 
-import io.github.ilikeyourhat.kudoku.model.Point
-
 class IndexEncoder(
     private val sizeX: Int,
     private val sizeY: Int,
@@ -20,14 +18,14 @@ class IndexEncoder(
 
     private val blockSize = sizeX * sizeY
 
-    fun encode(p: Point, value: Int): Int {
-        return p.x + sizeX * p.y + blockSize * (value - 1) + 1
+    fun encode(position: Pair<Int, Int>, value: Int): Int {
+        return position.first + sizeX * position.second + blockSize * (value - 1) + 1
     }
 
-    fun decodePoint(index: Int): Point {
+    fun decodePosition(index: Int): Pair<Int, Int> {
         val x = (index - 1) % sizeX
         val y = (index - 1) / sizeX % sizeY
-        return Point(x, y)
+        return x to y
     }
 
     fun decodeValue(index: Int): Int {

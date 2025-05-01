@@ -1,12 +1,11 @@
 package io.github.ilikeyourhat.kudoku.model.hint
 
 import io.github.ilikeyourhat.kudoku.model.Cell
-import io.github.ilikeyourhat.kudoku.model.Point
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 
 data class SudokuHintGrid(
-    private val hintMap: Map<Point, MutableSet<Int>>
+    private val hintMap: Map<Pair<Int, Int>, MutableSet<Int>>
 ) {
 
     fun forCell(cell: Cell): Set<Int> {
@@ -54,7 +53,7 @@ data class SudokuHintGrid(
     }
 
     private fun getFor(cell: Cell): MutableSet<Int> {
-        return hintMap.getValue(cell.position())
+        return hintMap.getValue(cell.position)
     }
 
     companion object {
@@ -62,8 +61,9 @@ data class SudokuHintGrid(
         fun create(sudoku: Sudoku): SudokuHintGrid {
             val possibleValues = 1..sudoku.type.maxValue
 
-            val hintMap = sudoku.allCells
-                .associate { it.position to possibleValues.toMutableSet() }
+            val hintMap = sudoku.cells()
+                .map { it.position }
+                .associateWith { possibleValues.toMutableSet() }
 
             return SudokuHintGrid(hintMap)
         }

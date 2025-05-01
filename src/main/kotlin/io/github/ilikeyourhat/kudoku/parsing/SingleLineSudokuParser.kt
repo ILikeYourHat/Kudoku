@@ -26,7 +26,7 @@ class SingleLineSudokuParser {
     ): String {
         require(sudoku.isSupported()) { "Unsupported sudoku type: ${sudoku.type.name}" }
 
-        return sudoku.allCells
+        return sudoku.cells()
             .map { encodeValue(it.value, emptyCellIndicator) }
             .joinToString("")
     }

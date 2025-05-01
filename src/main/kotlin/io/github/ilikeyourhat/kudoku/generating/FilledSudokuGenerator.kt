@@ -28,7 +28,7 @@ class FilledSudokuGenerator(
     }
 
     private fun setRandomValidValues(sudoku: Sudoku) {
-        sudoku.allCells
+        sudoku.cells()
             .shuffled(random)
             .forEach { cell -> setRandomValidValue(sudoku, cell) }
     }

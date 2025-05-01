@@ -24,8 +24,8 @@ class SudokuShuffler(
         val previousValues = 1..type.maxValue
         val newValues = previousValues.shuffled(random)
 
-        allCells
-            .filter { !it.isEmpty }
+        cells()
+            .filter { !it.isEmpty() }
             .forEach { cell ->
                 val previousValueIndex = previousValues.indexOf(cell.value)
                 cell.value = newValues[previousValueIndex]
@@ -36,10 +36,10 @@ class SudokuShuffler(
         val sizeSqrt = origin.sizeSqrt()
         val shuffledX = randomIndexMapping(sizeSqrt)
         val shuffledY = randomIndexMapping(sizeSqrt)
-        origin.allCells.forEach { cell ->
+        origin.cells().forEach { cell ->
             val targetX = shuffledX[cell.x]
             val targetY = shuffledY[cell.y]
-            atCell(targetX, targetY).set(cell.value)
+            this[targetX, targetY] = cell.value
         }
     }
 

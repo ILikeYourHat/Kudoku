@@ -10,14 +10,14 @@ class CellTest {
     @Test
     fun createEmptyCell() {
         val cell = Cell(0, 0)
-        assertTrue(cell.isEmpty)
+        assertTrue(cell.isEmpty())
         assertEquals(0, cell.value)
     }
 
     @Test
     fun setNewValueToCell() {
         val cell = Cell(0, 0)
-        assertTrue(cell.isEmpty)
+        assertTrue(cell.isEmpty())
 
         cell.set(7)
         assertEquals(7, cell.value)

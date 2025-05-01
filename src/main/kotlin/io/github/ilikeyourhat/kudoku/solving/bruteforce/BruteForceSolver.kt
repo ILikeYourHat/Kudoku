@@ -13,8 +13,8 @@ class BruteForceSolver(
     override fun solve(sudoku: Sudoku): Sudoku {
         val result = sudoku.copy()
         val lookup = RegionLookup(result)
-        val cells = result.allCells
-            .filter { it.isEmpty }
+        val cells = result.cells()
+            .filter { it.isEmpty() }
             .applyRandomOrder()
 
         runAlgorithm(result.type, cells, lookup)
@@ -51,7 +51,7 @@ class BruteForceSolver(
 
     private class RegionLookup(sudoku: Sudoku) {
 
-        private val regionsMap = sudoku.allCells
+        private val regionsMap = sudoku.cells()
             .associate { cell ->
                 cell.position to sudoku.regions.filter { region ->
                     region.contains(cell)

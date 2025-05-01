@@ -36,12 +36,12 @@ data class Sudoku(
         return sb.toString()
     }
 
-    fun atCellOrNull(x: Int, y: Int): Cell? {
-        return board.getOrNull(x, y)
+    operator fun get(x: Int, y: Int): Cell {
+        return board.getOrNull(x, y) ?: throw NoSuchElementException("Missing cell at position $x,$y")
     }
 
-    fun atCell(x: Int, y: Int): Cell {
-        return board.getOrNull(x, y) ?: throw NoSuchElementException("Missing cell at position $x,$y")
+    operator fun set(x: Int, y: Int, value: Int) {
+        get(x, y).set(value)
     }
 
     fun copy(): Sudoku {
@@ -70,7 +70,7 @@ data class Sudoku(
 
     fun isCompleted(): Boolean {
         return board.cells()
-            .none { it.isEmpty }
+            .none { it.isEmpty() }
     }
 
     fun isValid(): Boolean {
@@ -82,10 +82,10 @@ data class Sudoku(
     }
 
     fun isEmpty(): Boolean {
-        return board.cells().all { it.isEmpty }
+        return board.cells().all { it.isEmpty() }
     }
 
-    val allCells = board.cells()
+    fun cells() = board.cells()
 
     fun values(): List<Int> {
         return board.cells().map { it.value }

@@ -44,17 +44,16 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
         private fun Sudoku.applyModel(model: List<Int>) {
             model.filter { index -> index > 0 }
                 .forEach { index ->
-                    val (x, y) = indexEncoder.decodePoint(index)
-                    val value = indexEncoder.decodeValue(index)
-                    atCell(x, y).set(value)
+                    val (x, y) = indexEncoder.decodePosition(index)
+                    this[x, y] = indexEncoder.decodeValue(index)
                 }
         }
 
         private fun addCausesForCells(sudoku: Sudoku) {
-            for (cell in sudoku.allCells) {
+            for (cell in sudoku.cells()) {
                 engine.addExactly(createValues(cell))
-                if (!cell.isEmpty) {
-                    val index = indexEncoder.encode(cell.position(), cell.value())
+                if (!cell.isEmpty()) {
+                    val index = indexEncoder.encode(cell.position, cell.value)
                     engine.addClause(listOf(index))
                 }
             }
@@ -64,8 +63,8 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
             for (possibleValue in 1..sudoku.type.maxValue) {
                 for (region in sudoku.regions) {
                     val list = mutableListOf<Int>()
-                    for ((position) in region) {
-                        val index = indexEncoder.encode(position, possibleValue)
+                    for (cell in region) {
+                        val index = indexEncoder.encode(cell.position, possibleValue)
                         list.add(index)
                     }
                     engine.addExactly(list)
@@ -76,7 +75,7 @@ class SatSolver : SudokuSolver, SudokuSolutionChecker {
         private fun createValues(cell: Cell): List<Int> {
             val list = mutableListOf<Int>()
             for (value in 1..sudoku.type.maxValue) {
-                val index = indexEncoder.encode(cell.position(), value)
+                val index = indexEncoder.encode(cell.position, value)
                 list.add(index)
             }
             return list

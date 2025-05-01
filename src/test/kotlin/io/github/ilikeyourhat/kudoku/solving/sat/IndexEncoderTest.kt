@@ -1,13 +1,11 @@
 package io.github.ilikeyourhat.kudoku.solving.sat
 
-import io.github.ilikeyourhat.kudoku.model.Point
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.lang.IllegalArgumentException
 
 class IndexEncoderTest {
 
@@ -34,10 +32,10 @@ class IndexEncoderTest {
     ) {
         val encoder = IndexEncoder(sizeX, sizeY, maxValue)
 
-        val index = encoder.encode(Point(pointX, pointY), pointValue)
+        val index = encoder.encode(pointX to pointY, pointValue)
 
         index shouldBe encodedValue
-        encoder.decodePoint(index) shouldBe Point(pointX, pointY)
+        encoder.decodePosition(index) shouldBe (pointX to pointY)
         encoder.decodeValue(index) shouldBe pointValue
     }
 
