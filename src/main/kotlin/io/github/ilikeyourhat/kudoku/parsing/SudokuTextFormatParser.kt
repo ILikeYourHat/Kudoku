@@ -96,9 +96,9 @@ class SudokuTextFormatParser(
 
         private fun getExpectedValuesCount(type: SudokuType): Int {
             return if (type is JigsawSudokuType) {
-                type.createEmpty().allCells.size * 2
+                type.createEmpty().cells().size * 2
             } else {
-                type.createEmpty().allCells.size
+                type.createEmpty().cells().size
             }
         }
 

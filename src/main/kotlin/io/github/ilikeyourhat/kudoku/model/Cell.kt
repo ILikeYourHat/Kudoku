@@ -3,29 +3,21 @@ package io.github.ilikeyourhat.kudoku.model
 import kotlin.math.abs
 
 data class Cell(
-    val position: Point,
+    val x: Int,
+    val y: Int,
     var value: Int = EMPTY_CELL
 ) {
-
-    constructor(x: Int, y: Int) : this(Point(x, y))
-
-    fun value() = value
+    val position = x to y
 
     fun set(value: Int) {
         this.value = value
     }
 
-    val isEmpty: Boolean
-        get() = value == EMPTY_CELL
-
-    val x = position.x
-    val y = position.y
+    fun isEmpty() = value == EMPTY_CELL
 
     fun clear() {
         value = EMPTY_CELL
     }
-
-    fun position() = position
 
     fun isAdjacent(other: Cell): Boolean {
         return (x == other.x && abs(y - other.y) == 1) ||

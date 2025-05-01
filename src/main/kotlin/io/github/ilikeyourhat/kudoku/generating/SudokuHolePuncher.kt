@@ -28,7 +28,7 @@ class SudokuHolePuncher(
     }
 
     private fun tryToPunchHoles(sudoku: Sudoku, minDifficulty: Difficulty) {
-        sudoku.allCells
+        sudoku.cells()
             .shuffled(random)
             .forEach { cell ->
                 val value = cell.value

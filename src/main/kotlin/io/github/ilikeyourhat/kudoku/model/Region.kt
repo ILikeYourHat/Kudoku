@@ -23,7 +23,7 @@ data class Region(
     fun isValid(): Boolean {
         val set = mutableSetOf<Int>()
         for (cell in cells) {
-            if (!cell.isEmpty && !set.add(cell.value)) {
+            if (!cell.isEmpty() && !set.add(cell.value)) {
                 return false
             }
         }
@@ -31,10 +31,10 @@ data class Region(
     }
 
     fun fullCells(): List<Cell> {
-        return cells.filterNot { it.isEmpty }
+        return cells.filterNot { it.isEmpty() }
     }
 
     fun emptyCells(): List<Cell> {
-        return cells.filter { it.isEmpty }
+        return cells.filter { it.isEmpty() }
     }
 }

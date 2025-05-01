@@ -93,7 +93,7 @@ data class Board(
                 val cell = cells[x, y]
                 if (cell == null) {
                     sb.append('#')
-                } else if (cell.isEmpty) {
+                } else if (cell.isEmpty()) {
                     sb.append('_')
                 } else {
                     sb.append(cell.value)

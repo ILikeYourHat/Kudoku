@@ -57,13 +57,13 @@ class BoardTest {
     fun checkIfCellsAreInitializedCorrectWhenValuesAreGiven() {
         val values = listOf<Int?>(1, 2, 3, 4)
         val board = Board(2, 2, values)
-        assertFalse(board.getOrNull(0, 0)!!.isEmpty)
+        assertFalse(board.getOrNull(0, 0)!!.isEmpty())
         assertEquals(1, board.getOrNull(0, 0)!!.value)
-        assertFalse(board.getOrNull(1, 0)!!.isEmpty)
+        assertFalse(board.getOrNull(1, 0)!!.isEmpty())
         assertEquals(2, board.getOrNull(1, 0)!!.value)
-        assertFalse(board.getOrNull(0, 1)!!.isEmpty)
+        assertFalse(board.getOrNull(0, 1)!!.isEmpty())
         assertEquals(3, board.getOrNull(0, 1)!!.value)
-        assertFalse(board.getOrNull(1, 1)!!.isEmpty)
+        assertFalse(board.getOrNull(1, 1)!!.isEmpty())
         assertEquals(4, board.getOrNull(1, 1)!!.value)
     }
 

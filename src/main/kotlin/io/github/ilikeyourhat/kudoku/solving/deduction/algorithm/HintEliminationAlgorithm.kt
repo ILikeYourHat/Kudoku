@@ -26,7 +26,7 @@ class HintEliminationAlgorithm(
         for (cell in region.fullCells()) {
             changed = changed or
                 ensureFullCellHaveNoHints(cell) or
-                removeHintFromRegion(region, cell.value())
+                removeHintFromRegion(region, cell.value)
         }
         return changed
     }
