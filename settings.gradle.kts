@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Kudoku"
+
+include("cli", "core")
