@@ -71,6 +71,7 @@ Choose from multiple solver implementations:
 ```kotlin
 val solver1 = SatSolver()
 val solver2 = BruteForceSolver()
+val solver3 = DeductionSolverV3()
 ```
 
 Support for popular text formats:
@@ -100,7 +101,7 @@ Check if a given sudoku has one solution:
 
 ```kotlin
 val solutionChecker = Sudoku.defaultSolutionChecker()
-val solutionCount = solution.checkSolutions(sudoku) // can be ZERO, ONE or MANY
+val solutionCount = solutionChecker.checkSolutions(sudoku) // can be ZERO, ONE or MANY
 ```
 
 Kudoku can handle many different types of sudokus, in a reasonable time:
