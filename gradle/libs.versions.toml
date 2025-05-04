@@ -1,5 +1,6 @@
 [versions]
 axion = "1.18.18"
+clikt = "5.0.3"
 detekt = "1.23.8"
 junit5 = "5.12.2"
 kotest = "5.9.1"
@@ -10,6 +11,7 @@ mockk = "1.14.2"
 sat4j = "2.3.6"
 
 [libraries]
+clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
 junit5-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
