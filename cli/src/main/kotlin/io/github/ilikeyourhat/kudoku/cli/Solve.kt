@@ -10,9 +10,13 @@ import io.github.ilikeyourhat.kudoku.solving.defaultSolver
 class Solve : CliktCommand() {
 
     val input by argument()
+    val type by sudokuTypeOption()
 
     override fun run() {
-        val sudoku = Sudoku.fromSingleLineString(input)
+        val sudoku = type
+            ?.let { Sudoku.fromSingleLineString(it, input) }
+            ?: Sudoku.fromSingleLineString(input)
+
         val solver = Sudoku.defaultSolver()
         val solution = solver.solve(sudoku)
         echo(solution.toSingleLineString())

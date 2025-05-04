@@ -3,6 +3,7 @@ package io.github.ilikeyourhat.kudoku.cli
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.convert
+import com.github.ajalt.clikt.parameters.options.convert
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.enum
@@ -11,8 +12,17 @@ import com.github.ajalt.clikt.parameters.types.restrictTo
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 
-fun CliktCommand.sudokuType() = argument()
-    .convert { TypesRegistry.getTypeByName(it) ?: fail("Type $it is not supported") }
+fun CliktCommand.sudokuTypeArgument() = argument()
+    .convert { type ->
+        TypesRegistry.getTypeByName(type)
+            ?: fail("$type. Run `help types` to see supported Sudoku types.") // TODO no such help exists yet
+    }
+
+fun CliktCommand.sudokuTypeOption() = option()
+    .convert { type ->
+        TypesRegistry.getTypeByName(type)
+            ?: fail("$type. Run `help types` to see supported Sudoku types.") // TODO no such help exists yet
+    }
 
 fun CliktCommand.difficulty() = option()
     .enum<Difficulty>()

@@ -114,7 +114,7 @@ class SudokuTextFormatParser {
             }
 
             return TypesRegistry.getTypeByName(type)
-                ?: throw IllegalArgumentException("Unknown sudoku type: $type")
+                ?: throw IllegalArgumentException("Unsupported Sudoku type: $type")
         }
 
         private fun parse(input: String): Int? {

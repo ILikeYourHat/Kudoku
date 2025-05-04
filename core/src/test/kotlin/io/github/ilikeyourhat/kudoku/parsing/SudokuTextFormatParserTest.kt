@@ -3,6 +3,8 @@ package io.github.ilikeyourhat.kudoku.parsing
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
 import io.github.ilikeyourhat.kudoku.type.Jigsaw9x9
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.throwable.shouldHaveMessage
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
@@ -292,5 +294,27 @@ class SudokuTextFormatParserTest {
             ),
             sudoku
         )
+    }
+
+    @Test
+    fun `should fail on unknown Sudoku types`() {
+        val text = """
+            unknown_type
+            _,_,_, _,5,_, _,_,7
+            _,_,_, _,_,_, _,4,_
+            3,_,4, _,_,5, 2,_,_
+
+            7,2,_, _,_,1, _,5,_
+            _,_,_, _,_,_, _,_,_
+            _,6,_, 4,_,_, _,9,2
+
+            _,_,9, 8,_,_, 7,_,5
+            _,3,_, _,_,_, _,_,_
+            8,_,_, _,6,_, _,_,_
+        """.trimIndent()
+
+        shouldThrow<IllegalArgumentException> {
+            SudokuTextFormatParser().parseOne(text)
+        }.shouldHaveMessage("Unsupported Sudoku type: unknown_type")
     }
 }
