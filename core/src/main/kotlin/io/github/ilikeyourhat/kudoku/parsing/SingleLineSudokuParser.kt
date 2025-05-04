@@ -1,6 +1,7 @@
 package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.type.Classic12x12
 import io.github.ilikeyourhat.kudoku.type.Classic16x16
 import io.github.ilikeyourhat.kudoku.type.Classic25x25
@@ -24,25 +25,29 @@ class SingleLineSudokuParser {
         sudoku: Sudoku,
         emptyCellIndicator: EmptyCellIndicator
     ): String {
-        require(sudoku.isSupported()) { "Unsupported sudoku type: ${sudoku.type.name}" }
-
         return sudoku.cells()
             .map { encodeValue(it.value, emptyCellIndicator) }
             .joinToString("")
     }
 
     fun fromText(text: String): Sudoku {
-        val type = typeMap[text.length]
-            ?: throw IllegalArgumentException("Unsupported sudoku type with input length ${text.length}")
+        val type = guessTypeBasedOnInputLength(text.length)
+        return fromText(type, text)
+    }
 
+    private fun guessTypeBasedOnInputLength(length: Int): SudokuType {
+        return typeMap[length]
+            ?: throw IllegalArgumentException("Unsupported Sudoku type with input length $length")
+    }
+
+    fun fromText(
+        type: SudokuType,
+        text: String
+    ): Sudoku {
         val values = text
             .map { decodeValue(it) }
             .toList()
         return Sudoku(type, values)
-    }
-
-    private fun Sudoku.isSupported(): Boolean {
-        return typeMap.containsValue(type)
     }
 
     private fun encodeValue(value: Int, emptyCellIndicator: EmptyCellIndicator): Char {

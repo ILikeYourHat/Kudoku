@@ -7,7 +7,8 @@ plugins {
 }
 
 application {
-    mainClass = "io.github.ilikeyourhat.kudoku.cli.MainKt"
+    applicationName = "kudoku"
+    mainClass = "io.github.ilikeyourhat.kudoku.cli.KudokuKt"
 }
 
 kotlin {

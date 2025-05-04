@@ -2,7 +2,6 @@ package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
-import io.github.ilikeyourhat.kudoku.type.SamuraiClassic21x21
 import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.booleans.shouldBeTrue
@@ -78,7 +77,7 @@ class SingleLineSudokuParserTest {
 
         shouldThrow<IllegalArgumentException> {
             parser.fromText(encodedSudoku)
-        }.shouldHaveMessage("Unsupported sudoku type with input length 10")
+        }.shouldHaveMessage("Unsupported Sudoku type with input length 10")
     }
 
     @Test
@@ -145,14 +144,5 @@ class SingleLineSudokuParserTest {
 
         encodedSudoku
             .shouldBeEqual(possibleValues.repeat(possibleValues.length))
-    }
-
-    @Test
-    fun `should throw exception when encoding unsupported type`() {
-        val sudoku = SamuraiClassic21x21.createEmpty()
-
-        shouldThrow<IllegalArgumentException> {
-            parser.toText(sudoku, EmptyCellIndicator.ZERO)
-        }.shouldHaveMessage("Unsupported sudoku type: samurai_classic_21x21")
     }
 }

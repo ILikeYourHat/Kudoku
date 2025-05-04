@@ -7,7 +7,7 @@ import io.github.ilikeyourhat.kudoku.parsing.toSingleLineString
 
 class Generate : CliktCommand() {
 
-    val type by sudokuType()
+    val type by sudokuTypeArgument()
     val difficulty by difficulty()
     val count by count()
 
