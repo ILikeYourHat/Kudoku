@@ -1,7 +1,9 @@
 package io.github.ilikeyourhat.kudoku.integration.generating
 
-import io.github.ilikeyourhat.kudoku.Kudoku
+import io.github.ilikeyourhat.kudoku.generating.defaultGenerator
+import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
+import io.github.ilikeyourhat.kudoku.rating.defaultRater
 import io.github.ilikeyourhat.kudoku.type.Butterfly12x12
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
 import io.github.ilikeyourhat.kudoku.type.Jigsaw4x4
@@ -23,72 +25,74 @@ import kotlin.random.Random
 class SudokuGeneratingTest {
 
     private val random = Random(58857L)
+    private val generator = Sudoku.defaultGenerator(random)
+    private val rater = Sudoku.defaultRater()
 
     @Test
     fun `should generate Classic9x9 sudoku`() {
-        val sudoku = Kudoku.create(Classic9x9, random = random)
+        val sudoku = generator.generate(Classic9x9)
 
         assertEquals(Classic9x9, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertNotEquals(Difficulty.UNSOLVABLE, Kudoku.rate(sudoku))
+        assertNotEquals(Difficulty.UNSOLVABLE, rater.rate(sudoku))
     }
 
     @Test
     fun `should generate Classic9x9 sudoku with given difficulty`() {
-        val sudoku = Kudoku.create(Classic9x9, difficulty = Difficulty.HARD, random = random)
+        val sudoku = generator.generate(Classic9x9, difficulty = Difficulty.HARD)
 
         assertEquals(Classic9x9, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertEquals(Difficulty.HARD, Kudoku.rate(sudoku))
+        assertEquals(Difficulty.HARD, rater.rate(sudoku))
     }
 
     @Test
     fun `should generate Butterfly12x12 sudoku`() {
-        val sudoku = Kudoku.create(Butterfly12x12, random = random)
+        val sudoku = generator.generate(Butterfly12x12)
 
         assertEquals(Butterfly12x12, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertNotEquals(Difficulty.UNSOLVABLE, Kudoku.rate(sudoku))
+        assertNotEquals(Difficulty.UNSOLVABLE, rater.rate(sudoku))
     }
 
     @Test
     fun `should generate Butterfly12x12 sudoku with given difficulty`() {
-        val sudoku = Kudoku.create(Butterfly12x12, difficulty = Difficulty.HARD, random = random)
+        val sudoku = generator.generate(Butterfly12x12, difficulty = Difficulty.HARD)
 
         assertEquals(Butterfly12x12, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertEquals(Difficulty.HARD, Kudoku.rate(sudoku))
+        assertEquals(Difficulty.HARD, rater.rate(sudoku))
     }
 
     @Test
     fun `should generate Jigsaw9x9 sudoku`() {
-        val sudoku = Kudoku.create(Jigsaw9x9, random = random)
+        val sudoku = generator.generate(Jigsaw9x9)
 
         assertEquals(Jigsaw9x9, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertNotEquals(Difficulty.UNSOLVABLE, Kudoku.rate(sudoku))
+        assertNotEquals(Difficulty.UNSOLVABLE, rater.rate(sudoku))
     }
 
     @Test
     fun `should generate Jigsaw9x9 sudoku with given difficulty`() {
-        val sudoku = Kudoku.create(Jigsaw9x9, difficulty = Difficulty.HARD, random = random)
+        val sudoku = generator.generate(Jigsaw9x9, difficulty = Difficulty.HARD)
 
         assertEquals(Jigsaw9x9, sudoku.type)
         assertTrue(sudoku.isValid())
         assertFalse(sudoku.isCompleted())
-        assertEquals(Difficulty.HARD, Kudoku.rate(sudoku))
+        assertEquals(Difficulty.HARD, rater.rate(sudoku))
     }
 
     @Test
     fun `should generate valid Jigsaw4x4 sudoku giving that empty one can be already invalid`() {
         repeat(100) {
-            val sudoku = Kudoku.create(Jigsaw4x4, random = random)
-            assertNotEquals(Difficulty.UNSOLVABLE, Kudoku.rate(sudoku))
+            val sudoku = generator.generate(Jigsaw4x4)
+            assertNotEquals(Difficulty.UNSOLVABLE, rater.rate(sudoku))
         }
     }
 }

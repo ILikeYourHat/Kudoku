@@ -2,17 +2,17 @@ package io.github.ilikeyourhat.kudoku.cli
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.ajalt.clikt.parameters.arguments.convert
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
-import com.github.ajalt.clikt.parameters.types.choice
 import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.int
 import com.github.ajalt.clikt.parameters.types.restrictTo
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
-import io.github.ilikeyourhat.kudoku.type.BUILD_IN_TYPES
+import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 
 fun CliktCommand.sudokuType() = argument()
-    .choice(BUILD_IN_TYPES.associateBy { it.name })
+    .convert { TypesRegistry.getTypeByName(it) ?: fail("Type $it is not supported") }
 
 fun CliktCommand.difficulty() = option()
     .enum<Difficulty>()

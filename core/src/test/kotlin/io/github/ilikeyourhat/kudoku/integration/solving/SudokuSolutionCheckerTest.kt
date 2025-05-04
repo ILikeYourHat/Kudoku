@@ -1,7 +1,9 @@
 package io.github.ilikeyourhat.kudoku.integration.solving
 
-import io.github.ilikeyourhat.kudoku.Kudoku
+import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.parsing.createFromString
 import io.github.ilikeyourhat.kudoku.solving.SolutionCount
+import io.github.ilikeyourhat.kudoku.solving.defaultSolutionChecker
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -9,7 +11,7 @@ class SudokuSolutionCheckerTest {
 
     @Test
     fun `should have no solutions`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             1,1,1, _,_,_, _,_,_
@@ -26,14 +28,14 @@ class SudokuSolutionCheckerTest {
             """.trimIndent()
         )
 
-        val solutions = Kudoku.checkSolutions(sudoku)
+        val solutions = Sudoku.defaultSolutionChecker().checkSolutions(sudoku)
 
         assertEquals(SolutionCount.ZERO, solutions)
     }
 
     @Test
     fun `should have one solution`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             _,5,7, 8,6,_, _,_,4
@@ -50,14 +52,14 @@ class SudokuSolutionCheckerTest {
             """.trimIndent()
         )
 
-        val solutions = Kudoku.checkSolutions(sudoku)
+        val solutions = Sudoku.defaultSolutionChecker().checkSolutions(sudoku)
 
         assertEquals(SolutionCount.ONE, solutions)
     }
 
     @Test
     fun `should have multiple solutions`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             1,_,_, _,_,_, _,_,_
@@ -74,7 +76,7 @@ class SudokuSolutionCheckerTest {
             """.trimIndent()
         )
 
-        val solutions = Kudoku.checkSolutions(sudoku)
+        val solutions = Sudoku.defaultSolutionChecker().checkSolutions(sudoku)
 
         assertEquals(SolutionCount.MANY, solutions)
     }

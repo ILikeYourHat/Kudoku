@@ -1,9 +1,9 @@
 package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
-import io.github.ilikeyourhat.kudoku.type.BUILD_IN_TYPES
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.github.ilikeyourhat.kudoku.type.SamuraiClassic21x21
+import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldHaveSize
@@ -133,7 +133,7 @@ class SingleLineSudokuParserTest {
         ]
     )
     fun `should encode different sudoku types`(typeName: String) {
-        val type = BUILD_IN_TYPES.single { it.name == typeName }
+        val type = TypesRegistry.getTypeByName(typeName)!!
         val values = (1..type.maxValue)
             .flatMap { (1..type.maxValue) }
         val sudoku = Sudoku(type, values)

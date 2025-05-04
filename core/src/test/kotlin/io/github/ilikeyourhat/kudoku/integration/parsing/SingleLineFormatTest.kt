@@ -1,8 +1,8 @@
 package io.github.ilikeyourhat.kudoku.integration.parsing
 
-import io.github.ilikeyourhat.kudoku.Kudoku
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.parsing.EmptyCellIndicator
+import io.github.ilikeyourhat.kudoku.parsing.fromSingleLineString
 import io.github.ilikeyourhat.kudoku.parsing.toSingleLineString
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.kotest.matchers.equals.shouldBeEqual
@@ -40,9 +40,9 @@ class SingleLineFormatTest {
             )
         )
 
-        Kudoku.createFromSingleLineString("0010300004001040")
+        Sudoku.fromSingleLineString("0010300004001040")
             .shouldBeEqual(expectedSudoku)
-        Kudoku.createFromSingleLineString("..1.3....4..1.4.")
+        Sudoku.fromSingleLineString("..1.3....4..1.4.")
             .shouldBeEqual(expectedSudoku)
     }
 }
