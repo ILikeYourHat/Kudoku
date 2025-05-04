@@ -3,15 +3,13 @@ package io.github.ilikeyourhat.kudoku.parsing
 import io.github.ilikeyourhat.kudoku.model.JigsawSudokuType
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
-import io.github.ilikeyourhat.kudoku.type.BUILD_IN_TYPES
+import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
 import java.util.regex.Pattern
 
-class SudokuTextFormatParser(
-    private val supportedTypes: List<SudokuType> = BUILD_IN_TYPES
-) {
+class SudokuTextFormatParser {
 
     fun parseOne(text: String): Sudoku {
         return Command(text).parseOne()
@@ -115,7 +113,7 @@ class SudokuTextFormatParser(
                 type = scanner.nextLine()
             }
 
-            return supportedTypes.find { it.name == type }
+            return TypesRegistry.getTypeByName(type)
                 ?: throw IllegalArgumentException("Unknown sudoku type: $type")
         }
 

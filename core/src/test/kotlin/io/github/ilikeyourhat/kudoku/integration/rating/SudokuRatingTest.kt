@@ -1,7 +1,9 @@
 package io.github.ilikeyourhat.kudoku.integration.rating
 
-import io.github.ilikeyourhat.kudoku.Kudoku
+import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.parsing.createFromString
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
+import io.github.ilikeyourhat.kudoku.rating.defaultRater
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -9,7 +11,7 @@ class SudokuRatingTest {
 
     @Test
     fun `should rate sudoku as EASY`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             _,5,7, 8,6,_, _,_,4
@@ -26,14 +28,14 @@ class SudokuRatingTest {
             """.trimIndent()
         )
 
-        val rating = Kudoku.rate(sudoku)
+        val rating = Sudoku.defaultRater().rate(sudoku)
 
         assertEquals(Difficulty.EASY, rating)
     }
 
     @Test
     fun `should rate sudoku as MEDIUM`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             3,_,_, 2,_,_, _,_,_
@@ -50,14 +52,14 @@ class SudokuRatingTest {
             """.trimIndent()
         )
 
-        val rating = Kudoku.rate(sudoku)
+        val rating = Sudoku.defaultRater().rate(sudoku)
 
         assertEquals(Difficulty.MEDIUM, rating)
     }
 
     @Test
     fun `should rate sudoku as HARD`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             _,_,_, _,_,7, 5,_,_
@@ -74,14 +76,14 @@ class SudokuRatingTest {
             """.trimIndent()
         )
 
-        val rating = Kudoku.rate(sudoku)
+        val rating = Sudoku.defaultRater().rate(sudoku)
 
         assertEquals(Difficulty.HARD, rating)
     }
 
     @Test
     fun `should rate sudoku as VERY_HARD`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             8,_,_, _,_,_, _,_,_
@@ -98,14 +100,14 @@ class SudokuRatingTest {
             """.trimIndent()
         )
 
-        val rating = Kudoku.rate(sudoku)
+        val rating = Sudoku.defaultRater().rate(sudoku)
 
         assertEquals(Difficulty.VERY_HARD, rating)
     }
 
     @Test
     fun `should rate sudoku as INVALID when no solutions`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             1,1,1, _,_,_, _,_,_
@@ -122,14 +124,14 @@ class SudokuRatingTest {
             """.trimIndent()
         )
 
-        val rating = Kudoku.rate(sudoku)
+        val rating = Sudoku.defaultRater().rate(sudoku)
 
         assertEquals(Difficulty.UNSOLVABLE, rating)
     }
 
     @Test
     fun `should rate sudoku as INVALID when multiple solutions`() {
-        val sudoku = Kudoku.createFromString(
+        val sudoku = Sudoku.createFromString(
             """
             classic_9x9
             1,_,_, _,_,_, _,_,_
@@ -146,7 +148,7 @@ class SudokuRatingTest {
             """.trimIndent()
         )
 
-        val rating = Kudoku.rate(sudoku)
+        val rating = Sudoku.defaultRater().rate(sudoku)
 
         assertEquals(Difficulty.UNSOLVABLE, rating)
     }

@@ -1,6 +1,8 @@
 package io.github.ilikeyourhat.kudoku.type
 
-import io.github.ilikeyourhat.kudoku.Kudoku
+import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.parsing.createFromString
+import io.github.ilikeyourhat.kudoku.solving.defaultSolver
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
@@ -12,9 +14,9 @@ abstract class SudokuTypeTestTemplate {
 
     @Test
     fun `should solve it correctly`() {
-        val solver = Kudoku.defaultSolver()
-        val sudokuToSolve = Kudoku.createFromString(puzzle)
-        val expectedResult = Kudoku.createFromString(solution)
+        val solver = Sudoku.defaultSolver()
+        val sudokuToSolve = Sudoku.createFromString(puzzle)
+        val expectedResult = Sudoku.createFromString(solution)
 
         val result = solver.solve(sudokuToSolve)
 

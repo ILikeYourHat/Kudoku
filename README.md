@@ -40,7 +40,7 @@ val sudoku = Sudoku(
 ...or using a string notation for improved readability:
 
 ```kotlin
-val sudoku = Kudoku.createFromString(
+val sudoku = Sudoku.createFromString(
     """
     classic_9x9
     _,5,7, 8,6,_, _,_,4
@@ -61,7 +61,7 @@ val sudoku = Kudoku.createFromString(
 Create a solver instance and solve the board:
 
 ```kotlin
-val solver = Kudoku.defaultSolver()
+val solver = Sudoku.defaultSolver()
 val solution = solver.solve(sudoku)
 println(solution)
 ```
@@ -69,41 +69,45 @@ println(solution)
 Choose from multiple solver implementations:
 
 ```kotlin
-val solver1 = Kudoku.satSolver()
-val solver2 = Kudoku.bruteForceSolver()
+val solver1 = SatSolver()
+val solver2 = BruteForceSolver()
+val solver3 = DeductionSolverV3()
 ```
 
 Support for popular text formats:
 
 ```kotlin
 val string = "003020600900305001001806400008102900700000008006708200002609500800203009005010300"
-val sudoku = Kudoku.createFromSingleLineString(string)
+val sudoku = Sudoku.fromSingleLineString(string)
 val encoded = sudoku.toSingleLineString(emptyCellIndicator = EmptyCellIndicator.DOT)
 ```
 
-Create a random Sudoku with a given difficulty:
+Generate a random Sudoku with a given difficulty:
 
 ```kotlin
-val sudoku = Kudoku.create(SudokuType.Classic9x9, Difficulty.VERY_HARD)
+val generator = Sudoku.defaultGenerator()
+val sudoku = generator.generate(SudokuType.Classic9x9, Difficulty.VERY_HARD)
 println(sudoku)
 ```
 
 Check how hard is a given sudoku:
 
 ```kotlin
-val difficulty = Kudoku.rate(sudoku) // can be EASY, MEDIUM, HARD, VERY_HARD or UNSOLVABLE
+val rater = Sudoku.defaultRater()
+val difficulty = rater.rate(sudoku) // can be EASY, MEDIUM, HARD, VERY_HARD or UNSOLVABLE
 ```
 
 Check if a given sudoku has one solution:
 
 ```kotlin
-val solutionCount = Kudoku.checkSolutions(sudoku) // can be ZERO, ONE or MANY
+val solutionChecker = Sudoku.defaultSolutionChecker()
+val solutionCount = solutionChecker.checkSolutions(sudoku) // can be ZERO, ONE or MANY
 ```
 
 Kudoku can handle many different types of sudokus, in a reasonable time:
 
 ```kotlin
-val samurai21x21 = Kudoku.createFromString(
+val samurai21x21 = Sudoku.createFromString(
     """
     samurai_classic_21x21
     2,_,_, _,_,8, 9,_,_, #,#,#, 9,_,_, _,3,1, _,7,8
@@ -136,7 +140,7 @@ val samurai21x21 = Kudoku.createFromString(
     """.trimIndent()
 )
 
-val classic25x25 = Kudoku.createFromString(
+val classic25x25 = Sudoku.createFromString(
     """
     classic_25x25
     __,__,12,06,__, __,07,__,18,__, 05,24,__,10,01, __,__,04,__,__, __,__,__,__,__ 
@@ -172,3 +176,19 @@ val classic25x25 = Kudoku.createFromString(
 )
 ```
 
+Create own sudoku types by extending `SudokuType` class:
+
+```kotlin
+object MyCustomType : SudokuType() {
+    override val name = "my_custom_type"
+    override val sizeX = 4
+    override val sizeY = 4
+    override val maxValue = 4
+    override val dividers = listOf(
+        RowsDivider(),
+        ColumnsDivider()
+    )
+}
+
+TypesRegistry.register(MyCustomType)
+```

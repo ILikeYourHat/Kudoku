@@ -1,10 +1,11 @@
 package io.github.ilikeyourhat.kudoku.integration.parsing
 
-import io.github.ilikeyourhat.kudoku.Kudoku
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.model.dividers.ColumnsDivider
 import io.github.ilikeyourhat.kudoku.model.dividers.RowsDivider
+import io.github.ilikeyourhat.kudoku.parsing.createFromString
+import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -12,9 +13,9 @@ class CustomSudokuTypeTest {
 
     @Test
     fun `should parse custom type from string`() {
-        Kudoku.registerType(MyCustomType)
+        TypesRegistry.register(MyCustomType)
 
-        val actual = Kudoku.createFromString(
+        val actual = Sudoku.createFromString(
             """
             my_custom_type
             3,2, _,1,

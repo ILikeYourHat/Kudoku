@@ -1,7 +1,8 @@
 package io.github.ilikeyourhat.kudoku.cli
 
 import com.github.ajalt.clikt.core.CliktCommand
-import io.github.ilikeyourhat.kudoku.Kudoku
+import io.github.ilikeyourhat.kudoku.generating.defaultGenerator
+import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.parsing.toSingleLineString
 
 class Generate : CliktCommand() {
@@ -11,8 +12,9 @@ class Generate : CliktCommand() {
     val count by count()
 
     override fun run() {
+        val generator = Sudoku.defaultGenerator()
         repeat(count) {
-            val sudoku = Kudoku.create(type, difficulty)
+            val sudoku = generator.generate(type, difficulty)
             echo(sudoku.toSingleLineString())
         }
     }
