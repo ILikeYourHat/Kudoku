@@ -48,6 +48,8 @@ dependencies {
     detektPlugins(libs.detekt.formatting)
 
     implementation(project(":core"))
+    implementation(libs.clikt)
 
     testImplementation(kotlin("test"))
+    testImplementation(libs.kotest)
 }
