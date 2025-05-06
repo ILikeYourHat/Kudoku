@@ -8,9 +8,11 @@ import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.int
+import com.github.ajalt.clikt.parameters.types.long
 import com.github.ajalt.clikt.parameters.types.restrictTo
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.type.TypesRegistry
+import kotlin.random.Random
 
 fun CliktCommand.sudokuTypeArgument() = argument()
     .convert { type ->
@@ -31,3 +33,8 @@ fun CliktCommand.count() = option()
     .int()
     .restrictTo(min = 0)
     .default(1)
+
+fun CliktCommand.random() = option("--seed")
+    .long()
+    .convert { Random(it) }
+    .default(Random)
