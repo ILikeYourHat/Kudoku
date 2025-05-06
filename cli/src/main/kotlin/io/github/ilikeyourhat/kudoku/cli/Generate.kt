@@ -10,9 +10,10 @@ class Generate : CliktCommand() {
     val type by sudokuTypeArgument()
     val difficulty by difficulty()
     val count by count()
+    val random by random()
 
     override fun run() {
-        val generator = Sudoku.defaultGenerator()
+        val generator = Sudoku.defaultGenerator(random)
         repeat(count) {
             val sudoku = generator.generate(type, difficulty)
             echo(sudoku.toSingleLineString())
