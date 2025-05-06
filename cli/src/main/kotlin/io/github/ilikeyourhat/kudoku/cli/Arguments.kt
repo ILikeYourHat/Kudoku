@@ -37,4 +37,4 @@ fun CliktCommand.count() = option()
 fun CliktCommand.random() = option("--seed")
     .long()
     .convert { Random(it) }
-    .default(Random)
+    .default(Random.Default)
