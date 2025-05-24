@@ -3,7 +3,6 @@ package io.github.ilikeyourhat.kudoku.solving.deduction.algorithm
 import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.hint.SudokuHintGrid
 import io.github.ilikeyourhat.kudoku.solving.deduction.combinations.CollectionCombinator
-import java.util.Collections
 
 class HiddenValuesAlgorithm(
     regions: List<Region>,
@@ -36,7 +35,7 @@ class HiddenValuesAlgorithm(
         var sum = 0
         for (cell in region) {
             val hints = possibilities.forCell(cell)
-            if (!Collections.disjoint(hints, values)) {
+            if (hints.any { it in values }) {
                 sum++
             }
         }
@@ -48,7 +47,7 @@ class HiddenValuesAlgorithm(
         for (cell in region) {
             val hints = possibilities.forCell(cell).toMutableSet()
             val initialSize = hints.size
-            if (!Collections.disjoint(hints, values)) {
+            if (hints.any { it in values }) {
                 hints.removeIf { !values.contains(it) }
             }
             if (initialSize != hints.size) {

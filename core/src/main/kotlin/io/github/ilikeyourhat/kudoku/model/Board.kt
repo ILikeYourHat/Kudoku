@@ -2,7 +2,6 @@ package io.github.ilikeyourhat.kudoku.model
 
 import io.github.ilikeyourhat.kudoku.model.matrix.ListMatrix
 import io.github.ilikeyourhat.kudoku.model.matrix.MutableMatrix
-import java.util.NoSuchElementException
 
 data class Board(
     private val cells: MutableMatrix<Cell?>
