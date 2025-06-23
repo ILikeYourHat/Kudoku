@@ -1,10 +1,11 @@
 package io.github.ilikeyourhat.kudoku.parsing
 
 import io.github.ilikeyourhat.kudoku.model.Sudoku
-import io.github.ilikeyourhat.kudoku.model.SudokuType
-import io.github.ilikeyourhat.kudoku.model.matrix.ListMatrix
-import io.github.ilikeyourhat.kudoku.model.matrix.Matrix
-import io.github.ilikeyourhat.kudoku.model.matrix.MutableMatrix
+import io.github.ilikeyourhat.kudoku.type.Classic12x12
+import io.github.ilikeyourhat.kudoku.type.Classic12x12Vertical
+import io.github.ilikeyourhat.kudoku.type.Classic16x16
+import io.github.ilikeyourhat.kudoku.type.Classic25x25
+import io.github.ilikeyourhat.kudoku.type.Classic36x36
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.github.ilikeyourhat.kudoku.type.Classic6x6
 import io.github.ilikeyourhat.kudoku.type.Classic6x6Vertical
@@ -16,29 +17,19 @@ import io.github.ilikeyourhat.kudoku.type.Square2x2
 class GraphicFormatParser {
 
     fun toText(sudoku: Sudoku): String {
-        val (blockSizeX, blockSizeY) = getBlocksSize(sudoku.type)
-
-        val matrix = ListMatrix(sudoku.sizeX() * 2 + 1, sudoku.sizeY() * 2 + 1, "")
-        matrix.fill { x, y ->
-            when {
-                x % 2 == 0 && y % 2 == 0 -> crossroads(x, y, matrix.sizeX, matrix.sizeY, blockSizeX, blockSizeY)
-                x % 2 == 0 || y % 2 == 0 -> lines(x, y, matrix.sizeX, matrix.sizeY, blockSizeX, blockSizeY)
-                else -> valueToString(sudoku[x / 2, y / 2].value)
-            }
-        }
-        return matrix.rows()
-            .joinToString("\n") { it.joinToString("") }
+        val (blockSizeX, blockSizeY) = sudoku.getBlocksSize()
+        return Command(
+            values = sudoku.values().chunked(sudoku.sizeX()),
+            valuesLength = sudoku.getMaxValueLength(),
+            sizeX = sudoku.sizeX(),
+            sizeY = sudoku.sizeY(),
+            blockSizeX = blockSizeX,
+            blockSizeY = blockSizeY
+        ).execute()
     }
 
-    private fun <E> MutableMatrix<E>.fill(block: (Int, Int) -> E) {
-        for (x in 0 until this.sizeX) {
-            for (y in 0 until this.sizeY) {
-               this[x,y] = block(x, y)
-            }
-        }
-    }
-
-    private fun getBlocksSize(type: SudokuType): Pair<Int, Int> {
+    @Suppress("MagicNumber") // TODO refactor to depend on region dividers
+    private fun Sudoku.getBlocksSize(): Pair<Int, Int> {
         return when (type) {
             Square1x1 -> 1 to 1
             Square2x2 -> 2 to 2
@@ -46,60 +37,133 @@ class GraphicFormatParser {
             Classic6x6 -> 3 to 2
             Classic6x6Vertical -> 2 to 3
             Classic9x9 -> 3 to 3
+            Classic12x12 -> 4 to 3
+            Classic12x12Vertical -> 3 to 4
+            Classic16x16 -> 4 to 4
+            Classic25x25 -> 5 to 5
+            Classic36x36 -> 6 to 6
             DoubleDiagonal9x9 -> 3 to 3
-            else -> throw UnsupportedOperationException("Unsupported Sudoku type: $type")
+            else -> throw IllegalArgumentException("Unsupported Sudoku type: $type")
         }
     }
-}
 
-private fun crossroads(
-    x: Int,
-    y: Int,
-    sizeX: Int,
-    sizeY: Int,
-    blockSizeX: Int,
-    blockSizeY: Int
-): String {
-    return when {
-        x == 0 && y == 0 -> "╔"
-        x == 0 && y == sizeY - 1 -> "╚"
-        x == sizeX - 1 && y == 0 -> "╗"
-        x == sizeX - 1 && y == sizeY - 1 -> "╝"
-        x % (2 * blockSizeX) == 0 && y == 0 -> "╦"
-        x % 2 == 0 && y == 0 -> "╤"
-        x % (2 * blockSizeX) == 0 && y == sizeY - 1 -> "╩"
-        x % 2 == 0 && y == sizeY - 1 -> "╧"
-        x == 0 && y % (2 * blockSizeY) == 0 -> "╠"
-        y % 2 == 0 && x == 0 -> "╟"
-        x == sizeX - 1 && y % (2 * blockSizeY) == 0 -> "╣"
-        y % 2 == 0 && x == sizeX - 1 -> "╢"
-        x % (2 * blockSizeX) == 0 && y % (2 * blockSizeY) == 0 -> "╬"
-        x % 2 == 0 && y % (2 * blockSizeY) == 0 -> "╪"
-        x % (2 * blockSizeX) == 0 && y % 2 == 0 -> "╫"
-        else -> "┼"
+    private fun Sudoku.getMaxValueLength(): Int {
+        return type.maxValue.toString().length
     }
-}
 
-private fun lines(x: Int, y: Int, sizeX: Int, sizeY: Int, blockSizeX: Int, blockSizeY: Int): String {
-    return when {
-        x == 0 || x == sizeX - 1 -> "║"
-        y == 0 || y == sizeY - 1 -> "═"
-        y % (2 * blockSizeY) == 0 -> "═"
-        y % 2 == 0 -> "─"
-        x % (2 * blockSizeX) == 0 -> "║"
-        x % 2 == 0 -> "│"
-        else -> throw IllegalStateException("Unexpected coordinates: ($x, $y) in size ($sizeX, $sizeY)")
-    }
-}
-
-private fun valueToString(value: Int): String {
-    return if (value == 0) " " else value.toString()
-}
-
-private fun <E> Matrix<E>.rows(): List<List<E>> {
-    return (0 until this.sizeY).map { y ->
-        (0 until this.sizeX).map { x ->
-            this[x, y]
+    private class Command(
+        val values: List<List<Int>>,
+        val valuesLength: Int,
+        val sizeX: Int,
+        val sizeY: Int,
+        val blockSizeX: Int,
+        val blockSizeY: Int
+    ) {
+        fun execute(): String {
+            return StringBuilder().apply {
+                top().append("\n")
+                repeat(sizeY - 1) { index ->
+                    content(values[index]).append("\n")
+                    middle((index + 1) % blockSizeY == 0).append("\n")
+                }
+                content(values.last()).append("\n")
+                bottom()
+            }.toString()
         }
+
+        private fun StringBuilder.content(values: List<Int>) = apply {
+            verticalLine()
+            repeat(sizeX - 1) { index ->
+                graphicValue(values[index])
+                verticalLine((index + 1) % blockSizeX == 0)
+            }
+            graphicValue(values.last())
+            verticalLine()
+        }
+
+        private fun StringBuilder.graphicValue(value: Int) = append(
+            if (value == 0) {
+                " ".repeat(valuesLength)
+            } else {
+                value.toString().padStart(valuesLength)
+            }
+        )
+
+        private fun StringBuilder.top() = apply {
+            topLeftBorder()
+            repeat(sizeX - 1) { index ->
+                horizontalLine()
+                topBorder((index + 1) % blockSizeX == 0)
+            }
+            horizontalLine()
+            topRightBorder()
+        }
+
+        private fun StringBuilder.middle(isRegionIntersectionY: Boolean) = apply {
+            leftBorder(isRegionIntersectionY)
+            repeat(sizeX - 1) { index ->
+                horizontalLine(isRegionIntersectionY)
+                middleBorder((index + 1) % blockSizeX == 0, isRegionIntersectionY)
+            }
+            horizontalLine(isRegionIntersectionY)
+            rightBorder(isRegionIntersectionY)
+        }
+
+        private fun StringBuilder.bottom() = apply {
+            bottomLeftBorder()
+            repeat(sizeX - 1) { index ->
+                horizontalLine()
+                bottomBorder((index + 1) % blockSizeX == 0)
+            }
+            horizontalLine()
+            bottomRightBorder()
+        }
+
+        private fun StringBuilder.topLeftBorder() = append("╔")
+
+        private fun StringBuilder.topRightBorder() = append("╗")
+
+        private fun StringBuilder.bottomLeftBorder() = append("╚")
+
+        private fun StringBuilder.bottomRightBorder() = append("╝")
+
+        private fun StringBuilder.topBorder(isRegionIntersection: Boolean) = append(
+            if (isRegionIntersection) "╦" else "╤"
+        )
+
+        private fun StringBuilder.bottomBorder(isRegionIntersection: Boolean) = append(
+            if (isRegionIntersection) "╩" else "╧"
+        )
+
+        private fun StringBuilder.leftBorder(isRegionIntersection: Boolean) = append(
+            if (isRegionIntersection) "╠" else "╟"
+        )
+
+        private fun StringBuilder.rightBorder(isRegionIntersection: Boolean) = append(
+            if (isRegionIntersection) "╣" else "╢"
+        )
+
+        private fun StringBuilder.middleBorder(
+            isRegionIntersectionX: Boolean,
+            isRegionIntersectionY: Boolean
+        ) = append(
+            when {
+                isRegionIntersectionX && isRegionIntersectionY -> "╬"
+                isRegionIntersectionX -> "╫"
+                isRegionIntersectionY -> "╪"
+                else -> "┼"
+            }
+        )
+
+        private fun StringBuilder.horizontalLine(
+            isRegionIntersection: Boolean = true
+        ) = apply {
+            val lineChar = if (isRegionIntersection) "═" else "─"
+            append(lineChar.repeat(valuesLength))
+        }
+
+        private fun StringBuilder.verticalLine(isRegionIntersection: Boolean = true) = append(
+            if (isRegionIntersection) "║" else "│"
+        )
     }
 }
