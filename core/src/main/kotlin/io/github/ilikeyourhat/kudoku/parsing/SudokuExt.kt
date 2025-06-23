@@ -7,6 +7,10 @@ fun Sudoku.toSingleLineString(emptyCellIndicator: EmptyCellIndicator = EmptyCell
     return SingleLineSudokuParser().toText(this, emptyCellIndicator)
 }
 
+fun Sudoku.toGraphicFormatString(): String {
+    return GraphicFormatParser().toText(this)
+}
+
 fun Sudoku.Companion.fromSingleLineString(string: String): Sudoku {
     return SingleLineSudokuParser().fromText(string)
 }
