@@ -61,12 +61,12 @@ class GraphicFormatParser {
     ) {
         fun execute(): String {
             return StringBuilder().apply {
-                top().append("\n")
+                top().appendLine()
                 repeat(sizeY - 1) { index ->
-                    content(values[index]).append("\n")
-                    middle((index + 1) % blockSizeY == 0).append("\n")
+                    content(values[index]).appendLine()
+                    middle((index + 1) % blockSizeY == 0).appendLine()
                 }
-                content(values.last()).append("\n")
+                content(values.last()).appendLine()
                 bottom()
             }.toString()
         }
