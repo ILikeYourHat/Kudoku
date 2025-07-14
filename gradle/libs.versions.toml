@@ -6,7 +6,7 @@ junit5 = "5.13.3"
 kotest = "5.9.1"
 kotlin = "2.2.0"
 kover = "0.9.1"
-maven-publish = "0.33.0"
+maven-publish = "0.34.0"
 mockk = "1.14.4"
 sat4j = "2.3.6"
 
