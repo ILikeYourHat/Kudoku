@@ -10,7 +10,9 @@ import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.int
 import com.github.ajalt.clikt.parameters.types.long
 import com.github.ajalt.clikt.parameters.types.restrictTo
+import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
+import io.github.ilikeyourhat.kudoku.solving.defaultSolver
 import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 import kotlin.random.Random
 
@@ -25,6 +27,13 @@ fun CliktCommand.sudokuTypeOption() = option()
         TypesRegistry.getTypeByName(type)
             ?: fail("$type. Run `help types` to see supported Sudoku types.") // TODO no such help exists yet
     }
+
+fun CliktCommand.solverTypeOption() = option()
+    .convert { type ->
+        CommandLineRegistry.getSolver(type)
+            ?: fail("$type. Run `help solvers` to see supported Sudoku solvers.") // TODO no such help exists yet
+    }
+    .default(Sudoku.defaultSolver())
 
 fun CliktCommand.difficulty() = option()
     .enum<Difficulty>()

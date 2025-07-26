@@ -45,9 +45,9 @@ dependencies {
 
     implementation(libs.sat4j)
 
+    testImplementation(platform(libs.junit5.bom))
     testRuntimeOnly(libs.junit5.platform)
-    testImplementation(libs.junit5.api)
-    testImplementation(libs.junit5.params)
+    testImplementation(libs.bundles.junit5)
     testImplementation(libs.kotest)
     testImplementation(libs.mockk)
 }

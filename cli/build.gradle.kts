@@ -51,6 +51,8 @@ dependencies {
     implementation(project(":core"))
     implementation(libs.clikt)
 
-    testImplementation(kotlin("test"))
+    testImplementation(platform(libs.junit5.bom))
+    testRuntimeOnly(libs.junit5.platform)
+    testImplementation(libs.bundles.junit5)
     testImplementation(libs.kotest)
 }
