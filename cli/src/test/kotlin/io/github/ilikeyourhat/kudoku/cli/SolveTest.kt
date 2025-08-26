@@ -33,8 +33,15 @@ class SolveTest {
         val result = runCommand("solve --solver unknown_solver $UNSOLVED_CLASSIC_4X4")
 
         result.shouldFailWith(
-            "Error: invalid value for --solver: unknown_solver. " +
-                "Run `help solvers` to see supported Sudoku solvers."
+            "Error: invalid value for --solver: invalid choice: unknown_solver. " +
+                "(choose from sat, bruteforce, deduction)"
         )
+    }
+
+    @Test
+    fun `should fail if type is not available`() {
+        val result = runCommand("solve --type unknown_type $UNSOLVED_CLASSIC_4X4")
+
+        result.shouldFailWith("Error: invalid value for --type: unknown_type. Supported types are: $supportedTypes")
     }
 }

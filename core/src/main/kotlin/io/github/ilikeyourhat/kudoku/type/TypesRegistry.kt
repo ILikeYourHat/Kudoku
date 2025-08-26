@@ -45,6 +45,10 @@ object TypesRegistry {
     fun getTypeByName(name: String): SudokuType? {
         return typeMap[name]
     }
+
+    fun getTypes(): List<SudokuType> {
+        return typeMap.values.toList()
+    }
 }
 
 val CLASSIC_TYPES = listOf(

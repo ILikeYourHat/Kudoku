@@ -35,8 +35,6 @@ class RateTest {
     fun `should fail to rate given sudoku with unknown type`() {
         val result = runCommand("rate --type unknown_type $UNSOLVED_DD")
 
-        result.shouldFailWith(
-            "Error: invalid value for --type: unknown_type. Run `help types` to see supported Sudoku types."
-        )
+        result.shouldFailWith("Error: invalid value for --type: unknown_type. Supported types are: $supportedTypes")
     }
 }

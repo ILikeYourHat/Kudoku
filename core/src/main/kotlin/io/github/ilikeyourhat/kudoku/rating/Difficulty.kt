@@ -10,5 +10,7 @@ package io.github.ilikeyourhat.kudoku.rating
  * @property UNSOLVABLE The puzzle cannot be solved (it has zero solutions).
  */
 enum class Difficulty {
-    EASY, MEDIUM, HARD, VERY_HARD, UNSOLVABLE
+    EASY, MEDIUM, HARD, VERY_HARD, UNSOLVABLE;
+
+    override fun toString() = name.lowercase()
 }
