@@ -6,37 +6,53 @@ import com.github.ajalt.clikt.parameters.arguments.convert
 import com.github.ajalt.clikt.parameters.options.convert
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.types.choice
 import com.github.ajalt.clikt.parameters.types.enum
 import com.github.ajalt.clikt.parameters.types.int
 import com.github.ajalt.clikt.parameters.types.long
 import com.github.ajalt.clikt.parameters.types.restrictTo
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
+import io.github.ilikeyourhat.kudoku.solving.bruteforce.BruteForceSolver
+import io.github.ilikeyourhat.kudoku.solving.deduction.solver.DeductionSolverV3
 import io.github.ilikeyourhat.kudoku.solving.defaultSolver
+import io.github.ilikeyourhat.kudoku.solving.sat.SatSolver
 import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 import kotlin.random.Random
-
-fun CliktCommand.sudokuTypeArgument() = argument()
-    .convert { type ->
-        TypesRegistry.getTypeByName(type)
-            ?: fail("$type. Run `help types` to see supported Sudoku types.") // TODO no such help exists yet
-    }
 
 fun CliktCommand.sudokuTypeOption() = option()
     .convert { type ->
         TypesRegistry.getTypeByName(type)
-            ?: fail("$type. Run `help types` to see supported Sudoku types.") // TODO no such help exists yet
+            ?: fail("$type. Supported types are: $supportedTypes")
     }
 
-fun CliktCommand.solverTypeOption() = option()
+fun CliktCommand.sudokuTypeArgument() = argument()
     .convert { type ->
-        CommandLineRegistry.getSolver(type)
-            ?: fail("$type. Run `help solvers` to see supported Sudoku solvers.") // TODO no such help exists yet
+        TypesRegistry.getTypeByName(type)
+            ?: fail("$type. Supported types are: $supportedTypes")
+    }
+
+enum class SolverArgument { SAT, BRUTEFORCE, DEDUCTION }
+
+fun CliktCommand.solverTypeOption() = option()
+    .enum<SolverArgument> { it.name.lowercase() }
+    .convert { type ->
+        when (type) {
+            SolverArgument.SAT -> SatSolver()
+            SolverArgument.BRUTEFORCE -> BruteForceSolver()
+            SolverArgument.DEDUCTION -> DeductionSolverV3()
+        }
     }
     .default(Sudoku.defaultSolver())
 
 fun CliktCommand.difficulty() = option()
-    .enum<Difficulty>()
+    .choice(
+        Difficulty.EASY.toString(),
+        Difficulty.MEDIUM.toString(),
+        Difficulty.HARD.toString(),
+        Difficulty.VERY_HARD.toString()
+    )
+    .enum<Difficulty> { it.name.lowercase() }
 
 fun CliktCommand.count() = option()
     .int()
@@ -47,3 +63,11 @@ fun CliktCommand.random() = option("--seed")
     .long()
     .convert { Random(it) }
     .default(Random.Default)
+
+val supportedTypes: String
+    get() = TypesRegistry.getTypes()
+        .map { it.name }
+        .sorted()
+        // Jigsaw types are currently not supported, because there is no way to pass the custom region info
+        .filterNot { it.contains("jigsaw") }
+        .joinToString()

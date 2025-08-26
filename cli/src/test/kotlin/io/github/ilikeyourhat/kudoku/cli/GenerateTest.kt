@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test
 class GenerateTest {
 
     @Test
+    fun `should generate Sudoku with default type`() {
+        val result = runCommand("generate")
+
+        result.shouldSucceedWith(classic9x9Regex)
+    }
+
+    @Test
     fun `should generate Sudoku with given type`() {
         val result = runCommand("generate classic_4x4")
 
@@ -39,8 +46,6 @@ class GenerateTest {
     fun `should fail to generate Sudoku with unknown type`() {
         val result = runCommand("generate unknown_type")
 
-        result.shouldFailWith(
-            "Error: invalid value for <type>: unknown_type. Run `help types` to see supported Sudoku types."
-        )
+        result.shouldFailWith("Error: invalid value for <type>: unknown_type. Supported types are: $supportedTypes")
     }
 }
