@@ -1,10 +1,13 @@
 package io.github.ilikeyourhat.kudoku.cli
 
+import io.github.ilikeyourhat.kudoku.parsing.EmptyCellIndicator
 import io.kotest.inspectors.shouldForAll
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.string.shouldMatch
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.EnumSource
 
 class GenerateTest {
 
@@ -40,6 +43,20 @@ class GenerateTest {
         val result2 = runCommand("generate classic_4x4 --seed 123456789")
 
         result1.shouldBeEqual(result2)
+    }
+
+    @ParameterizedTest
+    @EnumSource(EmptyCellIndicator::class)
+    fun `should generate Sudoku with given indicator`(indicator: EmptyCellIndicator) {
+        val char = indicator.value
+        val name = indicator.name
+
+        val result = runCommand("generate classic_4x4 --empty-indicator=$name")
+
+        result.statusCode.shouldBeEqual(0)
+        result.output
+            .lines().first()
+            .shouldMatch("""^([1-4$char]){16}$""".toRegex())
     }
 
     @Test

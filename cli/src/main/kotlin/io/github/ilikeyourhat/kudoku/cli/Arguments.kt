@@ -12,6 +12,7 @@ import com.github.ajalt.clikt.parameters.types.int
 import com.github.ajalt.clikt.parameters.types.long
 import com.github.ajalt.clikt.parameters.types.restrictTo
 import io.github.ilikeyourhat.kudoku.model.Sudoku
+import io.github.ilikeyourhat.kudoku.parsing.EmptyCellIndicator
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.solving.bruteforce.BruteForceSolver
 import io.github.ilikeyourhat.kudoku.solving.deduction.solver.DeductionSolverV3
@@ -63,6 +64,10 @@ fun CliktCommand.random() = option("--seed")
     .long()
     .convert { Random(it) }
     .default(Random.Default)
+
+fun CliktCommand.emptyCellIndicator() = option()
+    .enum<EmptyCellIndicator> { it.name.lowercase() }
+    .default(EmptyCellIndicator.DEFAULT)
 
 val supportedTypes: String
     get() = TypesRegistry.getTypes()

@@ -36,6 +36,9 @@ class Generate : CliktCommand() {
     val count by count()
         .help { "Number of Sudokus to generate, defaults to 1" }
 
+    val emptyIndicator by emptyCellIndicator()
+        .help("The type of empty cell indicator in the output. Defaults to \"zero\" (0 character).")
+
     val random by random()
         .help { "The seed for the RNG implementation." }
 
@@ -43,7 +46,7 @@ class Generate : CliktCommand() {
         val generator = Sudoku.defaultGenerator(random)
         repeat(count) {
             val sudoku = generator.generate(type, difficulty)
-            echo(sudoku.toSingleLineString())
+            echo(sudoku.toSingleLineString(emptyIndicator))
         }
     }
 }

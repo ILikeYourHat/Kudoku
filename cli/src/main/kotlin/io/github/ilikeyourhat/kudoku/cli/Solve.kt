@@ -38,6 +38,9 @@ class Solve : CliktCommand() {
                 "Supported types are: $supportedTypes."
         )
 
+    val emptyIndicator by emptyCellIndicator()
+        .help("The type of empty cell indicator in the output. Defaults to \"zero\" (0 character).")
+
     val solver by solverTypeOption()
         .help(
             """
@@ -59,6 +62,6 @@ class Solve : CliktCommand() {
             ?: Sudoku.fromSingleLineString(input)
 
         val solution = solver.solve(sudoku)
-        echo(solution.toSingleLineString())
+        echo(solution.toSingleLineString(emptyIndicator))
     }
 }

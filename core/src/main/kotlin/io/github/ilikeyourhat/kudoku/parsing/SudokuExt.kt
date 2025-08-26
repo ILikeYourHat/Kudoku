@@ -3,7 +3,7 @@ package io.github.ilikeyourhat.kudoku.parsing
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 
-fun Sudoku.toSingleLineString(emptyCellIndicator: EmptyCellIndicator = EmptyCellIndicator.ZERO): String {
+fun Sudoku.toSingleLineString(emptyCellIndicator: EmptyCellIndicator = EmptyCellIndicator.DEFAULT): String {
     return SingleLineSudokuParser().toText(this, emptyCellIndicator)
 }
 
