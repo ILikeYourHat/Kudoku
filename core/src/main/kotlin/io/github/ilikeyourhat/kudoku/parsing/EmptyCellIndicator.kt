@@ -6,5 +6,11 @@ enum class EmptyCellIndicator(val value: Char) {
     X('X'),
     ASTERISK('*'),
     UNDERSCORE('_'),
-    SPACE(' ')
+    SPACE(' ');
+
+    override fun toString() = name.lowercase()
+
+    companion object {
+        val DEFAULT: EmptyCellIndicator = ZERO
+    }
 }
