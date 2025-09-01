@@ -5,6 +5,7 @@ detekt = "1.23.8"
 junit5 = "5.13.4"
 kotest = "6.0.1"
 kotlin = "2.2.10"
+kotlinx-coroutines = "1.10.2"
 kover = "0.9.1"
 maven-publish = "0.34.0"
 mockk = "1.14.5"
@@ -12,6 +13,8 @@ sat4j = "2.3.6"
 
 [libraries]
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 junit5 = { module = "org.junit.jupiter:junit-jupiter" }
 junit5-bom = { module = "org.junit:junit-bom", version.ref = "junit5" }

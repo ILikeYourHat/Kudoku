@@ -6,6 +6,7 @@ import io.github.ilikeyourhat.kudoku.solving.defaultSolver
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 
 abstract class SudokuTypeTestTemplate {
 
@@ -13,7 +14,7 @@ abstract class SudokuTypeTestTemplate {
     abstract val solution: String
 
     @Test
-    fun `should solve it correctly`() {
+    fun `should solve it correctly`() = runTest {
         val solver = Sudoku.defaultSolver()
         val sudokuToSolve = Sudoku.createFromString(puzzle)
         val expectedResult = Sudoku.createFromString(solution)

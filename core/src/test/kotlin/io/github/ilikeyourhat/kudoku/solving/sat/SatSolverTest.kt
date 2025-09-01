@@ -8,13 +8,14 @@ import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 
 class SatSolverTest : SolverContractTestTemplate<SatSolver>(
     solver = SatSolver()
 ) {
 
     @Test
-    fun `should not solve sudoku when there is no solution`() {
+    fun `should not solve sudoku when there is no solution`() = runTest {
         val sudoku = Sudoku(
             Classic4x4,
             listOf(
@@ -31,7 +32,7 @@ class SatSolverTest : SolverContractTestTemplate<SatSolver>(
     }
 
     @Test
-    fun `should solve sudoku when there are many solutions`() {
+    fun `should solve sudoku when there are many solutions`() = runTest {
         val sudoku = Sudoku(
             Classic4x4,
             listOf(
@@ -47,7 +48,7 @@ class SatSolverTest : SolverContractTestTemplate<SatSolver>(
     }
 
     @Test
-    fun `should detect single solution`() {
+    fun `should detect single solution`() = runTest {
         val sudoku = Sudoku(
             Classic4x4,
             listOf(
@@ -62,7 +63,7 @@ class SatSolverTest : SolverContractTestTemplate<SatSolver>(
     }
 
     @Test
-    fun `should detect no solutions`() {
+    fun `should detect no solutions`() = runTest {
         val sudoku = Sudoku(
             Classic4x4,
             listOf(
@@ -77,7 +78,7 @@ class SatSolverTest : SolverContractTestTemplate<SatSolver>(
     }
 
     @Test
-    fun `should detect many solutions`() {
+    fun `should detect many solutions`() = runTest {
         val sudoku = Sudoku(
             Classic4x4,
             listOf(

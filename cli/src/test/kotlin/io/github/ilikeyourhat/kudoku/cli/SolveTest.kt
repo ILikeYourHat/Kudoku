@@ -7,18 +7,19 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 import org.junit.jupiter.params.provider.ValueSource
+import kotlinx.coroutines.test.runTest
 
 class SolveTest {
 
     @Test
-    fun `should solve given sudoku`() {
+    fun `should solve given sudoku`() = runTest {
         val result = runCommand("solve $UNSOLVED_CLASSIC")
 
         result.shouldSucceedWith(SOLVED_CLASSIC)
     }
 
     @Test
-    fun `should solve given sudoku with given type`() {
+    fun `should solve given sudoku with given type`() = runTest {
         val result = runCommand("solve --type double_diagonal_9x9 $UNSOLVED_DD ")
 
         result.shouldSucceedWith(SOLVED_DD)
@@ -26,7 +27,7 @@ class SolveTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["sat", "bruteforce", "deduction"])
-    fun `should solve given sudoku with given solver`(solver: String) {
+    fun `should solve given sudoku with given solver`(solver: String) = runTest {
         val result = runCommand("solve --solver $solver $UNSOLVED_CLASSIC_4X4")
 
         result.shouldSucceedWith(SOLVED_CLASSIC_4X4)
@@ -34,7 +35,7 @@ class SolveTest {
 
     @ParameterizedTest
     @EnumSource(EmptyCellIndicator::class)
-    fun `should return Sudoku with given indicator as output`(indicator: EmptyCellIndicator) {
+    fun `should return Sudoku with given indicator as output`(indicator: EmptyCellIndicator) = runTest {
         val char = indicator.value
         val name = indicator.name
 
@@ -48,7 +49,7 @@ class SolveTest {
     }
 
     @Test
-    fun `should fail if solver is not available`() {
+    fun `should fail if solver is not available`() = runTest {
         val result = runCommand("solve --solver unknown_solver $UNSOLVED_CLASSIC_4X4")
 
         result.shouldFailWith(
@@ -58,7 +59,7 @@ class SolveTest {
     }
 
     @Test
-    fun `should fail if type is not available`() {
+    fun `should fail if type is not available`() = runTest {
         val result = runCommand("solve --type unknown_type $UNSOLVED_CLASSIC_4X4")
 
         result.shouldFailWith("Error: invalid value for --type: unknown_type. Supported types are: $supportedTypes")

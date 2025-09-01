@@ -26,5 +26,5 @@ interface SudokuSolver {
      * @param sudoku The Sudoku puzzle to solve.
      * @return The output Sudoku, might be solved or not.
      */
-    fun solve(sudoku: Sudoku): Sudoku
+    suspend fun solve(sudoku: Sudoku): Sudoku
 }

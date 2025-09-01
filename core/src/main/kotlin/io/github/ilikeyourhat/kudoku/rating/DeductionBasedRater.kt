@@ -16,7 +16,7 @@ class DeductionBasedRater(
     private val solutionChecker: SudokuSolutionChecker = SatSolver()
 ) : SudokuRater {
 
-    override fun rate(sudoku: Sudoku): Difficulty {
+    override suspend fun rate(sudoku: Sudoku): Difficulty {
         return when {
             easySolver.canSolve(sudoku) -> Difficulty.EASY
             mediumSolver.canSolve(sudoku) -> Difficulty.MEDIUM
@@ -31,7 +31,7 @@ class DeductionBasedRater(
         }
     }
 
-    private fun SudokuSolver.canSolve(sudoku: Sudoku): Boolean {
+    private suspend fun SudokuSolver.canSolve(sudoku: Sudoku): Boolean {
         return solve(sudoku).isSolved()
     }
 }

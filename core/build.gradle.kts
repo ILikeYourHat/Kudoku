@@ -44,12 +44,14 @@ dependencies {
     detektPlugins(libs.detekt.formatting)
 
     implementation(libs.sat4j)
+    implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(platform(libs.junit5.bom))
     testRuntimeOnly(libs.junit5.platform)
     testImplementation(libs.bundles.junit5)
     testImplementation(libs.kotest)
     testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
 
 mavenPublishing {

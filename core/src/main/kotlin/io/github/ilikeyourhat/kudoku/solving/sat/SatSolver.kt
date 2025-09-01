@@ -8,11 +8,11 @@ import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
 
 class SatSolver : SudokuSolver, SudokuSolutionChecker {
 
-    override fun solve(sudoku: Sudoku): Sudoku {
+    override suspend fun solve(sudoku: Sudoku): Sudoku {
         return Command(sudoku).solve()
     }
 
-    override fun checkSolutions(sudoku: Sudoku): SolutionCount {
+    override suspend fun checkSolutions(sudoku: Sudoku): SolutionCount {
         return Command(sudoku).checkSolutions()
     }
 

@@ -5,9 +5,11 @@ import io.github.ilikeyourhat.kudoku.solving.SolutionCount
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolutionChecker
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
 import io.kotest.matchers.shouldBe
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 
 class DeductionBasedRaterTest {
 
@@ -20,13 +22,13 @@ class DeductionBasedRaterTest {
     }
 
     private val easySolver: SudokuSolver = mockk {
-        every { solve(any()) } returns unsolvedSudoku
+        coEvery { solve(any()) } returns unsolvedSudoku
     }
     private val mediumSolver: SudokuSolver = mockk {
-        every { solve(any()) } returns unsolvedSudoku
+        coEvery { solve(any()) } returns unsolvedSudoku
     }
     private val hardSolver: SudokuSolver = mockk {
-        every { solve(any()) } returns unsolvedSudoku
+        coEvery { solve(any()) } returns unsolvedSudoku
     }
     private val solutionChecker: SudokuSolutionChecker = mockk()
 
@@ -38,8 +40,8 @@ class DeductionBasedRaterTest {
     )
 
     @Test
-    fun `should classify sudoku as easy`() {
-        every { easySolver.solve(inputSudoku) } returns solvedSudoku
+    fun `should classify sudoku as easy`() = runTest {
+        coEvery { easySolver.solve(inputSudoku) } returns solvedSudoku
 
         val difficulty = rater.rate(inputSudoku)
 
@@ -47,8 +49,8 @@ class DeductionBasedRaterTest {
     }
 
     @Test
-    fun `should classify sudoku as medium`() {
-        every { mediumSolver.solve(inputSudoku) } returns solvedSudoku
+    fun `should classify sudoku as medium`() = runTest {
+        coEvery { mediumSolver.solve(inputSudoku) } returns solvedSudoku
 
         val difficulty = rater.rate(inputSudoku)
 
@@ -56,8 +58,8 @@ class DeductionBasedRaterTest {
     }
 
     @Test
-    fun `should classify sudoku as hard`() {
-        every { hardSolver.solve(inputSudoku) } returns solvedSudoku
+    fun `should classify sudoku as hard`() = runTest {
+        coEvery { hardSolver.solve(inputSudoku) } returns solvedSudoku
 
         val difficulty = rater.rate(inputSudoku)
 
@@ -65,8 +67,8 @@ class DeductionBasedRaterTest {
     }
 
     @Test
-    fun `should classify sudoku as very hard`() {
-        every { solutionChecker.checkSolutions(inputSudoku) } returns SolutionCount.ONE
+    fun `should classify sudoku as very hard`() = runTest {
+        coEvery { solutionChecker.checkSolutions(inputSudoku) } returns SolutionCount.ONE
 
         val difficulty = rater.rate(inputSudoku)
 
@@ -74,8 +76,8 @@ class DeductionBasedRaterTest {
     }
 
     @Test
-    fun `should classify sudoku with no solutions as unsolvable`() {
-        every { solutionChecker.checkSolutions(inputSudoku) } returns SolutionCount.ZERO
+    fun `should classify sudoku with no solutions as unsolvable`() = runTest {
+        coEvery { solutionChecker.checkSolutions(inputSudoku) } returns SolutionCount.ZERO
 
         val difficulty = rater.rate(inputSudoku)
 
@@ -83,8 +85,8 @@ class DeductionBasedRaterTest {
     }
 
     @Test
-    fun `should classify sudoku with multiple solutions as unsolvable`() {
-        every { solutionChecker.checkSolutions(inputSudoku) } returns SolutionCount.MANY
+    fun `should classify sudoku with multiple solutions as unsolvable`() = runTest {
+        coEvery { solutionChecker.checkSolutions(inputSudoku) } returns SolutionCount.MANY
 
         val difficulty = rater.rate(inputSudoku)
 

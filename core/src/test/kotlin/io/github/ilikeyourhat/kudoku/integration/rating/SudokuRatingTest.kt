@@ -6,11 +6,12 @@ import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.rating.defaultRater
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 
 class SudokuRatingTest {
 
     @Test
-    fun `should rate sudoku as EASY`() {
+    fun `should rate sudoku as EASY`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
@@ -34,7 +35,7 @@ class SudokuRatingTest {
     }
 
     @Test
-    fun `should rate sudoku as MEDIUM`() {
+    fun `should rate sudoku as MEDIUM`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
@@ -58,7 +59,7 @@ class SudokuRatingTest {
     }
 
     @Test
-    fun `should rate sudoku as HARD`() {
+    fun `should rate sudoku as HARD`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
@@ -82,7 +83,7 @@ class SudokuRatingTest {
     }
 
     @Test
-    fun `should rate sudoku as VERY_HARD`() {
+    fun `should rate sudoku as VERY_HARD`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
@@ -106,7 +107,7 @@ class SudokuRatingTest {
     }
 
     @Test
-    fun `should rate sudoku as INVALID when no solutions`() {
+    fun `should rate sudoku as INVALID when no solutions`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
@@ -130,7 +131,7 @@ class SudokuRatingTest {
     }
 
     @Test
-    fun `should rate sudoku as INVALID when multiple solutions`() {
+    fun `should rate sudoku as INVALID when multiple solutions`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
