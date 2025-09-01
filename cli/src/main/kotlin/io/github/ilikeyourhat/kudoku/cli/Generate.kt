@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.cli
 
-import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.command.SuspendingCliktCommand
 import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.core.theme
 import com.github.ajalt.clikt.parameters.arguments.default
@@ -11,7 +11,7 @@ import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.parsing.toSingleLineString
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
 
-class Generate : CliktCommand() {
+class Generate : SuspendingCliktCommand() {
 
     override fun help(context: Context): String {
         return context.theme.info(
@@ -42,7 +42,7 @@ class Generate : CliktCommand() {
     val random by random()
         .help { "The seed for the RNG implementation." }
 
-    override fun run() {
+    override suspend fun run() {
         val generator = Sudoku.defaultGenerator(random)
         repeat(count) {
             val sudoku = generator.generate(type, difficulty)

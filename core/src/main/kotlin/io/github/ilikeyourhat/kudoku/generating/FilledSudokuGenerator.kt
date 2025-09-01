@@ -13,12 +13,12 @@ class FilledSudokuGenerator(
     private val random: Random = Random.Default
 ) {
 
-    fun generate(type: SudokuType): Sudoku {
+    suspend fun generate(type: SudokuType): Sudoku {
         return createValidEmptySudoku(type)
             .apply { setRandomValidValues(this) }
     }
 
-    private fun createValidEmptySudoku(type: SudokuType): Sudoku {
+    private suspend fun createValidEmptySudoku(type: SudokuType): Sudoku {
         var result: Sudoku
         do {
             // Some Sudoku types may not always create a valid empty sudoku!
@@ -27,13 +27,13 @@ class FilledSudokuGenerator(
         return result
     }
 
-    private fun setRandomValidValues(sudoku: Sudoku) {
+    private suspend fun setRandomValidValues(sudoku: Sudoku) {
         sudoku.cells()
             .shuffled(random)
             .forEach { cell -> setRandomValidValue(sudoku, cell) }
     }
 
-    private fun setRandomValidValue(sudoku: Sudoku, cell: Cell) {
+    private suspend fun setRandomValidValue(sudoku: Sudoku, cell: Cell) {
         (1..sudoku.type.maxValue)
             .shuffled(random)
             .asSequence()
@@ -41,7 +41,7 @@ class FilledSudokuGenerator(
             .first { sudoku.hasSolution() }
     }
 
-    private fun Sudoku.hasSolution(): Boolean {
+    private suspend fun Sudoku.hasSolution(): Boolean {
         return solutionChecker.checkSolutions(this) != SolutionCount.ZERO
     }
 }

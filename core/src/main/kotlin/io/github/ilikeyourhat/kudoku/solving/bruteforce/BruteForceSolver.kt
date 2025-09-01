@@ -10,7 +10,7 @@ class BruteForceSolver(
     private val random: Random? = null
 ) : SudokuSolver {
 
-    override fun solve(sudoku: Sudoku): Sudoku {
+    override suspend fun solve(sudoku: Sudoku): Sudoku {
         val result = sudoku.copy()
         val lookup = RegionLookup(result)
         val cells = result.cells()

@@ -55,4 +55,5 @@ dependencies {
     testRuntimeOnly(libs.junit5.platform)
     testImplementation(libs.bundles.junit5)
     testImplementation(libs.kotest)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

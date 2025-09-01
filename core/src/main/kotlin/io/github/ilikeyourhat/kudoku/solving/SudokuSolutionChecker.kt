@@ -16,7 +16,7 @@ interface SudokuSolutionChecker {
      * @param sudoku The Sudoku puzzle to check.
      * @return The number of solutions found (represented by the [SolutionCount] enum).
      */
-    fun checkSolutions(sudoku: Sudoku): SolutionCount
+    suspend fun checkSolutions(sudoku: Sudoku): SolutionCount
 
     /**
      * Checks if the Sudoku puzzle has at least one solution.
@@ -24,5 +24,5 @@ interface SudokuSolutionChecker {
      * @param sudoku The Sudoku puzzle to check.
      * @return True if the Sudoku puzzle has at least one solution, false otherwise.
      */
-    fun hasSolutions(sudoku: Sudoku) = checkSolutions(sudoku) != SolutionCount.ZERO
+    suspend fun hasSolutions(sudoku: Sudoku) = checkSolutions(sudoku) != SolutionCount.ZERO
 }

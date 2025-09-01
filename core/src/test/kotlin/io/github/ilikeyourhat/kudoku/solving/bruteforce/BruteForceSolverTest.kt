@@ -5,13 +5,14 @@ import io.github.ilikeyourhat.kudoku.solving.SolverContractTestTemplate
 import io.github.ilikeyourhat.kudoku.type.Classic4x4
 import io.kotest.matchers.booleans.shouldBeTrue
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 
 class BruteForceSolverTest : SolverContractTestTemplate<BruteForceSolver>(
     solver = BruteForceSolver()
 ) {
 
     @Test
-    fun `should solve empty grid`() {
+    fun `should solve empty grid`() = runTest {
         val input = Sudoku(
             Classic4x4,
             listOf(

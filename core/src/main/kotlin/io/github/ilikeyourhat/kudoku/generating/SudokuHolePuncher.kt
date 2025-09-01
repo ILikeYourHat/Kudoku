@@ -10,7 +10,7 @@ class SudokuHolePuncher(
     private val random: Random = Random.Default
 ) {
 
-    fun punchHoles(sudoku: Sudoku, difficulty: Difficulty? = null): Sudoku {
+    suspend fun punchHoles(sudoku: Sudoku, difficulty: Difficulty? = null): Sudoku {
         require(difficulty != Difficulty.UNSOLVABLE)
 
         val minDifficulty = difficulty ?: Difficulty.EASY
@@ -23,11 +23,11 @@ class SudokuHolePuncher(
         }
     }
 
-    private fun Sudoku.isDesiredDifficulty(difficulty: Difficulty): Boolean {
+    private suspend fun Sudoku.isDesiredDifficulty(difficulty: Difficulty): Boolean {
         return rater.rate(this) == difficulty
     }
 
-    private fun tryToPunchHoles(sudoku: Sudoku, minDifficulty: Difficulty) {
+    private suspend fun tryToPunchHoles(sudoku: Sudoku, minDifficulty: Difficulty) {
         sudoku.cells()
             .shuffled(random)
             .forEach { cell ->

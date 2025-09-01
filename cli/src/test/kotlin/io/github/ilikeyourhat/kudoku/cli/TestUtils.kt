@@ -1,13 +1,13 @@
 package io.github.ilikeyourhat.kudoku.cli
 
+import com.github.ajalt.clikt.command.test
 import com.github.ajalt.clikt.testing.CliktCommandTestResult
-import com.github.ajalt.clikt.testing.test
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.equals.shouldNotBeEqual
 import io.kotest.matchers.string.shouldMatch
 
-fun runCommand(argv: String): CliktCommandTestResult {
+suspend fun runCommand(argv: String): CliktCommandTestResult {
     return rootCommand.test(argv)
 }
 

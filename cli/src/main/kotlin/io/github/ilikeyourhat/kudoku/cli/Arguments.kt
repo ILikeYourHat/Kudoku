@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.cli
 
-import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.command.SuspendingCliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.convert
 import com.github.ajalt.clikt.parameters.options.convert
@@ -21,13 +21,13 @@ import io.github.ilikeyourhat.kudoku.solving.sat.SatSolver
 import io.github.ilikeyourhat.kudoku.type.TypesRegistry
 import kotlin.random.Random
 
-fun CliktCommand.sudokuTypeOption() = option()
+fun SuspendingCliktCommand.sudokuTypeOption() = option()
     .convert { type ->
         TypesRegistry.getTypeByName(type)
             ?: fail("$type. Supported types are: $supportedTypes")
     }
 
-fun CliktCommand.sudokuTypeArgument() = argument()
+fun SuspendingCliktCommand.sudokuTypeArgument() = argument()
     .convert { type ->
         TypesRegistry.getTypeByName(type)
             ?: fail("$type. Supported types are: $supportedTypes")
@@ -35,7 +35,7 @@ fun CliktCommand.sudokuTypeArgument() = argument()
 
 enum class SolverArgument { SAT, BRUTEFORCE, DEDUCTION }
 
-fun CliktCommand.solverTypeOption() = option()
+fun SuspendingCliktCommand.solverTypeOption() = option()
     .enum<SolverArgument> { it.name.lowercase() }
     .convert { type ->
         when (type) {
@@ -46,7 +46,7 @@ fun CliktCommand.solverTypeOption() = option()
     }
     .default(Sudoku.defaultSolver())
 
-fun CliktCommand.difficulty() = option()
+fun SuspendingCliktCommand.difficulty() = option()
     .choice(
         Difficulty.EASY.toString(),
         Difficulty.MEDIUM.toString(),
@@ -55,17 +55,17 @@ fun CliktCommand.difficulty() = option()
     )
     .enum<Difficulty> { it.name.lowercase() }
 
-fun CliktCommand.count() = option()
+fun SuspendingCliktCommand.count() = option()
     .int()
     .restrictTo(min = 0)
     .default(1)
 
-fun CliktCommand.random() = option("--seed")
+fun SuspendingCliktCommand.random() = option("--seed")
     .long()
     .convert { Random(it) }
     .default(Random.Default)
 
-fun CliktCommand.emptyCellIndicator() = option()
+fun SuspendingCliktCommand.emptyCellIndicator() = option()
     .enum<EmptyCellIndicator> { it.name.lowercase() }
     .default(EmptyCellIndicator.DEFAULT)
 

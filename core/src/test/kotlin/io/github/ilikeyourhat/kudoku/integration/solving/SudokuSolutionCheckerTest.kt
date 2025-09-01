@@ -6,11 +6,12 @@ import io.github.ilikeyourhat.kudoku.solving.SolutionCount
 import io.github.ilikeyourhat.kudoku.solving.defaultSolutionChecker
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 
 class SudokuSolutionCheckerTest {
 
     @Test
-    fun `should have no solutions`() {
+    fun `should have no solutions`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
@@ -34,7 +35,7 @@ class SudokuSolutionCheckerTest {
     }
 
     @Test
-    fun `should have one solution`() {
+    fun `should have one solution`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9
@@ -58,7 +59,7 @@ class SudokuSolutionCheckerTest {
     }
 
     @Test
-    fun `should have multiple solutions`() {
+    fun `should have multiple solutions`() = runTest {
         val sudoku = Sudoku.createFromString(
             """
             classic_9x9

@@ -10,7 +10,7 @@ abstract class DeductionSolver : SudokuSolver {
 
     protected abstract fun provideAlgorithms(type: SudokuType): List<DeductionAlgorithm.Factory>
 
-    override fun solve(sudoku: Sudoku): Sudoku {
+    override suspend fun solve(sudoku: Sudoku): Sudoku {
         val copy = sudoku.copy()
         val sudokuHintGrid = SudokuHintGrid.create(copy)
         return solve(copy, sudokuHintGrid)

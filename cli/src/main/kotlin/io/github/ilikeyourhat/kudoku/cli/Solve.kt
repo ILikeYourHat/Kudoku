@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.cli
 
-import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.command.SuspendingCliktCommand
 import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.core.theme
 import com.github.ajalt.clikt.parameters.arguments.argument
@@ -11,7 +11,7 @@ import io.github.ilikeyourhat.kudoku.parsing.EmptyCellIndicator
 import io.github.ilikeyourhat.kudoku.parsing.fromSingleLineString
 import io.github.ilikeyourhat.kudoku.parsing.toSingleLineString
 
-class Solve : CliktCommand() {
+class Solve : SuspendingCliktCommand() {
 
     override fun help(context: Context): String {
         return context.theme.info(
@@ -56,7 +56,7 @@ class Solve : CliktCommand() {
             """.trimIndent()
         )
 
-    override fun run() {
+    override suspend fun run() {
         val sudoku = type
             ?.let { Sudoku.fromSingleLineString(it, input) }
             ?: Sudoku.fromSingleLineString(input)

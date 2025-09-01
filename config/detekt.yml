@@ -10,3 +10,6 @@ complexity:
   TooManyFunctions:
     thresholdInFiles: 21
     thresholdInClasses: 21
+formatting:
+  ImportOrdering:
+    layout: '*,java.**,javax.**,kotlin.**,kotlinx.**,^'

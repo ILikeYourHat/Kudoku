@@ -1,6 +1,6 @@
 package io.github.ilikeyourhat.kudoku.cli
 
-import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.command.SuspendingCliktCommand
 import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.core.theme
 import com.github.ajalt.clikt.parameters.arguments.argument
@@ -12,7 +12,7 @@ import io.github.ilikeyourhat.kudoku.parsing.fromSingleLineString
 import io.github.ilikeyourhat.kudoku.rating.Difficulty
 import io.github.ilikeyourhat.kudoku.rating.defaultRater
 
-class Rate : CliktCommand() {
+class Rate : SuspendingCliktCommand() {
 
     override fun help(context: Context): String {
         return context.theme.info(
@@ -39,7 +39,7 @@ class Rate : CliktCommand() {
                 "Supported types are: $supportedTypes."
         )
 
-    override fun run() {
+    override suspend fun run() {
         val rater = Sudoku.defaultRater()
         val sudoku = type
             ?.let { Sudoku.fromSingleLineString(it, input) }

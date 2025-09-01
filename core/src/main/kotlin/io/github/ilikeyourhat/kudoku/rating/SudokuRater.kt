@@ -15,5 +15,5 @@ interface SudokuRater {
      * @param sudoku The Sudoku puzzle to rate.
      * @return The difficulty of the Sudoku puzzle (represented by the [Difficulty] enum).
      */
-    fun rate(sudoku: Sudoku): Difficulty
+    suspend fun rate(sudoku: Sudoku): Difficulty
 }

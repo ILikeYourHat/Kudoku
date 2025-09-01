@@ -8,6 +8,7 @@ import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.runTest
 
 @Suppress("UnnecessaryAbstractClass") // JUnit5 treats this class as a test suite when it is not abstract
 abstract class SolverContractTestTemplate<Solver : SudokuSolver>(
@@ -15,7 +16,7 @@ abstract class SolverContractTestTemplate<Solver : SudokuSolver>(
 ) {
 
     @Test
-    fun `should find solution for simple sudoku`() {
+    fun `should find solution for simple sudoku`() = runTest {
         val input = sudoku.copy()
         val result = solver.solve(input)
 
@@ -25,7 +26,7 @@ abstract class SolverContractTestTemplate<Solver : SudokuSolver>(
     }
 
     @Test
-    fun `should just return the progress on sudoku when not finding solution`() {
+    fun `should just return the progress on sudoku when not finding solution`() = runTest {
         val input = brokenSudoku.copy()
         val result = solver.solve(input)
 
@@ -35,7 +36,7 @@ abstract class SolverContractTestTemplate<Solver : SudokuSolver>(
     }
 
     @Test
-    fun `should handle already solved sudoku`() {
+    fun `should handle already solved sudoku`() = runTest {
         val input = solvedSudoku.copy()
         val result = solver.solve(input)
 
@@ -44,7 +45,7 @@ abstract class SolverContractTestTemplate<Solver : SudokuSolver>(
     }
 
     @Test
-    fun `should find solution for challenge sudoku`() {
+    fun `should find solution for challenge sudoku`() = runTest {
         val result = solver.solve(challengeSudoku)
         result.isSolved().shouldBeTrue()
     }
