@@ -5,6 +5,8 @@ import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.SudokuType
 import io.github.ilikeyourhat.kudoku.solving.SudokuSolver
 import kotlin.random.Random
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 
 class BruteForceSolver(
     private val random: Random? = null
@@ -21,13 +23,14 @@ class BruteForceSolver(
         return result
     }
 
-    private fun runAlgorithm(
+    private suspend fun runAlgorithm(
         type: SudokuType,
         cells: List<Cell>,
         lookup: RegionLookup
     ) {
         var position = 0
         loop@ while (cells.indices.contains(position)) {
+            currentCoroutineContext().ensureActive()
             val cell = cells[position]
             for (value in cell.value..<type.maxValue) {
                 cell.set(value + 1)
