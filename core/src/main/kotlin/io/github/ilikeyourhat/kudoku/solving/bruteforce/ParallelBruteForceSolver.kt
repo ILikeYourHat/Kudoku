@@ -25,9 +25,11 @@ class ParallelBruteForceSolver(
 
     override suspend fun solve(sudoku: Sudoku) = coroutineScope {
         val jobs = List(concurrencyLevel) { spawnSolveJob(sudoku) }
-        val result = select { jobs.forEach { job -> job.onAwait { it } } }
-        jobs.forEach { it.cancel() }
-        result
+        try {
+            select { jobs.forEach { job -> job.onAwait { it } } }
+        } finally {
+            jobs.forEach { it.cancel() }
+        }
     }
 
     private fun CoroutineScope.spawnSolveJob(sudoku: Sudoku): Deferred<Sudoku> {
