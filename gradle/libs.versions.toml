@@ -2,7 +2,7 @@
 axion = "1.20.1"
 clikt = "5.0.3"
 detekt = "1.23.8"
-junit5 = "5.13.4"
+junit5 = "5.14.0"
 kotest = "6.0.3"
 kotlin = "2.2.20"
 kotlinx-coroutines = "1.10.2"
