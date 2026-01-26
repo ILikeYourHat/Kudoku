@@ -8,7 +8,7 @@ kotlin = "2.2.21"
 kotlinx-coroutines = "1.10.2"
 kover = "0.9.4"
 maven-publish = "0.36.0"
-mockk = "1.14.7"
+mockk = "1.14.9"
 sat4j = "2.3.6"
 
 [libraries]
