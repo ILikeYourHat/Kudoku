@@ -1,6 +1,6 @@
 [versions]
 axion = "1.21.1"
-clikt = "5.0.3"
+clikt = "5.1.0"
 detekt = "1.23.8"
 junit5 = "6.0.2"
 kotest = "6.1.3"
