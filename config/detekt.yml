@@ -6,10 +6,10 @@ style:
     ]
 complexity:
   LongMethod:
-    threshold: 80
+    allowedLines: 80
   TooManyFunctions:
-    thresholdInFiles: 21
-    thresholdInClasses: 21
+    allowedFunctionsPerFile: 21
+    allowedFunctionsPerClass: 21
 formatting:
   ImportOrdering:
     layout: '*,java.**,javax.**,kotlin.**,kotlinx.**,^'
