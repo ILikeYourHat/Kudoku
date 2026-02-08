@@ -43,7 +43,7 @@ class XWingAlgorithmTest {
             Cell(4, 5),
         ).shouldForAll { it.shouldContain(4) }
 
-        XWingAlgorithm().solve(sudoku, hintGrid)
+        XWingAlgorithm().solve(hintGrid)
 
         hintGrid.selectCells(
             Cell(1, 0),

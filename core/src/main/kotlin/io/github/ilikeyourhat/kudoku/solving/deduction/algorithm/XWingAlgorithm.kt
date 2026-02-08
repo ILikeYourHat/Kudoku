@@ -9,36 +9,34 @@ class XWingAlgorithm {
 
     @Suppress("LoopWithTooManyJumpStatements")
     fun solve(
-        sudoku: Sudoku,
-        hints: SudokuHintGrid
+        hintGrid: SudokuHintGrid
     ) {
         var detection: Detection? = null
 
-        for (number in hints.missingNumbers()) {
-            detection = searchForDetection(number, sudoku.rows(), hints, Direction.ROWS, sudoku)
+        for (number in hintGrid.missingNumbers()) {
+            detection = searchForDetection(number, hintGrid.sudoku.rows(), hintGrid, Direction.ROWS)
             if (detection != null) break
-            detection = searchForDetection(number, sudoku.columns(), hints, Direction.COLUMNS, sudoku)
+            detection = searchForDetection(number, hintGrid.sudoku.columns(), hintGrid, Direction.COLUMNS)
             if (detection != null) break
         }
 
         if (detection != null) {
-            applyDetection(hints, detection)
+            applyDetection(hintGrid, detection)
         }
     }
 
     private fun searchForDetection(
         number: Int,
         regions: List<Region>,
-        hints: SudokuHintGrid,
-        direction: Direction,
-        sudoku: Sudoku
+        hintGrid: SudokuHintGrid,
+        direction: Direction
     ): Detection? {
         val interestingRegions = regions.filter { region ->
-            countHints(number, region, hints) == 2
+            countHints(number, region, hintGrid) == 2
         }
         return interestingRegions.eachWithEachOther()
             .firstNotNullOfOrNull { (regionA, regionB) ->
-                checkForXWing(number, regionA, regionB, direction, hints, sudoku)
+                checkForXWing(number, regionA, regionB, direction, hintGrid)
             }
     }
 
@@ -48,20 +46,19 @@ class XWingAlgorithm {
         regionA: Region,
         regionB: Region,
         direction: Direction,
-        hints: SudokuHintGrid,
-        sudoku: Sudoku
+        hintGrid: SudokuHintGrid
     ): Detection? {
-        val (a1, a2) = regionA.filter { hints.forCell(it).contains(number) }
-        val (b1, b2) = regionB.filter { hints.forCell(it).contains(number) }
+        val (a1, a2) = regionA.filter { hintGrid.forCell(it).contains(number) }
+        val (b1, b2) = regionB.filter { hintGrid.forCell(it).contains(number) }
 
         when (direction) {
             Direction.ROWS -> {
                 if (a1.x == b1.x && a2.x == b2.x) {
                     val interestingColumns = listOf(
-                        sudoku.column(a1.x),
-                        sudoku.column(b2.x)
+                        hintGrid.sudoku.column(a1.x),
+                        hintGrid.sudoku.column(b2.x)
                     )
-                    if (interestingColumns.any { countHints(number, it, hints) > 2 }) {
+                    if (interestingColumns.any { countHints(number, it, hintGrid) > 2 }) {
                         return Detection(
                             number = number,
                             xWingCells = listOf(a1, a2, b1, b2),
@@ -74,10 +71,10 @@ class XWingAlgorithm {
             Direction.COLUMNS -> {
                 if (a1.y == b1.y && a2.y == b2.y) {
                     val interestingRows = listOf(
-                        sudoku.row(a1.y),
-                        sudoku.row(b2.y)
+                        hintGrid.sudoku.row(a1.y),
+                        hintGrid.sudoku.row(b2.y)
                     )
-                    if (interestingRows.any { countHints(number, it, hints) > 2 }) {
+                    if (interestingRows.any { countHints(number, it, hintGrid) > 2 }) {
                         return Detection(
                             number = number,
                             xWingCells = listOf(a1, a2, b1, b2),
