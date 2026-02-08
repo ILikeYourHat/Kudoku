@@ -56,6 +56,13 @@ data class SudokuHintGrid(
         return hintMap.getValue(cell.position)
     }
 
+    fun missingNumbers(): List<Int> {
+        return hintMap.values
+            .flatten()
+            .distinct()
+            .sorted()
+    }
+
     companion object {
 
         fun create(sudoku: Sudoku): SudokuHintGrid {
