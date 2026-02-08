@@ -41,7 +41,7 @@ class XWingAlgorithmTest {
             Cell(4, 2),
             Cell(4, 4),
             Cell(4, 5),
-        ).shouldForAll { it.shouldHaveHint(4) }
+        ).shouldForAll { it.shouldContain(4) }
 
         XWingAlgorithm().solve(sudoku, hintGrid)
 
@@ -52,14 +52,6 @@ class XWingAlgorithmTest {
             Cell(4, 0),
             Cell(4, 1),
             Cell(4, 5),
-        ).shouldForNone { it.shouldHaveHint(4) }
-    }
-
-    private fun SudokuHintGrid.selectCells(vararg cells: Cell): List<Set<Int>> {
-        return cells.map { forCell(it) }
-    }
-
-    private fun Set<Int>.shouldHaveHint(hint: Int) {
-        this.shouldContain(hint)
+        ).shouldForNone { it.shouldContain(4) }
     }
 }

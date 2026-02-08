@@ -5,6 +5,7 @@ import io.github.ilikeyourhat.kudoku.model.Region
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 
 data class SudokuHintGrid(
+    private val sudoku: Sudoku,
     private val hintMap: Map<Pair<Int, Int>, MutableSet<Int>>
 ) {
 
@@ -72,7 +73,7 @@ data class SudokuHintGrid(
                 .map { it.position }
                 .associateWith { possibleValues.toMutableSet() }
 
-            return SudokuHintGrid(hintMap)
+            return SudokuHintGrid(sudoku, hintMap)
         }
     }
 }
