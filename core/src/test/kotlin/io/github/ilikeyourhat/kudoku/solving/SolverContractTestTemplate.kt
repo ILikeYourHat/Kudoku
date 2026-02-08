@@ -10,7 +10,7 @@ import io.kotest.matchers.types.shouldNotBeSameInstanceAs
 import org.junit.jupiter.api.Test
 import kotlinx.coroutines.test.runTest
 
-@Suppress("UnnecessaryAbstractClass") // JUnit5 treats this class as a test suite when it is not abstract
+@Suppress("AbstractClassCanBeConcreteClass") // JUnit5 treats this class as a test suite when it is not abstract
 abstract class SolverContractTestTemplate<Solver : SudokuSolver>(
     protected val solver: Solver
 ) {
