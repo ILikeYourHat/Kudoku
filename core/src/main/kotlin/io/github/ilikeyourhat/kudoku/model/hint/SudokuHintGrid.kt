@@ -65,6 +65,10 @@ data class SudokuHintGrid(
         return hintMap.getValue(cell.position)
     }
 
+    fun getHintsFor(position: Pair<Int, Int>): MutableSet<Int> {
+        return hintMap.getValue(position)
+    }
+
     fun missingNumbers(): List<Int> {
         return hintMap.values
             .flatten()

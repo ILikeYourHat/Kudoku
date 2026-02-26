@@ -1,12 +1,11 @@
 package io.github.ilikeyourhat.kudoku.solving.deduction.algorithm
 
-import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.hint.SudokuHintGrid
 import io.github.ilikeyourhat.kudoku.type.Classic9x9
 import io.kotest.inspectors.shouldForAll
-import io.kotest.inspectors.shouldForNone
 import io.kotest.matchers.collections.shouldContain
+import io.kotest.matchers.collections.shouldNotContain
 import org.junit.jupiter.api.Test
 
 class XWingAlgorithmTest {
@@ -31,27 +30,27 @@ class XWingAlgorithmTest {
         HintEliminationAlgorithm(sudoku.regions, hintGrid).solve()
 
         hintGrid.selectCells(
-            Cell(1, 0),
-            Cell(1, 1),
-            Cell(1, 2),
-            Cell(1, 4),
-            Cell(1, 5),
-            Cell(4, 0),
-            Cell(4, 1),
-            Cell(4, 2),
-            Cell(4, 4),
-            Cell(4, 5),
+            at(1, 0),
+            at(1, 1),
+            at(1, 2),
+            at(1, 4),
+            at(1, 5),
+            at(4, 0),
+            at(4, 1),
+            at(4, 2),
+            at(4, 4),
+            at(4, 5),
         ).shouldForAll { it.shouldContain(4) }
 
         XWingAlgorithm().solve(hintGrid)
 
         hintGrid.selectCells(
-            Cell(1, 0),
-            Cell(1, 1),
-            Cell(1, 5),
-            Cell(4, 0),
-            Cell(4, 1),
-            Cell(4, 5),
-        ).shouldForNone { it.shouldContain(4) }
+            at(1, 0),
+            at(1, 1),
+            at(1, 5),
+            at(4, 0),
+            at(4, 1),
+            at(4, 5),
+        ).shouldForAll { it.shouldNotContain(4) }
     }
 }
