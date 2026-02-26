@@ -9,6 +9,14 @@ data class SudokuHintGrid(
     private val hintMap: Map<Pair<Int, Int>, MutableSet<Int>>
 ) {
 
+    private val rows = sudoku.regions
+        .filter { region -> region.all { cell -> region.first().y == cell.y } }
+        .sortedBy { it.cells.first().x }
+
+    private val columns = sudoku.regions
+        .filter { region -> region.all { cell -> region.first().x == cell.x } }
+        .sortedBy { it.cells.first().y }
+
     fun forCell(cell: Cell): Set<Int> {
         return getFor(cell).toSet()
     }
@@ -63,6 +71,14 @@ data class SudokuHintGrid(
             .distinct()
             .sorted()
     }
+
+    fun column(x: Int) = columns[x]
+
+    fun columns() = columns
+
+    fun row(y: Int) = rows[y]
+
+    fun rows() = rows
 
     companion object {
 

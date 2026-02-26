@@ -2,7 +2,6 @@ package io.github.ilikeyourhat.kudoku.solving.deduction.algorithm
 
 import io.github.ilikeyourhat.kudoku.model.Cell
 import io.github.ilikeyourhat.kudoku.model.Region
-import io.github.ilikeyourhat.kudoku.model.Sudoku
 import io.github.ilikeyourhat.kudoku.model.hint.SudokuHintGrid
 
 class XWingAlgorithm {
@@ -14,9 +13,9 @@ class XWingAlgorithm {
         var detection: Detection? = null
 
         for (number in hintGrid.missingNumbers()) {
-            detection = searchForDetection(number, hintGrid.sudoku.rows(), hintGrid, Direction.ROWS)
+            detection = searchForDetection(number, hintGrid.rows(), hintGrid, Direction.ROWS)
             if (detection != null) break
-            detection = searchForDetection(number, hintGrid.sudoku.columns(), hintGrid, Direction.COLUMNS)
+            detection = searchForDetection(number, hintGrid.columns(), hintGrid, Direction.COLUMNS)
             if (detection != null) break
         }
 
@@ -55,8 +54,8 @@ class XWingAlgorithm {
             Direction.ROWS -> {
                 if (a1.x == b1.x && a2.x == b2.x) {
                     val interestingColumns = listOf(
-                        hintGrid.sudoku.column(a1.x),
-                        hintGrid.sudoku.column(b2.x)
+                        hintGrid.column(a1.x),
+                        hintGrid.column(b2.x)
                     )
                     if (interestingColumns.any { countHints(number, it, hintGrid) > 2 }) {
                         return Detection(
@@ -71,8 +70,8 @@ class XWingAlgorithm {
             Direction.COLUMNS -> {
                 if (a1.y == b1.y && a2.y == b2.y) {
                     val interestingRows = listOf(
-                        hintGrid.sudoku.row(a1.y),
-                        hintGrid.sudoku.row(b2.y)
+                        hintGrid.row(a1.y),
+                        hintGrid.row(b2.y)
                     )
                     if (interestingRows.any { countHints(number, it, hintGrid) > 2 }) {
                         return Detection(
@@ -118,23 +117,5 @@ class XWingAlgorithm {
             }
         }
         return list
-    }
-
-    private fun Sudoku.column(x: Int): Region {
-        return regions.first { region -> region.all { cell -> cell.x == x } }
-    }
-
-    private fun Sudoku.columns(): List<Region> {
-        return regions
-            .filter { region -> region.all { cell -> region.first().x == cell.x } }
-    }
-
-    private fun Sudoku.row(y: Int): Region {
-        return regions.first { region -> region.all { cell -> cell.y == y } }
-    }
-
-    private fun Sudoku.rows(): List<Region> {
-        return regions
-            .filter { region -> region.all { cell -> region.first().y == cell.y } }
     }
 }
